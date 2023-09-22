@@ -1,18 +1,37 @@
-## Getting Started
+Вариант №51871
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## Задание
+Написать программу на языке Java, выполняющую соответствующие варианту действия. Программа должна соответствовать следующим требованиям:
 
-## Folder Structure
+    Она должна быть упакована в исполняемый jar-архив.
+    Выражение должно вычисляться в соответствии с правилами вычисления математических выражений (должен соблюдаться порядок выполнения действий и т.д.).
+    Программа должна использовать математические функции из стандартной библиотеки Java.
+    Результат вычисления выражения должен быть выведен в стандартный поток вывода в заданном формате.
 
-The workspace contains two folders by default, where:
+Выполнение программы необходимо продемонстрировать на сервере helios.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+    Создать одномерный массив c типа int. Заполнить его чётными числами от 2 до 18 включительно в порядке убывания.
+    Создать одномерный массив x типа double. Заполнить его 18-ю случайными числами в диапазоне от -14.0 до 13.0.
+    Создать двумерный массив c размером 9x18. Вычислить его элементы по следующей формуле (где x = x[j]):
+  [image](https://github.com/fefumo/itmo/assets/77743898/40834f39-7019-427e-835b-c67fa8380338)
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+## Отчёт и вопросы
+Отчёт по лабораторной работе должен содержать:
 
-## Dependency Management
+    Текст задания.
+    Исходный код программы.
+    Результат работы программы.
+    Выводы по работе.
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Вопросы к защите лабораторной работы:
+
+    Язык Java. Особенности языка.
+    Средства разработки. JDK и JRE.
+    Примитивные типы данных в Java.
+    Работа с переменными. Декларация. Инициализация. Присваивание.
+    Инструкции ветвления и циклов.
+    Операторы и выражения в Java. Особенности вычисления, приоритеты операций.
+    Математические функции в составе стандартной библиотеки Java. Классjava.lang.Math.
+    Форматированный вывод числовых данных.
+
