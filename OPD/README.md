@@ -1,3 +1,5 @@
+Вариант № 8473
+
 1. Создать приведенное в варианте дерево каталогов и файлов с содержимым. В качестве корня дерева использовать каталог lab0 своего домашнего каталога. Для создания и навигации по дереву использовать команды: mkdir, echo, cat, touch, ls, pwd, cd, more, cp, rm, rmdir, mv. 
 ![image](https://github.com/fefumo/itmo/assets/77743898/0c16484e-3011-446e-a833-a2a2ba0ddeca)
 ![image](https://github.com/fefumo/itmo/assets/77743898/95d8aa96-184f-40e6-808d-415fbaa296a9)
