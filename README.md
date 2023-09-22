@@ -1,2 +1,2 @@
 # itmo
-labs, projects and more
+labs
