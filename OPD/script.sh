@@ -1,4 +1,4 @@
-#!/bin/bash
+#!usr/bin/bash
 
 #№1
 mkdir -p lab0/{krokorok1,shieldon3/{woobat,scyther},whiscash5/{klang,monferno}}
