@@ -1,37 +1,18 @@
-Вариант номер 51871
+## Getting Started
 
-## Задание
-Написать программу на языке Java, выполняющую соответствующие варианту действия. Программа должна соответствовать следующим требованиям:
-    Она должна быть упакована в исполняемый jar-архив.
-    Выражение должно вычисляться в соответствии с правилами вычисления математических выражений (должен соблюдаться порядок выполнения действий и т.д.).
-    Программа должна использовать математические функции из стандартной библиотеки Java.
-    Результат вычисления выражения должен быть выведен в стандартный поток вывода в заданном формате.
+Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
 
-Выполнение программы необходимо продемонстрировать на сервере helios.
+## Folder Structure
 
-    Создать одномерный массив c типа int. Заполнить его чётными числами от 2 до 18 включительно в порядке убывания.
-    Создать одномерный массив x типа double. Заполнить его 18-ю случайными числами в диапазоне от -14.0 до 13.0.
-    Создать двумерный массив c размером 9x18. Вычислить его элементы по следующей формуле (где x = x[j]):
+The workspace contains two folders by default, where:
 
-![image](https://github.com/fefumo/itmo/assets/77743898/27547b91-6b8b-4ff9-80d2-ae8e0917c0a5)
+- `src`: the folder to maintain sources
+- `lib`: the folder to maintain dependencies
 
-    Напечатать полученный в результате массив в формате с пятью знаками после запятой. 
+Meanwhile, the compiled output files will be generated in the `bin` folder by default.
 
-## Отчёт по лабораторной работе должен содержать:
+> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
 
-    Текст задания.
-    Исходный код программы.
-    Результат работы программы.
-    Выводы по работе.
+## Dependency Management
 
-## Вопросы к защите лабораторной работы:
-
-    Язык Java. Особенности языка.
-    Средства разработки. JDK и JRE.
-    Примитивные типы данных в Java.
-    Работа с переменными. Декларация. Инициализация. Присваивание.
-    Инструкции ветвления и циклов.
-    Операторы и выражения в Java. Особенности вычисления, приоритеты операций.
-    Математические функции в составе стандартной библиотеки Java. Классjava.lang.Math.
-    Форматированный вывод числовых данных.
-
+The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
