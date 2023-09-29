@@ -1,4 +1,4 @@
-#!usr/bin/bash
+#!/usr/bin/bash
 
 #№1
 mkdir -p lab0/{krokorok1,shieldon3/{woobat,scyther},whiscash5/{klang,monferno}}
@@ -46,8 +46,8 @@ Gambit" >> staravia
 cd ..
 
 #№2
-chmod 006 crustle4
-chmod 753 krokorok1
+chmod 006 crustle4 #chmod a-rwx chmod o+r
+chmod 753 krokorok1 
 chmod 640 krokorok1/ariados
 chmod 622 krokorok1/wooper
 chmod 060 krokorok1/simisage
@@ -88,18 +88,23 @@ ln ~/lab0/tranquill1 ~/lab0/krokorok1/simisagetranquill
 
 #4.1 
 chmod u+w ~/lab0/tranquill1 #-bash: tranquill1: Permission denied
-wc -m ~/lab0/tranquill1 >> ~/lab0/tranquill1 2>&1
+cat ~/lab0/tranquill1 | wc -m >> ~/lab0/tranquill1 2>&1 #ОСТАВИЛ ТОЛЬКО КОЛ-ВО
 chmod u-w tranquill1
 #4.2 
-ls -lR 2>/dev/null | sort -nrk2 | grep "r$" | head -n3
+ls -lR 2>/dev/null | sort -nrk2 | grep "r$" | head -n3 
 #4.3
-cat tranquill1 | grep -v "^Qu"
+cat tranquill1 | grep -v "^Qu" #-v inverted match
 #4.4
-cat ./w* ./*/w* 2>/tmp/for_errors | sort
+#НАДО ЧТОБЫ БЫЛО РЕКУРСИВНО!!
+#для примера
+mkdir -p asd/{a,b,c/{g,h,w}}
+cd ~/lab0/asd/c/w
+echo "this is the output for an example"
+grep -rh ".*" ./w* 2>/tmp/for_errors| sort
 #4.5
-ls -lRt | tail -n2 2>&1
+ls -lRrt | tail -n2 2>&1 #ОТСОРТИРОВАЛ ПО ВОЗРАСТАНИЮ
 #4.6
-ls -lRt s* | head -n4 2>/tmp/for_errors
+ls -lRt s* | head -n4 2>/tmp/for_errors #-t ПО УБЫВАНИЮ
 
 #№5
 rm -f crustle4
