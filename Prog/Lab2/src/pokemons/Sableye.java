@@ -1,6 +1,7 @@
 package pokemons;
 
-import moves.*;
+import moves.Special.*;
+import moves.Status.*;
 import ru.ifmo.se.pokemon.*;
 
 public class Sableye extends Pokemon{

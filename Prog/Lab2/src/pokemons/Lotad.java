@@ -1,6 +1,6 @@
 package pokemons;
 
-import moves.*;
+import moves.Special.*;
 import ru.ifmo.se.pokemon.*;
 
 public class Lotad extends Pokemon{

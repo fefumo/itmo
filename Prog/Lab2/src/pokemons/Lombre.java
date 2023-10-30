@@ -1,6 +1,7 @@
 package pokemons;
 
-import moves.*;
+import moves.Physical.*;
+import moves.Special.*;
 import ru.ifmo.se.pokemon.*;
 
 public class Lombre extends Pokemon{

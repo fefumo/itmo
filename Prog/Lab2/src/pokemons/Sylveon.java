@@ -1,7 +1,9 @@
 package pokemons;
 
+import moves.Physical.*;
+import moves.Special.*;
+import moves.Status.*;
 import ru.ifmo.se.pokemon.*;
-import moves.*;
 
 public class Sylveon extends Pokemon{
     public Sylveon(String name, int level){
