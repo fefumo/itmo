@@ -14,7 +14,7 @@ public class DrainingKiss extends SpecialMove {
     }
     @Override
     protected void applySelfEffects(Pokemon p){
-        p.setMod(Stat.HP, +(int)(damageToHeal*0.75));
+        p.setMod(Stat.HP, -(int)(Math.abs(damageToHeal)*0.75));
     }
     @Override
     protected String describe(){

@@ -2,7 +2,7 @@ import pokemons.*;
 import ru.ifmo.se.pokemon.*;
 
 public class App {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args){
         Battle b = new Battle();
         Pokemon p1 = new Lombre("Pancho", 1);
         Pokemon p2 = new Sableye("Kill_Menkov", 1);
