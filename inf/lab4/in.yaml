@@ -1,0 +1,24 @@
+---
+even_week: true
+day_id: 0
+group_name: P3113
+date: Wednesday, 08 Nov 2023 UTC +3:00
+schedule:
+  first_lesson:
+    subject: Информатика
+    lecturer: Балакшин Павел Валерьевич
+    room: Ауд. Актовый зал (1216/0 (усл))
+    place: ул.Ломоносова, д.9, лит. М
+    time: 08:20-09:50
+  second_lesson:
+    subject: Основы Профессиональной Деятельности
+    lecturer: Клименков Сергей Викторович
+    room: Ауд. Актовый зал (1216/0 (усл))
+    place: ул.Ломоносова, д.9, лит. М
+    time: 10:00-11:30
+  third_lesson:
+    subject: Дискретная математика
+    lecturer: Поляков Владимир Иванович
+    room: Ауд. 2407
+    place: Кронверкский пр., д.49, лит.А 
+    time: 13:30-15:00 15:20-16:50
