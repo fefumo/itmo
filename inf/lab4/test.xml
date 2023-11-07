@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<root> 
+    <even_week>true</even_week>
+    <day_id>0</day_id>
+    <group_name>P3113</group_name>
+    <date>Wednesday, 08 Nov 2023 UTC +3:00</date>
+    <schedule>
+        <first_lesson>
+            <subject>Информатика</subject>
+            <lecturer>Балакшин Павел Валерьевич</lecturer>
+            <room>Ауд. Актовый зал (1216/0 (усл))</room>
+            <place>ул.Ломоносова, д.9, лит. М</place>
+            <time>08:20-09:50</time>
+        </first_lesson>
+        <second_lesson>
+            <subject>Основы Профессиональной Деятельности</subject>
+            <lecturer>Клименков Сергей Викторович</lecturer>
+            <room>Ауд. Актовый зал (1216/0 (усл))</room>
+            <place>ул.Ломоносова, д.9, лит. М</place>
+            <time>10:00-11:30</time>
+        </second_lesson>
+        <third_lesson>
+            <subject>Дискретная математика</subject>
+            <lecturer>Поляков Владимир Иванович</lecturer>
+            <room>Ауд. 2407</room>
+            <place>Кронверкский пр., д.49, лит.А</place>
+            <time>13:30-15:00 15:20-16:50</time>
+        </third_lesson>
+    </schedule>
+</root>

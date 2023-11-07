@@ -11,7 +11,7 @@ test_string5 = ''
 strings = [test_string1, test_string2, test_string3, test_string4, test_string5]
 
 for i in range(len(strings)):
-    if valid_smile.search(strings[i]) != None:
+    if valid_smile.search(strings[i]):
         print ('the string is ' + strings[i] + '\n the smile is: ' + valid_smile.search(strings[i]).group(0))
     else:
         print('string number',i, 'is not valid')
