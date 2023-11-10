@@ -1,10 +1,11 @@
 inyaml = open('in.yaml', 'r', encoding = 'utf-8')
-outxml = open('test.xml', 'w', encoding = 'utf-8')
+outxml = open('expected_xml.xml', 'w', encoding = 'utf-8')
 
 
 outxml.write('<?xml version="1.0" encoding="UTF-8" ?> \n' + '<root> \n')
 strings = inyaml.readlines()
 inyaml.close()
+
 ended_tags = [] #закрывающие теги
 tab = 1 #табуляция
 prev_space = 0 #кол-во пробелов в предыдущей строке
@@ -12,9 +13,7 @@ prev_space = 0 #кол-во пробелов в предыдущей строк�
 for yaml_string in strings:
     single_string = '' #одиночная строка с начальным и конечным тегом
     space = 0 #кол-во пробелов в данной строке
-    
-    #проверка на вход
-    if yaml_string == '---\n':
+    if yaml_string == '---\n': #проверка на вход
         continue
     
     #ищем тэг
