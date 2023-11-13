@@ -17,6 +17,14 @@
 			<lecturer type="str">Клименков Сергей Викторович</lecturer>
 			<room type="str">Ауд. Актовый зал (1216/0 (усл))</room>
 			<place type="str">ул.Ломоносова, д.9, лит. М</place>
+			<additional_information type="dict">
+				<rule type="str">Не опаздывать</rule>
+				<things_to_take type="dict">
+					<laptop type="int">1</laptop>
+					<pen type="int">1</pen>
+					<sheet type="int">1</sheet>
+				</things_to_take>
+			</additional_information>
 			<time type="str">10:00-11:30</time>
 		</second_lesson>
 		<third_lesson type="dict">

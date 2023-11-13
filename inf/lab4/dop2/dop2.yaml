@@ -15,6 +15,12 @@ schedule:
     lecturer: Клименков Сергей Викторович
     room: Ауд. Актовый зал (1216/0 (усл))
     place: ул.Ломоносова, д.9, лит. М
+    additional_information:
+      rule: Не опаздывать
+      things_to_take:
+        laptop: 1
+        pen: 1
+        sheet: 1
     time: 10:00-11:30
   third_lesson:
     subject: Дискретная математика
