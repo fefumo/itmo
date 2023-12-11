@@ -1,7 +1,7 @@
 package Entities;
 
 public class Place extends Obj {
-    double x, y, z;
+    public double x, y, z;
     public Place (String name){
         super(name);
     }
