@@ -38,7 +38,6 @@ package src #DDDDDD {
     class Rocket{
         Rocket(String)
         --
-        +launch(Place)
         +attach(Thing)
     }
     class Thing{
