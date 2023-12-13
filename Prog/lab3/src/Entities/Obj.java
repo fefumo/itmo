@@ -30,16 +30,16 @@ public abstract class Obj {
         + "характеристики: " + chr + "\n"
         + "}\n";
     }
+
     @Override
     public boolean equals(Object o){
-        if (this == o && this.hashCode() == o.hashCode()){
+        Obj t = (Obj) o;
+        if (t.getCharacteristic() ==  this.getCharacteristic()){
             return true;
-        }
-        if (this.getClass() != o.getClass()){
-            return false;
         }
         return false;
     }
+
     @Override
     public int hashCode(){
         if (this.characteristic == null){

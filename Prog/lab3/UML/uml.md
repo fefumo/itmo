@@ -4,6 +4,17 @@
 @startuml
 package src #DDDDDD {
     package "Entitites" #DDDDDD {
+    class Animal{
+        + Animal(String)
+
+    }
+    class RocketCorpus{
+        + RocketCorpus(String)
+        --
+        - double width
+        --
+        + double getWidth();
+    }
     abstract class Obj {
         Obj (String)
         Obj (String, String)
@@ -23,8 +34,7 @@ package src #DDDDDD {
         Human (String, Stirng, Profession)
         --
         + void think (Thinktype)
-        + void claim (Thing)
-        + void claim (String)
+
         + void feel()
         + void feel(Thing)
     }
@@ -49,20 +59,15 @@ package src #DDDDDD {
         + getQuantity()
     }
 
-    Human --> Obj
-    Place --> Obj
-    Rocket --> Thing
-    Thing --> Obj
+}
 
-    }
+
 
     package Enums #DDDDDD{
         enum Action{
             Action(String)
-            --
-            LAUNCH ("запустить"), 
+            -- 
             ROLL ("кататься"), 
-            FEEL("испытывает"),
             APPEARING("попав"),
             CAN("могла");
             --
@@ -105,17 +110,34 @@ package src #DDDDDD {
         }
     }
     package Interfaces #DDDDDD{
-        interface PhysicalAction{
-            + void launch(Thing, Place);
-            + void deliver(Place, Thing);
-            + void take(Thing);
-            + void take(Thing, Place);
-            + void jump(Place);
-            + void getOn(Place);
-            + void notMake(Thing);
+        interface Iclaim{
+            + void claim (Thing)
+            + void claim (String)
+
         }
-        interface RocketInterface{
-            void attach(Thing);
+        interface Itake{
+            + default void take (Thing);
+            + default void take (Thing, Place);
+        }
+        
+        interface Ideliver{
+            + void deliver(Thing, Place);
+        }
+        interface IFeel{
+            + void feel();
+            + void feel(Thing t);            
+        }
+        interface Ijump{
+            + default void jump(Place);
+        }
+
+        interface IRocketInteraction{
+            + default void launch (Rocket, Place);
+            --
+            + void attach(Thing);
+        }
+        interface Ido{
+            + default void notMake();
         }
         interface VerbalAction{
             + void makeCount();
@@ -124,20 +146,25 @@ package src #DDDDDD {
             --
             void think(ThinkType);
         }
+        }
     }
-    Human --> PhysicalAction
-    Human --> VerbalAction
-    Rocket --> RocketInterface
-    note as n1
-        я знаю, что это не по солиду,
-        однако в моём мирке такая реализация возможна.
-        Готов выполнить доп задание, 
-        чтобы показать своё понимание
-        принципа разделения интерфейсов. 
-    end note
-    Human .. n1
-    n1 .. PhysicalAction
-}
+    Human --> Obj
+    Place --> Obj
+    Rocket --> Thing
+    RocketCorpus --> Rocket
+    Thing --> Obj
+    Human ..> Iclaim
+    Human ..> Ideliver
+    Human ..> Ijump
+    Human ..> Ido
+    Human ..> IFeel
+    Human ..> Itake
+    Human ..> VerbalAction
+    Human ..> Profession
+    Human ..> IRocketInteraction
+    Rocket ..> IRocketInteraction
+    Animal --> Obj
+    Animal ..> Iclaim 
 
 
 @enduml

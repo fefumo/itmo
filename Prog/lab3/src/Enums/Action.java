@@ -1,9 +1,7 @@
 package Enums;
 
 public enum Action{
-    LAUNCH ("запустить"), 
     ROLL ("кататься"), 
-    FEEL("испытывает"),
     APPEARING("попав"),
     CAN("могла");
 

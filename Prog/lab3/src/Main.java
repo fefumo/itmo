@@ -61,7 +61,7 @@ public class Main {
         System.out.print(" всё как следует и ");
         Klepka.comeToConclusion();
         System.out.print(Adjective.ARRIVINGAT.getAdjective() + Moon.getName() + " " + Profession.COSMONAUT.getProfession() + " ");
-        Shorty.claim(Benefit);
+        Shorty.claimThing(Benefit);
         System.out.print(" взамен которых ");
         Shorty.feel(Disadvantage);
         
@@ -69,14 +69,16 @@ public class Main {
         System.out.println("==================================================================================================================================");
         
         //реализация переопределенных методов
-        System.out.println(Vintik.toString());
-        Thing wheels2 = new Thing("wheels", 4);
-        Thing wheels3 = new Thing("wheels", 4);
-        System.out.println("до приравнивания одного объекта к другому: " + wheels2.equals(wheels3));
-        wheels2 = wheels3;
-        System.out.println("после приравнивания: "+ wheels2.equals(wheels3) + ", теперь они ссылаются на одну и ту же область памяти ");
-        System.out.println(Vintik.hashCode());
-        System.out.println(Rocket.hashCode());
+        Thing r2 = new Thing("двигатель ", "реактивный роликовый " );
+        System.out.println(r2.equals(Trubolet));
+        // System.out.println(Vintik.toString());
+        // Thing wheels2 = new Thing("wheels", 4);
+        // Thing wheels3 = new Thing("wheels", 4);
+        // System.out.println("до приравнивания одного объекта к другому: " + wheels2.equals(wheels3));
+        // wheels2 = wheels3;
+        // System.out.println("после приравнивания: "+ wheels2.equals(wheels3) + ", теперь они ссылаются на одну и ту же область памяти ");
+        // System.out.println(Vintik.hashCode());
+        // System.out.println(Rocket.hashCode());
 
     }
 
