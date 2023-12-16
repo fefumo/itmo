@@ -1,2 +1,2 @@
 Проект по теме "Франция в начале XX века"
-![](http://okkultmotionpictures.tumblr.com/post/85022752049/modern-business-machines)
+![giphy](https://github.com/fefumo/itmo/assets/77743898/e71b8ed2-c635-42ea-97bc-1aecf752582d)
