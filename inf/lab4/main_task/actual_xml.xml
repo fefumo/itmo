@@ -17,6 +17,14 @@
             <lecturer>Клименков Сергей Викторович</lecturer>
             <room>Ауд. Актовый зал (1216/0 (усл))</room>
             <place>ул.Ломоносова, д.9, лит. М</place>
+            <additional_information>
+                <rule>Не опаздывать</rule>
+                <things_to_take>
+                    <laptop>1</laptop>
+                    <pen>1</pen>
+                    <sheet>1</sheet>
+                </things_to_take>
+            </additional_information>
             <time>10:00-11:30</time>
         </second_lesson>
         <third_lesson>

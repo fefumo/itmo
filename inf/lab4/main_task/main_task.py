@@ -3,7 +3,7 @@ def YamlToXML():
     strings = inyaml.readlines()
     inyaml.close()
 
-    with open ('tester.xml', 'w', encoding = 'utf-8') as outxml:
+    with open ('actual_xml.xml', 'w', encoding = 'utf-8') as outxml:
         outxml.write('<?xml version="1.0" encoding="UTF-8" ?> \n' + '<root> \n')
         ended_tags = [] #закрывающие теги
         tab = 1 #табуляция
