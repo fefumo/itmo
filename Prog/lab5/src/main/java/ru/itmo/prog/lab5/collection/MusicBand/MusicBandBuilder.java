@@ -12,11 +12,10 @@ public class MusicBandBuilder implements Builder<MusicBand> {
     @Override
     public MusicBand build() throws IdException{
         id++;
-        IdManager idManager = new IdManager();
+        IdManager.previousIds.add(id);
         final Date creationDate = new Date();
         Coordinates coordinates = null;
         MusicBand new_Band = new MusicBand(id, null, coordinates, creationDate, 0, null, null, null, null);
-        idManager.putId(id, new_Band);
         id++;
         return new_Band;
     }

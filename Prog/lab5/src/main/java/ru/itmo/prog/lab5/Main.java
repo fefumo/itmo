@@ -1,13 +1,12 @@
 package ru.itmo.prog.lab5;
 
 import ru.itmo.prog.lab5.CLI.*;
-import ru.itmo.prog.lab5.CLI.Managers.CollectionManager;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        CollectionManager collectionManager = new CollectionManager();
+        //CollectionManager collectionManager = new CollectionManager();
         //System.out.println(collectionManager.musicBands.get);
         // ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("GMT+05:30") );
         //Label label = new Label("buba", 123L);

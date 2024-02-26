@@ -5,7 +5,7 @@ public enum Commands {
     SHOW("show"),
     ADD("add"),
     UPDATE_ID("update_id"),
-    REMOVE_BY_ID("remove_by_Id"),
+    REMOVE_BY_ID("remove_by_id"),
     CLEAR("clear"),
     SAVE("save"),
     EXECUTE_SCRIPT("execute_script"),

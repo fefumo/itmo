@@ -3,7 +3,6 @@ package ru.itmo.prog.lab5.CLI.Managers;
 import java.time.ZonedDateTime;
 import java.util.PriorityQueue;
 
-import ru.itmo.prog.lab5.Exceptions.IncorrectInputException;
 import ru.itmo.prog.lab5.collection.Builders.CoordinatesBuilder;
 import ru.itmo.prog.lab5.collection.Builders.LabelBuilder;
 import ru.itmo.prog.lab5.collection.MusicBand.Coordinates;
@@ -15,6 +14,16 @@ import ru.itmo.prog.lab5.collection.MusicBand.MusicGenre;
 public class CollectionManager {
     public static PriorityQueue<MusicBand> musicBands = new PriorityQueue<MusicBand>();
 
+
+    public static MusicBand getBandById(long id){
+        for (MusicBand band : musicBands){
+            if (band.getId() == id){
+                return band;
+            }
+        }
+        return null;
+    }
+
     public static void addNewCollection(){
 
         MusicBandBuilder musicBandBuilder = new MusicBandBuilder();
@@ -25,15 +34,11 @@ public class CollectionManager {
             System.out.println("Enter the name of the band you want to add (String).");
             try {
                 String userInput = InputHandler.getStringInput();
-                if (userInput.isBlank() || userInput.isBlank()){
-                    throw new IncorrectInputException("Name cannot be blank. Try again.");
-                }
-                else{
-                    newCollection.setName(userInput);
-                    System.out.println("Name has been added.");
-                    break;
-                }
-            } catch (IncorrectInputException e) {
+                newCollection.setName(userInput);
+                System.out.println("Name has been added.");
+                break;
+                    
+            } catch (Exception e) {
                 System.out.println(e);
             }
         }
@@ -52,10 +57,12 @@ public class CollectionManager {
                 int userInput = InputHandler.getIntInput();
                 newCollection.setNumberOfParticipants(userInput);
                 System.out.println("Number of participants has been added.");
-                break;
+                break;             
+                    
             } catch (Exception e) {
                 System.out.println(e);
             }
+            
         }
 
         //albumsCount

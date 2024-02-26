@@ -37,7 +37,7 @@ public class MusicBand implements  Comparable<MusicBand> {
         return "MusicBand's id: " + id + ", name: " + name + ", coordinates: " + coordinates
          + ", created: " + creationDate + ", number_of_participants: " + numberOfParticipants
          + ", albums_count: " + albumsCount + ", established: " + establishmentDate
-         + ", genre: " + genre + ", label: " + label + " with " + label.getBands() + "bands";
+         + ", genre: " + genre + ", label: " + label + " with " + label.getBands() + " bands";
 
     }
 

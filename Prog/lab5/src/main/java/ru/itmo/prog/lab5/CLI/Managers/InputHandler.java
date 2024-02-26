@@ -6,17 +6,16 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import ru.itmo.prog.lab5.Exceptions.IncorrectInputException;
-
+import ru.itmo.prog.lab5.Exceptions.EmptyLineException;
 
 public class InputHandler {
     public static Scanner inputScanner = new Scanner(System.in);
 
-    public static String getStringInput() {
+    public static String getStringInput() throws EmptyLineException{
         System.out.print(">");
         String  userInput = inputScanner.nextLine();
         if (validateStringInput(userInput) == false){
-            throw new IncorrectInputException("Your input cannot be empty. Try again.");
+            throw new EmptyLineException("Your input cannot be empty. Try again.");
         }
         return userInput;
     }
@@ -24,7 +23,6 @@ public class InputHandler {
     public static int getIntInput() {
         String userInput = InputHandler.getStringInput();
         int newInt = Integer.parseInt(userInput);
-
         return newInt;
     }
 

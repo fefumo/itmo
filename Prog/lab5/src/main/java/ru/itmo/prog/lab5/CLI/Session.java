@@ -2,6 +2,8 @@ package ru.itmo.prog.lab5.CLI;
 
 import ru.itmo.prog.lab5.CLI.Managers.CommandManager;
 import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
+import ru.itmo.prog.lab5.Exceptions.EmptyLineException;
+
 
 public class Session {
     
@@ -11,8 +13,8 @@ public class Session {
 
         while (true) {
             try {
-                commandManager.executeCommand(InputHandler.getStringInput());                
-            } catch (Exception e) {
+                commandManager.executeCommand(InputHandler.getStringInput());                   
+            } catch (EmptyLineException e) {
                 System.out.println(e);
             }
         }
