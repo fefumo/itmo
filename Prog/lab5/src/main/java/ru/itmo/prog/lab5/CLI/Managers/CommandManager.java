@@ -28,13 +28,17 @@ public class CommandManager {
                 case "info":
                     Info.exeucte();
                     break;
-                case "update_Id":
+                case "update_id":
                     UpdateId.execute();
+                    break;
+                case "remove_by_id":
+                    RemoveById.execute();
                     break;
                 
                 default:
                     throw new InvalidCommandException("No such command. Try again");
             }
+            
     
         } catch (InvalidCommandException e) {
             System.out.println(e);

@@ -12,7 +12,7 @@ public class InputHandler {
     public static Scanner inputScanner = new Scanner(System.in);
 
     public static String getStringInput() throws EmptyLineException{
-        System.out.print(">");
+        System.out.print("> ");
         String  userInput = inputScanner.nextLine();
         if (validateStringInput(userInput) == false){
             throw new EmptyLineException("Your input cannot be empty. Try again.");

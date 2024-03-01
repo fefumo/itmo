@@ -33,6 +33,7 @@ public class IdManager {
                     }               
                 } catch (Exception e) {
                     System.out.println(e);
+                    return;
                 }
             }
     
@@ -41,6 +42,7 @@ public class IdManager {
                 try {
                     long userInput = InputHandler.getLongInput();
                     if (IdManager.checkIdForUpdate(userInput)){
+                        previousIds.remove(idToRemove);
                         IdManager.setCollectionId(userInput);
                         System.out.println();
                         System.out.println("--------------------------");
@@ -52,13 +54,38 @@ public class IdManager {
                 }
             }    
         }
-        
+    }    
+    
+
+    public static void removeCollectionById(){
+        if (previousIds.isEmpty()){
+            System.out.println("Fail: Collection is empty - cannot do anything to it \nReturning to starting screen...");
+        }
+        else{
+            while(true){
+                System.out.println("Type the id number of band you want to remove");
+                try {
+                    long userInput = InputHandler.getLongInput();     
+                    if (IdManager.checkIdForInput(userInput)){
+                        previousIds.remove(idToRemove);
+                        CollectionManager.musicBands.remove(musicBand);
+                        System.out.println();
+                        System.out.println("--------------------------");
+                        System.out.println("Band has been removed");
+                        break;
+                    }               
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            }
+        }
     }
+
+    //public static void 
 
     //set id and put it in previous Ids
     public static void setCollectionId(long id) { 
         musicBand.setId(id);
-        previousIds.remove(idToRemove);
         previousIds.add(id);
     }
 
@@ -77,7 +104,7 @@ public class IdManager {
         if(previousIds.contains(number)){
             IdManager.idToRemove = number;
             musicBandId = number;
-            musicBand = CollectionManager.getBandById(musicBandId); // changing musicBand for setCollectionId
+            musicBand = CollectionManager.getBandById(musicBandId); // changing musicBand for set\remove collectionById
             return true;
         }
         else{

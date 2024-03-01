@@ -11,6 +11,7 @@ public class Info {
         else{
             for (MusicBand item: CollectionManager.musicBands){
                 System.out.println(item);
+                System.out.println();
             }    
         }
     }
