@@ -1,43 +1,49 @@
-## uml: class diagram
+## uml: ER class diagram
 
 ```plantuml
 @startuml
+
 entity "human" as human{
-    *human_id: serial
+    *human_id: int
     --
     name: varchar
     age: int
 }
 
 entity "action" as action{
-    * action_id: serial
+    * action_id: int
     --
     description:text
 }
 
-entity "mind" as mind{
-    *mind_id: serial
+entity "mind_status" as mind_status{
+    *mind_status_id: int
     --
-    sanity: varchar
+    sanity: boolean
 }
 entity "creature" as creature{
-    *creature_id: serial
+    *creature_id: int
     --
     known: bool
 }
 entity "sensation" as sensation{
-    *sensation_id: serial
+    *sensation_id: int
     --
-    describtion: varchar
+    description: varchar
 }
-human }o--o{ creature
-human ||--|| mind
-human ||--o{ action
-human ||--o{ sensation
-creature ||--o{ action
-creature ||--|| mind
-creature ||--o{ sensation
 
+human ||--o{ action
+creature ||--o{ action
+
+human ||--|{ mind_status
+action }o--|{ mind_status
+
+mind_status ||--|{ sensation
 
 @enduml
 ```
+
+<!-- 
+действие аффектит чувство, а чувство аффектит человека и его разум. в первую очередь разум. 
+
+ -->
