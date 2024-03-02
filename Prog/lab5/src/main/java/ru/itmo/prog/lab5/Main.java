@@ -13,7 +13,7 @@ public class Main {
         //queue.add(new MusicBand(0, "asd", new Coordinates(1, 2), new java.util.Date(), 2, 2L, zdt, MusicGenre.BLUES, label));
         
         Session session = new Session();
-        session.execute();
+        session.start();
     }
 
 

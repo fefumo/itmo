@@ -1,12 +1,20 @@
 package ru.itmo.prog.lab5.CLI.Commands;
 
-public class Help{
+import ru.itmo.prog.lab5.CLI.Managers.CommandManager;
 
-    public static void execute(){
+public class Help extends Command{
+    
+    public Help(String name, String descr) {
+        super(name, descr);
+    }
+
+    @Override
+    public void execute(String[] args){
         System.out.println("here is the list of available commands: ");
-        for (Commands e: Commands.values()){
-            System.out.println(" " + e.getName());
+        for (String key: CommandManager.getCommandsHashMap().keySet()){
+            System.out.println(" -" + key + ": " + CommandManager.getCommandsHashMap().get(key).getDescr()); 
         }
     }
+
     
 }

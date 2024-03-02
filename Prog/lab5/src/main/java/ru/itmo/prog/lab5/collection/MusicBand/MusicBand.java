@@ -3,7 +3,7 @@ package ru.itmo.prog.lab5.collection.MusicBand;
 import java.time.ZonedDateTime;
 
 
-public class MusicBand implements  Comparable<MusicBand> {
+public class MusicBand implements Comparable<MusicBand> {
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -30,8 +30,17 @@ public class MusicBand implements  Comparable<MusicBand> {
 
     @Override
     public int compareTo(MusicBand oMusicBand){
-        return this.numberOfParticipants - oMusicBand.numberOfParticipants;
+        if (this.numberOfParticipants > oMusicBand.numberOfParticipants){
+            return 1;
+        }
+        else if( this.numberOfParticipants == oMusicBand.numberOfParticipants){
+            return 0;
+        }
+        else{
+            return -1;
+        }
     }
+    
     @Override
     public String toString(){
         return "MusicBand's id: " + id + ", name: " + name + ", coordinates: " + coordinates

@@ -1,8 +1,14 @@
 package ru.itmo.prog.lab5.CLI.Commands;
 
-public class GroupCountingById {
+public class GroupCountingById extends Command{
 
-    public static void execute(){
+    public GroupCountingById(String name, String descr) {
+        super(name, descr);
+    }
+
+    @Override
+    public void execute(String[] args){
 
     }
+
 }

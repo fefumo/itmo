@@ -1,20 +1,33 @@
 package ru.itmo.prog.lab5.CLI.Managers;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 
-import ru.itmo.prog.lab5.collection.Builders.CoordinatesBuilder;
-import ru.itmo.prog.lab5.collection.Builders.LabelBuilder;
-import ru.itmo.prog.lab5.collection.MusicBand.Coordinates;
-import ru.itmo.prog.lab5.collection.MusicBand.Label;
 import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
-import ru.itmo.prog.lab5.collection.MusicBand.MusicBandBuilder;
-import ru.itmo.prog.lab5.collection.MusicBand.MusicGenre;
 
 public class CollectionManager {
     public static PriorityQueue<MusicBand> musicBands = new PriorityQueue<MusicBand>();
+    private static LocalDateTime InitilizationDate = LocalDateTime.now();
+    public static ArrayList<Long> previousIds = new ArrayList<Long>();
+    private static MusicBand musicBand;
 
+    @SuppressWarnings("unchecked")
+    public static Class<? extends PriorityQueue<MusicBand>> getMusicBandsClass() {
+        return (Class<? extends PriorityQueue<MusicBand>>) musicBands.getClass();
+    }
 
+    public static LocalDateTime getInitilizationDate() {
+        return InitilizationDate;
+    }
+    public static int getCollectionNumberOfElements(){
+        int numberOfElements = 0;
+        for (int i = 0; i < musicBands.size(); i ++){
+            numberOfElements += 1;
+        }
+        return numberOfElements;
+    }
     public static MusicBand getBandById(long id){
         for (MusicBand band : musicBands){
             if (band.getId() == id){
@@ -24,105 +37,40 @@ public class CollectionManager {
         return null;
     }
 
-    public static void addNewCollection(){
-
-        MusicBandBuilder musicBandBuilder = new MusicBandBuilder();
-        MusicBand newCollection = musicBandBuilder.build();
-
-        //name
-        while(true){
-            System.out.println("Enter the name of the band you want to add (String).");
-            try {
-                String userInput = InputHandler.getStringInput();
-                newCollection.setName(userInput);
-                System.out.println("Name has been added.");
-                break;
-                    
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+    public static boolean collectionHasId(long idForInput) throws NoSuchElementException{
+        if (previousIds.contains(idForInput)){
+            return true;
         }
-            
-        //coordinates
-        System.out.println();
-        CoordinatesBuilder coordinatesBuilder = new CoordinatesBuilder();
-        Coordinates coordinates = coordinatesBuilder.build();
-        newCollection.setCoordinates(coordinates);
-
-        //number of participants
-        System.out.println();
-        while(true){
-            System.out.println("Enter the number of participants (int).");
-            try {
-                int userInput = InputHandler.getIntInput();
-                newCollection.setNumberOfParticipants(userInput);
-                System.out.println("Number of participants has been added.");
-                break;             
-                    
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-            
+        else{
+            throw new NoSuchElementException("There is no such id. Try again");
         }
+    }
 
-        //albumsCount
+    public static void setCollectionId(long id) { 
+        musicBand = getBandById(id);
+        musicBand.setId(id);
+        previousIds.add(id);
         System.out.println();
-        while(true){
-            System.out.println("Enter the number of albums (long).");
-            try {
-                long userInput = InputHandler.getLongInput();
-                newCollection.setAlbumsCount(userInput);
-                System.out.println("Number of albums has been added.");
-                break;
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
-
-        //establishmentDate
-        System.out.println();
-        while(true){
-            System.out.println("Enter the date of establishment in \"yyyy-MM-dd\" format.");
-            try {
-                ZonedDateTime input = InputHandler.getDateInput();
-                newCollection.setEstablishmentDate(input);
-                System.out.println("The date of estblishment has been added.");
-                break;
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
-
-        //musicGenre
-        System.out.println();
-        MusicGenre genre = MusicGenre.requestGenre();
-        newCollection.setGenre(genre);
-
-        //label
-        System.out.println();
-        LabelBuilder labelBuilder = new LabelBuilder();
-        Label label = labelBuilder.build();
-        newCollection.setLabel(label);
-        
-        //adding to priorityQueue
-        musicBands.add(newCollection);
-
-        System.out.println();
+        System.out.println("");
         System.out.println("--------------------------");
-        System.out.println("New Music Band has been added to the collection.");
+        System.out.println(musicBand.getName() + "'s id has been set." );
+    }
+
+    public static MusicBand getBandByName(String name){
+        for (MusicBand band : musicBands){
+            if (band.getName() == name){
+                return band;
+            }
+        }
+        return null;
+    }
+    public static MusicBand getBandByNumberOfParticipants(int n){
+        for (MusicBand band : musicBands){
+            if (band.getNumberOfParticipants() == n){
+                return band;
+            }
+        }
+        return null;
     }
     
-    public static void clearCollection(){
-        musicBands.clear();
-    }
-
-    //public static void InfoAboutCollection(){
-    //    if(musicBands.isEmpty()){
-    //        System.out.println("Collection is empty");
-    //    }
-    //    else{
-    //        System.out.println("Collection type:" + musicBands.getClass().toString());
-    //        System.out.println("Creation date: " + );
-    //    }
-    //}
 }

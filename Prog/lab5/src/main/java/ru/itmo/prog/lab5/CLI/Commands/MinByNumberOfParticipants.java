@@ -1,14 +1,13 @@
 package ru.itmo.prog.lab5.CLI.Commands;
 
-public class Save extends Command{
+public class MinByNumberOfParticipants extends Command {
 
-    public Save(String name, String descr) {
+    public MinByNumberOfParticipants(String name, String descr) {
         super(name, descr);
     }
-
+    
     @Override
     public void execute(String[] args) {
         
     }
-    
 }
