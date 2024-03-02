@@ -4,7 +4,7 @@ public abstract class Command implements CommandInterface {
     String name;
     String descr;
     Object argument;
-
+    
     public Command (String name, String descr){
         this.name = name;
         this.descr = descr;

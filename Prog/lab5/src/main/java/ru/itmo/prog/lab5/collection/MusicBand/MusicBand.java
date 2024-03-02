@@ -30,10 +30,10 @@ public class MusicBand implements Comparable<MusicBand> {
 
     @Override
     public int compareTo(MusicBand oMusicBand){
-        if (this.numberOfParticipants > oMusicBand.numberOfParticipants){
+        if (this.id > oMusicBand.id){
             return 1;
         }
-        else if( this.numberOfParticipants == oMusicBand.numberOfParticipants){
+        else if(this.id == oMusicBand.id){
             return 0;
         }
         else{

@@ -3,6 +3,8 @@ package ru.itmo.prog.lab5.CLI.Commands;
 
 import ru.itmo.prog.lab5.CLI.Managers.CollectionManager;
 import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
+import ru.itmo.prog.lab5.Exceptions.EmptyCollectionException;
+import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
 
 public class UpdateId extends Command {
 
@@ -12,18 +14,26 @@ public class UpdateId extends Command {
     
     @Override
     public void execute(String[] args){
-        if (CollectionManager.previousIds.isEmpty()){
-            System.out.println("Fail: Collection is empty - cannot do anything to it \nReturning to starting screen...");
+        if (args.length != 2) throw new ArrayIndexOutOfBoundsException("There has to be 1 argument (type: long)");
+        CollectionManager manager = CollectionManager.getInstance();
+
+        if (manager.getCollection().isEmpty()){
+            throw new  EmptyCollectionException("Fail: Collection is empty - cannot do anything to it \nReturning to starting screen...");
         }
         else{
             try {
                 long userInput = Long.parseLong(args[1]);
-                if(CollectionManager.collectionHasId(userInput)){
+                if(manager.getBandById(userInput) != null){
+                    MusicBand band = manager.getBandById(userInput);
                     while(true){
                         System.out.println("type id you want to change to");
                         long finalId = InputHandler.getLongInput();
-                        if(CollectionManager.getBandById(finalId) == null){
-                            CollectionManager.setCollectionId(finalId);
+                        if(manager.getBandById(finalId) == null){
+                            band.setId(finalId);
+                            manager.getPreviousIds().remove(userInput);
+                            System.out.println("");
+                            System.out.println("--------------------------");
+                            System.out.println(band.getName() + "'s id has been chaged");
                             break;
                         }
                         else{

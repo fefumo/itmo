@@ -4,6 +4,7 @@ import java.time.ZonedDateTime;
 
 import ru.itmo.prog.lab5.CLI.Managers.CollectionManager;
 import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
+import ru.itmo.prog.lab5.Exceptions.IncorrectInputException;
 import ru.itmo.prog.lab5.collection.Builders.CoordinatesBuilder;
 import ru.itmo.prog.lab5.collection.Builders.LabelBuilder;
 import ru.itmo.prog.lab5.collection.Builders.MusicBandBuilder;
@@ -21,6 +22,8 @@ public class Add  extends Command{
 
     @Override
     public void execute(String[] args){
+        if (args.length != 1) throw new ArrayIndexOutOfBoundsException("There has to be no arguments");
+        CollectionManager manager = CollectionManager.getInstance();
 
         MusicBandBuilder musicBandBuilder = new MusicBandBuilder();
         MusicBand newCollection = musicBandBuilder.build();
@@ -51,6 +54,9 @@ public class Add  extends Command{
             System.out.println("Enter the number of participants (int).");
             try {
                 int userInput = InputHandler.getIntInput();
+                if(userInput < 0){
+                    throw new IncorrectInputException("number has to be more than 0");
+                }
                 newCollection.setNumberOfParticipants(userInput);
                 System.out.println("Number of participants has been added.");
                 break;             
@@ -101,7 +107,7 @@ public class Add  extends Command{
         newCollection.setLabel(label);
         
         //adding to priorityQueue
-        CollectionManager.musicBands.add(newCollection);
+        manager.addElementToCollection(newCollection);
     
         System.out.println();
         System.out.println("--------------------------");

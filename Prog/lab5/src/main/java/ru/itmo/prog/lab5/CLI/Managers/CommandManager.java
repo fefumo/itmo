@@ -52,6 +52,7 @@ public class CommandManager {
             if (!(commands.containsKey(args[0].toLowerCase()))){
                 throw new InvalidCommandException("No such command. Try again");
             }
+            
             commands.get(args[0].toLowerCase()).execute(args);                
         } catch (Exception e) {
             System.out.println(e);

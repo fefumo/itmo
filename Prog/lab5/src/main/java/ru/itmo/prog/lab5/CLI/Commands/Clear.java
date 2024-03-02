@@ -10,6 +10,13 @@ public class Clear extends Command {
 
     @Override
     public void execute(String[] args){
-        CollectionManager.musicBands.clear();
+        if (args.length != 1) throw new ArrayIndexOutOfBoundsException("There has to be no arguments");
+        CollectionManager manager = CollectionManager.getInstance();
+
+        if (manager.getCollection().isEmpty()) throw new RuntimeException("Collection is empty");
+        manager.getCollection().clear();
+        System.out.println();
+        System.out.println("--------------------------");
+        System.out.println("Collection has been cleared");
     }
 }

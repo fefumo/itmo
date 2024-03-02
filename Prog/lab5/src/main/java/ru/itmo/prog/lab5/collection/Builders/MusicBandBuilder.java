@@ -11,19 +11,20 @@ public class MusicBandBuilder implements Builder<MusicBand> {
     
     @Override
     public MusicBand build(){
-        if (!CollectionManager.previousIds.isEmpty()){
-            for (long i = 1; i <= CollectionManager.previousIds.size(); i++){
-                if (!CollectionManager.previousIds.contains(i)){
+        CollectionManager manager = CollectionManager.getInstance();
+        if (!(manager.getPreviousIds().isEmpty())){
+            for (long i = 1; i <= manager.getPreviousIds().size(); i++){
+                if (!(manager.getPreviousIds().contains(i))){
                     id = i;
                     break;
                 }
                 else{
-                    id = CollectionManager.previousIds.size() + 1;
+                    id = manager.getPreviousIds().size() + 1;
                 }
             }    
         }
 
-        CollectionManager.previousIds.add(id);
+        manager.getPreviousIds().add(id);
         final Date creationDate = new Date();
         Coordinates coordinates = null;
         MusicBand new_Band = new MusicBand(id, null, coordinates, creationDate, 0, null, null, null, null);

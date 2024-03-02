@@ -25,6 +25,8 @@ public class History extends Command{
     }
     @Override
     public void execute(String[] args){
+        if (args.length != 1) throw new ArrayIndexOutOfBoundsException("There has to be no arguments");
+        
         System.out.println("Here is your history command list: \n----------------------------------");
         if (headIndex == -1) {
             System.out.println("No commands in history");

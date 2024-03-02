@@ -8,7 +8,7 @@ public class ExecuteScript extends Command{
     
     @Override
     public void execute(String[] args){
-        
+        if (args.length != 2) throw new ArrayIndexOutOfBoundsException("There has to be 1 argument");
     }
 
 }

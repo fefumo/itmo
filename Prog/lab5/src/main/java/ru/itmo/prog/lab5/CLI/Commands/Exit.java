@@ -10,9 +10,10 @@ public class Exit extends Command{
 
     @Override
     public void execute(String[] args){
-            System.out.println("Goodbye, have a nice day!");
-            InputHandler.inputScanner.close();
-            System.exit(0);
+        if (args.length != 1) throw new ArrayIndexOutOfBoundsException("There has to be no arguments");
+        System.out.println("Goodbye, have a nice day!");
+        InputHandler.inputScanner.close();
+        System.exit(0);
     }
 
 }

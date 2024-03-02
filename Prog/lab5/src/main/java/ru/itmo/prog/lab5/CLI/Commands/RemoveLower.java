@@ -1,6 +1,10 @@
 package ru.itmo.prog.lab5.CLI.Commands;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import ru.itmo.prog.lab5.CLI.Managers.CollectionManager;
+import ru.itmo.prog.lab5.Exceptions.EmptyCollectionException;
 import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
 
 public class RemoveLower extends Command{
@@ -11,26 +15,36 @@ public class RemoveLower extends Command{
 
     @Override
     public void execute(String[] args) {
-        MusicBand musicBand; 
-        if (CollectionManager.previousIds.isEmpty()){
-            System.out.println("Fail: Collection is empty - cannot do anything to it \nReturning to starting screen...");
-        }
-        String name = "";
-        for (int i = 1; i < args.length; i++){
-            name += args[i];
-        }
-        String  userInput = name;
-        if (CollectionManager.getBandByName(userInput) != null){
-            musicBand = CollectionManager.getBandByName(userInput);
-            for (MusicBand mb : CollectionManager.musicBands){
-                if (mb.compareTo(musicBand) < 0){
-                    CollectionManager.musicBands.remove(mb);
-                    CollectionManager.previousIds.remove(musicBand.getId());
-                    System.out.println();
-                    System.out.println("--------------------------");
-                    System.out.println("Band " + musicBand.getName() + " has been removed");
+        
+        if (args.length != 2) throw new ArrayIndexOutOfBoundsException("There has to be 1 argument (type: long)");
+        CollectionManager manager = CollectionManager.getInstance();
+        if (manager.getCollection() == null) throw new EmptyCollectionException("There has to be a collection with elements. Try \\\"add\\\" command");
+
+        MusicBand musicBand;
+        try {
+            long  id = Long.parseLong(args[1]);
+            if(manager.getCollectionById(id) != null){
+                musicBand = manager.getCollectionById(id);
+                Iterator<MusicBand> iter = manager.getCollection().iterator();
+                while (iter.hasNext()){
+                    MusicBand musicBandToDelete = iter.next();
+                    if (musicBandToDelete.compareTo(musicBand) < 0){
+                        manager.getPreviousIds().remove(musicBandToDelete.getId());
+                        //THIS IS SO IMPORTANT NOT TO GET ConcurrentModificationException here!!!!!!!!!
+                        //manager.getCollection().remove(musicBandToDelete.getId()) WILL RESOLVE IN AN EXCEPTION!
+                        iter.remove();
+                        System.out.println();
+                        System.out.println("--------------------------");
+                        System.out.println("Band with id " + musicBandToDelete.getId() + " has been removed");    
+        
+                    }
                 }
             }
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+            System.out.println("There has to be an argument (int) provided");
+        }
+        catch (NoSuchElementException e){
+            System.out.println(e);
         }
     }
 }

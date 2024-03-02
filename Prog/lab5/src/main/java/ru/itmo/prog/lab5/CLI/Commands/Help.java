@@ -10,6 +10,7 @@ public class Help extends Command{
 
     @Override
     public void execute(String[] args){
+        if (args.length != 1) throw new ArrayIndexOutOfBoundsException("There has to be no arguments");
         System.out.println("here is the list of available commands: ");
         for (String key: CommandManager.getCommandsHashMap().keySet()){
             System.out.println(" -" + key + ": " + CommandManager.getCommandsHashMap().get(key).getDescr()); 
