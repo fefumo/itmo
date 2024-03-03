@@ -1,19 +1,24 @@
 package ru.itmo.prog.lab5;
 
-import ru.itmo.prog.lab5.CLI.*;
+import ru.itmo.prog.lab5.CLI.Managers.CommandManager;
+import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
+import ru.itmo.prog.lab5.Exceptions.EmptyLineException;
 
 public class Main {
 
     public static void main(String[] args) {
-
-        //CollectionManager collectionManager = new CollectionManager();
-        //System.out.println(collectionManager.musicBands.get);
-        // ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("GMT+05:30") );
-        //Label label = new Label("buba", 123L);
-        //queue.add(new MusicBand(0, "asd", new Coordinates(1, 2), new java.util.Date(), 2, 2L, zdt, MusicGenre.BLUES, label));
         
-        Session session = new Session();
-        session.start();
+        System.out.println("Hello! This is a program for working with music band collections.  \nType \"help\" for more info.");
+        CommandManager commandManager = new CommandManager();
+        commandManager.buildCommands();
+
+        while (true) {
+            try {
+                commandManager.executeCommand(InputHandler.getInput());                   
+            } catch (EmptyLineException e) {
+                System.out.println(e);
+            } 
+        }
     }
 
 

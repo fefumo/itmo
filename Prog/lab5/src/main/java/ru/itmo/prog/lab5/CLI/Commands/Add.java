@@ -12,6 +12,7 @@ import ru.itmo.prog.lab5.collection.MusicBand.Coordinates;
 import ru.itmo.prog.lab5.collection.MusicBand.Label;
 import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
 import ru.itmo.prog.lab5.collection.MusicBand.MusicGenre;
+import ru.itmo.prog.lab5.collection.Validators.NameValidator;
 
 
 public class Add  extends Command{
@@ -30,12 +31,18 @@ public class Add  extends Command{
         
         //name
         while(true){
-            System.out.println("Enter the name of the band you want to add (String).");
+            System.out.println("Enter the name of the band you want to add (String; 3 chrtrs min).");
             try {
                 String userInput = InputHandler.getStringInput();
-                newCollection.setName(userInput);
-                System.out.println("Name has been added.");
-                break;
+                NameValidator nv = new NameValidator();
+                if(nv.validate(userInput)){
+                    newCollection.setName(userInput);
+                    System.out.println("Name has been added.");
+                    break;    
+                }
+                else{
+                    throw new IncorrectInputException("name has to have at least 3 characters");
+                }
                     
             } catch (Exception e) {
                 System.out.println(e);

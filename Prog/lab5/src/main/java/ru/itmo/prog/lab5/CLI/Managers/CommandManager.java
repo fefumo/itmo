@@ -10,8 +10,6 @@ public class CommandManager {
 
     public static HashMap<String, Command> commands = new HashMap<>();
 
-    
-
 
     public void buildCommands(){
     
@@ -52,7 +50,13 @@ public class CommandManager {
             if (!(commands.containsKey(args[0].toLowerCase()))){
                 throw new InvalidCommandException("No such command. Try again");
             }
-            
+            /*
+             * Command command = commands.get(args[0].toLowerCase())
+             * if (command.usermode != false){
+             *     command.execute(args)
+             * }
+             * 
+             */
             commands.get(args[0].toLowerCase()).execute(args);                
         } catch (Exception e) {
             System.out.println(e);
@@ -62,48 +66,5 @@ public class CommandManager {
     public static HashMap<String, Command> getCommandsHashMap() {
         return commands;
     }
-
-    // public void executeCommand(String st) throws InvalidCommandException{
-        // History.addCommandToHistory(st);
-        // try {
-            // switch(st){
-                // case "help":
-                    // Help.execute();
-                    // break;
-                // case "exit":
-                    // Exit.execute();
-                    // break;
-                // case "add":
-                    // Add.execute();
-                    // break;
-                // case "clear":
-                    // Clear.execute();
-                    // break;
-                // case "history":
-                    // History.execute();
-                    // break;
-                // case "show":
-                    // Show.exeucte();
-                    // break;
-                // case "update_id":
-                    // UpdateId.execute();
-                    // break;
-                // case "remove_by_id":
-                    // RemoveById.execute();
-                    // break;
-                // case "remove_lower":
-                    // RemoveLower.execute();
-                    // break;
-                // case "info":
-                    // Info.execute();
-                    // break;
-                // 
-                // default:
-                    // 
-            // }
-        // } catch (InvalidCommandException e) {
-            // System.out.println(e);
-        // }
-    // }
 }
 

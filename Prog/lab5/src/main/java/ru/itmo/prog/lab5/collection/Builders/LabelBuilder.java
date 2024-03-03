@@ -1,7 +1,9 @@
 package ru.itmo.prog.lab5.collection.Builders;
 
 import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
+import ru.itmo.prog.lab5.Exceptions.IncorrectInputException;
 import ru.itmo.prog.lab5.collection.MusicBand.Label;
+import ru.itmo.prog.lab5.collection.Validators.NameValidator;
 
 public class LabelBuilder implements Builder<Label> {
     
@@ -12,15 +14,20 @@ public class LabelBuilder implements Builder<Label> {
         
         //name
         while(true){
+            System.out.println("Input label's name");
             try {
-                System.out.println("Input label's name");
-                String input = InputHandler.getStringInput();
-                System.out.println("Label's name has been added.");
-                label.setName(input);
-                break;
-                }
-            catch (Exception e) {
-                System.out.println(e);  
+                String userInput = InputHandler.getStringInput();
+                NameValidator nv = new NameValidator();
+                if(nv.validate(userInput)){
+                    label.setName(userInput);
+                    System.out.println("Label's name has been added.");
+                    break;    
+            }
+            else{
+                throw new IncorrectInputException("name has to have at least 3 characters");
+            }
+            }catch (Exception e) {
+                System.out.println(e);
             }
         }
 
@@ -39,5 +46,5 @@ public class LabelBuilder implements Builder<Label> {
         }
 
         return label;
-    }
+        }
 }
