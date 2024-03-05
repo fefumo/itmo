@@ -10,7 +10,8 @@ public class Label{
         this. bands = bands;
     }
 
-    
+    public Label(){}
+
     public String getName() {
         return name;
     }

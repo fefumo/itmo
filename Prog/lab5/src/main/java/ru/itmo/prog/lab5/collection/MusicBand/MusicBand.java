@@ -50,12 +50,6 @@ public class MusicBand implements Comparable<MusicBand> {
 
     }
 
-    
-    //"Name cannot be null nor can it be blank"
-    //"Number of participants has to be more than 0"
-    //"Albums count has to be more than 0 AND not null"
-
-
     public Long getAlbumsCount() {
         return albumsCount;
     }

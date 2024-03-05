@@ -1,6 +1,7 @@
 package ru.itmo.prog.lab5.collection.MusicBand;
 
 import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
+import ru.itmo.prog.lab5.Exceptions.IncorrectInputException;
 
 public enum MusicGenre{
     PSYCHEDELIC_ROCK,
@@ -17,18 +18,19 @@ public enum MusicGenre{
     }
 
     public static MusicGenre requestGenre(){
+        InputHandler inputHandler = InputHandler.getInstance();
         MusicGenre[] array = MusicGenre.values();
         showGenres();
         MusicGenre resultingGenre;
         while(true){
             System.out.println("Enter the number of the band's genre.");
             try {
-                int userIntInput = InputHandler.getIntInput();
+                int userIntInput = inputHandler.getIntInput();
                 resultingGenre = array[userIntInput-1];
                 System.out.println("Genre " + array[userIntInput - 1] + " has been added");
                 return resultingGenre;
-            } catch (Exception e) {
-                System.out.println(e);
+            } catch (NumberFormatException | IncorrectInputException e) {
+                System.out.println(e.getMessage());
             }
 
         }

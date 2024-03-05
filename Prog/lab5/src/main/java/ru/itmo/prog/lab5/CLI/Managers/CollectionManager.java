@@ -58,6 +58,9 @@ public class CollectionManager {
         else{
             musicBandsQueue.add(value);
         }
+        System.out.println();
+        System.out.println("--------------------------");
+        System.out.println("New Music Band has been added to the colleciton.");
     }
 
     public MusicBand getCollectionById(long id) throws NoSuchElementException{

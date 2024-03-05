@@ -1,5 +1,6 @@
 package ru.itmo.prog.lab5.CLI.Commands;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,8 +8,8 @@ import java.util.ArrayDeque;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import ru.itmo.prog.lab5.CLI.Managers.CommandManager;
-import ru.itmo.prog.lab5.CLI.Managers.DumpManager;
+
+import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
 
 public class ExecuteScript extends Command{
     
@@ -19,8 +20,7 @@ public class ExecuteScript extends Command{
     @Override
     public void execute(String[] args){
         if (args.length != 2) throw new ArrayIndexOutOfBoundsException("There has to be 1 argument - path to file ");
-        DumpManager dumpManager = DumpManager.getInstance();
-        CommandManager commandManager = new CommandManager();
+        InputHandler inputHandler = InputHandler.getInstance();
 
         try {
             String userInput = args[1];
@@ -32,21 +32,14 @@ public class ExecuteScript extends Command{
             System.out.println("--------------------------");
             System.out.println("Executing script...");
 
-            String[] data = dumpManager.loadFromFile(Path.of(userInput));
-            for (String line : data){
-                String[] command = line.split(" ");
-                /*
-                 * 
-                 */
-                commandManager.executeCommand(command);
-            }
+            //preparing some data
 
-            System.out.println();
-            System.out.println("--------------------------");
-            System.out.println("Script has been executed.");
+            File file = new File(userInput);
+            inputHandler.setflagOfUserMode(false);
+            inputHandler.setInputFromFile(file);
 
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println("Something is wrong with the file. Try again.");
         } catch (SecurityException e ){
             System.out.println("Access to the file is denied.");
         }

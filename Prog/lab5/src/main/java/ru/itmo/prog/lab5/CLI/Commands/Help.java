@@ -13,7 +13,7 @@ public class Help extends Command{
         if (args.length != 1) throw new ArrayIndexOutOfBoundsException("There has to be no arguments");
         System.out.println("here is the list of available commands: ");
         for (String key: CommandManager.getCommandsHashMap().keySet()){
-            System.out.println(" -" + key + ": " + CommandManager.getCommandsHashMap().get(key).getDescr()); 
+            System.out.println("    -" + key + ": " + CommandManager.getCommandsHashMap().get(key).getDescr()); 
         }
     }
 

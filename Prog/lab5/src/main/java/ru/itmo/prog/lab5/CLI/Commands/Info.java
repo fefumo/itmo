@@ -13,9 +13,9 @@ public class Info extends Command {
         CollectionManager manager = CollectionManager.getInstance();
         if (manager.getCollection() == null) throw new EmptyCollectionException("There has to be a collection with elements. Try \"add\" command");
         
-        System.out.println("-Collection of type: " + manager.getCollection().getClass().toString()
-                            + "\n-Number of elements: "  + manager.getCollection().size()
-                            + "\n-Created at: " + manager.getCollectionInitilizationDate());
+        System.out.println("    -Collection of type: " + manager.getCollection().getClass().toString()
+                            + "\n   -Number of elements: "  + manager.getCollection().size()
+                            + "\n   -Created at: " + manager.getCollectionInitilizationDate());
     }
 
 }

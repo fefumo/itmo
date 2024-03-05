@@ -26,21 +26,25 @@ public class DumpManager {
 
     }
 
-    //BufferedReader is thread-safe so i used it for future purposes
-    public String[] loadFromFile(Path path) throws IOException {
-        ArrayList<String> data = new ArrayList<>();
-
-        //maybe changed to StringBuffer in the future
-        InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(path.toFile()));
-        BufferedReader in = new BufferedReader(inputStreamReader);
-        //i found this on baeldung. dont judge.
-        String line = in.readLine();
-        while (line != null){
-            data.add(line);
-            line = in.readLine();
-        }
-        String[] newData = data.toArray(new String[0]);
-        in.close();
-        return newData;
+    public FileInputStream loadStreamFromFile(Path path) throws IOException {
+        FileInputStream fileInputStream = new FileInputStream(path.toFile());
+                
+        return fileInputStream;
     }
+
+    public String[] loadStrinDataFromStream(FileInputStream fileInputStream) throws IOException{
+        ArrayList<String> initialData = new ArrayList<>();
+        InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        String line = bufferedReader.readLine();
+        while (line != null){
+            initialData.add(line);
+            line = bufferedReader.readLine();
+        }
+        String[] finalData = initialData.toArray(new String[0]);
+        bufferedReader.close();
+
+        return finalData;
+    }  
+
 }

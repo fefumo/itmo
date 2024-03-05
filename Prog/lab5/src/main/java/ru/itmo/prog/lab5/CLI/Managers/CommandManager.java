@@ -3,7 +3,7 @@ package ru.itmo.prog.lab5.CLI.Managers;
 import java.util.HashMap;
 
 import ru.itmo.prog.lab5.CLI.Commands.*;
-
+import ru.itmo.prog.lab5.Exceptions.EmptyCollectionException;
 import ru.itmo.prog.lab5.Exceptions.InvalidCommandException;
 
 public class CommandManager {
@@ -44,22 +44,17 @@ public class CommandManager {
         commands.put(groupCountingById.getName(), groupCountingById);
     }
 
-    public void executeCommand(String[] args) throws InvalidCommandException{
-        History.addCommandToHistory(String.join(" ", args));
+    public void executeCommand(String command) throws InvalidCommandException{
+        String[] commandAndArgs = command.split(" ", 2);
+        History.addCommandToHistory(command);
         try {
-            if (!(commands.containsKey(args[0].toLowerCase()))){
+            if (!(commands.containsKey(commandAndArgs[0]))){
                 throw new InvalidCommandException("No such command. Try again");
             }
-            /*
-             * Command command = commands.get(args[0].toLowerCase())
-             * if (command.usermode != false){
-             *     command.execute(args)
-             * }
-             * 
-             */
-            commands.get(args[0].toLowerCase()).execute(args);                
-        } catch (Exception e) {
-            System.out.println(e);
+            commands.get(commandAndArgs[0]).execute(commandAndArgs);
+
+        } catch (InvalidCommandException | ArrayIndexOutOfBoundsException | EmptyCollectionException e) {
+            System.out.println(e.getMessage());
         }
     }
 

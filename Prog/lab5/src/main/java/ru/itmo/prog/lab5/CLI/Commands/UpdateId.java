@@ -16,6 +16,7 @@ public class UpdateId extends Command {
     public void execute(String[] args){
         if (args.length != 2) throw new ArrayIndexOutOfBoundsException("There has to be 1 argument (type: long)");
         CollectionManager manager = CollectionManager.getInstance();
+        InputHandler inputHandler = InputHandler.getInstance();
 
         if (manager.getCollection().isEmpty()){
             throw new  EmptyCollectionException("Fail: Collection is empty - cannot do anything to it \nReturning to starting screen...");
@@ -27,7 +28,8 @@ public class UpdateId extends Command {
                     MusicBand band = manager.getBandById(userInput);
                     while(true){
                         System.out.println("type id you want to change to");
-                        long finalId = InputHandler.getLongInput();
+                        String userStringInput = inputHandler.getInput();
+                        long finalId = Long.parseLong(userStringInput);
                         if(manager.getBandById(finalId) == null){
                             band.setId(finalId);
                             manager.getPreviousIds().remove(userInput);

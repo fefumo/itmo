@@ -1,18 +1,10 @@
 package ru.itmo.prog.lab5.CLI.Commands;
 
-import java.time.ZonedDateTime;
-
 import ru.itmo.prog.lab5.CLI.Managers.CollectionManager;
 import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
-import ru.itmo.prog.lab5.Exceptions.IncorrectInputException;
-import ru.itmo.prog.lab5.collection.Builders.CoordinatesBuilder;
-import ru.itmo.prog.lab5.collection.Builders.LabelBuilder;
-import ru.itmo.prog.lab5.collection.Builders.MusicBandBuilder;
-import ru.itmo.prog.lab5.collection.MusicBand.Coordinates;
-import ru.itmo.prog.lab5.collection.MusicBand.Label;
 import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
-import ru.itmo.prog.lab5.collection.MusicBand.MusicGenre;
-import ru.itmo.prog.lab5.collection.Validators.NameValidator;
+import ru.itmo.prog.lab5.collection.MusicBand.MusicBandRequester;
+
 
 
 public class Add  extends Command{
@@ -22,103 +14,23 @@ public class Add  extends Command{
     }
 
     @Override
-    public void execute(String[] args){
+    public void execute(String[] args) {
         if (args.length != 1) throw new ArrayIndexOutOfBoundsException("There has to be no arguments");
         CollectionManager manager = CollectionManager.getInstance();
+        MusicBandRequester musicBandRequester = new MusicBandRequester();
+        InputHandler inputHandler = InputHandler.getInstance();
+        if (inputHandler.getflagOfUserMode() == true){
+            manager.addElementToCollection(musicBandRequester.requestUserBand());
+        }
+        else{
+            MusicBand musicBand = musicBandRequester.requestNonUserBand();
+            if (musicBand != null){
+                manager.addElementToCollection(musicBand);
+            }
+            else{
+                System.out.println("MusicBand hasn't been added t the collection.");
+            }
+        }
 
-        MusicBandBuilder musicBandBuilder = new MusicBandBuilder();
-        MusicBand newCollection = musicBandBuilder.build();
-        
-        //name
-        while(true){
-            System.out.println("Enter the name of the band you want to add (String; 3 chrtrs min).");
-            try {
-                String userInput = InputHandler.getStringInput();
-                NameValidator nv = new NameValidator();
-                if(nv.validate(userInput)){
-                    newCollection.setName(userInput);
-                    System.out.println("Name has been added.");
-                    break;    
-                }
-                else{
-                    throw new IncorrectInputException("name has to have at least 3 characters");
-                }
-                    
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
-            
-        //coordinates
-        System.out.println();
-        CoordinatesBuilder coordinatesBuilder = new CoordinatesBuilder();
-        Coordinates coordinates = coordinatesBuilder.build();
-        newCollection.setCoordinates(coordinates);
-    
-        //number of participants
-        System.out.println();
-        while(true){
-            System.out.println("Enter the number of participants (int).");
-            try {
-                int userInput = InputHandler.getIntInput();
-                if(userInput < 0){
-                    throw new IncorrectInputException("number has to be more than 0");
-                }
-                newCollection.setNumberOfParticipants(userInput);
-                System.out.println("Number of participants has been added.");
-                break;             
-                    
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-            
-        }
-    
-        //albumsCount
-        System.out.println();
-        while(true){
-            System.out.println("Enter the number of albums (long).");
-            try {
-                long userInput = InputHandler.getLongInput();
-                newCollection.setAlbumsCount(userInput);
-                System.out.println("Number of albums has been added.");
-                break;
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
-    
-        //establishmentDate
-        System.out.println();
-        while(true){
-            System.out.println("Enter the date of establishment in \"yyyy-MM-dd\" format.");
-            try {
-                ZonedDateTime input = InputHandler.getDateInput();
-                newCollection.setEstablishmentDate(input);
-                System.out.println("The date of estblishment has been added.");
-                break;
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
-    
-        //musicGenre
-        System.out.println();
-        MusicGenre genre = MusicGenre.requestGenre();
-        newCollection.setGenre(genre);
-    
-        //label
-        System.out.println();
-        LabelBuilder labelBuilder = new LabelBuilder();
-        Label label = labelBuilder.build();
-        newCollection.setLabel(label);
-        
-        //adding to priorityQueue
-        manager.addElementToCollection(newCollection);
-    
-        System.out.println();
-        System.out.println("--------------------------");
-        System.out.println("New Music Band has been added to the collection.");
     }
-    
 }

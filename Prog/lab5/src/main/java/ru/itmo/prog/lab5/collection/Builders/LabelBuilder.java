@@ -9,6 +9,7 @@ public class LabelBuilder implements Builder<Label> {
     
     @Override
     public Label build() {
+        InputHandler inputHandler = InputHandler.getInstance();
         System.out.println("Generating label...");
         Label label = new Label(null, 0L);
         
@@ -16,7 +17,7 @@ public class LabelBuilder implements Builder<Label> {
         while(true){
             System.out.println("Input label's name");
             try {
-                String userInput = InputHandler.getStringInput();
+                String userInput = inputHandler.getInput();
                 NameValidator nv = new NameValidator();
                 if(nv.validate(userInput)){
                     label.setName(userInput);
@@ -26,8 +27,8 @@ public class LabelBuilder implements Builder<Label> {
             else{
                 throw new IncorrectInputException("name has to have at least 3 characters");
             }
-            }catch (Exception e) {
-                System.out.println(e);
+            }catch (IncorrectInputException e) {
+                System.out.println(e.getMessage());
             }
         }
 
@@ -35,8 +36,9 @@ public class LabelBuilder implements Builder<Label> {
         while(true){
             try {
                 System.out.println("Enter label's amount of bands");
-                Long input = InputHandler.getLongInput();
-                label.setBands(input);
+                String userInput = inputHandler.getInput();
+                long userLongInput = Long.parseLong(userInput);
+                label.setBands(userLongInput);
                 System.out.println("Label's amount of bands has been added");
                 break;
 
