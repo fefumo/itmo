@@ -26,9 +26,10 @@ public class Add  extends Command{
             MusicBand musicBand = musicBandRequester.requestNonUserBand();
             if (musicBand != null){
                 manager.addElementToCollection(musicBand);
+                System.out.println("MusicBand has been added to the collection.");
             }
             else{
-                System.out.println("MusicBand hasn't been added t the collection.");
+                System.out.println("MusicBand hasn't been added to the collection.");
             }
         }
 

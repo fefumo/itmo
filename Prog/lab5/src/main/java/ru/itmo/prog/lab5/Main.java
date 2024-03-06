@@ -1,9 +1,10 @@
 package ru.itmo.prog.lab5;
 
 
+import java.util.NoSuchElementException;
+
 import ru.itmo.prog.lab5.CLI.Managers.CommandManager;
 import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
-import ru.itmo.prog.lab5.Exceptions.EmptyLineException;
 
 public class Main {
 
@@ -16,8 +17,12 @@ public class Main {
         while (true) {
             try {
                 commandManager.executeCommand(inputHandler.getInput());                   
-            } catch (EmptyLineException e) {
-                System.out.println(e.getMessage());
+            } catch (NoSuchElementException e) {
+                System.out.println();
+                System.out.println("--------------------------");
+                System.out.println("EOF or smth has been reached. Returning to user-mode...");
+                System.out.println();
+                inputHandler.setUserInput();
             } 
         }
     }

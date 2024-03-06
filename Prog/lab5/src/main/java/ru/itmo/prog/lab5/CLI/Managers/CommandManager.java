@@ -25,7 +25,7 @@ public class CommandManager {
         Exit exit = new Exit("exit", "завершить программу (без сохранения в файл)");
         RemoveLower removeLower = new RemoveLower("remove_lower", "remove_lower {element} удалить из коллекции все элементы, меньшие, чем заданный");
         History history = new History("history", "вывести последние 14 выполненных комманд");
-        MinByNumberOfParticipants minByNumberOfParticipants = new MinByNumberOfParticipants("min_by_number_of_participants", "вывести любой объект из коллекции, значение поля numberOfParticipants которого является минимальным");
+        MinByNumberOfParticipants minByNumberOfParticipants = new MinByNumberOfParticipants("min_by_number_of_participants", "вывести объект из коллекции, значение поля numberOfParticipants которого является минимальным");
         GroupCountingById groupCountingById = new GroupCountingById("group_counting_by_id", "вывести количество элементов, значение поля id которых меньше заданного");
         
         commands.put(help.getName(), help);
@@ -44,7 +44,11 @@ public class CommandManager {
         commands.put(groupCountingById.getName(), groupCountingById);
     }
 
-    public void executeCommand(String command) throws InvalidCommandException{
+    public void executeCommand(String command){
+        if(command == null){
+            System.out.println("Null passed. No command will be executed.");
+            return;
+        }
         String[] commandAndArgs = command.split(" ", 2);
         History.addCommandToHistory(command);
         try {
@@ -55,7 +59,7 @@ public class CommandManager {
 
         } catch (InvalidCommandException | ArrayIndexOutOfBoundsException | EmptyCollectionException e) {
             System.out.println(e.getMessage());
-        }
+        } 
     }
 
     public static HashMap<String, Command> getCommandsHashMap() {

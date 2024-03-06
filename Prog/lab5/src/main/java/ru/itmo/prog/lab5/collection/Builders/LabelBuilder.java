@@ -1,9 +1,7 @@
 package ru.itmo.prog.lab5.collection.Builders;
 
 import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
-import ru.itmo.prog.lab5.Exceptions.IncorrectInputException;
 import ru.itmo.prog.lab5.collection.MusicBand.Label;
-import ru.itmo.prog.lab5.collection.Validators.NameValidator;
 
 public class LabelBuilder implements Builder<Label> {
     
@@ -15,35 +13,30 @@ public class LabelBuilder implements Builder<Label> {
         
         //name
         while(true){
-            System.out.println("Input label's name");
-            try {
-                String userInput = inputHandler.getInput();
-                NameValidator nv = new NameValidator();
-                if(nv.validate(userInput)){
-                    label.setName(userInput);
-                    System.out.println("Label's name has been added.");
-                    break;    
-            }
-            else{
-                throw new IncorrectInputException("name has to have at least 3 characters");
-            }
-            }catch (IncorrectInputException e) {
-                System.out.println(e.getMessage());
-            }
+            System.out.println("Input label's name (String, can be null)");
+            String userInput = inputHandler.getInput();
+            label.setName(userInput);
+            System.out.println("Label's name has been added.");
+            break;
         }
 
         //bands
         while(true){
             try {
-                System.out.println("Enter label's amount of bands");
+                System.out.println("Enter label's amount of bands (Long)");
                 String userInput = inputHandler.getInput();
-                long userLongInput = Long.parseLong(userInput);
-                label.setBands(userLongInput);
-                System.out.println("Label's amount of bands has been added");
-                break;
+                if (userInput == null){
+                    System.out.println("Bands can't be null");
+                }
+                else{
+                    long userLongInput = Long.parseLong(userInput);
+                    label.setBands(userLongInput);
+                    System.out.println("Label's amount of bands has been added");
+                    break;    
+                }
 
-            } catch (Exception e) {
-                System.out.println(e);
+            } catch (NumberFormatException e) {
+                System.out.println("Number was written incorrectly. Try again.");
             }
         }
 

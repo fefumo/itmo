@@ -3,19 +3,17 @@ package ru.itmo.prog.lab5.collection.MusicBand;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeParseException;
 
-import ru.itmo.prog.lab5.CLI.Managers.CollectionManager;
 import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
-import ru.itmo.prog.lab5.Exceptions.EmptyLineException;
-import ru.itmo.prog.lab5.Exceptions.IncorrectInputException;
 import ru.itmo.prog.lab5.collection.Builders.CoordinatesBuilder;
 import ru.itmo.prog.lab5.collection.Builders.LabelBuilder;
 import ru.itmo.prog.lab5.collection.Builders.MusicBandBuilder;
+import ru.itmo.prog.lab5.collection.Validators.AlbumsValidator;
 import ru.itmo.prog.lab5.collection.Validators.NameValidator;
 
 public class MusicBandRequester {
     MusicBandBuilder musicBandBuilder = new MusicBandBuilder();
     NameValidator nv = new NameValidator();
-    CollectionManager collectionManager = CollectionManager.getInstance();
+    AlbumsValidator av = new AlbumsValidator();
 
     public MusicBand requestUserBand(){
         InputHandler inputHandler = InputHandler.getInstance();
@@ -25,7 +23,6 @@ public class MusicBandRequester {
         //name
         while(true){
             System.out.println("Enter the name of the band you want to add (String).");
-            try {
             String userInput = inputHandler.getInput();
             if(nv.validate(userInput)){
                 newBand.setName(userInput);
@@ -34,9 +31,6 @@ public class MusicBandRequester {
             }
             else{
                 System.out.println("Name can't be blank.");
-            }
-            } catch (IncorrectInputException e) {
-                e.getMessage();
             }
         }
         
@@ -52,17 +46,24 @@ public class MusicBandRequester {
         //number of participants
         System.out.println();
         while(true){
-            System.out.println("Enter the number of participants (int).");
+            System.out.println("Enter the number of participants (int) > 0.");
             try {
-                int intUserInput = inputHandler.getIntInput();
-                if(intUserInput < 0){
-                    System.out.println("number has to be more than 0");
+                Integer intUserInput = inputHandler.getIntInput();
+                if (intUserInput == null){
+                    System.out.println("Number can't be null.");
                 }
-                newBand.setNumberOfParticipants(intUserInput);
-                System.out.println("Number of participants has been added.");
-                break;
-            } catch (IncorrectInputException | NumberFormatException e) {
-                System.out.println(e.getMessage());
+                else{
+                    if(intUserInput < 0){
+                        System.out.println("Number has to be more than 0.");
+                    }
+                    else{
+                        newBand.setNumberOfParticipants(intUserInput);
+                        System.out.println("Number of participants has been added.");
+                        break;    
+                    }    
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Number was written incorrectly. Try again.");
             }
             
         }
@@ -70,27 +71,32 @@ public class MusicBandRequester {
         //albumsCount
         System.out.println();
         while(true){
-            System.out.println("Enter the number of albums (long).");
+            System.out.println("Enter the number of albums (long, can be null) > 0.");
             try {
-                long longUserInput = inputHandler.getLongInput();
-                newBand.setAlbumsCount(longUserInput);
-                System.out.println("Number of albums has been added.");
-                break;
-            } catch (NumberFormatException | IncorrectInputException e) {
-                System.out.println(e.getMessage());
+                Long longUserInput = inputHandler.getLongInput();
+                if (av.validate(longUserInput) == false){
+                    System.out.println("Number has to be more than 0");
+                }
+                else{
+                    newBand.setAlbumsCount(longUserInput);
+                    System.out.println("Number of albums has been added.");
+                    break;    
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Number was written incorrectly. Try again.");
             }
         }
     
         //establishmentDate
         System.out.println();
         while(true){
-            System.out.println("Enter the date of establishment in \"yyyy-MM-dd\" format.");
+            System.out.println("Enter the date of establishment in \"yyyy-MM-dd\" format (can be null).");
             try {
                 ZonedDateTime input = inputHandler.getDateInput();
                 newBand.setEstablishmentDate(input);
                 System.out.println("The date of estblishment has been added.");
                 break;    
-            } catch (DateTimeParseException | IncorrectInputException e) {
+            } catch (DateTimeParseException e) {
                 System.out.println(e.getMessage());
             }
             
@@ -117,29 +123,48 @@ public class MusicBandRequester {
         
         
         //name
-        nonUserBand.setName(inputHandler.getInput());            
+        String name = inputHandler.getInput();
+        if (name == null){
+            validArguments = false;
+            System.out.println("! Name hasn't been set. Invalid argument !");
+        }
+        nonUserBand.setName(name);            
         System.out.println("Name: " + nonUserBand.getName());
         System.out.println();
 
         //coordinates
         Coordinates coordinates = new Coordinates();
         try {
-            coordinates.setX(inputHandler.getIntInput());
-            coordinates.setY(inputHandler.getIntInput());                
-        } catch (NumberFormatException | EmptyLineException e) {
+            Integer x = inputHandler.getIntInput();
+            if (x == null){
+                throw new NumberFormatException();
+            }
+            Integer y = inputHandler.getIntInput();
+            if (y == null){
+                throw new NumberFormatException();
+            }
+            coordinates.setX(x);
+            coordinates.setY(y);                
+        } catch (NumberFormatException e) {
             validArguments = false;
-            System.out.println("! Coordinates haven't been set. Invalid argument!");
+            System.out.println("! Coordinates haven't been set. Invalid argument !");
         }
         nonUserBand.setCoordinates(coordinates);
-        System.out.println("X: "+ coordinates.getX() + "; Y: " + coordinates.getY());
+        System.out.println("X: " + coordinates.getX() + "Y: " + coordinates.getY());
         System.out.println();
 
         //numberOfParticipants
         try {
-            int number = inputHandler.getIntInput();
-            nonUserBand.setNumberOfParticipants(number);
-            System.out.println("NumberOfParticipants: " + nonUserBand.getNumberOfParticipants());
-            System.out.println();                    
+            Integer number = inputHandler.getIntInput();
+            if (number < 0 || number == null){
+                validArguments = false;
+                throw new NumberFormatException();
+            }
+            else{
+                nonUserBand.setNumberOfParticipants(number);
+                System.out.println("NumberOfParticipants: " + nonUserBand.getNumberOfParticipants());
+                System.out.println();    
+            }
         } catch (NumberFormatException e) {
             validArguments = false;
             System.out.println("! NumberOfParticipants hasn't been set. Invalid argument !");
@@ -158,7 +183,7 @@ public class MusicBandRequester {
         //establishmentDate
         try {
             nonUserBand.setEstablishmentDate(inputHandler.getDateInput());;
-        } catch (DateTimeParseException | EmptyLineException e) {
+        } catch (DateTimeParseException e) {
             validArguments = false;
             System.out.println("! EstablishmentDate hasn't been set. Invalid argument !");
         }
@@ -168,7 +193,11 @@ public class MusicBandRequester {
         //musicGenre
         MusicGenre[] array = MusicGenre.values();
         try {
-            MusicGenre resultingGenre = array[inputHandler.getIntInput()-1];
+            Integer input = inputHandler.getIntInput();
+            if (input == null || input < 0 || input > array.length - 1){
+                throw new NumberFormatException();
+            }
+            MusicGenre resultingGenre = array[input-1];
             nonUserBand.setGenre(resultingGenre);
         } catch (NumberFormatException e) {
             System.out.println("! MusicGenre hasn't been set. Invalid argument !");
@@ -182,22 +211,30 @@ public class MusicBandRequester {
 
         //label
         Label label = new Label();
-        label.setName(inputHandler.getInput());
+        String labelName = inputHandler.getInput();
+        label.setName(labelName);
+        System.out.println("Label name: " + labelName);
         try {
-            label.setBands(inputHandler.getLongInput());                    
+            Long input = inputHandler.getLongInput();
+            if (input == null){
+                throw new NumberFormatException();
+            }
+            label.setBands(input);
+            System.out.println("Label bands: " + input );                    
         } catch (NumberFormatException e) {
-            System.out.println("");
+            System.out.println("! Label hasn't been set. Invalid argument !");
         }
         nonUserBand.setLabel(label);
-        System.out.println("Label name: " + label.getName());
-        System.out.println("Label bands: " + label.getBands());
+        
 
         //result
         if (validArguments == true){
             System.out.println("All arguments are valid. New Music Band will be added to the collection.");
+            System.out.println();
         }
         else{
-            System.out.println("Not all arguments are valid. Music Band can't to the collection. Check your script for valid values.");
+            System.out.println("Not all arguments are valid. Music Band can't be added to the collection. Check your script for valid values.");
+            System.out.println();
             return null;
         }
         return nonUserBand;

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayDeque;
+import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,6 +43,9 @@ public class ExecuteScript extends Command{
             System.out.println("Something is wrong with the file. Try again.");
         } catch (SecurityException e ){
             System.out.println("Access to the file is denied.");
+        } catch (NoSuchElementException e){
+            System.out.println("EOF. Returning to user-mode.");
+            inputHandler.setflagOfUserMode(true);
         }
     }
 
