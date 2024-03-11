@@ -24,7 +24,7 @@ public class ExecuteScript extends Command{
         InputHandler inputHandler = InputHandler.getInstance();
 
         try {
-            String userInput = args[1];
+            String userInput = args[1].trim();
             if (checkRecursion(Path.of(userInput), new ArrayDeque<>())){
                 System.out.println("There is a recursion found in the script.");
                 return;
@@ -32,8 +32,6 @@ public class ExecuteScript extends Command{
             System.out.println();
             System.out.println("--------------------------");
             System.out.println("Executing script...");
-
-            //preparing some data
 
             File file = new File(userInput);
             inputHandler.setflagOfUserMode(false);
