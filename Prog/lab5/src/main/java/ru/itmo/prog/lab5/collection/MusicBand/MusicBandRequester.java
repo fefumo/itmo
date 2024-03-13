@@ -90,7 +90,7 @@ public class MusicBandRequester {
         //establishmentDate
         System.out.println();
         while(true){
-            System.out.println("Enter the date of establishment in \"yyyy-MM-dd\" format (can be null).");
+            System.out.println("Enter the date of establishment (can be null).");
             try {
                 ZonedDateTime input = inputHandler.getDateInput();
                 newBand.setEstablishmentDate(input);

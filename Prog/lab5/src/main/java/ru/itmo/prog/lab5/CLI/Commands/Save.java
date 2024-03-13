@@ -9,6 +9,7 @@ public class Save extends Command{
     @Override
     public void execute(String[] args) {
         if (args.length != 1) throw new ArrayIndexOutOfBoundsException("There has to be no arguments");
+        
     }
     
 }

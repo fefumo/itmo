@@ -20,7 +20,7 @@ public class Main {
             } catch (NoSuchElementException e) {
                 System.out.println();
                 System.out.println("--------------------------");
-                System.out.println("EOF or smth has been reached. Returning to user-mode...");
+                System.out.println("EOF or ctrl+d has been reached. Returning to user-mode...");
                 System.out.println();
                 inputHandler.setUserInput();
             } 
