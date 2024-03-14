@@ -5,7 +5,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 /*
  * Save and load the collection class
@@ -47,4 +53,12 @@ public class DumpManager {
         return finalData;
     }  
 
+    public static final XMLGregorianCalendar getDate(Date d) {
+    try {
+        return DatatypeFactory.newInstance().newXMLGregorianCalendar(new SimpleDateFormat("yyyy-MM-dd").format(d));
+    } catch (DatatypeConfigurationException e) {
+        return null;
+    }
+    
+}
 }

@@ -6,15 +6,22 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 
-
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
 
+@XmlRootElement(name = "Collection")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CollectionManager {
 
     //for multithreading and preventing problems with iterating over a modified queue
     //i made a singleton instance of collectionmanager to contact with collection
 
     private static CollectionManager singletonPattern; 
+    @XmlElement(name = "MusicBand")
     private  PriorityQueue<MusicBand> musicBandsQueue;
     private final static LocalDateTime InitilizationDate = LocalDateTime.now();
     private ArrayList<Long> previousIds = new ArrayList<Long>();
