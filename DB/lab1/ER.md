@@ -7,7 +7,7 @@ entity "human" as human{
     *human_id: int
     --
     name: varchar
-    age: int
+    brithday_date: date
 }
 
 entity "action" as action{

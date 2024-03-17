@@ -7,7 +7,7 @@ entity "human" as human{
     *human_id: SERIAL [PRIMARY KEY]
     --
     name: varchar [255][NOT NULL]
-    age: int
+    birthday_age: date
 }
 entity "action" as action{
     * action_id: SERIAL [PRIMARY KEY]
