@@ -5,31 +5,40 @@ import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
 import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
 import ru.itmo.prog.lab5.collection.MusicBand.MusicBandRequester;
 
-
-
-public class Add  extends Command{
+/**
+ * The `Add` class extends `Command` and implements a method to add a
+ * `MusicBand` object to a
+ * collection based on user input.
+ */
+public class Add extends Command {
 
     public Add(String name, String descr) {
         super(name, descr);
     }
 
+    /**
+     * This function checks the number of arguments, requests a MusicBand object,
+     * and adds it to a
+     * collection based on user input.
+     */
     @Override
     public void execute(String[] args) {
-        if (args.length != 1) throw new ArrayIndexOutOfBoundsException("There has to be no arguments");
+        if (args.length != 1)
+            throw new ArrayIndexOutOfBoundsException("There has to be no arguments");
         CollectionManager manager = CollectionManager.getInstance();
         MusicBandRequester musicBandRequester = new MusicBandRequester();
         InputHandler inputHandler = InputHandler.getInstance();
-        if (inputHandler.getflagOfUserMode() == true){
+        if (inputHandler.getflagOfUserMode() == true) {
             manager.addElementToCollection(musicBandRequester.requestUserBand());
-        }
-        else{
+        } else {
             MusicBand musicBand = musicBandRequester.requestNonUserBand();
-            if (musicBand != null){
+            if (musicBand != null) {
                 manager.addElementToCollection(musicBand);
                 System.out.println("MusicBand has been added to the collection.");
-            }
-            else{
+                System.out.println("--------------------------");
+            } else {
                 System.out.println("MusicBand hasn't been added to the collection.");
+                System.out.println("--------------------------");
             }
         }
 

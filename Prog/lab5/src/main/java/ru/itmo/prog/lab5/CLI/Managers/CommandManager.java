@@ -6,28 +6,46 @@ import ru.itmo.prog.lab5.CLI.Commands.*;
 import ru.itmo.prog.lab5.Exceptions.EmptyCollectionException;
 import ru.itmo.prog.lab5.Exceptions.InvalidCommandException;
 
+/**
+ * The `CommandManager` class in Java manages a collection of commands and
+ * executes them based on user
+ * input.
+ */
 public class CommandManager {
 
     public static HashMap<String, Command> commands = new HashMap<>();
 
+    /**
+     * The `buildCommands` function initializes and adds various command objects to
+     * a map for a
+     * command-line interface.
+     */
+    public void buildCommands() {
 
-    public void buildCommands(){
-    
-        Help help = new Help("help", "вывести справку по доступным командам");
-        Info info = new Info("info", "вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)");
-        Show show = new Show("show", "вывести в стандартный поток вывода все элементы коллекции в строковом представлении");
-        Add add = new Add("add", "add {element} добавить новый элемент в коллекцию");
-        UpdateId updateId = new UpdateId("update_id", "update_id {id} обновить значение элемента коллекции, id которого равен заданному");
-        RemoveById removeById = new RemoveById("remove_by_id", "remove_by_id {id} удалить элемент из коллекции по его id");
-        Clear clear = new Clear("clear", "очистить коллекцию");
-        Save save = new Save("save", "сохранить коллекцию в файл");
-        ExecuteScript executeScript = new ExecuteScript("execute_script", "execute_script {file_name} считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.");
-        Exit exit = new Exit("exit", "завершить программу (без сохранения в файл)");
-        RemoveLower removeLower = new RemoveLower("remove_lower", "remove_lower {element} удалить из коллекции все элементы, меньшие, чем заданный");
-        History history = new History("history", "вывести последние 14 выполненных комманд");
-        MinByNumberOfParticipants minByNumberOfParticipants = new MinByNumberOfParticipants("min_by_number_of_participants", "вывести объект из коллекции, значение поля numberOfParticipants которого является минимальным");
-        GroupCountingById groupCountingById = new GroupCountingById("group_counting_by_id", "вывести количество элементов, значение поля id которых меньше заданного");
-        
+        Help help = new Help("help", "display help on available commands");
+        Info info = new Info("info",
+                "Print information about the collection (type, initialization date, number of elements, etc.) to the standard output stream.");
+        Show show = new Show("show",
+                "print to standard output all the elements of the collection in string representation");
+        Add add = new Add("add", "add {element} add a new element to the collection");
+        UpdateId updateId = new UpdateId("update_id",
+                "update_id {id} update the value of a collection element whose id is equal to the given one");
+        RemoveById removeById = new RemoveById("remove_by_id",
+                "remove_by_id {id} remove an element from a collection by its id");
+        Clear clear = new Clear("clear", "clear collection");
+        Save save = new Save("save", "save the collection to a file");
+        ExecuteScript executeScript = new ExecuteScript("execute_script",
+                "execute_script {file_name} read and execute a script from the specified file. The script contains commands in the same form in which the user enters them interactively.");
+        Exit exit = new Exit("exit", "end the program (without saving to a file)");
+        RemoveLower removeLower = new RemoveLower("remove_lower",
+                "remove_lower {element} remove all elements from the collection that are smaller than the given one");
+        History history = new History("history", "display the last 14 executed commands");
+        MinByNumberOfParticipants minByNumberOfParticipants = new MinByNumberOfParticipants(
+                "min_by_number_of_participants",
+                "display an object from a collection whose numberOfParticipants field value is minimal");
+        GroupCountingById groupCountingById = new GroupCountingById("group_counting_by_id",
+                "display the number of elements whose id field value is less than the specified one");
+
         commands.put(help.getName(), help);
         commands.put(info.getName(), info);
         commands.put(show.getName(), show);
@@ -44,26 +62,45 @@ public class CommandManager {
         commands.put(groupCountingById.getName(), groupCountingById);
     }
 
-    public void executeCommand(String command){
-        if(command == null){
+    /**
+     * The `executeCommand` function in Java processes a given command, adds it to
+     * history, and
+     * executes the corresponding command if it exists in a map of commands,
+     * handling exceptions
+     * appropriately.
+     * 
+     * @param command The `executeCommand` method takes a command as a parameter,
+     *                which is a string
+     *                representing the command to be executed. The command can
+     *                include the command name and any
+     *                arguments separated by spaces. The method first checks if the
+     *                command is null and prints a
+     *                message if it is. It then splits the command
+     */
+    public void executeCommand(String command) {
+        if (command == null) {
             System.out.println("Null passed. No command will be executed.");
             return;
         }
         String[] commandAndArgs = command.split(" ", 2);
         History.addCommandToHistory(command);
         try {
-            if (!(commands.containsKey(commandAndArgs[0]))){
+            if (!(commands.containsKey(commandAndArgs[0]))) {
                 throw new InvalidCommandException("No such command. Try again");
             }
             commands.get(commandAndArgs[0]).execute(commandAndArgs);
 
         } catch (InvalidCommandException | ArrayIndexOutOfBoundsException | EmptyCollectionException e) {
             System.out.println(e.getMessage());
-        } 
+        }
     }
 
+    /**
+     * The function returns a HashMap containing String keys and Command values.
+     * 
+     * @return A HashMap<String, Command> named "commands" is being returned.
+     */
     public static HashMap<String, Command> getCommandsHashMap() {
         return commands;
     }
 }
-

@@ -6,15 +6,13 @@ import ru.itmo.prog.lab5.CLI.Managers.CollectionManager;
 import ru.itmo.prog.lab5.collection.MusicBand.Coordinates;
 import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
 
-
 public class MusicBandBuilder implements Builder<MusicBand> {
     static long id = 1;
-    
-    
+
     CollectionManager manager = CollectionManager.getInstance();
-    
+
     @Override
-    public MusicBand build(){
+    public MusicBand build() {
         checkForEmptySlot();
         manager.getPreviousIds().add(id);
         final Date creationDate = new Date();
@@ -23,20 +21,17 @@ public class MusicBandBuilder implements Builder<MusicBand> {
         return new_Band;
     }
 
-    private void checkForEmptySlot(){
-        if (!(manager.getPreviousIds().isEmpty())){
-            for (long i = 1; i <= manager.getPreviousIds().size(); i++){
-                if (!(manager.getPreviousIds().contains(i))){
+    private void checkForEmptySlot() {
+        if (!(manager.getPreviousIds().isEmpty())) {
+            for (long i = 1; i <= manager.getPreviousIds().size(); i++) {
+                if (!(manager.getPreviousIds().contains(i))) {
                     id = i;
                     break;
-                }
-                else{
+                } else {
                     id = manager.getPreviousIds().size() + 1;
                 }
-            }    
+            }
         }
     }
-
-    
 
 }
