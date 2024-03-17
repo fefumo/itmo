@@ -9,5 +9,7 @@ asd
 
 
 show
+execute_script script2.txt
+
 
 
