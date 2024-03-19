@@ -8,14 +8,21 @@
             "type": "java",
             "name": "Current File",
             "request": "launch",
-            "mainClass": "${file}"
+            "mainClass": "${file}",
+            
         },
         {
             "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "ru.itmo.prog.lab5.Main",
-            "projectName": "lab5"
+            "projectName": "lab5",
+            "env": {
+                "FILE_PATH": "C:\\coding\\itmo\\Prog\\lab5\\collection.xml"
+            }
+            
         }
+        
     ]
+    
 }

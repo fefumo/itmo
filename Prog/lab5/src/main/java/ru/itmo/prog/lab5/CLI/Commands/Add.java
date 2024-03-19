@@ -30,15 +30,17 @@ public class Add extends Command {
         InputHandler inputHandler = InputHandler.getInstance();
         if (inputHandler.getflagOfUserMode() == true) {
             manager.addElementToCollection(musicBandRequester.requestUserBand());
+            System.out.println("--------------------------");
+            System.out.println("MusicBand has been added to the collection.");
         } else {
             MusicBand musicBand = musicBandRequester.requestNonUserBand();
             if (musicBand != null) {
                 manager.addElementToCollection(musicBand);
+                System.out.println("--------------------------");
                 System.out.println("MusicBand has been added to the collection.");
-                System.out.println("--------------------------");
             } else {
-                System.out.println("MusicBand hasn't been added to the collection.");
                 System.out.println("--------------------------");
+                System.out.println("MusicBand hasn't been added to the collection.");
             }
         }
 

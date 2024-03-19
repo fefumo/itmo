@@ -1,17 +1,17 @@
 package ru.itmo.prog.lab5.CLI.Managers;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.file.Path;
+import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 
 /**
  * The `DumpManager` class in Java implements Singleton design pattern and
@@ -22,14 +22,16 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 public class DumpManager {
 
-    // same this as in collection manager
     private static DumpManager singletonPattern;
 
-    // The `getInstance()` method in the `DumpManager` class is implementing the
-    // Singleton design
-    // pattern. It ensures that only one instance of the `DumpManager` class is
-    // created and provides a
-    // global point of access to that instance.
+    /**
+     * The `getInstance()` method in the `DumpManager` class is implementing
+     * theSingleton designpattern. It ensures that only one instance of the
+     * `DumpManager` class iscreated and provides aglobal point of access to that
+     * instance.
+     * 
+     * @return singleton instance of DumpManager
+     */
     public static DumpManager getInstance() {
         if (singletonPattern == null) {
             singletonPattern = new DumpManager();
@@ -37,56 +39,87 @@ public class DumpManager {
         return singletonPattern;
     }
 
-    public void saveToFile(Path path) {
-
-    }
-
     /**
-     * The function `loadStreamFromFile` takes a `Path` object as input, creates a
-     * `FileInputStream`
-     * from the corresponding file, and returns the `FileInputStream`.
-     * 
-     * @param path The `path` parameter is of type `Path` and represents the
-     *             location of the file from
-     *             which you want to load a `FileInputStream`.
-     * @return The method `loadStreamFromFile` is returning a `FileInputStream`
-     *         object.
+     * Method that saves current collection to a file provided in signature by
+     * marshalling it to XML.
      */
-    public FileInputStream loadStreamFromFile(Path path) throws IOException {
-        FileInputStream fileInputStream = new FileInputStream(path.toFile());
+    public void saveToXmlFile(String path) {
+        CollectionManager collectionManager = CollectionManager.getInstance();
+        try {
+            JAXBContext context = JAXBContext.newInstance(CollectionManager.class);
+            Marshaller marshaller = context.createMarshaller();
 
-        return fileInputStream;
-    }
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-    /**
-     * The function `loadStrinDataFromStream` reads data from a FileInputStream and
-     * returns it as an
-     * array of strings.
-     * 
-     * @param fileInputStream The `fileInputStream` parameter in the
-     *                        `loadStrinDataFromStream` method
-     *                        is of type `FileInputStream`. This input stream is
-     *                        used to read data from a file. The method
-     *                        reads the data from the file input stream, line by
-     *                        line, and stores each line in an ArrayList.
-     *                        Finally
-     * @return The method `loadStrinDataFromStream` returns an array of strings
-     *         containing the data
-     *         read from the `FileInputStream` provided as a parameter.
-     */
-    public String[] loadStrinDataFromStream(FileInputStream fileInputStream) throws IOException {
-        ArrayList<String> initialData = new ArrayList<>();
-        InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-        String line = bufferedReader.readLine();
-        while (line != null) {
-            initialData.add(line);
-            line = bufferedReader.readLine();
+            StringWriter stringWriter = new StringWriter();
+            /*
+             * easier version is to marshal(collectionManager, new File(path))
+             * but I was asked to use bufferedWriter. so here it is...
+             */
+            marshaller.marshal(collectionManager, stringWriter);
+            String xmlString = stringWriter.toString();
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
+                writer.write(xmlString);
+            } catch (IOException e) {
+                System.out.println();
+                System.out.println("--------------------------");
+                System.out.println("Something is wrong with the file that the program is saving to. Check it's access rights.");
+                return;
+            }
+            System.out.println();
+            System.out.println("--------------------------");
+            System.out.println("Collection has been saved");
+        } catch (JAXBException e) {
+            System.out.println();
+            System.out.println("--------------------------");
+            System.out.println("An error occured during marshalling.");
         }
-        String[] finalData = initialData.toArray(new String[0]);
-        bufferedReader.close();
+    }
 
-        return finalData;
+    /**
+     * method `unmarshalCollectionFromXml` unmarshales xml file and makes a new
+     * instance of collection manager so that user can use it in the future;
+     * 
+     * @param filePath path to the file with xml data
+     * @return new instance of collection manager with a new collection or null if
+     *         no data in file is present.
+     */
+    public void unmarshalAndSetCollectionFromXML(String filePath) {
+        CollectionManager collectionManager = CollectionManager.getInstance();
+        CollectionManager marshallingManager = null;
+        try {
+            FileInputStream fileInputStream = new FileInputStream(filePath);
+            // i have to use InputStreamReader so here it is...
+            try (Reader reader = new InputStreamReader(fileInputStream)) {
+                // DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                // DocumentBuilder builder = factory.newDocumentBuilder();
+                // Document document = builder.parse(fileInputStream);
+                // Element rootElement = document.getDocumentElement();
+                // NodeList musicBandNodeList = rootElement.getElementsByTagName("muiscBands");
+
+                JAXBContext jaxbContext = JAXBContext.newInstance(CollectionManager.class);
+                Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+
+                marshallingManager = (CollectionManager) jaxbUnmarshaller.unmarshal(reader);
+                collectionManager.setCollection(marshallingManager.getCollection());
+                // add id's to previousIds array
+                collectionManager.reloadIdArray();
+
+            } catch (JAXBException e) {
+                System.out.println();
+                System.out.println("--------------------------");
+                System.out.println("An error occured during unmarshalling. Check the xml file and it's contents.");
+            } catch(IOException e){
+                System.out.println();
+                System.out.println("--------------------------");
+                System.out.println("Something is wrong with the file that the program is reading from. Check it's access rights.");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println();
+            System.out.println("--------------------------");
+            System.out.println("Something is wrong with the file that the program is reading from. Check it's access rights.");
+            System.exit(0);
+        }
     }
 
     /**

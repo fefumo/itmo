@@ -9,7 +9,9 @@ import java.util.PriorityQueue;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
 
 /**
@@ -17,7 +19,7 @@ import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
  * collection of `MusicBand`
  * objects with methods for adding, retrieving, and managing the collection.
  */
-@XmlRootElement(name = "Collection")
+@XmlRootElement(name = "MusicBandCollection")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CollectionManager {
 
@@ -26,9 +28,11 @@ public class CollectionManager {
     // i made a singleton instance of collectionmanager to contact with collection
 
     private static CollectionManager singletonPattern;
-    @XmlElement(name = "MusicBand")
+    @XmlElement(name = "musicBand")
+    @XmlElementWrapper(name = "musicBands")
     private PriorityQueue<MusicBand> musicBandsQueue;
     private final static LocalDateTime InitilizationDate = LocalDateTime.now();
+    @XmlTransient
     private ArrayList<Long> previousIds = new ArrayList<Long>();
 
     /**
@@ -128,9 +132,6 @@ public class CollectionManager {
         } else {
             musicBandsQueue.add(value);
         }
-        System.out.println();
-        System.out.println("--------------------------");
-        System.out.println("New Music Band has been added to the colleciton.");
     }
 
     /**
@@ -143,13 +144,12 @@ public class CollectionManager {
      *           object in the collection. The method `getCollectionById` iterates
      *           through a queue of `MusicBand`
      *           objects to find and return the `MusicBand` object with the matching
-     *           `id`. If no
+     *           `id`. 
      * @return The method `getCollectionById` returns a `MusicBand` object with the
      *         specified ID. If no
      *         `MusicBand` object with the given ID is found in the
      *         `musicBandsQueue`, it throws a
-     *         `NoSuchElementException` with the message "There is no such element.
-     *         Try again".
+     *         `NoSuchElementException`.
      */
     public MusicBand getCollectionById(long id) throws NoSuchElementException {
         MusicBand mb = null;
@@ -167,4 +167,15 @@ public class CollectionManager {
         return mb;
     }
 
+    /**
+     * Method that inserts ids of a collection in previousIds. Used at
+     * initialization of a program so that future add commands will consider
+     * elements' ids from
+     * file.
+     */
+    public void reloadIdArray() {
+        for (MusicBand mb : musicBandsQueue) {
+            previousIds.add(mb.getId());
+        }
+    }
 }

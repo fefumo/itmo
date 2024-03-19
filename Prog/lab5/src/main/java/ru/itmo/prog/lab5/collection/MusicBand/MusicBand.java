@@ -3,25 +3,42 @@ package ru.itmo.prog.lab5.collection.MusicBand;
 import java.time.ZonedDateTime;
 
 import io.github.threetenjaxb.core.ZonedDateTimeXmlAdapter;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlType;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import ru.itmo.prog.lab5.CLI.Managers.DateAdapter;
 
 /**
- * Main class
+ * Main class representing a MusicBand type with fields like id, name, genre etc.
  */
 @XmlType(propOrder = { "id", "name", "coordinates", "numberOfParticipants", "creationDate", "albumsCount",
         "establishmentDate", "genre", "label" })
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MusicBand implements Comparable<MusicBand> {
-    private long id; // Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
-    private String name; // Поле не может быть null, Строка не может быть пустой
-    private Coordinates coordinates; // Поле не может быть null
-    private java.util.Date creationDate; // Поле не может быть null, Значение этого поля должно генерироватьсяавтоматически
-    private int numberOfParticipants; // Поле не может быть null, Значение поля должно быть больше 0
-    private Long albumsCount; // Поле может быть null, Значение поля должно быть больше 0
-    private java.time.ZonedDateTime establishmentDate; // Поле может быть null
-    private MusicGenre genre; // Поле не может быть null
-    private Label label; // Поле может быть null
+    @XmlAttribute
+    private long id; // The value of the field must be greater than 0, The value of this field must be unique, The value of this field must be generated automatically
+    @XmlElement(required = true)
+    private String name; // The field cannot be null, The string cannot be empty
+    @XmlElement(required = true)
+    private Coordinates coordinates; // The field cannot be null
+    @XmlElement(required = true)
+    private java.util.Date creationDate; // The field cannot be null, The value of this field must be generated automatically
+    @XmlElement(required = true)
+    private int numberOfParticipants; // The field cannot be null, The value of the field must be greater than 0
+    @XmlElement
+    private Long albumsCount; // The field can be null, The value of the field must be greater than 0
+    @XmlElement
+    @XmlJavaTypeAdapter(ZonedDateTimeXmlAdapter.class)
+    private java.time.ZonedDateTime establishmentDate; // The field can be null
+    @XmlElement(required = true)
+    private MusicGenre genre; // The field cannot be null
+    @XmlElement(required = true)
+    private Label label; // The field can be null (actually, it cannot, because of the Bands field)
+
 
     public MusicBand(long id, String name, Coordinates coordinates, java.util.Date creationDate,
             int numberOfParticipants, Long albumsCount,
@@ -68,12 +85,10 @@ public class MusicBand implements Comparable<MusicBand> {
         return coordinates;
     }
 
-    @XmlJavaTypeAdapter(DateAdapter.class)
     public java.util.Date getCreationDate() {
         return creationDate;
     }
 
-    @XmlJavaTypeAdapter(ZonedDateTimeXmlAdapter.class)
     public java.time.ZonedDateTime getEstablishmentDate() {
         return establishmentDate;
     }

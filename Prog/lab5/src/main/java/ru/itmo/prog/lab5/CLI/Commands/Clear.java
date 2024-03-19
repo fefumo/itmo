@@ -27,6 +27,7 @@ public class Clear extends Command {
         if (manager.getCollection().isEmpty())
             throw new RuntimeException("Collection is empty");
         manager.getCollection().clear();
+        manager.getPreviousIds().clear();
         System.out.println();
         System.out.println("--------------------------");
         System.out.println("Collection has been cleared");

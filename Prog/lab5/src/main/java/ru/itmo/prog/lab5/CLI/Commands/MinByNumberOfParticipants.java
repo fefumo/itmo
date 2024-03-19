@@ -35,7 +35,7 @@ public class MinByNumberOfParticipants extends Command {
         mb = iter.next();
         while (iter.hasNext()) {
             MusicBand temp = iter.next();
-            if (mb.getNumberOfParticipants() < temp.getNumberOfParticipants()) {
+            if (temp.getNumberOfParticipants() < mb.getNumberOfParticipants()) {
                 mb = temp;
             }
         }
