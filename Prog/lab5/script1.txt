@@ -10,6 +10,7 @@ labelName
 3
 add
 asd 2
+execute_script script2.txt
 2
 2
 2

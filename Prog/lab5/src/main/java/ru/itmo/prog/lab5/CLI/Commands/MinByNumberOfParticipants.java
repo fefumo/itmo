@@ -27,7 +27,7 @@ public class MinByNumberOfParticipants extends Command {
         if (args.length != 1)
             throw new ArrayIndexOutOfBoundsException("There has to be no arguments");
         CollectionManager manager = CollectionManager.getInstance();
-        if (manager.getCollection() == null)
+        if (manager.getCollection() == null || manager.getCollection().isEmpty())
             throw new EmptyCollectionException("There has to be a collection with elements. Try \\\"add\\\" command");
 
         MusicBand mb;

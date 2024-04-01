@@ -12,6 +12,8 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
+import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
+import ru.itmo.prog.lab5.collection.Validators.MusicBandValidator;
 
 /**
  * The `DumpManager` class in Java implements Singleton design pattern and
@@ -87,6 +89,7 @@ public class DumpManager {
     public void unmarshalAndSetCollectionFromXML(String filePath) {
         CollectionManager collectionManager = CollectionManager.getInstance();
         CollectionManager marshallingManager = null;
+        MusicBandValidator musicBandValidator = new MusicBandValidator();
         try {
             FileInputStream fileInputStream = new FileInputStream(filePath);
             // i have to use InputStreamReader so here it is...
@@ -101,6 +104,15 @@ public class DumpManager {
                 Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
                 marshallingManager = (CollectionManager) jaxbUnmarshaller.unmarshal(reader);
+                //validating elements
+                for(MusicBand element : marshallingManager.getCollection()){
+                    if (musicBandValidator.validate(element) == false){
+                        System.out.println();
+                        System.out.println("--------------------------");
+                        System.out.println("Wrong values in xml. Fix the file and try Again.");
+                        System.exit(1);
+                    }
+                }
                 collectionManager.setCollection(marshallingManager.getCollection());
                 // add id's to previousIds array
                 collectionManager.reloadIdArray();
