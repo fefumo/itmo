@@ -2,9 +2,18 @@ package ru.itmo.prog.lab5.collection.Validators;
 
 import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
 
+/**
+ * The Music band validator.
+ */
 public class MusicBandValidator implements Validator<MusicBand> {
 
-public boolean validate(MusicBand value) {
+    /**
+     * Validate boolean.
+     *
+     * @param MusicBand value
+     * @return the result of validation which is true if ervery field of the value has been validated and returned true.
+     */
+    public boolean validate(MusicBand value) {
     CoordinatesValidator coordinatesValidator = new CoordinatesValidator();
     AlbumsValidator albumsValidator = new AlbumsValidator();
     GenreValidator genreValidator = new GenreValidator();

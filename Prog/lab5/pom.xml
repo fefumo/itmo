@@ -18,6 +18,8 @@
 
     <build>
         <plugins>
+
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -45,7 +47,6 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.3.0</version>
                 <configuration>
-                    <finalName>lab5</finalName>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
@@ -65,6 +66,18 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <!-- Укажите, какие исходные файлы должны быть включены в Javadoc -->
+                    <sourcepath>src/main/java/ru/itmo/prog/lab5</sourcepath>
+                </configuration>
+            </plugin>
+
+            
         </plugins>
     </build>
 
@@ -74,19 +87,13 @@
         <dependency>
             <groupId>io.github.threeten-jaxb</groupId>
             <artifactId>threeten-jaxb-core</artifactId>
-            <version>2.2.0</version>
-        </dependency>
-    
-        <dependency>
-            <groupId>jakarta.xml.bind</groupId>
-            <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>3.0.0</version>
+            <version>2.1.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
-            <version>4.0.5</version>
+            <version>3.0.1</version>
         </dependency>
 
     </dependencies>

@@ -40,6 +40,19 @@ public class MusicBand implements Comparable<MusicBand> {
     private Label label; // The field can be null (actually, it cannot, because of the Bands field)
 
 
+    /**
+     * Instantiates a new Music band.
+     *
+     * @param id                   the id
+     * @param name                 the name
+     * @param coordinates          the coordinates
+     * @param creationDate         the creation date
+     * @param numberOfParticipants the number of participants
+     * @param albumsCount          the albums count
+     * @param establishmenDate     the establishmen date
+     * @param genre                the genre
+     * @param label                the label
+     */
     public MusicBand(long id, String name, Coordinates coordinates, java.util.Date creationDate,
             int numberOfParticipants, Long albumsCount,
             ZonedDateTime establishmenDate, MusicGenre genre, Label label) {
@@ -54,9 +67,18 @@ public class MusicBand implements Comparable<MusicBand> {
         this.label = label;
     }
 
+    /**
+     * Instantiates a new Music band.
+     */
     public MusicBand() {
     }
 
+    /**
+     * Compare to int.
+     *
+     * @param oMusicBand the o music band
+     * @return the int
+     */
     @Override
     public int compareTo(MusicBand oMusicBand) {
         if (this.id > oMusicBand.id) {
@@ -68,6 +90,11 @@ public class MusicBand implements Comparable<MusicBand> {
         }
     }
 
+    /**
+     * To string string.
+     *
+     * @return the string
+     */
     @Override
     public String toString() {
         return "MusicBand's id: " + id + ", name: " + name + ", coordinates: " + coordinates
@@ -77,74 +104,164 @@ public class MusicBand implements Comparable<MusicBand> {
 
     }
 
+    /**
+     * Gets albums count.
+     *
+     * @return the albums count
+     */
     public Long getAlbumsCount() {
         return albumsCount;
     }
 
+    /**
+     * Gets coordinates.
+     *
+     * @return the coordinates
+     */
     public Coordinates getCoordinates() {
         return coordinates;
     }
 
+    /**
+     * Gets creation date.
+     *
+     * @return the creation date
+     */
     public java.util.Date getCreationDate() {
         return creationDate;
     }
 
+    /**
+     * Gets establishment date.
+     *
+     * @return the establishment date
+     */
     public java.time.ZonedDateTime getEstablishmentDate() {
         return establishmentDate;
     }
 
+    /**
+     * Gets genre.
+     *
+     * @return the genre
+     */
     public MusicGenre getGenre() {
         return genre;
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     * Gets label.
+     *
+     * @return the label
+     */
     public Label getLabel() {
         return label;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets number of participants.
+     *
+     * @return the number of participants
+     */
     public int getNumberOfParticipants() {
         return numberOfParticipants;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Sets coordinates.
+     *
+     * @param coordinates the coordinates
+     */
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
     }
 
+    /**
+     * Sets albums count.
+     *
+     * @param albumsCount the albums count
+     */
     public void setAlbumsCount(Long albumsCount) {
         this.albumsCount = albumsCount;
     }
 
+    /**
+     * Sets establishment date.
+     *
+     * @param establishmentDate the establishment date
+     */
     public void setEstablishmentDate(java.time.ZonedDateTime establishmentDate) {
         this.establishmentDate = establishmentDate;
     }
 
+    /**
+     * Sets genre.
+     *
+     * @param genre the genre
+     */
     public void setGenre(MusicGenre genre) {
         this.genre = genre;
     }
 
+    /**
+     * Sets label.
+     *
+     * @param label the label
+     */
     public void setLabel(Label label) {
         this.label = label;
     }
 
+    /**
+     * Sets number of participants.
+     *
+     * @param numberOfParticipants the number of participants
+     */
     public void setNumberOfParticipants(int numberOfParticipants) {
         this.numberOfParticipants = numberOfParticipants;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(long id) {
         this.id = id;
     }
 
+    /**
+     * Sets creation date.
+     *
+     * @param creationDate the creation date
+     */
     public void setCreationDate(java.util.Date creationDate) {
         this.creationDate = creationDate;
     }

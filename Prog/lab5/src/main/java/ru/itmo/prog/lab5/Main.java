@@ -6,8 +6,16 @@ import ru.itmo.prog.lab5.CLI.Managers.CommandManager;
 import ru.itmo.prog.lab5.CLI.Managers.DumpManager;
 import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
 
+/**
+ * The main class of the application that starts the program
+ */
 public class Main {
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         // preparing block
         CommandManager commandManager = new CommandManager();

@@ -1,0 +1,24 @@
+-classpath
+'C:/Users/fedosss/.m2/repository/io/github/threeten-jaxb/threeten-jaxb-core/2.1.0/threeten-jaxb-core-2.1.0.jar;C:/Users/fedosss/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/3.0.1/jakarta.xml.bind-api-3.0.1.jar;C:/Users/fedosss/.m2/repository/com/sun/activation/jakarta.activation/2.0.1/jakarta.activation-2.0.1.jar;C:/Users/fedosss/.m2/repository/com/sun/xml/bind/jaxb-impl/3.0.1/jaxb-impl-3.0.1.jar;C:/Users/fedosss/.m2/repository/com/sun/xml/bind/jaxb-core/3.0.1/jaxb-core-3.0.1.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'17'
+-sourcepath
+'C:/coding/itmo/Prog/lab5/src/main/java/ru/itmo/prog/lab5'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/coding/itmo/Prog/lab5/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'lab5 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'lab5 1.0-SNAPSHOT API'

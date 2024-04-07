@@ -6,11 +6,27 @@ import ru.itmo.prog.lab5.CLI.Managers.CollectionManager;
 import ru.itmo.prog.lab5.collection.MusicBand.Coordinates;
 import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
 
+/**
+ * The type Music band builder.
+ *
+ * @see Builder
+ */
 public class MusicBandBuilder implements Builder<MusicBand> {
+    /**
+     * The Id.
+     */
     static long id = 1;
 
+    /**
+     * The Manager.
+     */
     CollectionManager manager = CollectionManager.getInstance();
 
+    /**
+     * Build music band.
+     *
+     * @return the music band
+     */
     @Override
     public MusicBand build() {
         checkForEmptySlot();

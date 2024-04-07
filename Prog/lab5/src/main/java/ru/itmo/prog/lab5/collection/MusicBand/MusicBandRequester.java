@@ -10,11 +10,28 @@ import ru.itmo.prog.lab5.collection.Builders.MusicBandBuilder;
 import ru.itmo.prog.lab5.collection.Validators.AlbumsValidator;
 import ru.itmo.prog.lab5.collection.Validators.NameValidator;
 
+/**
+ * The Music band requester class is used to perform operations with requesting Music Bands from user and non-user requesters.
+ */
 public class MusicBandRequester {
+    /**
+     * The Music band builder.
+     */
     MusicBandBuilder musicBandBuilder = new MusicBandBuilder();
+    /**
+     * The Name validator.
+     */
     NameValidator nv = new NameValidator();
+    /**
+     * The Albums validator.
+     */
     AlbumsValidator av = new AlbumsValidator();
 
+    /**
+     * Request user band music band.
+     *
+     * @return the music band
+     */
     public MusicBand requestUserBand() {
         InputHandler inputHandler = InputHandler.getInstance();
         MusicBand newBand = musicBandBuilder.build();
@@ -108,6 +125,11 @@ public class MusicBandRequester {
         return newBand;
     }
 
+    /**
+     * Request non user band music band.
+     *
+     * @return the music band
+     */
     public MusicBand requestNonUserBand() {
         boolean validArguments = true;
         MusicBand nonUserBand = musicBandBuilder.build();

@@ -2,13 +2,34 @@ package ru.itmo.prog.lab5.collection.MusicBand;
 
 import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
 
+/**
+ * The enum Music genre which serves as a part of MusicBand class.
+ */
 public enum MusicGenre {
+    /**
+     * Psychedelic rock music genre.
+     */
     PSYCHEDELIC_ROCK,
+    /**
+     * Psychedelic cloud rap music genre.
+     */
     PSYCHEDELIC_CLOUD_RAP,
+    /**
+     * Soul music genre.
+     */
     SOUL,
+    /**
+     * Blues music genre.
+     */
     BLUES,
+    /**
+     * Punk rock music genre.
+     */
     PUNK_ROCK;
 
+    /**
+     * Show genres.
+     */
     public static void showGenres() {
         int counter = 1;
         for (MusicGenre i : MusicGenre.values()) {
@@ -16,6 +37,11 @@ public enum MusicGenre {
         }
     }
 
+    /**
+     * Request genre music genre.
+     *
+     * @return the music genre
+     */
     public static MusicGenre requestGenre() {
         InputHandler inputHandler = InputHandler.getInstance();
         MusicGenre[] array = MusicGenre.values();
