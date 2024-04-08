@@ -1,0 +1,24 @@
+add
+asd
+1
+1
+1
+1
+28 04 2005
+1
+labelName
+3
+add
+asd 2
+execute_script script2.txt
+2
+2
+2
+2
+29 04 2005
+2
+label name 2
+2
+
+
+

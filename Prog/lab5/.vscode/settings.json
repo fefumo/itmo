@@ -1,0 +1,6 @@
+{
+    "java.dependency.packagePresentation": "flat",
+    "maven.view": "hierarchical",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "docwriter.style": "Javadoc"
+}

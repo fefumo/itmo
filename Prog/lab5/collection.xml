@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MusicBandCollection>
+    <musicBands>
+        <musicBand id="1">
+            <name>name</name>
+            <coordinates>
+                <x>1</x>
+                <y>1</y>
+            </coordinates>
+            <numberOfParticipants>1</numberOfParticipants>
+            <creationDate>2024-04-01T13:05:34.671+03:00</creationDate>
+            <genre>SOUL</genre>
+            <label>
+                <bands>2</bands>
+            </label>
+        </musicBand>
+        <musicBand id="2">
+            <name>some name</name>
+            <coordinates>
+                <x>-23</x>
+                <y>421</y>
+            </coordinates>
+            <numberOfParticipants>1</numberOfParticipants>
+            <creationDate>2024-04-01T13:05:34.731+03:00</creationDate>
+            <albumsCount>8</albumsCount>
+            <establishmentDate>2005-04-28T00:00:00+04:00[Europe/Moscow]</establishmentDate>
+            <genre>PSYCHEDELIC_CLOUD_RAP</genre>
+            <label>
+                <bands>189</bands>
+                <name>labelName</name>
+            </label>
+        </musicBand>
+    </musicBands>
+</MusicBandCollection>
