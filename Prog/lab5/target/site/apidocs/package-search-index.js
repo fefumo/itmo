@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.itmo.prog.lab5"},{"l":"ru.itmo.prog.lab5.CLI.Commands"},{"l":"ru.itmo.prog.lab5.CLI.Managers"},{"l":"ru.itmo.prog.lab5.collection.Builders"},{"l":"ru.itmo.prog.lab5.collection.MusicBand"},{"l":"ru.itmo.prog.lab5.collection.Validators"},{"l":"ru.itmo.prog.lab5.Exceptions"}];updateSearchResults();
