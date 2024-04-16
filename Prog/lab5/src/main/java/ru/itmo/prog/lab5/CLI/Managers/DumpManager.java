@@ -1,6 +1,13 @@
 package ru.itmo.prog.lab5.CLI.Managers;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,8 +19,8 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
-import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
-import ru.itmo.prog.lab5.collection.Validators.MusicBandValidator;
+import ru.itmo.prog.lab5.Collection.MusicBand.MusicBand;
+import ru.itmo.prog.lab5.Collection.Validators.MusicBandValidator;
 
 /**
  * The `DumpManager` class in Java implements Singleton design pattern and
@@ -121,10 +128,13 @@ public class DumpManager {
                 System.out.println();
                 System.out.println("--------------------------");
                 System.out.println("An error occured during unmarshalling. Check the xml file and it's contents.");
+                e.printStackTrace();
+                System.exit(0);
             } catch(IOException e){
                 System.out.println();
                 System.out.println("--------------------------");
                 System.out.println("Something is wrong with the file that the program is reading from. Check it's access rights.");
+                System.exit(0);
             }
         } catch (FileNotFoundException e) {
             System.out.println();

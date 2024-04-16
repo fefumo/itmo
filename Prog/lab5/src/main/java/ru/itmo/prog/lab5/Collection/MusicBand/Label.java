@@ -1,4 +1,4 @@
-package ru.itmo.prog.lab5.collection.MusicBand;
+package ru.itmo.prog.lab5.Collection.MusicBand;
 
 /**
  * Calss Label which serves as a part of MusicBand class

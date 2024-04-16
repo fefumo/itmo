@@ -1,6 +1,6 @@
-package ru.itmo.prog.lab5.collection.Validators;
+package ru.itmo.prog.lab5.Collection.Validators;
 
-import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
+import ru.itmo.prog.lab5.Collection.MusicBand.MusicBand;
 
 /**
  * The Music band validator.

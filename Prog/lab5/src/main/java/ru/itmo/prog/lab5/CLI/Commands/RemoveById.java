@@ -3,8 +3,8 @@ package ru.itmo.prog.lab5.CLI.Commands;
 import java.util.NoSuchElementException;
 
 import ru.itmo.prog.lab5.CLI.Managers.CollectionManager;
+import ru.itmo.prog.lab5.Collection.MusicBand.MusicBand;
 import ru.itmo.prog.lab5.Exceptions.EmptyCollectionException;
-import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
 
 /**
  * The `RemoveById` class extends a command class and implements a method to

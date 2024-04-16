@@ -3,8 +3,8 @@ package ru.itmo.prog.lab5.CLI.Commands;
 import java.util.Iterator;
 
 import ru.itmo.prog.lab5.CLI.Managers.CollectionManager;
+import ru.itmo.prog.lab5.Collection.MusicBand.MusicBand;
 import ru.itmo.prog.lab5.Exceptions.EmptyCollectionException;
-import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
 
 /**
  * This Java class extends Command and implements a function to find and print

@@ -2,8 +2,8 @@ package ru.itmo.prog.lab5.CLI.Commands;
 
 import ru.itmo.prog.lab5.CLI.Managers.CollectionManager;
 import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
+import ru.itmo.prog.lab5.Collection.MusicBand.MusicBand;
 import ru.itmo.prog.lab5.Exceptions.EmptyCollectionException;
-import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
 
 /**
  * This Java class defines a command to update the ID of a music band in a

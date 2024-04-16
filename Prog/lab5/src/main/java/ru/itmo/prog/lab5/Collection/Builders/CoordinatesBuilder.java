@@ -1,7 +1,7 @@
-package ru.itmo.prog.lab5.collection.Builders;
+package ru.itmo.prog.lab5.Collection.Builders;
 
 import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
-import ru.itmo.prog.lab5.collection.MusicBand.Coordinates;
+import ru.itmo.prog.lab5.Collection.MusicBand.Coordinates;
 
 /**
  * Class for building objects of type Coordinates. Uses Builder interface.

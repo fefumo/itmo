@@ -1,14 +1,14 @@
-package ru.itmo.prog.lab5.collection.MusicBand;
+package ru.itmo.prog.lab5.Collection.MusicBand;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeParseException;
 
+import ru.itmo.prog.lab5.Collection.Builders.CoordinatesBuilder;
+import ru.itmo.prog.lab5.Collection.Builders.LabelBuilder;
+import ru.itmo.prog.lab5.Collection.Builders.MusicBandBuilder;
+import ru.itmo.prog.lab5.Collection.Validators.AlbumsValidator;
+import ru.itmo.prog.lab5.Collection.Validators.NameValidator;
 import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
-import ru.itmo.prog.lab5.collection.Builders.CoordinatesBuilder;
-import ru.itmo.prog.lab5.collection.Builders.LabelBuilder;
-import ru.itmo.prog.lab5.collection.Builders.MusicBandBuilder;
-import ru.itmo.prog.lab5.collection.Validators.AlbumsValidator;
-import ru.itmo.prog.lab5.collection.Validators.NameValidator;
 
 /**
  * The Music band requester class is used to perform operations with requesting Music Bands from user and non-user requesters.

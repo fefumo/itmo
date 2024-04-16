@@ -4,8 +4,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import ru.itmo.prog.lab5.CLI.Managers.CollectionManager;
+import ru.itmo.prog.lab5.Collection.MusicBand.MusicBand;
 import ru.itmo.prog.lab5.Exceptions.EmptyCollectionException;
-import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
 
 /**
  * The `RemoveLower` class in Java defines a command that removes a `MusicBand`

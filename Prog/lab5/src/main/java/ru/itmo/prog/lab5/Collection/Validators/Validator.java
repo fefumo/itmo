@@ -1,4 +1,4 @@
-package ru.itmo.prog.lab5.collection.Validators;
+package ru.itmo.prog.lab5.Collection.Validators;
 
 /**
  * The generic functional abstract interface Validator.

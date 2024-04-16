@@ -12,7 +12,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlTransient;
-import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
+import ru.itmo.prog.lab5.Collection.MusicBand.MusicBand;
 
 /**
  * The `CollectionManager` class in Java represents a singleton manager for a

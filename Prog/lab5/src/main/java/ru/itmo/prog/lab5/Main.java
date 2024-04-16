@@ -28,11 +28,11 @@ public class Main {
                     "No environment variable is set. Please set it with \"export FILE_PATH=\"path_to_collection.xml\"\"");
             System.exit(1);
         }
-
+        
+        dumpManager.unmarshalAndSetCollectionFromXML(path);
         System.out.println(
                 "Hello! This is a program for working with music band collections.  \nType \"help\" for more info.");
 
-        dumpManager.unmarshalAndSetCollectionFromXML(path);
 
         // actual program block
 

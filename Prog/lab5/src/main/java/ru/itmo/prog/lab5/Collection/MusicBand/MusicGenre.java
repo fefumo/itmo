@@ -1,4 +1,4 @@
-package ru.itmo.prog.lab5.collection.MusicBand;
+package ru.itmo.prog.lab5.Collection.MusicBand;
 
 import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
 

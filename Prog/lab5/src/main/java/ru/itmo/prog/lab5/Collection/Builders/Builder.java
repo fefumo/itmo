@@ -1,4 +1,4 @@
-package ru.itmo.prog.lab5.collection.Builders;
+package ru.itmo.prog.lab5.Collection.Builders;
 
 /**
  * Functional generic interface for building Objects of any type.

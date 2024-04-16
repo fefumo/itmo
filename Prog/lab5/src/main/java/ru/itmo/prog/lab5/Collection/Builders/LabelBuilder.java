@@ -1,7 +1,7 @@
-package ru.itmo.prog.lab5.collection.Builders;
+package ru.itmo.prog.lab5.Collection.Builders;
 
+import ru.itmo.prog.lab5.Collection.MusicBand.Label;
 import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
-import ru.itmo.prog.lab5.collection.MusicBand.Label;
 
 /**
  * Class for building objects of type Label. Uses Builder interface.

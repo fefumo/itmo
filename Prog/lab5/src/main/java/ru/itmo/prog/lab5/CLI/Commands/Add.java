@@ -2,8 +2,8 @@ package ru.itmo.prog.lab5.CLI.Commands;
 
 import ru.itmo.prog.lab5.CLI.Managers.CollectionManager;
 import ru.itmo.prog.lab5.CLI.Managers.InputHandler;
-import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
-import ru.itmo.prog.lab5.collection.MusicBand.MusicBandRequester;
+import ru.itmo.prog.lab5.Collection.MusicBand.MusicBand;
+import ru.itmo.prog.lab5.Collection.MusicBand.MusicBandRequester;
 
 /**
  * The `Add` class extends `Command` and implements a method to add a

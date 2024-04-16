@@ -1,10 +1,10 @@
-package ru.itmo.prog.lab5.collection.Builders;
+package ru.itmo.prog.lab5.Collection.Builders;
 
 import java.util.Date;
 
+import ru.itmo.prog.lab5.Collection.MusicBand.Coordinates;
+import ru.itmo.prog.lab5.Collection.MusicBand.MusicBand;
 import ru.itmo.prog.lab5.CLI.Managers.CollectionManager;
-import ru.itmo.prog.lab5.collection.MusicBand.Coordinates;
-import ru.itmo.prog.lab5.collection.MusicBand.MusicBand;
 
 /**
  * The type Music band builder.
