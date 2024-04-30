@@ -6,20 +6,38 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Current File",
+            "name": "Main",
             "request": "launch",
-            "mainClass": "${file}",
-            
+            "mainClass": "ru.itmo.prog.lab5.Main",
+            "projectName": "lab5-copy"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "lab5-copy"
         },
         {
             "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "ru.itmo.prog.lab5.Main",
-            "projectName": "lab5",
-            
+            "projectName": "lab5 - Copy"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "ru.itmo.prog.lab5.Main",
+            "projectName": "lab5"
         }
-        
     ]
     
 }
