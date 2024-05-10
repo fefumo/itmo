@@ -1,4 +1,7 @@
-package CLI.Commands;
+package Commands;
+
+import Communication.CommandResult;
+import Exceptions.CommandException;
 
 /**
  * The `History` class in Java represents a command history feature that stores
@@ -47,22 +50,24 @@ public class History extends Command {
      * there are no commands in history.
      */
     @Override
-    public void execute(String[] args) {
-        if (args.length != 1)
-            throw new ArrayIndexOutOfBoundsException("There has to be no arguments");
+    public CommandResult execute(String[] args) {
+        String out = "";
+        if (args.length != 0)
+            throw new CommandException("There has to be no arguments");
 
-        System.out.println("Here is your history command list: \n----------------------------------");
+        out = out.concat("\nHere is your history command list: \n----------------------------------\n");
         if (headIndex == -1) {
-            System.out.println("No commands in history");
+            return new CommandResult(true, null, this.name, "No commands in history");
         } else {
             int i = headIndex;
             int count = 1;
             do {
-                System.out.println(count + ": " + commandHistory[i]);
+                out = out.concat(count + ": " + commandHistory[i] + "\n");
                 i = (i + 1) % HISTORY_SIZE;
                 count++;
             } while (i != tailIndex + 1);
         }
+        return new CommandResult(true, null, this.name, out);
     }
 
 }

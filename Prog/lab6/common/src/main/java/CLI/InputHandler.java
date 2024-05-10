@@ -1,4 +1,4 @@
-package CLI.Managers;
+package CLI;
 
 
 import java.io.BufferedReader;
@@ -15,7 +15,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
- * The `InputHandler` class in Java provides methods for handling user input
+ * The InputHandler class provides methods for handling user input
  * from the console or a
  * file, including getting different types of input such as integers, longs, and
  * dates.
@@ -23,22 +23,7 @@ import java.util.Scanner;
 public class InputHandler {
     private InputStream inputStream = System.in;
     private Scanner scanner = new Scanner(inputStream);
-    // indicates current mode (user or non-user)
-    // private boolean flagOfUserMode = true;
-    // private static InputHandler inputHandlerSingleton;
-
-    /**
-     * Method for getting the singleton instance of InputHandler class.
-     * 
-     * @return InputHandler instance
-     */
-    // public static InputHandler getInstance() {
-    //     if (inputHandlerSingleton == null) {
-    //         inputHandlerSingleton = new InputHandler();
-    //     }
-    //     return inputHandlerSingleton;
-    // }
-
+    //boolean flagOfUserMode = true;
     /**
      * Method for getting the Scanner of InputHandler class.
      * 
@@ -47,20 +32,6 @@ public class InputHandler {
     public Scanner getScanner() {
         return scanner;
     }
-
-    /**
-     * Method for setting the flag of user mode that is used to differentiate from
-     * user and non-user modes.
-     * 
-     * @param flagOfUserMode
-     */
-    // public void setflagOfUserMode(boolean flagOfUserMode) {
-    //     this.flagOfUserMode = flagOfUserMode;
-    // }
-
-    // public boolean getflagOfUserMode() {
-    //     return flagOfUserMode;
-    // }
 
     public InputStream getInputStream() {
         return inputStream;
@@ -71,15 +42,16 @@ public class InputHandler {
      * 
      * @return input based on an inputstream that scanner has
      */
-    public String getInput() {
+    public String[] getInput() {
         String input;
         System.out.print("> ");
         input = this.scanner.nextLine().trim();
         if (input == "") {
             return null;
         }
+        String[] commandAndArgs = input.split(" ", 2);
         //System.out.println(input);
-        return input;
+        return commandAndArgs;
     }
 
     /**
@@ -100,6 +72,21 @@ public class InputHandler {
         this.inputStream = new FileInputStream(file);
         this.scanner = new Scanner(bufferedReader);
     }
+    /**
+     * Method for woeking with scripts. Outputs the line that is given and transforms it like getInput() would.
+     * Used in combination with BufferedReader
+     * @see BufferedReader
+     * @see InputHandler
+     */
+    public String[] convertFileLine(String line){
+        System.out.println(">>> " + line);
+        line = line.strip();
+        if (line == ""){
+            return null;
+        }
+        String[] c = line.split(" ", 2);
+        return c;
+    }
 
     /**
      * Method to set user input (after changing the input stream for scanner, i.e.
@@ -118,12 +105,12 @@ public class InputHandler {
      * @throws NumberFormatException
      */
     public Integer getIntInput() throws NumberFormatException {
-        String userInput = this.getInput();
+        String[] userInput = this.getInput();
         if (userInput == null) {
             return null;
         }
 
-        Integer newInt = Integer.parseInt(userInput);
+        Integer newInt = Integer.parseInt(userInput[0]);
         return newInt;
     }
 
@@ -134,11 +121,11 @@ public class InputHandler {
      * @throws NumberFormatException
      */
     public Long getLongInput() throws NumberFormatException {
-        String userInput = this.getInput();
+        String[] userInput = this.getInput();
         if (userInput == null) {
             return null;
         }
-        Long newLong = Long.parseLong(userInput);
+        Long newLong = Long.parseLong(userInput[0]);
         return newLong;
     }
 
@@ -151,14 +138,13 @@ public class InputHandler {
      */
     public ZonedDateTime getDateInput() throws DateTimeParseException {
         System.out.println("format of input should be \"dd MM uuuu\" i.e. 28 04 2024");
-        String input = this.getInput();
-
-        if (input == null) {
+        String[] inputArray = this.getInput();
+        if (inputArray == null) {
             return null;
         }
-
+        String input = String.join(" ", inputArray);
+        // System.out.println(input);        
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM uuuu");
-
         LocalDate localDate = LocalDate.parse(input, formatter);
         ZonedDateTime zonedDateTime = localDate.atStartOfDay(ZoneId.systemDefault());
 

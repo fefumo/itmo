@@ -1,5 +1,6 @@
-package CLI.Commands;
+package Commands;
 
+import Communication.CommandResult;
 
 /**
  * Abstract interface that abstract Command class iplements. Used mostly for architecture designing.
@@ -12,7 +13,7 @@ public abstract interface CommandInterface {
      *
      * @param args the args
      */
-    void execute(String[] args);
+    CommandResult execute(String[] args);
 
     /**
      * Gets description.

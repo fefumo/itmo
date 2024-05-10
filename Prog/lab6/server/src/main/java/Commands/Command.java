@@ -1,4 +1,6 @@
-package CLI.Commands;
+package Commands;
+
+import Communication.CommandResult;
 
 /**
  * The abstract class Command defines properties and methods for a command
@@ -25,7 +27,7 @@ public abstract class Command implements CommandInterface {
     }
 
     @Override
-    public abstract void execute(String[] args);
+    public abstract CommandResult execute(String[] args);
 
     public Object getArgument() {
         return argument;

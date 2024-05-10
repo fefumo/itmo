@@ -1,7 +1,6 @@
-package CLI.Managers;
+package Managers;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
@@ -11,7 +10,6 @@ import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
-import jakarta.xml.bind.annotation.XmlTransient;
 
 /**
  * The `CollectionManager` class in Java represents a singleton manager for a
@@ -30,8 +28,6 @@ public class CollectionManager {
     @XmlElement(name = "musicBand")
     private PriorityQueue<MusicBand> musicBandsQueue;
     private final static LocalDateTime InitilizationDate = LocalDateTime.now();
-    @XmlTransient
-    private ArrayList<Long> previousIds = new ArrayList<Long>();
 
     /**
      * The function getInstance() returns an instance of CollectionManager using the
@@ -108,9 +104,6 @@ public class CollectionManager {
      * @return An ArrayList of Long values containing the previousIds is being
      *         returned.
      */
-    public ArrayList<Long> getPreviousIds() {
-        return previousIds;
-    }
 
     /**
      * The `addElementToCollection` method adds a MusicBand object to a
@@ -163,15 +156,8 @@ public class CollectionManager {
         return mb;
     }
 
-    /**
-     * Method that inserts ids of a collection in previousIds. Used at
-     * initialization of a program so that future add commands will consider
-     * elements' ids from
-     * file.
-     */
-    public void reloadIdArray() {
-        for (MusicBand mb : musicBandsQueue) {
-            previousIds.add(mb.getId());
-        }
-    }
+    // public PriorityQueue<MusicBand> getSortedCollection(){
+        // Object[] sortedCollection = musicBandsQueue.toArray();
+        // Arrays.sort(sortedCollection); 
+    // }
 }

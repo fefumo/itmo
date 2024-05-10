@@ -2,7 +2,7 @@ package Collection.CollectionObject;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
-import CLI.Managers.DateAdapter;
+
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;

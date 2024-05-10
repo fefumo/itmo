@@ -1,9 +1,11 @@
-package CLI.Commands;
+package Commands;
 
 import java.util.Arrays;
 
-import CLI.Managers.CollectionManager;
+import Communication.CommandResult;
+import Exceptions.CommandException;
 import Exceptions.EmptyCollectionException;
+import Managers.CollectionManager;
 
 /**
  * The `Show` class extends `Command` and implements a function to sort and
@@ -21,9 +23,10 @@ public class Show extends Command {
      * instance.
      */
     @Override
-    public void execute(String[] args) {
-        if (args.length != 1)
-            throw new ArrayIndexOutOfBoundsException("There has to be no arguments");
+    public CommandResult execute(String[] args) {
+        String out = "";
+        if (args.length != 0)
+            throw new CommandException("There has to be no arguments");
         CollectionManager manager = CollectionManager.getInstance();
         if (manager.getCollection() == null || manager.getCollection().isEmpty())
             throw new EmptyCollectionException("There has to be a collection with elements. Try \"add\" command");
@@ -32,8 +35,9 @@ public class Show extends Command {
         Arrays.sort(sortedCollection);
 
         for (Object element : sortedCollection) {
-            System.out.println("--------------------------");
-            System.out.println(element.toString());
+            out = out.concat("\n--------------------------\n");
+            out = out.concat(element.toString() + "\n");
         }
+        return new CommandResult(true, null, this.name, out);
     }
 }

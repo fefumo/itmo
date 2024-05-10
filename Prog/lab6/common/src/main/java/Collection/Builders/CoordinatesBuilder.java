@@ -1,6 +1,6 @@
 package Collection.Builders;
 
-import CLI.Managers.InputHandler;
+import CLI.InputHandler;
 import Collection.CollectionObject.Coordinates;
 
 /**

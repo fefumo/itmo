@@ -1,6 +1,6 @@
 package Collection.CollectionObject;
 
-import CLI.Managers.InputHandler;
+import CLI.InputHandler;
 
 /**
  * The enum Music genre which serves as a part of MusicBand class.

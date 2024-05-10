@@ -1,7 +1,9 @@
-package CLI.Commands;
+package Commands;
 
 
-import CLI.Managers.DumpManager;
+import Communication.CommandResult;
+import Exceptions.CommandException;
+import Managers.DumpManager;
 
 /**
  * This Java class represents a "Save" command that takes an array of strings,
@@ -20,11 +22,12 @@ public class Save extends Command {
      * marshals a CollectionManager object into an XML file using JAXB.
      */
     @Override
-    public void execute(String[] args) {
-        if (args.length != 1)
-            throw new ArrayIndexOutOfBoundsException("There has to be 1 argument (type: long)");
+    public CommandResult execute(String[] args) {
+        if (args.length != 0)
+            throw new CommandException("There has to be 1 argument (type: long)");
         DumpManager dumpManager = DumpManager.getInstance();
         dumpManager.saveToXmlFile("collection.xml");
+        return new CommandResult(true, null, this.name, "Collection has been saved.");
     }
 
 }

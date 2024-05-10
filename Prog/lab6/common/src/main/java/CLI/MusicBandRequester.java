@@ -1,12 +1,19 @@
-package Collection.CollectionObject;
+package CLI;
 
+import java.io.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import CLI.Managers.InputHandler;
 import Collection.Builders.CoordinatesBuilder;
 import Collection.Builders.LabelBuilder;
 import Collection.Builders.MusicBandBuilder;
+import Collection.CollectionObject.Coordinates;
+import Collection.CollectionObject.Label;
+import Collection.CollectionObject.MusicBand;
+import Collection.CollectionObject.MusicGenre;
 import Collection.Validators.AlbumsValidator;
 import Collection.Validators.NameValidator;
 
@@ -27,6 +34,8 @@ public class MusicBandRequester {
      */
     AlbumsValidator av = new AlbumsValidator();
 
+    BufferedReader bufferedReader;
+
     /**
      * Request user band music band.
      *
@@ -39,13 +48,15 @@ public class MusicBandRequester {
         // name
         while (true) {
             System.out.println("Enter the name of the band you want to add (String).");
-            String userInput = inputHandler.getInput();
-            if (nv.validate(userInput)) {
-                newBand.setName(userInput);
-                System.out.println("Name has been added.");
+            String[] input = inputHandler.getInput();
+            if(input == null){
+                System.out.println("Name can't be blank");
+            }
+            else{
+                String input1 = input[0];
+                newBand.setName(input1);
+                System.out.println("Name has been set");
                 break;
-            } else {
-                System.out.println("Name can't be blank.");
             }
         }
 
@@ -129,30 +140,37 @@ public class MusicBandRequester {
      * Request non user band music band.
      *
      * @return the music band
+     * @throws IOException 
      */
-    public MusicBand requestNonUserBand() {
+    public MusicBand requestNonUserBand(BufferedReader br) throws IOException {
+        bufferedReader = br;
+
+        System.out.println();
+        System.out.println("--------------------------");
+        System.out.println("Add command for nonUserBand has started...");
         boolean validArguments = true;
         MusicBand nonUserBand = musicBandBuilder.build();
-        InputHandler inputHandler = new InputHandler();
+        // InputHandler inputHandler = ih;
+        // inputHandler.setInputFromFile(file);
 
         // name
-        String name = inputHandler.getInput();
+        String[] name = getInput();
         if (name == null) {
             validArguments = false;
             System.out.println("! Name hasn't been set. Invalid argument !");
         }
-        nonUserBand.setName(name);
+        nonUserBand.setName(name[0]);
         System.out.println("Name: " + nonUserBand.getName());
         System.out.println();
 
         // coordinates
         Coordinates coordinates = new Coordinates();
         try {
-            Integer x = inputHandler.getIntInput();
+            Integer x = getIntInput();
             if (x == null) {
                 throw new NumberFormatException();
             }
-            Integer y = inputHandler.getIntInput();
+            Integer y = getIntInput();
             if (y == null) {
                 throw new NumberFormatException();
             }
@@ -168,11 +186,16 @@ public class MusicBandRequester {
 
         // numberOfParticipants
         try {
-            Integer number = inputHandler.getIntInput();
-            if (number < 0 || number == null) {
+            Integer number = getIntInput();
+            if (number == null) {
                 validArguments = false;
                 throw new NumberFormatException();
-            } else {
+            }
+            else if (number < 0){ //это просто отвратительно что я не мог поставить в первый if просто == null || < 0 из-за NullPointerException... 
+                validArguments = false;
+                throw new NullPointerException();
+            }
+            else {
                 nonUserBand.setNumberOfParticipants(number);
                 System.out.println("NumberOfParticipants: " + nonUserBand.getNumberOfParticipants());
                 System.out.println();
@@ -184,7 +207,7 @@ public class MusicBandRequester {
 
         // albumsCount
         try {
-            nonUserBand.setAlbumsCount(inputHandler.getLongInput());
+            nonUserBand.setAlbumsCount(getLongInput());
         } catch (NumberFormatException e) {
             validArguments = false;
             System.out.println("! AlbumsCount hasn't been set. Invalid argument !");
@@ -194,7 +217,7 @@ public class MusicBandRequester {
 
         // establishmentDate
         try {
-            nonUserBand.setEstablishmentDate(inputHandler.getDateInput());
+            nonUserBand.setEstablishmentDate(getDateInput());
             ;
         } catch (DateTimeParseException e) {
             // validArguments = false;
@@ -206,7 +229,7 @@ public class MusicBandRequester {
         // musicGenre
         MusicGenre[] array = MusicGenre.values();
         try {
-            Integer input = inputHandler.getIntInput();
+            Integer input = getIntInput();
             if (input == null || input < 0 || input > array.length - 1) {
                 throw new NumberFormatException();
             }
@@ -224,11 +247,12 @@ public class MusicBandRequester {
 
         // label
         Label label = new Label();
-        String labelName = inputHandler.getInput();
+        String[] labelNameStrings = getInput();
+        String labelName = labelNameStrings == null ? null : labelNameStrings[0]; // cuz labelNameStrings[0] would give an error if array is null
         label.setName(labelName);
         System.out.println("Label name: " + labelName);
         try {
-            Long input = inputHandler.getLongInput();
+            Long input = getLongInput();
             System.out.println("Label bands: " + input);
             if (input == null) {
                 throw new NumberFormatException();
@@ -239,7 +263,7 @@ public class MusicBandRequester {
             validArguments = false;
             System.out.println("! Label hasn't been set. Invalid argument !");
         }
-        System.out.println("Label: " + nonUserBand.getLabel());
+        System.out.println("Label: " + nonUserBand.getLabel() );
 
         // result
         if (validArguments == true) {
@@ -254,5 +278,47 @@ public class MusicBandRequester {
             return null;
         }
         return nonUserBand;
+    }
+
+    private String[] getInput() throws IOException{
+        String s = bufferedReader.readLine();
+        System.out.println(">>> "  + s);
+        s = s.strip();
+        if (s == ""){
+            return null;
+        }
+        String[] c = s.split(" ", 2);
+        return c;
+    }
+    private Integer getIntInput() throws IOException{
+        String[] userInput = getInput();
+        if (userInput == null) {
+            return null;
+        }
+
+        Integer newInt = Integer.parseInt(userInput[0]);
+        return newInt;
+    }
+    public Long getLongInput() throws NumberFormatException, IOException {
+        String[] userInput = getInput();
+        if (userInput == null) {
+            return null;
+        }
+        Long newLong = Long.parseLong(userInput[0]);
+        return newLong;
+    }
+    public ZonedDateTime getDateInput() throws DateTimeParseException, IOException {
+        System.out.println("format of input should be \"dd MM uuuu\" i.e. 28 04 2024");
+        String[] inputArray = getInput();
+        if (inputArray == null) {
+            return null;
+        }
+        String input = String.join(" ", inputArray);
+        // System.out.println(input);        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM uuuu");
+        LocalDate localDate = LocalDate.parse(input, formatter);
+        ZonedDateTime zonedDateTime = localDate.atStartOfDay(ZoneId.systemDefault());
+
+        return zonedDateTime;
     }
 }

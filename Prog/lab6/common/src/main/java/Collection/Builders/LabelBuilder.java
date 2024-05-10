@@ -1,6 +1,6 @@
 package Collection.Builders;
 
-import CLI.Managers.InputHandler;
+import CLI.InputHandler;
 import Collection.CollectionObject.Label;
 
 /**
@@ -23,8 +23,13 @@ public class LabelBuilder implements Builder<Label> {
         // name
         while (true) {
             System.out.println("Input label's name (String, can be null)");
-            String userInput = inputHandler.getInput();
-            label.setName(userInput);
+            String[] userInputArray = inputHandler.getInput();
+            if (userInputArray == null){
+                label.setName(null);
+            }
+            else{
+                label.setName(userInputArray[0]);
+            }
             System.out.println("Label's name has been added.");
             break;
         }
@@ -33,12 +38,11 @@ public class LabelBuilder implements Builder<Label> {
         while (true) {
             try {
                 System.out.println("Enter label's amount of bands (Long)");
-                String userInput = inputHandler.getInput();
+                Long userInput = inputHandler.getLongInput();
                 if (userInput == null) {
                     System.out.println("Bands can't be null");
                 } else {
-                    long userLongInput = Long.parseLong(userInput);
-                    label.setBands(userLongInput);
+                    label.setBands(userInput);
                     System.out.println("Label's amount of bands has been added");
                     break;
                 }

@@ -1,4 +1,7 @@
-package CLI.Commands;
+package Commands;
+
+import Communication.CommandResult;
+import Exceptions.CommandException;
 
 /**
  * The `Exit` class in Java extends `Command` and contains a method `execute`
@@ -18,9 +21,9 @@ public class Exit extends Command {
      * exiting the program if there is exactly one argument passed to it.
      */
     @Override
-    public void execute(String[] args) {
-        if (args.length != 1)
-            throw new ArrayIndexOutOfBoundsException("There has to be no arguments");
+    public CommandResult execute(String[] args) {
+        if (args.length != 0)
+            throw new CommandException("There has to be no arguments");
         System.out.println("Goodbye, have a nice day!");
         System.out.println(
                 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠴⠒⠒⠲⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" + //
@@ -49,6 +52,7 @@ public class Exit extends Command {
                         "⠀⠀⠀⠀⠀⠀⢸⣄⠀⠀⢀⣤⠀⣠⡾⠀⠀⠀⠙⠷⣄⣀⢀⣾⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" + //
                         "⠀⠀⠀⠀⠀⠀⠀⠉⠙⠛⠛⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
         System.exit(0);
+        return null;
     }
 
 }

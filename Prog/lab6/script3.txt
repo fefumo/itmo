@@ -1,0 +1,15 @@
+
+add
+KEKWname
+9000
+2100
+80
+
+02 02 2002
+3
+some frikin name
+28
+
+
+show
+execute_script script4.txt

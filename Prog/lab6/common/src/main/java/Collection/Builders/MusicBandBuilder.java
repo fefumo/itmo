@@ -2,7 +2,7 @@ package Collection.Builders;
 
 import java.util.Date;
 
-import CLI.Managers.CollectionManager;
+import Collection.IdManager;
 import Collection.CollectionObject.Coordinates;
 import Collection.CollectionObject.MusicBand;
 
@@ -12,15 +12,13 @@ import Collection.CollectionObject.MusicBand;
  * @see Builder
  */
 public class MusicBandBuilder implements Builder<MusicBand> {
-    /**
-     * The Id.
-     */
-    static long id = 1;
+    private static MusicBandBuilder singleton;
 
-    /**
-     * The Manager.
-     */
-    CollectionManager manager = CollectionManager.getInstance();
+    public static MusicBandBuilder getInstance(){
+        if (singleton == null) return new MusicBandBuilder();
+        else return singleton;
+    }
+
     /**
      * Build music band.
      *
@@ -28,25 +26,12 @@ public class MusicBandBuilder implements Builder<MusicBand> {
      */
     @Override
     public MusicBand build() {
-        checkForEmptySlot();
-        manager.getPreviousIds().add(id);
+        IdManager idManager = IdManager.getInstance();
+        long id = idManager.genereateId();
         final Date creationDate = new Date();
         Coordinates coordinates = null;
         MusicBand new_Band = new MusicBand(id, null, coordinates, creationDate, 0, null, null, null, null);
         return new_Band;
-    }
-
-    private void checkForEmptySlot() {
-        if (!(manager.getPreviousIds().isEmpty())) {
-            for (long i = 1; i <= manager.getPreviousIds().size(); i++) {
-                if (!(manager.getPreviousIds().contains(i))) {
-                    id = i;
-                    break;
-                } else {
-                    id = manager.getPreviousIds().size() + 1;
-                }
-            }
-        }
     }
 
 }

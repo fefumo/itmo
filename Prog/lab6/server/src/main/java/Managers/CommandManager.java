@@ -1,9 +1,10 @@
-package CLI.Managers;
+package Managers;
 
 import java.util.HashMap;
-
-import CLI.Commands.*;
-import Exceptions.EmptyCollectionException;
+import java.util.Arrays;
+import Commands.*;
+import Communication.CommandResult;
+import Exceptions.CommandException;
 import Exceptions.InvalidCommandException;
 
 /**
@@ -14,7 +15,8 @@ import Exceptions.InvalidCommandException;
 public class CommandManager {
 
     private static HashMap<String, Command> commands = new HashMap<>();
-
+    String errString;
+    CommandResult result;
     /**
      * The `buildCommands` function initializes and adds various command objects to
      * a map for a
@@ -28,14 +30,12 @@ public class CommandManager {
         Show show = new Show("show",
                 "print to standard output all the elements of the collection in string representation");
         Add add = new Add("add", "add {element} add a new element to the collection");
-        UpdateId updateId = new UpdateId("update_id",
-                "update_id {id} update the value of a collection element whose id is equal to the given one");
+        UpdateId updateId = new UpdateId("update_id","update_id {id} update the value of a collection element whose id is equal to the given one");
         RemoveById removeById = new RemoveById("remove_by_id",
                 "remove_by_id {id} remove an element from a collection by its id");
         Clear clear = new Clear("clear", "clear collection");
         Save save = new Save("save", "save the collection to a file");
-        ExecuteScript executeScript = new ExecuteScript("execute_script",
-                "execute_script {file_name} read and execute a script from the specified file. The script contains commands in the same form in which the user enters them interactively.");
+        ExecuteScript executeScript = new ExecuteScript("execute_script","execute_script {file_name} read and execute a script from the specified file. The script contains commands in the same form in which the user enters them interactively.");
         Exit exit = new Exit("exit", "end the program (without saving to a file)");
         RemoveLower removeLower = new RemoveLower("remove_lower",
                 "remove_lower {element} remove all elements from the collection that are smaller than the given one");
@@ -77,22 +77,21 @@ public class CommandManager {
      *                command is null and prints a
      *                message if it is. It then splits the command
      */
-    public void executeCommand(String command) {
-        if (command == null) {
-            System.out.println("Null passed. No command will be executed.");
-            return;
-        }
-        String[] commandAndArgs = command.split(" ", 2);
-        History.addCommandToHistory(command);
-        try {
-            if (!(commands.containsKey(commandAndArgs[0]))) {
-                throw new InvalidCommandException("No such command. Try again");
+    public CommandResult executeCommand(String[] commandAndArgs) {
+            String command = commandAndArgs[0];
+            String[] args = Arrays.copyOfRange(commandAndArgs, 1, commandAndArgs.length);
+            History.addCommandToHistory(command);
+            try {
+                if (!(commands.containsKey(command))) {
+                    throw new InvalidCommandException("No such command. Try again");
+                }
+                result = commands.get(command).execute(args);
+            }catch (CommandException e){
+                result = new CommandResult(false, e.getMessage(), command);
+            }catch (NullPointerException e){
+                result = new CommandResult(false, "Null passed", command);
             }
-            commands.get(commandAndArgs[0]).execute(commandAndArgs);
-
-        } catch (InvalidCommandException | ArrayIndexOutOfBoundsException | EmptyCollectionException e) {
-            System.out.println(e.getMessage());
-        }
+        return result;
     }
 
     /**

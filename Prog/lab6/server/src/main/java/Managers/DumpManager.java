@@ -1,4 +1,4 @@
-package CLI.Managers;
+package Managers;
 
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -11,6 +11,7 @@ import java.io.StringWriter;
 
 import Collection.CollectionObject.MusicBand;
 import Collection.Validators.MusicBandValidator;
+import Exceptions.CommandException;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
@@ -64,18 +65,13 @@ public class DumpManager {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
                 writer.write(xmlString);
             } catch (IOException e) {
-                System.out.println();
-                System.out.println("--------------------------");
-                System.out.println("Something is wrong with the file that the program is saving to. Check it's access rights.");
-                return;
+                throw new CommandException("Something is wrong with the file that the program is saving to. Check it's access rights. ");
             }
             System.out.println();
             System.out.println("--------------------------");
             System.out.println("Collection has been saved");
         } catch (JAXBException e) {
-            System.out.println();
-            System.out.println("--------------------------");
-            System.out.println("An error occured during marshalling.");
+            throw new CommandException("An error occured during marshalling.");
         }
     }
 
@@ -124,7 +120,7 @@ public class DumpManager {
                     }    
                 collectionManager.setCollection(marshallingManager.getCollection());
                 // add id's to previousIds array
-                collectionManager.reloadIdArray();
+                //collectionManager.reloadIdArray();
 
             } catch (JAXBException e) {
                 System.out.println();

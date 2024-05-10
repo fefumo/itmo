@@ -1,4 +1,4 @@
-package CLI.Managers;
+package Collection.CollectionObject;
 
 import java.time.ZonedDateTime;
 

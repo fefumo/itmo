@@ -1,7 +1,9 @@
-package CLI.Commands;
+package Commands;
 
-import CLI.Managers.CollectionManager;
+import Communication.CommandResult;
+import Exceptions.CommandException;
 import Exceptions.EmptyCollectionException;
+import Managers.CollectionManager;
 
 /**
  * The Info class extends Command and provides a method to check and print
@@ -19,16 +21,19 @@ public class Info extends Command {
      * and then prints information about the collection.
      */
     @Override
-    public void execute(String[] args) {
-        if (args.length != 1)
-            throw new ArrayIndexOutOfBoundsException("There has to be no arguments");
+    public CommandResult execute(String[] args) {
         CollectionManager manager = CollectionManager.getInstance();
-        if (manager.getCollection() == null)
+        String out = "";        
+        if (args.length != 0)
+            throw new CommandException("There has to be no arguments");
+        if (manager.getCollection() == null || manager.getCollection().isEmpty())
             throw new EmptyCollectionException("There has to be a collection with elements. Try \"add\" command");
 
-        System.out.println("   -Collection of type: " + manager.getCollection().getClass().toString()
+        out = out.concat("   -Collection of type: " + manager.getCollection().getClass().toString()
                 + "\n   -Number of elements: " + manager.getCollection().size()
                 + "\n   -Created at: " + manager.getCollectionInitilizationDate());
+        
+        return new CommandResult(true, null, this.name, out);
     }
 
 }

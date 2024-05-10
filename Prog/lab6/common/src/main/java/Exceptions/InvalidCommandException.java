@@ -1,13 +1,7 @@
 package Exceptions;
 
-public class InvalidCommandException extends RuntimeException {
-    private String message;
-
+public class InvalidCommandException extends CommandException {
     public InvalidCommandException(String message) {
-        this.message = message;
-    }
-
-    public String getMessage() {
-        return message;
+        super(message);
     }
 }

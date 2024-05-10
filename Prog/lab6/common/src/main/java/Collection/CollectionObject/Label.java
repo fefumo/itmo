@@ -71,6 +71,6 @@ public class Label implements Serializable{
      */
     @Override
     public String toString() {
-        return name;
+        return "Label name: " + name + " with " + bands + " bands";
     }
 }

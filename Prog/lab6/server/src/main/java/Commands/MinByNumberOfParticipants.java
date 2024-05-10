@@ -1,10 +1,12 @@
-package CLI.Commands;
+package Commands;
 
 import java.util.Iterator;
 
-import CLI.Managers.CollectionManager;
 import Collection.CollectionObject.MusicBand;
+import Communication.CommandResult;
+import Exceptions.CommandException;
 import Exceptions.EmptyCollectionException;
+import Managers.CollectionManager;
 
 /**
  * This Java class extends Command and implements a function to find and print
@@ -23,9 +25,9 @@ public class MinByNumberOfParticipants extends Command {
      * collection.
      */
     @Override
-    public void execute(String[] args) {
-        if (args.length != 1)
-            throw new ArrayIndexOutOfBoundsException("There has to be no arguments");
+    public CommandResult execute(String[] args) {
+        if (args.length != 0)
+            throw new CommandException("There has to be no arguments");
         CollectionManager manager = CollectionManager.getInstance();
         if (manager.getCollection() == null || manager.getCollection().isEmpty())
             throw new EmptyCollectionException("There has to be a collection with elements. Try \\\"add\\\" command");
@@ -39,8 +41,6 @@ public class MinByNumberOfParticipants extends Command {
                 mb = temp;
             }
         }
-        System.out.println("Here's band with the lowest number of participants:");
-        System.out.println(mb);
-
+        return new CommandResult(true, null, this.name, "Band with the lowest number of participants: " + mb);
     }
 }

@@ -1,0 +1,2 @@
+remove_lower 2
+execute_script script2.txt
