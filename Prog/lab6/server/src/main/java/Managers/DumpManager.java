@@ -67,9 +67,6 @@ public class DumpManager {
             } catch (IOException e) {
                 throw new CommandException("Something is wrong with the file that the program is saving to. Check it's access rights. ");
             }
-            System.out.println();
-            System.out.println("--------------------------");
-            System.out.println("Collection has been saved");
         } catch (JAXBException e) {
             throw new CommandException("An error occured during marshalling.");
         }

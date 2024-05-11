@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MusicBandCollection>
+    <musicBand id="1">
+        <name>namescript4</name>
+        <coordinates>
+            <x>9090</x>
+            <y>2902</y>
+        </coordinates>
+        <numberOfParticipants>100</numberOfParticipants>
+        <creationDate>2024-05-12T01:12:45+03:00</creationDate>
+        <albumsCount>250</albumsCount>
+        <establishmentDate>2005-04-28T00:00+04:00[Europe/Moscow]</establishmentDate>
+        <genre>SOUL</genre>
+        <label>
+            <bands>20</bands>
+        </label>
+    </musicBand>
+    <musicBand id="2">
+        <name>some name</name>
+        <coordinates>
+            <x>-23</x>
+            <y>421</y>
+        </coordinates>
+        <numberOfParticipants>100</numberOfParticipants>
+        <creationDate>2024-04-29T01:55:27.860+03:00</creationDate>
+        <albumsCount>8</albumsCount>
+        <establishmentDate>2005-04-28T00:00+04:00[Europe/Moscow]</establishmentDate>
+        <genre>PSYCHEDELIC_CLOUD_RAP</genre>
+        <label>
+            <bands>189</bands>
+            <name>labelName</name>
+        </label>
+    </musicBand>
+    <musicBand id="3">
+        <name>namescript4</name>
+        <coordinates>
+            <x>9090</x>
+            <y>2902</y>
+        </coordinates>
+        <numberOfParticipants>100</numberOfParticipants>
+        <creationDate>2024-05-12T01:12:32+03:00</creationDate>
+        <albumsCount>250</albumsCount>
+        <establishmentDate>2005-04-28T00:00+04:00[Europe/Moscow]</establishmentDate>
+        <genre>SOUL</genre>
+        <label>
+            <bands>20</bands>
+        </label>
+    </musicBand>
+</MusicBandCollection>

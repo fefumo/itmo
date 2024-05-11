@@ -6,6 +6,9 @@ import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
 import java.time.ZonedDateTime;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -17,6 +20,7 @@ import Managers.CommandManager;
 import Managers.DumpManager;
 
 public class Server {
+    Logger logger = LogManager.getLogger(Server.class);
     private static final int BUFFERSIZE = 2048;
     private final String host = "127.0.0.1";
     private final int port = 2804;
@@ -25,52 +29,40 @@ public class Server {
     private ByteBuffer buffer;
     private GsonBuilder gsonBuilder = new GsonBuilder().registerTypeAdapter(ZonedDateTime.class, new ZonedDateTimeAdapter());
     private Gson gson = gsonBuilder.create();
-
     private InputHandler inputHandler = new InputHandler();
+
     public void run(){
         commandManager = new CommandManager();
         commandManager.buildCommands();
-
         initializeCollection();
         createAndStartThreadForInput();
-        
         try {
             server = ServerSocketChannel.open();
             server.configureBlocking(false);
             server.bind(new InetSocketAddress(host, port));
-            System.out.println("Server started running!");
+            logger.info("Server is opened and binded to the address " + server.getLocalAddress().toString());
             
             while (true) {
                 SocketChannel clientSocketChannel = server.accept();
-                
+                logger.info("Server is now waiting for new connections");
                 if (clientSocketChannel == null){
                     System.out.println("No clients connected, waiting for connections...");
                     Thread.sleep(3000);
                 }
-                else{
-                    System.out.println();
-                    System.out.println("--------------------------");    
-                    System.out.println("Server has accepted a new client " + clientSocketChannel.socket().getRemoteSocketAddress());
-                    processClient(clientSocketChannel);
-                    
-                    System.out.println();
-                    System.out.println("--------------------------");    
-                    System.out.println("Processing client has ended.");
-                    
-                    System.out.println();
-                    System.out.println("--------------------------");
-                    System.out.println("Returning to waiting for connections...");
+                else{  
+                    logger.info("Server has accepted a new client " + clientSocketChannel.socket().toString());
+                    processClient(clientSocketChannel);   
+                    logger.warn("Processing client has ended. Returning to waiting for connections...");
                 }
             }
     
 
         } catch (IOException e) {
-            System.out.println("IO exception occured. Most likely the chosen port is already being used. Try again");
-            //e.printStackTrace();
+            logger.fatal("IO exception occured. Most likely the chosen port is already being used. Try again");
         } catch (ClassNotFoundException e){
-            System.out.println("ClassNotFoundException during client processing");
+            logger.error("ClassNotFoundException during client processing");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.fatal(e);
         }
     }
 
@@ -78,7 +70,6 @@ public class Server {
         //отправление
         RequestHandler requestHandler = new RequestHandler(this.commandManager);
         boolean clientConnected = true;
-        //clientSocketChannel.socket().setSoTimeout(30000);
         while (clientConnected){
             try {
                 //получение
@@ -86,57 +77,56 @@ public class Server {
                 int n;
                 do {
                     n = clientSocketChannel.read(buffer);
-                    System.out.println("Waiting for request...");                    
+                    logger.info("Waiting for request...");                    
                 } while (n == 0);
-                if (n == -1 ){
+                if (n == -1){
                     throw new IOException("Client disconnected");
                 }
-                System.out.println("Bytes received: " + n);
                 buffer.flip();
                 byte[] requestBytes = new byte[buffer.remaining()];
                 buffer.get(requestBytes);
                 String data = new String(requestBytes, StandardCharsets.UTF_8);
-                System.out.println(data);
+                //logger.info("Bytes received: " + n +"\nJSON string received: " + data);
+                logger.info("Bytes recieved and deserialized: " + n);
                 Request request = gson.fromJson(data, Request.class);
                 
                 //обработка
                 CommandResult newResponse = requestHandler.processRequest(request);
+                logger.info("Processing request is finished");
 
                 //отправление
                 buffer.clear();
                 String stringResponseJSON = gson.toJson(newResponse);
                 byte[] responseBytes = stringResponseJSON.getBytes();
                 buffer.put(responseBytes);
-                System.out.println("JSON data to be sent: " + stringResponseJSON + "\nits size: " + stringResponseJSON.getBytes().length);
+                //logger.info("JSON data to be sent: " + stringResponseJSON + "\nits size: " + stringResponseJSON.getBytes().length);
+                logger.info("Bytes to be sent: " + stringResponseJSON.getBytes().length);
                 buffer.flip();
                 clientSocketChannel.write(buffer);
 
             } catch (IOException e ) {
-                System.out.println();
-                System.out.println("--------------------------");
-                System.out.println("client " + clientSocketChannel.socket().getLocalSocketAddress() +  " disconnected");
-                //e.printStackTrace();
+                logger.warn("Client " + clientSocketChannel.socket().toString() +  " disconnected");
+                logger.info("Saving collection after client's disconnect...");
+                CommandResult clientDisc = commandManager.executeCommand("save".split(" ", 2));
+                logger.info(clientDisc);
                 clientConnected = false;
             }
         }
-        System.out.println();
-        System.out.println("--------------------------");
-        System.out.println("Closing connection...");
+        logger.info("Closing connection...");
         clientSocketChannel.close();
+        logger.info("Connection closed");
     }
     
     private void initializeCollection(){
         String path = System.getenv("FILE_PATH");
         if (path == null || path.isBlank()) {
-            System.out.println("Env variable \"FILE_PATH\" is not set.");
+            logger.fatal("Env variable \"FILE_PATH\" is not set.");
             System.exit(0);
         }
 
         DumpManager dumpManager = DumpManager.getInstance();
         dumpManager.unmarshalAndSetCollectionFromXML(path);
-        System.out.println();
-        System.out.println("--------------------------");
-        System.out.println("Collection has been initialized");
+        logger.info("Collection has been initialized");
     }
     private void createAndStartThreadForInput(){
         Thread consoleInputThread = new Thread(() ->{
@@ -144,18 +134,24 @@ public class Server {
                 String[] serverInputArray = inputHandler.getInput();
                 String serverInput = serverInputArray == null ? null : serverInputArray[0];
                 if (serverInput == null){
-                    System.out.println("Null passed. nothing will be executed.");
+                    logger.info("INPUT: Null passed. nothing will be executed.");
                 }
                 else{
                     switch (serverInput) {
                         case "exit":
+                            logger.info("INPUT: exit");
+                            CommandResult exitResult = commandManager.executeCommand("save".split(" ", 2));
+                            logger.info("Saving before exiting...");
+                            logger.info(exitResult);
                             commandManager.executeCommand(serverInputArray);
                             break;
                         case "save":
+                            logger.info("INPUT: save");
                             CommandResult result = commandManager.executeCommand(serverInputArray);
-                            System.out.println(result);
+                            logger.info(result);
                             break;
                         default:
+                            logger.info("INPUT: " + serverInput);
                             System.out.println("There are only \"save\" and \"exit\" commands available");
                             break;
                     }    
@@ -163,5 +159,6 @@ public class Server {
             }
         });
         consoleInputThread.start();
+        logger.info("Thread for input has been created");
     }
 }

@@ -42,7 +42,7 @@ public class RemoveById extends Command {
             musicBand = manager.getCollectionById(id);
             idManager.deleteId(id);
             manager.getCollection().remove(musicBand);
-            commandResult = new CommandResult(true, null, this.name,"\n--------------------------\nBand with id " + musicBand.getId() + " has been removed");
+            commandResult = new CommandResult(true, null, this.name,"Band with id " + musicBand.getId() + " has been removed");
 
         } catch (NoSuchElementException e) {
             throw new CommandException(e.getMessage());

@@ -64,9 +64,9 @@ public class RemoveLower extends Command {
                 }
             }
             if (flag == true){
-                commandResult = new CommandResult(true, null, this.name, "\n--------------------------\nThere is no band which id is less than the provided one.");
+                commandResult = new CommandResult(true, null, this.name, "There is no band which id is less than the provided one.");
             }
-            commandResult = new CommandResult(true, null, this.name, "\n--------------------------\nBand(s) with id(s) " + Arrays.toString(list.toArray()) + " has(have) been removed");
+            commandResult = new CommandResult(true, null, this.name, "Band(s) with id(s) " + Arrays.toString(list.toArray()) + " has(have) been removed");
         } catch (NumberFormatException e) {
             throw new CommandException("There has to be an argument (int) provided");
         } catch (NoSuchElementException e) {

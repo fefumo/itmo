@@ -33,7 +33,7 @@ public class RequestHandler {
                 }
                 collectionManager.addElementToCollection(mb);
                 mb.setId(idManager.genereateId());
-                System.out.println("--------------------------\nNew element has been added"); // в logger
+                //System.out.println("--------------------------\nNew element has been added"); // в logger
                 commandResult = new CommandResult(true, null, commandFromRequest, "--------------------------\nNew element has been added\n");
                 break;
             case "update_id":

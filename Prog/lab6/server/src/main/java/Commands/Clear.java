@@ -35,6 +35,6 @@ public class Clear extends Command {
         manager.getCollection().clear();
         idManager.getIdSet().clear();
         idManager.setNextId(0);
-        return new CommandResult(true, null, this.getName(), "\n--------------------------\nCollection has been cleared");
+        return new CommandResult(true, null, this.getName(), "Collection has been cleared");
     }
 }

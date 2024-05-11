@@ -101,7 +101,7 @@ public class Client {
         String stringJsonRequest = gson.toJson(request);
         byte[] reqestBytes = stringJsonRequest.getBytes(StandardCharsets.UTF_8);
         buffer.put(reqestBytes);
-        System.out.println("JSON data to be sent: " + stringJsonRequest + "\nits size: " + stringJsonRequest.getBytes().length);
+        //System.out.println("JSON data to be sent: " + stringJsonRequest + "\nits size: " + stringJsonRequest.getBytes().length);
         buffer.flip();
         clientSocketChannel.write(buffer);
     }
@@ -118,7 +118,7 @@ public class Client {
         byte[] dataBytes = new byte[buffer.remaining()];
         buffer.get(dataBytes);
         String responseData = new String(dataBytes, StandardCharsets.UTF_8);
-        System.out.println(responseData);
+        //System.out.println(responseData);
         CommandResult response = gson.fromJson(responseData, CommandResult.class);
         System.out.println(response); 
     }

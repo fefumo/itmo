@@ -11,6 +11,8 @@ repositories {
 
 dependencies{
     implementation(project(":common"))
+    implementation("org.apache.logging.log4j:log4j-core:2.17.1")
+    implementation("org.apache.logging.log4j:log4j-api:2.17.1")
 }
 
 tasks {
