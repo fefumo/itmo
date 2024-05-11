@@ -1,4 +1,4 @@
-package Collection.Builders;
+package Builders;
 
 /**
  * Functional generic interface for building Objects of any type.

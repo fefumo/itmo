@@ -4,12 +4,12 @@ import Communication.CommandResult;
 import Communication.Request;
 import Managers.CollectionManager;
 import Managers.CommandManager;
+import Managers.IdManager;
 
 public class RequestHandler {
     CommandManager commandManager;
     CommandResult commandResult;
     private boolean flagForUpdateCommand = false; //indicates whether to delete prev MB when we are adding a new one
-    private MusicBand mb = null;
 
     public RequestHandler(CommandManager commandManager){
         this.commandManager = commandManager;
@@ -18,18 +18,21 @@ public class RequestHandler {
     public CommandResult processRequest(Request request) throws IOException{
         String commandFromRequest = request.getCommandAndArgs()[0];
         CollectionManager collectionManager = CollectionManager.getInstance();
-
+        IdManager idManager = IdManager.getInstance();
+        MusicBand mb = request.getMusicBand();
+        MusicBand musicBandForUpdateCommand = null;
         switch (commandFromRequest) {
             case "add":
-                if (flagForUpdateCommand == true){
-                    collectionManager.getCollection().remove(mb);
+                if ( flagForUpdateCommand == true){
+                    collectionManager.getCollection().remove(musicBandForUpdateCommand);
                     flagForUpdateCommand = false;
                 }
-                if (request.getMusicBand() == null){
+                if (mb == null){
                     commandResult = new CommandResult(false, "MusicBand is null", commandFromRequest);
                     break;
                 }
-                collectionManager.addElementToCollection(request.getMusicBand());
+                collectionManager.addElementToCollection(mb);
+                mb.setId(idManager.genereateId());
                 System.out.println("--------------------------\nNew element has been added"); // в logger
                 commandResult = new CommandResult(true, null, commandFromRequest, "--------------------------\nNew element has been added\n");
                 break;
@@ -38,8 +41,8 @@ public class RequestHandler {
                     Long id;
                     String idString = request.getCommandAndArgs()[1];
                     id = Long.parseLong(idString);
-                    mb = collectionManager.getBandById(id);
-                    if (mb == null){
+                    musicBandForUpdateCommand = collectionManager.getBandById(id);
+                    if (musicBandForUpdateCommand == null){
                         commandResult = new CommandResult(false, "There is no such element", commandFromRequest);
                         break;
                     }

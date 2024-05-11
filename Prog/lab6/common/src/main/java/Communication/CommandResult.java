@@ -6,18 +6,18 @@ public class CommandResult implements Serializable {
     private boolean success;
     private String errorMessage;
     private String commandName;
-    private String additionalInfo;
+    private String commandOutput;
 
     public CommandResult(boolean success, String errorMessage, String commandName){
         this.success = success;
         this.errorMessage = errorMessage;
         this.commandName = commandName;
     }
-    public CommandResult(boolean success, String errorMessage, String commandName, String additionalInfo){
+    public CommandResult(boolean success, String errorMessage, String commandName, String commandOutput){
         this.success = success;
         this.errorMessage = errorMessage;
         this.commandName = commandName;
-        this.additionalInfo = additionalInfo;
+        this.commandOutput = commandOutput;
     }
 
     public boolean isSuccess(){
@@ -35,21 +35,21 @@ public class CommandResult implements Serializable {
     @Override
     public String toString() {
         if (isSuccess() == false){
-            if (this.additionalInfo == null){
+            if (this.commandOutput == null){
                 return "Command " + commandName + " was finished with error: " + errorMessage;
             }
             else{
-                return "Command " + commandName + " was finished with error: " + errorMessage + " and additional info: \n" + additionalInfo;
+                return "Command " + commandName + " was finished with error: " + errorMessage + " and command output: \n" + commandOutput;
             }
         }
         else if (isSuccess() == true){
-            if( this.additionalInfo == null){
+            if( this.commandOutput == null){
                 return "Command " + commandName + " was finished successfully";
             }
             else{
-                return "Command " + commandName + " was finished successfully with additional info: \n" + additionalInfo;
+                return "Command " + commandName + " was finished successfully with command output: \n" + commandOutput;
             }
         }
-        return "Command " + commandName + " was finished with result " + success + ", error: " + errorMessage + ", additional info: " + additionalInfo;
+        return "Command " + commandName + " was finished with result " + success + ", error: " + errorMessage + ", command output: " + commandOutput;
     }    
 }

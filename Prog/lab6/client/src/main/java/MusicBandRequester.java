@@ -1,4 +1,4 @@
-package CLI;
+
 
 import java.io.*;
 import java.time.LocalDate;
@@ -7,9 +7,10 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import Collection.Builders.CoordinatesBuilder;
-import Collection.Builders.LabelBuilder;
-import Collection.Builders.MusicBandBuilder;
+import Builders.CoordinatesBuilder;
+import Builders.LabelBuilder;
+import Builders.MusicBandBuilder;
+import CLI.InputHandler;
 import Collection.CollectionObject.Coordinates;
 import Collection.CollectionObject.Label;
 import Collection.CollectionObject.MusicBand;
@@ -53,8 +54,8 @@ public class MusicBandRequester {
                 System.out.println("Name can't be blank");
             }
             else{
-                String input1 = input[0];
-                newBand.setName(input1);
+                String actualName = String.join(" ", input);
+                newBand.setName(actualName);
                 System.out.println("Name has been set");
                 break;
             }
@@ -248,7 +249,7 @@ public class MusicBandRequester {
         // label
         Label label = new Label();
         String[] labelNameStrings = getInput();
-        String labelName = labelNameStrings == null ? null : labelNameStrings[0]; // cuz labelNameStrings[0] would give an error if array is null
+        String labelName = labelNameStrings == null ? null : String.join(" ", labelNameStrings);
         label.setName(labelName);
         System.out.println("Label name: " + labelName);
         try {

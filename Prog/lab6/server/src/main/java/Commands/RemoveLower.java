@@ -1,14 +1,17 @@
 package Commands;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
-import Collection.IdManager;
 import Collection.CollectionObject.MusicBand;
 import Communication.CommandResult;
 import Exceptions.CommandException;
 import Exceptions.EmptyCollectionException;
 import Managers.CollectionManager;
+import Managers.IdManager;
 
 /**
  * The `RemoveLower` class in Java defines a command that removes a `MusicBand`
@@ -31,10 +34,11 @@ public class RemoveLower extends Command {
     @Override
     public CommandResult execute(String[] args) {
         CollectionManager manager = CollectionManager.getInstance();
-        IdManager idManager = IdManager.getInstance();
         MusicBand musicBand;
         boolean flag = true;
         CommandResult commandResult = new CommandResult(false, null, null);
+        IdManager idManager = IdManager.getInstance();
+        List<Long> list = new ArrayList<>();
 
         if (args.length != 1)
             throw new CommandException("There has to be 1 argument (type: long)");
@@ -48,7 +52,7 @@ public class RemoveLower extends Command {
             while (iter.hasNext()) {
                 MusicBand musicBandToDelete = iter.next();
                 if (musicBandToDelete.compareTo(musicBand) < 0) {
-                    idManager.getIdArray().remove(musicBandToDelete.getId());
+                    idManager.deleteId(musicBandToDelete.getId());
                     /*
                     THIS IS SO IMPORTANT NOT TO GET ConcurrentModificationException here!!!!!!!!!
                     manager.getCollection().remove(musicBandToDelete.getId()) WILL RESOLVE IN AN
@@ -56,12 +60,13 @@ public class RemoveLower extends Command {
                     */
                     iter.remove();
                     flag = false;
-                    commandResult = new CommandResult(true, null, this.name, "\n--------------------------\nBand with id " + musicBandToDelete.getId() + " has been removed");
+                    list.add(musicBandToDelete.getId());
                 }
             }
             if (flag == true){
                 commandResult = new CommandResult(true, null, this.name, "\n--------------------------\nThere is no band which id is less than the provided one.");
             }
+            commandResult = new CommandResult(true, null, this.name, "\n--------------------------\nBand(s) with id(s) " + Arrays.toString(list.toArray()) + " has(have) been removed");
         } catch (NumberFormatException e) {
             throw new CommandException("There has to be an argument (int) provided");
         } catch (NoSuchElementException e) {

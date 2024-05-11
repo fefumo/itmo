@@ -1,10 +1,10 @@
 package Commands;
 
 
-import Collection.IdManager;
 import Communication.CommandResult;
 import Exceptions.CommandException;
 import Managers.CollectionManager;
+import Managers.IdManager;
 
 /**
  * The `Clear` class extends `Command` and provides a method to clear the
@@ -26,7 +26,6 @@ public class Clear extends Command {
     public CommandResult execute(String[] args) {
         CollectionManager manager = CollectionManager.getInstance();
         IdManager idManager = IdManager.getInstance();
-
         if (args.length != 0){
             throw new CommandException("There has to be no arguments");
         }        
@@ -34,7 +33,8 @@ public class Clear extends Command {
             return new CommandResult(false, "Collection is empty", this.getName());
         }
         manager.getCollection().clear();
-        idManager.getIdArray().clear();
+        idManager.getIdSet().clear();
+        idManager.setNextId(0);
         return new CommandResult(true, null, this.getName(), "\n--------------------------\nCollection has been cleared");
     }
 }

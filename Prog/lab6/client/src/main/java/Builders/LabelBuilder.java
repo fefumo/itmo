@@ -1,4 +1,4 @@
-package Collection.Builders;
+package Builders;
 
 import CLI.InputHandler;
 import Collection.CollectionObject.Label;

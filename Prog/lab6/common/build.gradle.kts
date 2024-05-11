@@ -12,8 +12,7 @@ repositories {
 dependencies {
     implementation("org.glassfish.jaxb:jaxb-runtime:4.0.5")
     implementation("org.glassfish.jaxb:jaxb-core:4.0.5")
-    //implementation(project(":server"))
-    
+    implementation("com.google.code.gson:gson:2.10.1")    
 }
 
 tasks {

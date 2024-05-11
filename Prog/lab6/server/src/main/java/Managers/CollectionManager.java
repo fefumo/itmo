@@ -20,10 +20,6 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CollectionManager {
 
-    // for multithreading and preventing problems with iterating over a modified
-    // queue
-    // i made a singleton instance of collectionmanager to contact with collection
-
     private static CollectionManager singletonPattern;
     @XmlElement(name = "musicBand")
     private PriorityQueue<MusicBand> musicBandsQueue;

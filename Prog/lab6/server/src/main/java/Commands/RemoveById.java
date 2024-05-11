@@ -2,12 +2,12 @@ package Commands;
 
 import java.util.NoSuchElementException;
 
-import Collection.IdManager;
 import Collection.CollectionObject.MusicBand;
 import Communication.CommandResult;
 import Exceptions.CommandException;
 import Exceptions.EmptyCollectionException;
 import Managers.CollectionManager;
+import Managers.IdManager;
 
 /**
  * The `RemoveById` class extends a command class and implements a method to
@@ -28,8 +28,8 @@ public class RemoveById extends Command {
     @Override
     public CommandResult execute(String[] args) {
         CollectionManager manager = CollectionManager.getInstance();
-        IdManager idManager = IdManager.getInstance();
         CommandResult commandResult = new CommandResult(false, null, this.name);
+        IdManager idManager = IdManager.getInstance();
         if (args.length != 1)
             throw new CommandException("There has to be 1 argument (type: long)");
         if (manager.getCollection() == null)
@@ -40,7 +40,7 @@ public class RemoveById extends Command {
         try {
             long id = Long.parseLong(args[0]);
             musicBand = manager.getCollectionById(id);
-            idManager.getIdArray().remove(musicBand.getId());
+            idManager.deleteId(id);
             manager.getCollection().remove(musicBand);
             commandResult = new CommandResult(true, null, this.name,"\n--------------------------\nBand with id " + musicBand.getId() + " has been removed");
 

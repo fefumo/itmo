@@ -86,6 +86,7 @@ public class DumpManager {
     public void unmarshalAndSetCollectionFromXML(String filePath) {
         CollectionManager collectionManager = CollectionManager.getInstance();
         CollectionManager marshallingManager = null;
+        IdManager idManager = IdManager.getInstance();
         MusicBandValidator musicBandValidator = new MusicBandValidator();
 
         try {
@@ -110,18 +111,17 @@ public class DumpManager {
                     return;
                 }
                 //validating elements
-                    for(MusicBand element : marshallingManager.getCollection()){
-                        if (musicBandValidator.validate(element) == false){
-                            System.out.println();
-                            System.out.println("--------------------------");
-                            System.out.println("Wrong values in xml. Fix the file and try Again.");
-                            System.exit(1);
-                        }
-                    }    
+                for(MusicBand element : marshallingManager.getCollection()){
+                    if (musicBandValidator.validate(element) == false){
+                        System.out.println();
+                        System.out.println("--------------------------");
+                        System.out.println("Wrong values in xml. Fix the file and try Again.");
+                        System.exit(1);
+                    }
+                }    
                 collectionManager.setCollection(marshallingManager.getCollection());
                 // add id's to previousIds array
-                //collectionManager.reloadIdArray();
-
+                idManager.reloadIds(collectionManager.getCollection());
             } catch (JAXBException e) {
                 System.out.println();
                 System.out.println("--------------------------");

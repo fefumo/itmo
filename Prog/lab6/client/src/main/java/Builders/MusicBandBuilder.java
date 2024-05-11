@@ -1,8 +1,7 @@
-package Collection.Builders;
+package Builders;
 
 import java.util.Date;
 
-import Collection.IdManager;
 import Collection.CollectionObject.Coordinates;
 import Collection.CollectionObject.MusicBand;
 
@@ -26,11 +25,9 @@ public class MusicBandBuilder implements Builder<MusicBand> {
      */
     @Override
     public MusicBand build() {
-        IdManager idManager = IdManager.getInstance();
-        long id = idManager.genereateId();
         final Date creationDate = new Date();
         Coordinates coordinates = null;
-        MusicBand new_Band = new MusicBand(id, null, coordinates, creationDate, 0, null, null, null, null);
+        MusicBand new_Band = new MusicBand(-1, null, coordinates, creationDate, 0, null, null, null, null);
         return new_Band;
     }
 

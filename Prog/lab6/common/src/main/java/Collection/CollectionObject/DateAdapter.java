@@ -31,11 +31,9 @@ public class DateAdapter extends XmlAdapter<String, ZonedDateTime> {
     }
 
     /**
-     * The function unmarshals a string into a Date object using a synchronized
-     * block to ensure thread
-     * safety when parsing the date.
+     * The function unmarshals a string into a Date object
      * 
-     * @param v The parameter `v` in the `unmarshal` method represents the string
+     * @param v The parameter `v` represents the string
      *          value that needs to
      *          be converted into a `Date` object. The method uses a
      *          `SimpleDateFormat` object (`dateFormat`) to
