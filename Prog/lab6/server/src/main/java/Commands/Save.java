@@ -6,9 +6,8 @@ import Exceptions.CommandException;
 import Managers.DumpManager;
 
 /**
- * This Java class represents a "Save" command that takes an array of strings,
- * checks for one element,
- * and marshals a CollectionManager object into an XML file using JAXB.
+ * This Java class represents a "Save" command.
+ * 
  */
 public class Save extends Command {
 
@@ -17,16 +16,15 @@ public class Save extends Command {
     }
 
     /**
-     * This function takes an array of strings as input, checks if it has exactly
-     * one element, and then
-     * marshals a CollectionManager object into an XML file using JAXB.
+     * This function marshals a CollectionManager object into an XML file using JAXB.
+     * 
      */
     @Override
     public CommandResult execute(String[] args) {
         if (args.length != 0)
-            throw new CommandException("There has to be 1 argument (type: long)");
+            throw new CommandException("There has to be no arguments");
         DumpManager dumpManager = DumpManager.getInstance();
-        dumpManager.saveToXmlFile("collection.xml");
+        dumpManager.saveToXmlFile(dumpManager.getPathToEnvVariable());
         return new CommandResult(true, null, this.name, "Collection has been saved.");
     }
 

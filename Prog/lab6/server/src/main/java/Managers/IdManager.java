@@ -1,5 +1,11 @@
 package Managers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.Set;
@@ -42,9 +48,11 @@ public class IdManager {
         if (collection == null){
             return new CommandResult(true, null, "reloadIds");
         }
-        for (MusicBand mb: collection){
-            if (mb.getId() > IdManager.currentId){
-                IdManager.currentId = mb.getId();
+        if (idSet.isEmpty()){
+            for (MusicBand mb: collection){
+                if (mb.getId() > IdManager.currentId){
+                    IdManager.currentId = mb.getId();
+                }
             }
         }
         return new CommandResult(true, null, "reloadIds");
@@ -55,5 +63,31 @@ public class IdManager {
     public void setNextId(long currentId) {
         IdManager.currentId = currentId;
     }
-    
+
+    @SuppressWarnings("unchecked")
+    public void loadIdSetFromFile() {
+        File file = new File("./server/src/main/resources/Ids.dat");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            idSet = (Set<Long>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            idSet = new HashSet<>();
+        }
+    }
+
+    public void saveIdSetToFile() {
+        File file = new File("./server/src/main/resources/Ids.dat");
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
+            oos.writeObject(idSet);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

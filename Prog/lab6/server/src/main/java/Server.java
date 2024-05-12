@@ -140,7 +140,7 @@ public class Server {
                     switch (serverInput) {
                         case "exit":
                             logger.info("INPUT: exit");
-                            CommandResult exitResult = commandManager.executeCommand("save".split(" ", 2));
+                            CommandResult exitResult = commandManager.executeCommand(serverInputArray);
                             logger.info("Saving before exiting...");
                             logger.info(exitResult);
                             commandManager.executeCommand(serverInputArray);

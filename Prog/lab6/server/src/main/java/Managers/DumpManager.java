@@ -27,6 +27,7 @@ import jakarta.xml.bind.Unmarshaller;
 public class DumpManager {
 
     private static DumpManager singletonPattern;
+    private String pathToEnvVariable;
 
     /**
      * The `getInstance()` method in the `DumpManager` class is implementing
@@ -49,10 +50,10 @@ public class DumpManager {
      */
     public void saveToXmlFile(String path) {
         CollectionManager collectionManager = CollectionManager.getInstance();
+        IdManager idManager = IdManager.getInstance();
         try {
             JAXBContext context = JAXBContext.newInstance(CollectionManager.class);
             Marshaller marshaller = context.createMarshaller();
-
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
             StringWriter stringWriter = new StringWriter();
@@ -61,6 +62,7 @@ public class DumpManager {
              * but I was asked to use bufferedWriter. so here it is...
              */
             marshaller.marshal(collectionManager, stringWriter);
+            idManager.saveIdSetToFile();
             String xmlString = stringWriter.toString();
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
                 writer.write(xmlString);
@@ -81,6 +83,7 @@ public class DumpManager {
      *         no data in file is present.
      */
     public void unmarshalAndSetCollectionFromXML(String filePath) {
+        setPathToEnvVariable(filePath);
         CollectionManager collectionManager = CollectionManager.getInstance();
         CollectionManager marshallingManager = null;
         IdManager idManager = IdManager.getInstance();
@@ -117,7 +120,7 @@ public class DumpManager {
                     }
                 }    
                 collectionManager.setCollection(marshallingManager.getCollection());
-                // add id's to previousIds array
+                idManager.loadIdSetFromFile();                
                 idManager.reloadIds(collectionManager.getCollection());
             } catch (JAXBException e) {
                 System.out.println();
@@ -137,5 +140,11 @@ public class DumpManager {
             System.out.println("Something is wrong with the file that the program is reading from. Check it's access rights.");
             System.exit(0);
         }
+    }
+    public String getPathToEnvVariable() {
+        return pathToEnvVariable;
+    }
+    public void setPathToEnvVariable(String pathToEnvVariable) {
+        this.pathToEnvVariable = pathToEnvVariable;
     }
 }

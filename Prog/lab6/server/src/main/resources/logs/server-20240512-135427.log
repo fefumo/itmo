@@ -1,0 +1,20 @@
+2024-05-12 13:54:27.608 [main] INFO  Server - Collection has been initialized
+2024-05-12 13:54:27.614 [main] INFO  Server - Thread for input has been created
+2024-05-12 13:54:27.623 [main] INFO  Server - Server is opened and binded to the address /127.0.0.1:2804
+2024-05-12 13:54:27.624 [main] INFO  Server - Server is now waiting for new connections
+2024-05-12 13:54:30.639 [main] INFO  Server - Server is now waiting for new connections
+2024-05-12 13:54:30.644 [main] INFO  Server - Server has accepted a new client Socket[addr=/127.0.0.1,port=51985,localport=2804]
+2024-05-12 13:54:46.792 [main] INFO  Server - Waiting for request...
+2024-05-12 13:54:46.793 [main] INFO  Server - Bytes recieved and deserialized: 201
+2024-05-12 13:54:46.822 [main] INFO  Server - Processing request is finished
+2024-05-12 13:54:46.827 [main] INFO  Server - Bytes to be sent: 111
+2024-05-12 13:55:00.392 [main] INFO  Server - Waiting for request...
+2024-05-12 13:55:00.395 [main] WARN  Server - Client Socket[addr=/127.0.0.1,port=51985,localport=2804] disconnected
+2024-05-12 13:55:00.395 [main] INFO  Server - Saving collection after client's disconnect...
+2024-05-12 13:55:00.428 [main] INFO  Server - Command save was finished successfully with command output: 
+Collection has been saved.
+2024-05-12 13:55:00.429 [main] INFO  Server - Closing connection...
+2024-05-12 13:55:00.430 [main] INFO  Server - Connection closed
+2024-05-12 13:55:00.431 [main] WARN  Server - Processing client has ended. Returning to waiting for connections...
+2024-05-12 13:55:00.431 [main] INFO  Server - Server is now waiting for new connections
+2024-05-12 13:55:01.538 [Thread-0] INFO  Server - INPUT: exit
