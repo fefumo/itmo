@@ -1,7 +1,5 @@
 package Commands;
 
-import java.util.Iterator;
-
 import Collection.CollectionObject.MusicBand;
 import Communication.CommandResult;
 import Exceptions.CommandException;
@@ -36,27 +34,37 @@ public class GroupCountingById extends Command {
         // INPUT!!!!!
         MusicBand musicBand;
         int numberOfBands = 0;
-        try {
-            long id = Long.parseLong(args[0]);
-            if (manager.getCollectionById(id) != null) {
-                musicBand = manager.getCollectionById(id);
-                Iterator<MusicBand> iter = manager.getCollection().iterator();
-                while (iter.hasNext()) {
-                    MusicBand musicBandToCompare = iter.next();
-                    if (musicBandToCompare.compareTo(musicBand) < 0) {
-                        numberOfBands++;
-                    }
-                }
-                if (numberOfBands== 1 || numberOfBands == 0) {
-                    return new CommandResult(true, null, this.name, "There is " + numberOfBands + " that is lower than " + musicBand.getName());
-                } else {
-                    return new CommandResult(true, null, this.name, "There are " + numberOfBands + " that are lower than " + musicBand.getName());
-                }
-            }
-        } catch (Exception e) {
-            return new CommandResult(false, e.getMessage(), this.name);
+        musicBand = manager.getCollectionById(Long.parseLong(args[0]));
+        if (musicBand != null) {
+            numberOfBands = (int) manager.getCollection().stream()
+                                                        .filter(musicBandToCompare -> musicBandToCompare.compareTo(musicBand) < 0)
+                                                        .count();
         }
-        return new CommandResult(false, null, this.getName());
+        else{
+            return new CommandResult(false, "No such musicBand", this.name);
+        }
+        return new CommandResult(true, null, this.name, "there are(is) " + numberOfBands + "band(s) that are(is) lower than " + musicBand.getName());
+        // try {
+        //     long id = Long.parseLong(args[0]);
+        //     if (manager.getCollectionById(id) != null) {
+        //         musicBand = manager.getCollectionById(id);
+        //         Iterator<MusicBand> iter = manager.getCollection().iterator();
+        //         while (iter.hasNext()) {
+        //             MusicBand musicBandToCompare = iter.next();
+        //             if (musicBandToCompare.compareTo(musicBand) < 0) {
+        //                 numberOfBands++;
+        //             }
+        //         }
+        //         if (numberOfBands== 1 || numberOfBands == 0) {
+        //             return new CommandResult(true, null, this.name, "There is " + numberOfBands + " that is lower than " + musicBand.getName());
+        //         } else {
+        //             return new CommandResult(true, null, this.name, "There are " + numberOfBands + " that are lower than " + musicBand.getName());
+        //         }
+        //     }
+        // } catch (Exception e) {
+        //     return new CommandResult(false, e.getMessage(), this.name);
+        // }
+        // return new CommandResult(false, null, this.getName());
     }
 
 }

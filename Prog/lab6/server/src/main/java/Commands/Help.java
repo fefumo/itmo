@@ -1,5 +1,7 @@
 package Commands;
 
+import java.util.stream.Collectors;
+
 import Communication.CommandResult;
 import Exceptions.CommandException;
 import Managers.CommandManager;
@@ -26,9 +28,12 @@ public class Help extends Command {
         if (args.length != 0)
             throw new CommandException("There has to be no arguments");
         out = out.concat("\nhere is the list of available commands: \n");
-        for (String key : CommandManager.getCommandsHashMap().keySet()) {
-            out = out.concat("    -" + key + ": " + CommandManager.getCommandsHashMap().get(key).getDescr() + "\n");
-        }
+        // for (String key : CommandManager.getCommandsHashMap().keySet()) {
+        //     out = out.concat("    -" + key + ": " + CommandManager.getCommandsHashMap().get(key).getDescr() + "\n");
+        // }
+        out = CommandManager.getCommandsHashMap().keySet().stream()
+            .map(key -> "  -" + key + ": " + CommandManager.getCommandsHashMap().get(key).getDescr())
+            .collect(Collectors.joining("\n"));
         return new CommandResult(true, null, this.name, out);
     }
 

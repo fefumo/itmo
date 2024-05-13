@@ -29,9 +29,14 @@ public class Info extends Command {
         if (manager.getCollection() == null || manager.getCollection().isEmpty())
             throw new EmptyCollectionException("There has to be a collection with elements. Try \"add\" command");
 
-        out = out.concat("   -Collection of type: " + manager.getCollection().getClass().toString()
-                + "\n   -Number of elements: " + manager.getCollection().size()
-                + "\n   -Created at: " + manager.getCollectionInitilizationDate());
+        // out = out.concat("   -Collection of type: " + manager.getCollection().getClass().toString()
+        //         + "\n   -Number of elements: " + manager.getCollection().size()
+        //         + "\n   -Created at: " + manager.getCollectionInitilizationDate());
+        out = manager.getCollection().stream()
+                                .collect(StringBuilder::new,
+                                        (sb, mb) -> sb.append("   -").append(mb).append("n"),
+                                        StringBuilder::append)
+                                .toString();
         
         return new CommandResult(true, null, this.name, out);
     }

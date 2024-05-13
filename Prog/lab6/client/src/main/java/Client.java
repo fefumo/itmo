@@ -1,21 +1,19 @@
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.NotYetConnectedException;
 import java.nio.channels.SocketChannel;
-import java.nio.charset.StandardCharsets;
-import java.time.ZonedDateTime;
 import java.util.Stack;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import CLI.InputHandler;
 import Collection.CollectionObject.MusicBand;
-import Collection.CollectionObject.ZonedDateTimeAdapter;
 import Communication.CommandResult;
 import Communication.Request;
 
@@ -28,8 +26,6 @@ public class Client {
     private InputHandler clientInputHandler = new InputHandler();
     private MusicBandRequester musicBandRequester = new MusicBandRequester();
     private Stack<String> processedFiles = new Stack<>(); 
-    private GsonBuilder gsonBuilder = new GsonBuilder().registerTypeAdapter(ZonedDateTime.class, new ZonedDateTimeAdapter());
-    private Gson gson = gsonBuilder.create();
 
     public void run() {
 
@@ -48,7 +44,7 @@ public class Client {
             System.out.println();
             System.out.println("Hello! This is a program for working with music band collections. \nType \"help\" for more info.");
 
-            while(true){    
+            //while(true){    
                 String[] clientInput = clientInputHandler.getInput();
                 if (clientInput == null){
                     System.out.println("Null sent. Nothing will be executed.");
@@ -77,7 +73,7 @@ public class Client {
                             break;
                     }
                 }
-            }
+            //}
 
         } catch (IOException e) {
             System.out.println("Connection is lost.");
@@ -97,13 +93,16 @@ public class Client {
     }
 
     private void send (Request request) throws IOException, NotYetConnectedException{
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
+        oos.writeObject(request);
         buffer = buffer == null ? ByteBuffer.allocate(BUFFERSIZE) : buffer.clear();
-        String stringJsonRequest = gson.toJson(request);
-        byte[] reqestBytes = stringJsonRequest.getBytes(StandardCharsets.UTF_8);
+        byte[] reqestBytes = bos.toByteArray();
         buffer.put(reqestBytes);
-        //System.out.println("JSON data to be sent: " + stringJsonRequest + "\nits size: " + stringJsonRequest.getBytes().length);
         buffer.flip();
         clientSocketChannel.write(buffer);
+        bos.close();
+        oos.close();
     }
     private void receiveAndProcessResponse() throws ClassNotFoundException, IOException, NotYetConnectedException, InterruptedException{
         int n ;
@@ -117,9 +116,12 @@ public class Client {
         buffer.flip();
         byte[] dataBytes = new byte[buffer.remaining()];
         buffer.get(dataBytes);
-        String responseData = new String(dataBytes, StandardCharsets.UTF_8);
-        //System.out.println(responseData);
-        CommandResult response = gson.fromJson(responseData, CommandResult.class);
+
+        ByteArrayInputStream bis = new ByteArrayInputStream(dataBytes);
+        ObjectInputStream ois = new ObjectInputStream(bis);
+        CommandResult  response = (CommandResult) ois.readObject();
+        bis.close();
+        ois.close();
         System.out.println(response); 
     }
     private void executeSctipt(String path) throws ClassNotFoundException{
@@ -219,9 +221,13 @@ public class Client {
         buffer.flip();
         byte[] dataBytes = new byte[buffer.remaining()];
         buffer.get(dataBytes);
-        String responseData = new String(dataBytes);
-        CommandResult response = gson.fromJson(responseData, CommandResult.class);
-        System.out.println(response);       
+        
+        ByteArrayInputStream bis = new ByteArrayInputStream(dataBytes);
+        ObjectInputStream ois = new ObjectInputStream(bis);
+        CommandResult  response = (CommandResult) ois.readObject();
+        bis.close();
+        ois.close();
+        System.out.println(response);      
 
         if(!response.isSuccess()){
             return;

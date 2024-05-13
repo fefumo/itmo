@@ -1,8 +1,5 @@
 package Commands;
 
-import java.util.NoSuchElementException;
-
-import Collection.CollectionObject.MusicBand;
 import Communication.CommandResult;
 import Exceptions.CommandException;
 import Exceptions.EmptyCollectionException;
@@ -35,20 +32,32 @@ public class RemoveById extends Command {
         if (manager.getCollection() == null)
             throw new EmptyCollectionException("There has to be a collection with elements. Try \"add\" command");
 
-        MusicBand musicBand;
+        // MusicBand musicBand;
 
         try {
             long id = Long.parseLong(args[0]);
-            musicBand = manager.getCollectionById(id);
-            idManager.deleteId(id);
-            manager.getCollection().remove(musicBand);
-            commandResult = new CommandResult(true, null, this.name,"Band with id " + musicBand.getId() + " has been removed");
-
-        } catch (NoSuchElementException e) {
-            throw new CommandException(e.getMessage());
+            if(manager.getCollection().removeIf(musicBand -> musicBand.getId() == id)){
+               idManager.deleteId(id);
+               commandResult = new CommandResult(true, null, this.name,"Band with id " + id + " has been removed");
+            } else {
+               commandResult = new CommandResult(false, null, this.name, "No band with specified id found");
+            }
         } catch (NumberFormatException e){
-            throw new CommandException("Argument has to be of type long");
+           throw new CommandException("Argument has to be of type long");
         }
+        
+        // try {
+        //     long id = Long.parseLong(args[0]);
+        //     musicBand = manager.getCollectionById(id);
+        //     idManager.deleteId(id);
+        //     manager.getCollection().remove(musicBand);
+        //     commandResult = new CommandResult(true, null, this.name,"Band with id " + musicBand.getId() + " has been removed");
+
+        // } catch (NoSuchElementException e) {
+        //     throw new CommandException(e.getMessage());
+        // } catch (NumberFormatException e){
+        //     throw new CommandException("Argument has to be of type long");
+        // }
         return commandResult;
     }
 

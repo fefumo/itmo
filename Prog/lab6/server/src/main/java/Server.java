@@ -1,19 +1,17 @@
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.nio.charset.StandardCharsets;
-import java.time.ZonedDateTime;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import CLI.InputHandler;
-import Collection.CollectionObject.ZonedDateTimeAdapter;
 import Communication.CommandResult;
 import Communication.Request;
 import Managers.CommandManager;
@@ -27,15 +25,13 @@ public class Server {
     private ServerSocketChannel server;
     private CommandManager commandManager;
     private ByteBuffer buffer;
-    private GsonBuilder gsonBuilder = new GsonBuilder().registerTypeAdapter(ZonedDateTime.class, new ZonedDateTimeAdapter());
-    private Gson gson = gsonBuilder.create();
     private InputHandler inputHandler = new InputHandler();
 
     public void run(){
         commandManager = new CommandManager();
         commandManager.buildCommands();
         initializeCollection();
-        createAndStartThreadForInput();
+
         try {
             server = ServerSocketChannel.open();
             server.configureBlocking(false);
@@ -46,8 +42,7 @@ public class Server {
                 SocketChannel clientSocketChannel = server.accept();
                 logger.info("Server is now waiting for new connections");
                 if (clientSocketChannel == null){
-                    System.out.println("No clients connected, waiting for connections...");
-                    Thread.sleep(3000);
+                    createInputService();
                 }
                 else{  
                     logger.info("Server has accepted a new client " + clientSocketChannel.socket().toString());
@@ -61,9 +56,10 @@ public class Server {
             logger.fatal("IO exception occured. Most likely the chosen port is already being used. Try again");
         } catch (ClassNotFoundException e){
             logger.error("ClassNotFoundException during client processing");
-        } catch (InterruptedException e) {
-            logger.fatal(e);
-        }
+        } 
+        // catch (InterruptedException e) {
+            // logger.fatal(e);
+        // }
     }
 
     private void processClient(SocketChannel clientSocketChannel) throws ClassNotFoundException, IOException{
@@ -85,10 +81,14 @@ public class Server {
                 buffer.flip();
                 byte[] requestBytes = new byte[buffer.remaining()];
                 buffer.get(requestBytes);
-                String data = new String(requestBytes, StandardCharsets.UTF_8);
-                //logger.info("Bytes received: " + n +"\nJSON string received: " + data);
-                logger.info("Bytes recieved and deserialized: " + n);
-                Request request = gson.fromJson(data, Request.class);
+                
+                ByteArrayInputStream bis = new ByteArrayInputStream(requestBytes);
+                ObjectInputStream ois = new ObjectInputStream(bis);
+                Request request = (Request) ois.readObject();
+                bis.close();
+                ois.close();
+
+                logger.info("Bytes recieved and deserialized: " + n);                
                 
                 //обработка
                 CommandResult newResponse = requestHandler.processRequest(request);
@@ -96,13 +96,16 @@ public class Server {
 
                 //отправление
                 buffer.clear();
-                String stringResponseJSON = gson.toJson(newResponse);
-                byte[] responseBytes = stringResponseJSON.getBytes();
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                ObjectOutputStream oos = new ObjectOutputStream(bos);
+                oos.writeObject(newResponse);
+                byte[] responseBytes = bos.toByteArray();
                 buffer.put(responseBytes);
-                //logger.info("JSON data to be sent: " + stringResponseJSON + "\nits size: " + stringResponseJSON.getBytes().length);
-                logger.info("Bytes to be sent: " + stringResponseJSON.getBytes().length);
+                logger.info("Bytes to be sent: " + responseBytes.length);
                 buffer.flip();
                 clientSocketChannel.write(buffer);
+                bos.close();
+                oos.close();
 
             } catch (IOException e ) {
                 logger.warn("Client " + clientSocketChannel.socket().toString() +  " disconnected");
@@ -128,37 +131,33 @@ public class Server {
         dumpManager.unmarshalAndSetCollectionFromXML(path);
         logger.info("Collection has been initialized");
     }
-    private void createAndStartThreadForInput(){
-        Thread consoleInputThread = new Thread(() ->{
-            while(true){
-                String[] serverInputArray = inputHandler.getInput();
-                String serverInput = serverInputArray == null ? null : serverInputArray[0];
-                if (serverInput == null){
-                    logger.info("INPUT: Null passed. nothing will be executed.");
-                }
-                else{
-                    switch (serverInput) {
-                        case "exit":
-                            logger.info("INPUT: exit");
-                            CommandResult exitResult = commandManager.executeCommand(serverInputArray);
-                            logger.info("Saving before exiting...");
-                            logger.info(exitResult);
-                            commandManager.executeCommand(serverInputArray);
-                            break;
-                        case "save":
-                            logger.info("INPUT: save");
-                            CommandResult result = commandManager.executeCommand(serverInputArray);
-                            logger.info(result);
-                            break;
-                        default:
-                            logger.info("INPUT: " + serverInput);
-                            System.out.println("There are only \"save\" and \"exit\" commands available");
-                            break;
-                    }    
-                }
-            }
-        });
-        consoleInputThread.start();
-        logger.info("Thread for input has been created");
+    private void createInputService() throws IOException{
+        logger.info("InputService started");
+        String[] serverInputArray = inputHandler.getInput();
+        String serverInput = serverInputArray == null ? null : serverInputArray[0];
+        if (serverInput == null){
+            logger.info("INPUT: Null passed. nothing will be executed.");
+        }
+        else{
+            switch (serverInput) {
+                case "exit":
+                    logger.info("INPUT: exit");
+                    CommandResult exitResult = commandManager.executeCommand(serverInputArray);
+                    logger.info("Saving before exiting...");
+                    logger.info(exitResult);
+                    commandManager.executeCommand(serverInputArray);
+                    return;
+                case "save":
+                    logger.info("INPUT: save");
+                    CommandResult result = commandManager.executeCommand(serverInputArray);
+                    logger.info(result);
+                    return;
+                default:
+                    logger.info("INPUT: " + serverInput);
+                    System.out.println("There are only \"save\" and \"exit\" commands available");
+                    return;
+            }    
+        }
+        //logger.info("Thread for input has been created");
     }
 }

@@ -1,6 +1,6 @@
 package Commands;
 
-import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import Communication.CommandResult;
 import Exceptions.CommandException;
@@ -31,13 +31,19 @@ public class Show extends Command {
         if (manager.getCollection() == null || manager.getCollection().isEmpty())
             throw new EmptyCollectionException("There has to be a collection with elements. Try \"add\" command");
 
-        Object[] sortedCollection = manager.getCollection().toArray();
-        Arrays.sort(sortedCollection);
+        out = manager.getCollection()
+                    .stream()
+                    .sorted()
+                    .map(Object::toString)
+                    .collect(Collectors.joining("\n--------------------------\n"));
 
-        for (Object element : sortedCollection) {
-            out = out.concat("\n--------------------------\n");
-            out = out.concat(element.toString() + "\n");
-        }
+        // Object[] sortedCollection = manager.getCollection().toArray();
+        // Arrays.sort(sortedCollection);
+
+        // for (Object element : sortedCollection) {
+        //     out = out.concat("\n--------------------------\n");
+        //     out = out.concat(element.toString() + "\n");
+        // }
         return new CommandResult(true, null, this.name, out);
     }
 }

@@ -1,5 +1,8 @@
 package Commands;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import Communication.CommandResult;
 import Exceptions.CommandException;
 
@@ -56,16 +59,26 @@ public class History extends Command {
             throw new CommandException("There has to be no arguments");
 
         out = out.concat("\nHere is your history command list: \n----------------------------------\n");
-        if (headIndex == -1) {
+        // if (headIndex == -1) {
+        //     return new CommandResult(true, null, this.name, "No commands in history");
+        // } else {
+        //     int i = headIndex;
+        //     int count = 1;
+
+        //     do {
+        //         out = out.concat(count + ": " + commandHistory[i] + "\n");
+        //         i = (i + 1) % HISTORY_SIZE;
+        //         count++;
+        //     } while (i != tailIndex + 1);
+        // }
+        if (headIndex != -1) {
+            out = IntStream.iterate(headIndex, i -> (i + 1) % HISTORY_SIZE)
+                    .limit(tailIndex >= headIndex ? tailIndex - headIndex + 1 : HISTORY_SIZE)
+                    .mapToObj(i -> (i + 1) + ": " + commandHistory[i])
+                    .collect(Collectors.joining("\n"));
+        }
+        else{
             return new CommandResult(true, null, this.name, "No commands in history");
-        } else {
-            int i = headIndex;
-            int count = 1;
-            do {
-                out = out.concat(count + ": " + commandHistory[i] + "\n");
-                i = (i + 1) % HISTORY_SIZE;
-                count++;
-            } while (i != tailIndex + 1);
         }
         return new CommandResult(true, null, this.name, out);
     }

@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <MusicBandCollection>
+    <musicBand id="5">
+        <name>namescript4</name>
+        <coordinates>
+            <x>9090</x>
+            <y>2902</y>
+        </coordinates>
+        <numberOfParticipants>100</numberOfParticipants>
+        <creationDate>2024-05-13T15:56:21.975+03:00</creationDate>
+        <albumsCount>250</albumsCount>
+        <establishmentDate>2005-04-28T00:00+04:00[Europe/Moscow]</establishmentDate>
+        <genre>SOUL</genre>
+        <label>
+            <bands>20</bands>
+        </label>
+    </musicBand>
     <musicBand id="1">
         <name>1</name>
         <coordinates>
@@ -11,21 +26,6 @@
         <genre>PSYCHEDELIC_ROCK</genre>
         <label>
             <bands>1</bands>
-        </label>
-    </musicBand>
-    <musicBand id="3">
-        <name>namescript4</name>
-        <coordinates>
-            <x>9090</x>
-            <y>2902</y>
-        </coordinates>
-        <numberOfParticipants>100</numberOfParticipants>
-        <creationDate>2024-05-12T13:53:14+03:00</creationDate>
-        <albumsCount>250</albumsCount>
-        <establishmentDate>2005-04-28T00:00+04:00[Europe/Moscow]</establishmentDate>
-        <genre>SOUL</genre>
-        <label>
-            <bands>20</bands>
         </label>
     </musicBand>
     <musicBand id="2">
@@ -42,6 +42,36 @@
         <label>
             <bands>189</bands>
             <name>labelName</name>
+        </label>
+    </musicBand>
+    <musicBand id="4">
+        <name>namescript4</name>
+        <coordinates>
+            <x>9090</x>
+            <y>2902</y>
+        </coordinates>
+        <numberOfParticipants>100</numberOfParticipants>
+        <creationDate>2024-05-13T13:56:57+03:00</creationDate>
+        <albumsCount>250</albumsCount>
+        <establishmentDate>2005-04-28T00:00+04:00[Europe/Moscow]</establishmentDate>
+        <genre>SOUL</genre>
+        <label>
+            <bands>20</bands>
+        </label>
+    </musicBand>
+    <musicBand id="3">
+        <name>namescript4</name>
+        <coordinates>
+            <x>9090</x>
+            <y>2902</y>
+        </coordinates>
+        <numberOfParticipants>100</numberOfParticipants>
+        <creationDate>2024-05-12T13:53:14+03:00</creationDate>
+        <albumsCount>250</albumsCount>
+        <establishmentDate>2005-04-28T00:00+04:00[Europe/Moscow]</establishmentDate>
+        <genre>SOUL</genre>
+        <label>
+            <bands>20</bands>
         </label>
     </musicBand>
 </MusicBandCollection>

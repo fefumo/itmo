@@ -1,0 +1,63 @@
+2024-05-13 15:55:26.090 [main] INFO  Server - Collection has been initialized
+2024-05-13 15:55:26.090 [main] INFO  Server - Server is opened and binded to the address /127.0.0.1:2804
+2024-05-13 15:55:26.090 [main] INFO  Server - Server is now waiting for new connections
+2024-05-13 15:55:26.090 [main] INFO  Server - InputService started
+2024-05-13 15:55:28.297 [main] INFO  Server - INPUT: Null passed. nothing will be executed.
+2024-05-13 15:55:28.297 [main] INFO  Server - Server is now waiting for new connections
+2024-05-13 15:55:28.297 [main] INFO  Server - InputService started
+2024-05-13 15:55:41.229 [main] INFO  Server - INPUT: Null passed. nothing will be executed.
+2024-05-13 15:55:41.244 [main] INFO  Server - Server is now waiting for new connections
+2024-05-13 15:55:41.244 [main] INFO  Server - Server has accepted a new client Socket[addr=/127.0.0.1,port=54323,localport=2804]
+2024-05-13 15:55:41.244 [main] INFO  Server - Waiting for request...
+2024-05-13 15:55:41.260 [main] INFO  Server - Bytes recieved and deserialized: 183
+2024-05-13 15:55:41.260 [main] INFO  Server - Processing request is finished
+2024-05-13 15:55:41.260 [main] INFO  Server - Bytes to be sent: 1360
+2024-05-13 15:55:42.315 [main] WARN  Server - Client Socket[addr=/127.0.0.1,port=54323,localport=2804] disconnected
+2024-05-13 15:55:42.315 [main] INFO  Server - Saving collection after client's disconnect...
+2024-05-13 15:55:42.333 [main] INFO  Server - Command save was finished successfully with command output: 
+Collection has been saved.
+2024-05-13 15:55:42.333 [main] INFO  Server - Closing connection...
+2024-05-13 15:55:42.333 [main] INFO  Server - Connection closed
+2024-05-13 15:55:42.333 [main] WARN  Server - Processing client has ended. Returning to waiting for connections...
+2024-05-13 15:55:42.333 [main] INFO  Server - Server is now waiting for new connections
+2024-05-13 15:55:42.333 [main] INFO  Server - InputService started
+2024-05-13 15:55:52.928 [main] INFO  Server - INPUT: info
+2024-05-13 15:55:52.928 [main] INFO  Server - Server is now waiting for new connections
+2024-05-13 15:55:52.928 [main] INFO  Server - InputService started
+2024-05-13 15:56:08.014 [main] INFO  Server - INPUT: info
+2024-05-13 15:56:08.014 [main] INFO  Server - Server is now waiting for new connections
+2024-05-13 15:56:08.014 [main] INFO  Server - Server has accepted a new client Socket[addr=/127.0.0.1,port=54553,localport=2804]
+2024-05-13 15:56:08.014 [main] INFO  Server - Waiting for request...
+2024-05-13 15:56:08.014 [main] INFO  Server - Bytes recieved and deserialized: 207
+2024-05-13 15:56:08.014 [main] INFO  Server - Processing request is finished
+2024-05-13 15:56:08.014 [main] INFO  Server - Bytes to be sent: 182
+2024-05-13 15:56:08.062 [main] WARN  Server - Client Socket[addr=/127.0.0.1,port=54553,localport=2804] disconnected
+2024-05-13 15:56:08.062 [main] INFO  Server - Saving collection after client's disconnect...
+2024-05-13 15:56:08.062 [main] INFO  Server - Command save was finished successfully with command output: 
+Collection has been saved.
+2024-05-13 15:56:08.062 [main] INFO  Server - Closing connection...
+2024-05-13 15:56:08.062 [main] INFO  Server - Connection closed
+2024-05-13 15:56:08.062 [main] WARN  Server - Processing client has ended. Returning to waiting for connections...
+2024-05-13 15:56:08.062 [main] INFO  Server - Server is now waiting for new connections
+2024-05-13 15:56:08.062 [main] INFO  Server - InputService started
+2024-05-13 15:56:29.113 [main] INFO  Server - INPUT: asd
+2024-05-13 15:56:29.113 [main] INFO  Server - Server is now waiting for new connections
+2024-05-13 15:56:29.113 [main] INFO  Server - Server has accepted a new client Socket[addr=/127.0.0.1,port=54614,localport=2804]
+2024-05-13 15:56:29.113 [main] INFO  Server - Waiting for request...
+2024-05-13 15:56:29.113 [main] INFO  Server - Bytes recieved and deserialized: 1018
+2024-05-13 15:56:29.113 [main] INFO  Server - Processing request is finished
+2024-05-13 15:56:29.113 [main] INFO  Server - Bytes to be sent: 199
+2024-05-13 15:56:30.054 [main] INFO  Server - Waiting for request...
+2024-05-13 15:56:30.054 [main] INFO  Server - Bytes recieved and deserialized: 183
+2024-05-13 15:56:30.085 [main] INFO  Server - Processing request is finished
+2024-05-13 15:56:30.085 [main] INFO  Server - Bytes to be sent: 1466
+2024-05-13 15:56:32.085 [main] WARN  Server - Client Socket[addr=/127.0.0.1,port=54614,localport=2804] disconnected
+2024-05-13 15:56:32.085 [main] INFO  Server - Saving collection after client's disconnect...
+2024-05-13 15:56:32.091 [main] INFO  Server - Command save was finished successfully with command output: 
+Collection has been saved.
+2024-05-13 15:56:32.091 [main] INFO  Server - Closing connection...
+2024-05-13 15:56:32.091 [main] INFO  Server - Connection closed
+2024-05-13 15:56:32.091 [main] WARN  Server - Processing client has ended. Returning to waiting for connections...
+2024-05-13 15:56:32.091 [main] INFO  Server - Server is now waiting for new connections
+2024-05-13 15:56:32.091 [main] INFO  Server - InputService started
+2024-05-13 15:57:16.795 [main] INFO  Server - INPUT: exit
