@@ -44,8 +44,7 @@ public class Client {
             System.out.println();
             System.out.println("Hello! This is a program for working with music band collections. \nType \"help\" for more info.");
 
-            //while(true){    
-                String[] clientInput = clientInputHandler.getInput();
+            String[] clientInput = clientInputHandler.getInput();
                 if (clientInput == null){
                     System.out.println("Null sent. Nothing will be executed.");
                 }
@@ -73,11 +72,9 @@ public class Client {
                             break;
                     }
                 }
-            //}
 
         } catch (IOException e) {
             System.out.println("Connection is lost.");
-            //e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (NullPointerException e){
@@ -85,7 +82,6 @@ public class Client {
         } catch (ArrayIndexOutOfBoundsException e){
             System.out.println("Not enough or too much arguments provided");
         } catch (NotYetConnectedException e){
-            //System.out.println("No connection or connection is lost. Try again.");
             e.printStackTrace();
         } catch (InterruptedException e) {
 			System.out.println("THREAD IS INTERRUPTED!!!!!!");
@@ -164,7 +160,7 @@ public class Client {
                             exitCase(clientSocketChannel);
                             break;
                         case "update_id":
-                            updateCase(commandAndArgs); //поменять для скрипта.
+                            updateCase(commandAndArgs);
                             break;
                         case "execute_script":
                             executeSctipt(commandAndArgs[1]);

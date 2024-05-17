@@ -1,0 +1,32 @@
+2024-05-17 19:26:24.867 [main] INFO  Server - Collection has been initialized
+2024-05-17 19:26:24.878 [main] INFO  Server - Server is opened and binded to the address /127.0.0.1:2804
+2024-05-17 19:26:29.789 [main] INFO  Server - INPUT: hello?
+2024-05-17 19:26:35.762 [main] INFO  Server - Server has accepted a new client Socket[addr=/127.0.0.1,port=60356,localport=2804]
+2024-05-17 19:26:40.027 [main] INFO  Server - Bytes recieved and deserialized: 188
+2024-05-17 19:26:40.027 [main] INFO  Server - Processing request is finished
+2024-05-17 19:26:40.046 [main] INFO  Server - Bytes to be sent: 177
+2024-05-17 19:26:42.069 [main] WARN  Server - Client Socket[addr=/127.0.0.1,port=60356,localport=2804] disconnected
+2024-05-17 19:26:42.069 [main] INFO  Server - Saving collection after client's disconnect...
+2024-05-17 19:26:42.091 [main] INFO  Server - Command save was finished successfully with command output: 
+Collection has been saved.
+2024-05-17 19:26:42.091 [main] INFO  Server - Closing connection...
+2024-05-17 19:26:42.091 [main] INFO  Server - Connection closed
+2024-05-17 19:26:56.843 [main] INFO  Server - INPUT: o
+2024-05-17 19:27:06.733 [main] INFO  Server - Server has accepted a new client Socket[addr=/127.0.0.1,port=60372,localport=2804]
+2024-05-17 19:27:15.490 [main] INFO  Server - Bytes recieved and deserialized: 1018
+2024-05-17 19:27:15.490 [main] INFO  Server - Processing request is finished
+2024-05-17 19:27:15.490 [main] INFO  Server - Bytes to be sent: 199
+2024-05-17 19:27:17.503 [main] INFO  Server - Bytes recieved and deserialized: 183
+2024-05-17 19:27:17.534 [main] INFO  Server - Processing request is finished
+2024-05-17 19:27:17.534 [main] INFO  Server - Bytes to be sent: 1740
+2024-05-17 19:27:19.523 [main] WARN  Server - Client Socket[addr=/127.0.0.1,port=60372,localport=2804] disconnected
+2024-05-17 19:27:19.523 [main] INFO  Server - Saving collection after client's disconnect...
+2024-05-17 19:27:19.538 [main] INFO  Server - Command save was finished successfully with command output: 
+Collection has been saved.
+2024-05-17 19:27:19.538 [main] INFO  Server - Closing connection...
+2024-05-17 19:27:19.538 [main] INFO  Server - Connection closed
+2024-05-17 19:27:27.858 [main] INFO  Server - INPUT: interesting...
+2024-05-17 19:27:28.938 [main] INFO  Server - INPUT: save
+2024-05-17 19:27:28.951 [main] INFO  Server - Command save was finished successfully with command output: 
+Collection has been saved.
+2024-05-17 19:27:30.267 [main] INFO  Server - INPUT: exit

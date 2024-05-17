@@ -7,6 +7,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -22,6 +24,22 @@ import java.util.Scanner;
  */
 public class InputHandler {
     private InputStream inputStream = System.in;
+    ByteBuffer bf = ByteBuffer.allocate(128);
+    
+    public String[] readByBytes() throws IOException {
+        while (inputStream.available() > 0){
+            int r = inputStream.read();
+            if (r == '\n'){
+                bf.flip();
+                String s = StandardCharsets.UTF_8.decode(bf).toString().replace('\n', ' ').trim();
+                String[] array = s.split(" ", 2);
+                bf.clear();
+                return array;
+            }
+            bf.put((byte)r); //so that last "\n" doesnt account in buffer
+        }
+        return null;
+    }
     private Scanner scanner = new Scanner(inputStream);
     //boolean flagOfUserMode = true;
     /**
