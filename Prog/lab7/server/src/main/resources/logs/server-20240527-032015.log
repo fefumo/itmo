@@ -1,0 +1,36 @@
+2024-05-27 03:20:16.423 [main] INFO  DBRelated.JdbcProvider - Connection with db is established 
+2024-05-27 03:20:16.467 [main] INFO  Server - Server started running
+2024-05-27 03:20:17.778 [main] INFO  Server - Accepted connection from /127.0.0.1:50305
+2024-05-27 03:20:17.782 [pool-2-thread-1] INFO  Server - before read request in processing client block
+2024-05-27 03:20:17.785 [pool-2-thread-2] INFO  Server - in reading method
+2024-05-27 03:20:21.168 [pool-2-thread-2] INFO  Server - returning ois.readObject
+2024-05-27 03:20:21.179 [pool-2-thread-1] INFO  Server - after reading request in processing client block
+2024-05-27 03:20:21.182 [pool-2-thread-1] INFO  Server - before read request in processing client block
+2024-05-27 03:20:21.183 [pool-2-thread-2] INFO  Server - in reading method
+2024-05-27 03:20:21.183 [ForkJoinPool-1-worker-1] INFO  Server - before processing request in processing client block
+2024-05-27 03:20:21.184 [ForkJoinPool-1-worker-1] INFO  Server - in processRequest method
+2024-05-27 03:20:21.184 [ForkJoinPool-1-worker-1] INFO  Server - processing request started
+2024-05-27 03:20:21.249 [ForkJoinPool-1-worker-1] INFO  Server - after processing request in processing client block
+2024-05-27 03:20:21.251 [pool-3-thread-1] INFO  Server - in send response 
+2024-05-27 03:20:21.256 [pool-3-thread-1] INFO  Server - oos flushed
+2024-05-27 03:20:21.257 [pool-3-thread-1] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 03:20:21.257 [pool-3-thread-1] INFO  Server - in sending response while loop
+2024-05-27 03:20:21.258 [pool-3-thread-1] INFO  Server - Response sent to /127.0.0.1:50305
+2024-05-27 03:20:27.924 [pool-2-thread-2] INFO  Server - returning ois.readObject
+2024-05-27 03:20:27.925 [pool-2-thread-1] INFO  Server - after reading request in processing client block
+2024-05-27 03:20:27.926 [pool-2-thread-1] INFO  Server - before read request in processing client block
+2024-05-27 03:20:27.926 [ForkJoinPool-1-worker-1] INFO  Server - before processing request in processing client block
+2024-05-27 03:20:27.926 [pool-2-thread-2] INFO  Server - in reading method
+2024-05-27 03:20:27.926 [ForkJoinPool-1-worker-1] INFO  Server - in processRequest method
+2024-05-27 03:20:27.927 [ForkJoinPool-1-worker-1] INFO  Server - processing request started
+2024-05-27 03:20:28.063 [ForkJoinPool-1-worker-1] INFO  Server - user kkk registered
+2024-05-27 03:20:28.064 [ForkJoinPool-1-worker-1] INFO  Server - after processing request in processing client block
+2024-05-27 03:20:28.065 [pool-3-thread-2] INFO  Server - in send response 
+2024-05-27 03:20:28.065 [pool-3-thread-2] INFO  Server - oos flushed
+2024-05-27 03:20:28.066 [pool-3-thread-2] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 03:20:28.066 [pool-3-thread-2] INFO  Server - in sending response while loop
+2024-05-27 03:20:28.067 [pool-3-thread-2] INFO  Server - Response sent to /127.0.0.1:50305
+2024-05-27 03:20:28.095 [pool-2-thread-2] ERROR Server - IO exception from client while reading request /127.0.0.1, info: Connection reset
+2024-05-27 03:20:28.095 [pool-2-thread-1] INFO  Server - after reading request in processing client block
+2024-05-27 03:20:28.096 [pool-2-thread-1] INFO  Server - null request -> breaking processing client
+2024-05-27 03:22:16.444 [Thread-0] INFO  Server - INPUT: exit

@@ -1,0 +1,375 @@
+2024-05-27 02:49:26.596 [main] INFO  DBRelated.JdbcProvider - Connection with db is established 
+2024-05-27 02:49:26.654 [main] INFO  Server - Server started running
+2024-05-27 02:49:30.396 [main] INFO  Server - Accepted connection from /127.0.0.1:65369
+2024-05-27 02:49:30.399 [pool-2-thread-1] INFO  Server - before read request in processing client block
+2024-05-27 02:49:30.402 [pool-2-thread-2] INFO  Server - in reading method
+2024-05-27 02:49:31.598 [pool-2-thread-2] INFO  Server - returning ois.readObject
+2024-05-27 02:49:31.608 [pool-2-thread-1] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:31.608 [pool-2-thread-1] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:31.609 [pool-2-thread-1] INFO  Server - in processRequest method
+2024-05-27 02:49:31.609 [pool-2-thread-1] INFO  Server - processing request started
+2024-05-27 02:49:31.611 [pool-2-thread-1] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:31.619 [pool-2-thread-1] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:31.620 [pool-2-thread-1] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:31.620 [pool-2-thread-1] INFO  Server - in send response 
+2024-05-27 02:49:31.626 [pool-2-thread-1] INFO  Server - oos flushed
+2024-05-27 02:49:31.626 [pool-2-thread-1] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:31.627 [pool-2-thread-1] INFO  Server - in sending response while loop
+2024-05-27 02:49:31.628 [pool-2-thread-1] INFO  Server - Response sent to /127.0.0.1:65369
+2024-05-27 02:49:31.629 [pool-2-thread-1] INFO  Server - before read request in processing client block
+2024-05-27 02:49:31.630 [pool-2-thread-2] INFO  Server - in reading method
+2024-05-27 02:49:31.862 [pool-2-thread-2] INFO  Server - returning ois.readObject
+2024-05-27 02:49:31.863 [pool-2-thread-1] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:31.863 [pool-2-thread-1] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:31.864 [pool-2-thread-1] INFO  Server - in processRequest method
+2024-05-27 02:49:31.864 [pool-2-thread-1] INFO  Server - processing request started
+2024-05-27 02:49:31.864 [pool-2-thread-1] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:31.865 [pool-2-thread-1] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:31.865 [pool-2-thread-1] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:31.866 [pool-2-thread-1] INFO  Server - in send response 
+2024-05-27 02:49:31.866 [pool-2-thread-1] INFO  Server - oos flushed
+2024-05-27 02:49:31.867 [pool-2-thread-1] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:31.867 [pool-2-thread-1] INFO  Server - in sending response while loop
+2024-05-27 02:49:31.868 [pool-2-thread-1] INFO  Server - Response sent to /127.0.0.1:65369
+2024-05-27 02:49:31.868 [pool-2-thread-1] INFO  Server - before read request in processing client block
+2024-05-27 02:49:31.868 [pool-2-thread-2] INFO  Server - in reading method
+2024-05-27 02:49:32.570 [pool-2-thread-2] INFO  Server - returning ois.readObject
+2024-05-27 02:49:32.572 [pool-2-thread-1] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:32.572 [pool-2-thread-1] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:32.572 [pool-2-thread-1] INFO  Server - in processRequest method
+2024-05-27 02:49:32.572 [pool-2-thread-1] INFO  Server - processing request started
+2024-05-27 02:49:32.573 [pool-2-thread-1] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:32.573 [pool-2-thread-1] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:32.574 [pool-2-thread-1] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:32.574 [pool-2-thread-1] INFO  Server - in send response 
+2024-05-27 02:49:32.575 [pool-2-thread-1] INFO  Server - oos flushed
+2024-05-27 02:49:32.575 [pool-2-thread-1] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:32.575 [pool-2-thread-1] INFO  Server - in sending response while loop
+2024-05-27 02:49:32.576 [pool-2-thread-1] INFO  Server - Response sent to /127.0.0.1:65369
+2024-05-27 02:49:32.576 [pool-2-thread-1] INFO  Server - before read request in processing client block
+2024-05-27 02:49:32.577 [pool-2-thread-2] INFO  Server - in reading method
+2024-05-27 02:49:32.900 [pool-2-thread-2] INFO  Server - returning ois.readObject
+2024-05-27 02:49:32.902 [pool-2-thread-1] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:32.902 [pool-2-thread-1] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:32.902 [pool-2-thread-1] INFO  Server - in processRequest method
+2024-05-27 02:49:32.903 [pool-2-thread-1] INFO  Server - processing request started
+2024-05-27 02:49:32.903 [pool-2-thread-1] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:32.904 [pool-2-thread-1] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:32.904 [pool-2-thread-1] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:32.904 [pool-2-thread-1] INFO  Server - in send response 
+2024-05-27 02:49:32.905 [pool-2-thread-1] INFO  Server - oos flushed
+2024-05-27 02:49:32.905 [pool-2-thread-1] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:32.905 [pool-2-thread-1] INFO  Server - in sending response while loop
+2024-05-27 02:49:32.906 [pool-2-thread-1] INFO  Server - Response sent to /127.0.0.1:65369
+2024-05-27 02:49:32.906 [pool-2-thread-1] INFO  Server - before read request in processing client block
+2024-05-27 02:49:32.907 [pool-2-thread-2] INFO  Server - in reading method
+2024-05-27 02:49:33.396 [pool-2-thread-2] INFO  Server - returning ois.readObject
+2024-05-27 02:49:33.397 [pool-2-thread-1] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:33.398 [pool-2-thread-1] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:33.398 [pool-2-thread-1] INFO  Server - in processRequest method
+2024-05-27 02:49:33.398 [pool-2-thread-1] INFO  Server - processing request started
+2024-05-27 02:49:33.399 [pool-2-thread-1] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:33.399 [pool-2-thread-1] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:33.400 [pool-2-thread-1] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:33.400 [pool-2-thread-1] INFO  Server - in send response 
+2024-05-27 02:49:33.400 [pool-2-thread-1] INFO  Server - oos flushed
+2024-05-27 02:49:33.401 [pool-2-thread-1] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:33.401 [pool-2-thread-1] INFO  Server - in sending response while loop
+2024-05-27 02:49:33.401 [pool-2-thread-1] INFO  Server - Response sent to /127.0.0.1:65369
+2024-05-27 02:49:33.402 [pool-2-thread-1] INFO  Server - before read request in processing client block
+2024-05-27 02:49:33.402 [pool-2-thread-2] INFO  Server - in reading method
+2024-05-27 02:49:43.565 [main] INFO  Server - Accepted connection from /127.0.0.1:65376
+2024-05-27 02:49:43.566 [pool-2-thread-3] INFO  Server - before read request in processing client block
+2024-05-27 02:49:43.567 [pool-2-thread-4] INFO  Server - in reading method
+2024-05-27 02:49:44.790 [pool-2-thread-4] INFO  Server - returning ois.readObject
+2024-05-27 02:49:44.791 [pool-2-thread-3] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:44.791 [pool-2-thread-3] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:44.792 [pool-2-thread-3] INFO  Server - in processRequest method
+2024-05-27 02:49:44.792 [pool-2-thread-3] INFO  Server - processing request started
+2024-05-27 02:49:44.793 [pool-2-thread-3] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:44.793 [pool-2-thread-3] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:44.794 [pool-2-thread-3] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:44.794 [pool-2-thread-3] INFO  Server - in send response 
+2024-05-27 02:49:44.795 [pool-2-thread-3] INFO  Server - oos flushed
+2024-05-27 02:49:44.795 [pool-2-thread-3] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:44.795 [pool-2-thread-3] INFO  Server - in sending response while loop
+2024-05-27 02:49:44.796 [pool-2-thread-3] INFO  Server - Response sent to /127.0.0.1:65376
+2024-05-27 02:49:44.796 [pool-2-thread-3] INFO  Server - before read request in processing client block
+2024-05-27 02:49:44.797 [pool-2-thread-4] INFO  Server - in reading method
+2024-05-27 02:49:47.380 [pool-2-thread-2] INFO  Server - returning ois.readObject
+2024-05-27 02:49:47.381 [pool-2-thread-1] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:47.381 [pool-2-thread-1] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:47.381 [pool-2-thread-1] INFO  Server - in processRequest method
+2024-05-27 02:49:47.382 [pool-2-thread-1] INFO  Server - processing request started
+2024-05-27 02:49:47.382 [pool-2-thread-1] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:47.382 [pool-2-thread-1] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:47.383 [pool-2-thread-1] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:47.383 [pool-2-thread-1] INFO  Server - in send response 
+2024-05-27 02:49:47.383 [pool-2-thread-1] INFO  Server - oos flushed
+2024-05-27 02:49:47.384 [pool-2-thread-1] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:47.384 [pool-2-thread-1] INFO  Server - in sending response while loop
+2024-05-27 02:49:47.385 [pool-2-thread-1] INFO  Server - Response sent to /127.0.0.1:65369
+2024-05-27 02:49:47.385 [pool-2-thread-1] INFO  Server - before read request in processing client block
+2024-05-27 02:49:47.385 [pool-2-thread-2] INFO  Server - in reading method
+2024-05-27 02:49:48.066 [pool-2-thread-4] INFO  Server - returning ois.readObject
+2024-05-27 02:49:48.067 [pool-2-thread-3] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:48.068 [pool-2-thread-3] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:48.068 [pool-2-thread-3] INFO  Server - in processRequest method
+2024-05-27 02:49:48.068 [pool-2-thread-3] INFO  Server - processing request started
+2024-05-27 02:49:48.069 [pool-2-thread-3] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:48.069 [pool-2-thread-3] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:48.069 [pool-2-thread-3] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:48.070 [pool-2-thread-3] INFO  Server - in send response 
+2024-05-27 02:49:48.070 [pool-2-thread-3] INFO  Server - oos flushed
+2024-05-27 02:49:48.070 [pool-2-thread-3] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:48.071 [pool-2-thread-3] INFO  Server - in sending response while loop
+2024-05-27 02:49:48.071 [pool-2-thread-3] INFO  Server - Response sent to /127.0.0.1:65376
+2024-05-27 02:49:48.072 [pool-2-thread-3] INFO  Server - before read request in processing client block
+2024-05-27 02:49:48.072 [pool-2-thread-4] INFO  Server - in reading method
+2024-05-27 02:49:48.234 [pool-2-thread-4] INFO  Server - returning ois.readObject
+2024-05-27 02:49:48.235 [pool-2-thread-3] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:48.236 [pool-2-thread-3] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:48.236 [pool-2-thread-3] INFO  Server - in processRequest method
+2024-05-27 02:49:48.236 [pool-2-thread-3] INFO  Server - processing request started
+2024-05-27 02:49:48.237 [pool-2-thread-3] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:48.237 [pool-2-thread-3] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:48.237 [pool-2-thread-3] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:48.237 [pool-2-thread-3] INFO  Server - in send response 
+2024-05-27 02:49:48.238 [pool-2-thread-3] INFO  Server - oos flushed
+2024-05-27 02:49:48.238 [pool-2-thread-3] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:48.238 [pool-2-thread-3] INFO  Server - in sending response while loop
+2024-05-27 02:49:48.239 [pool-2-thread-3] INFO  Server - Response sent to /127.0.0.1:65376
+2024-05-27 02:49:48.239 [pool-2-thread-3] INFO  Server - before read request in processing client block
+2024-05-27 02:49:48.240 [pool-2-thread-4] INFO  Server - in reading method
+2024-05-27 02:49:48.763 [pool-2-thread-2] INFO  Server - returning ois.readObject
+2024-05-27 02:49:48.764 [pool-2-thread-1] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:48.764 [pool-2-thread-1] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:48.765 [pool-2-thread-1] INFO  Server - in processRequest method
+2024-05-27 02:49:48.765 [pool-2-thread-1] INFO  Server - processing request started
+2024-05-27 02:49:48.765 [pool-2-thread-1] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:48.765 [pool-2-thread-1] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:48.766 [pool-2-thread-1] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:48.766 [pool-2-thread-1] INFO  Server - in send response 
+2024-05-27 02:49:48.767 [pool-2-thread-1] INFO  Server - oos flushed
+2024-05-27 02:49:48.767 [pool-2-thread-1] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:48.767 [pool-2-thread-1] INFO  Server - in sending response while loop
+2024-05-27 02:49:48.767 [pool-2-thread-1] INFO  Server - Response sent to /127.0.0.1:65369
+2024-05-27 02:49:48.768 [pool-2-thread-1] INFO  Server - before read request in processing client block
+2024-05-27 02:49:48.768 [pool-2-thread-2] INFO  Server - in reading method
+2024-05-27 02:49:48.900 [pool-2-thread-2] INFO  Server - returning ois.readObject
+2024-05-27 02:49:48.901 [pool-2-thread-1] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:48.902 [pool-2-thread-1] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:48.902 [pool-2-thread-1] INFO  Server - in processRequest method
+2024-05-27 02:49:48.902 [pool-2-thread-1] INFO  Server - processing request started
+2024-05-27 02:49:48.903 [pool-2-thread-1] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:48.903 [pool-2-thread-1] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:48.903 [pool-2-thread-1] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:48.903 [pool-2-thread-1] INFO  Server - in send response 
+2024-05-27 02:49:48.904 [pool-2-thread-1] INFO  Server - oos flushed
+2024-05-27 02:49:48.904 [pool-2-thread-1] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:48.904 [pool-2-thread-1] INFO  Server - in sending response while loop
+2024-05-27 02:49:48.905 [pool-2-thread-1] INFO  Server - Response sent to /127.0.0.1:65369
+2024-05-27 02:49:48.905 [pool-2-thread-1] INFO  Server - before read request in processing client block
+2024-05-27 02:49:48.905 [pool-2-thread-2] INFO  Server - in reading method
+2024-05-27 02:49:49.341 [pool-2-thread-4] INFO  Server - returning ois.readObject
+2024-05-27 02:49:49.343 [pool-2-thread-3] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:49.343 [pool-2-thread-3] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:49.343 [pool-2-thread-3] INFO  Server - in processRequest method
+2024-05-27 02:49:49.343 [pool-2-thread-3] INFO  Server - processing request started
+2024-05-27 02:49:49.344 [pool-2-thread-3] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:49.344 [pool-2-thread-3] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:49.344 [pool-2-thread-3] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:49.345 [pool-2-thread-3] INFO  Server - in send response 
+2024-05-27 02:49:49.345 [pool-2-thread-3] INFO  Server - oos flushed
+2024-05-27 02:49:49.345 [pool-2-thread-3] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:49.346 [pool-2-thread-3] INFO  Server - in sending response while loop
+2024-05-27 02:49:49.346 [pool-2-thread-3] INFO  Server - Response sent to /127.0.0.1:65376
+2024-05-27 02:49:49.346 [pool-2-thread-3] INFO  Server - before read request in processing client block
+2024-05-27 02:49:49.347 [pool-2-thread-4] INFO  Server - in reading method
+2024-05-27 02:49:50.273 [pool-2-thread-2] INFO  Server - returning ois.readObject
+2024-05-27 02:49:50.274 [pool-2-thread-1] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:50.274 [pool-2-thread-1] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:50.275 [pool-2-thread-1] INFO  Server - in processRequest method
+2024-05-27 02:49:50.275 [pool-2-thread-1] INFO  Server - processing request started
+2024-05-27 02:49:50.276 [pool-2-thread-1] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:50.276 [pool-2-thread-1] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:50.276 [pool-2-thread-1] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:50.277 [pool-2-thread-1] INFO  Server - in send response 
+2024-05-27 02:49:50.277 [pool-2-thread-1] INFO  Server - oos flushed
+2024-05-27 02:49:50.277 [pool-2-thread-1] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:50.278 [pool-2-thread-1] INFO  Server - in sending response while loop
+2024-05-27 02:49:50.278 [pool-2-thread-1] INFO  Server - Response sent to /127.0.0.1:65369
+2024-05-27 02:49:50.279 [pool-2-thread-1] INFO  Server - before read request in processing client block
+2024-05-27 02:49:50.279 [pool-2-thread-2] INFO  Server - in reading method
+2024-05-27 02:49:50.655 [pool-2-thread-2] INFO  Server - returning ois.readObject
+2024-05-27 02:49:50.657 [pool-2-thread-1] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:50.657 [pool-2-thread-1] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:50.657 [pool-2-thread-1] INFO  Server - in processRequest method
+2024-05-27 02:49:50.657 [pool-2-thread-1] INFO  Server - processing request started
+2024-05-27 02:49:50.658 [pool-2-thread-1] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:50.658 [pool-2-thread-1] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:50.658 [pool-2-thread-1] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:50.658 [pool-2-thread-1] INFO  Server - in send response 
+2024-05-27 02:49:50.659 [pool-2-thread-1] INFO  Server - oos flushed
+2024-05-27 02:49:50.659 [pool-2-thread-1] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:50.659 [pool-2-thread-1] INFO  Server - in sending response while loop
+2024-05-27 02:49:50.660 [pool-2-thread-1] INFO  Server - Response sent to /127.0.0.1:65369
+2024-05-27 02:49:50.660 [pool-2-thread-1] INFO  Server - before read request in processing client block
+2024-05-27 02:49:50.660 [pool-2-thread-2] INFO  Server - in reading method
+2024-05-27 02:49:51.205 [pool-2-thread-4] INFO  Server - returning ois.readObject
+2024-05-27 02:49:51.206 [pool-2-thread-3] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:51.206 [pool-2-thread-3] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:51.206 [pool-2-thread-3] INFO  Server - in processRequest method
+2024-05-27 02:49:51.207 [pool-2-thread-3] INFO  Server - processing request started
+2024-05-27 02:49:51.207 [pool-2-thread-3] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:51.207 [pool-2-thread-3] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:51.208 [pool-2-thread-3] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:51.208 [pool-2-thread-3] INFO  Server - in send response 
+2024-05-27 02:49:51.208 [pool-2-thread-3] INFO  Server - oos flushed
+2024-05-27 02:49:51.209 [pool-2-thread-3] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:51.209 [pool-2-thread-3] INFO  Server - in sending response while loop
+2024-05-27 02:49:51.209 [pool-2-thread-3] INFO  Server - Response sent to /127.0.0.1:65376
+2024-05-27 02:49:51.210 [pool-2-thread-3] INFO  Server - before read request in processing client block
+2024-05-27 02:49:51.210 [pool-2-thread-4] INFO  Server - in reading method
+2024-05-27 02:49:51.844 [pool-2-thread-2] INFO  Server - returning ois.readObject
+2024-05-27 02:49:51.845 [pool-2-thread-1] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:51.846 [pool-2-thread-1] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:51.846 [pool-2-thread-1] INFO  Server - in processRequest method
+2024-05-27 02:49:51.846 [pool-2-thread-1] INFO  Server - processing request started
+2024-05-27 02:49:51.846 [pool-2-thread-1] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:51.847 [pool-2-thread-1] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:51.847 [pool-2-thread-1] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:51.847 [pool-2-thread-1] INFO  Server - in send response 
+2024-05-27 02:49:51.848 [pool-2-thread-1] INFO  Server - oos flushed
+2024-05-27 02:49:51.848 [pool-2-thread-1] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:51.848 [pool-2-thread-1] INFO  Server - in sending response while loop
+2024-05-27 02:49:51.849 [pool-2-thread-1] INFO  Server - Response sent to /127.0.0.1:65369
+2024-05-27 02:49:51.849 [pool-2-thread-1] INFO  Server - before read request in processing client block
+2024-05-27 02:49:51.849 [pool-2-thread-2] INFO  Server - in reading method
+2024-05-27 02:49:52.551 [pool-2-thread-4] INFO  Server - returning ois.readObject
+2024-05-27 02:49:52.552 [pool-2-thread-3] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:52.553 [pool-2-thread-3] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:52.553 [pool-2-thread-3] INFO  Server - in processRequest method
+2024-05-27 02:49:52.553 [pool-2-thread-3] INFO  Server - processing request started
+2024-05-27 02:49:52.554 [pool-2-thread-3] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:52.554 [pool-2-thread-3] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:52.554 [pool-2-thread-3] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:52.555 [pool-2-thread-3] INFO  Server - in send response 
+2024-05-27 02:49:52.556 [pool-2-thread-3] INFO  Server - oos flushed
+2024-05-27 02:49:52.556 [pool-2-thread-3] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:52.556 [pool-2-thread-3] INFO  Server - in sending response while loop
+2024-05-27 02:49:52.557 [pool-2-thread-3] INFO  Server - Response sent to /127.0.0.1:65376
+2024-05-27 02:49:52.557 [pool-2-thread-3] INFO  Server - before read request in processing client block
+2024-05-27 02:49:52.558 [pool-2-thread-4] INFO  Server - in reading method
+2024-05-27 02:49:53.094 [pool-2-thread-2] INFO  Server - returning ois.readObject
+2024-05-27 02:49:53.095 [pool-2-thread-1] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:53.096 [pool-2-thread-1] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:53.096 [pool-2-thread-1] INFO  Server - in processRequest method
+2024-05-27 02:49:53.096 [pool-2-thread-1] INFO  Server - processing request started
+2024-05-27 02:49:53.097 [pool-2-thread-1] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:53.097 [pool-2-thread-1] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:53.097 [pool-2-thread-1] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:53.098 [pool-2-thread-1] INFO  Server - in send response 
+2024-05-27 02:49:53.098 [pool-2-thread-1] INFO  Server - oos flushed
+2024-05-27 02:49:53.099 [pool-2-thread-1] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:53.099 [pool-2-thread-1] INFO  Server - in sending response while loop
+2024-05-27 02:49:53.099 [pool-2-thread-1] INFO  Server - Response sent to /127.0.0.1:65369
+2024-05-27 02:49:53.100 [pool-2-thread-1] INFO  Server - before read request in processing client block
+2024-05-27 02:49:53.100 [pool-2-thread-2] INFO  Server - in reading method
+2024-05-27 02:49:53.600 [pool-2-thread-4] INFO  Server - returning ois.readObject
+2024-05-27 02:49:53.601 [pool-2-thread-3] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:53.601 [pool-2-thread-3] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:53.601 [pool-2-thread-3] INFO  Server - in processRequest method
+2024-05-27 02:49:53.601 [pool-2-thread-3] INFO  Server - processing request started
+2024-05-27 02:49:53.602 [pool-2-thread-3] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:53.602 [pool-2-thread-3] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:53.602 [pool-2-thread-3] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:53.602 [pool-2-thread-3] INFO  Server - in send response 
+2024-05-27 02:49:53.603 [pool-2-thread-3] INFO  Server - oos flushed
+2024-05-27 02:49:53.603 [pool-2-thread-3] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:53.603 [pool-2-thread-3] INFO  Server - in sending response while loop
+2024-05-27 02:49:53.603 [pool-2-thread-3] INFO  Server - Response sent to /127.0.0.1:65376
+2024-05-27 02:49:53.604 [pool-2-thread-3] INFO  Server - before read request in processing client block
+2024-05-27 02:49:53.604 [pool-2-thread-4] INFO  Server - in reading method
+2024-05-27 02:49:54.179 [pool-2-thread-2] INFO  Server - returning ois.readObject
+2024-05-27 02:49:54.180 [pool-2-thread-1] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:54.180 [pool-2-thread-1] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:54.180 [pool-2-thread-1] INFO  Server - in processRequest method
+2024-05-27 02:49:54.181 [pool-2-thread-1] INFO  Server - processing request started
+2024-05-27 02:49:54.181 [pool-2-thread-1] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:54.181 [pool-2-thread-1] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:54.182 [pool-2-thread-1] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:54.182 [pool-2-thread-1] INFO  Server - in send response 
+2024-05-27 02:49:54.182 [pool-2-thread-1] INFO  Server - oos flushed
+2024-05-27 02:49:54.182 [pool-2-thread-1] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:54.183 [pool-2-thread-1] INFO  Server - in sending response while loop
+2024-05-27 02:49:54.183 [pool-2-thread-1] INFO  Server - Response sent to /127.0.0.1:65369
+2024-05-27 02:49:54.183 [pool-2-thread-1] INFO  Server - before read request in processing client block
+2024-05-27 02:49:54.184 [pool-2-thread-2] INFO  Server - in reading method
+2024-05-27 02:49:54.760 [pool-2-thread-4] INFO  Server - returning ois.readObject
+2024-05-27 02:49:54.761 [pool-2-thread-3] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:54.761 [pool-2-thread-3] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:54.761 [pool-2-thread-3] INFO  Server - in processRequest method
+2024-05-27 02:49:54.761 [pool-2-thread-3] INFO  Server - processing request started
+2024-05-27 02:49:54.762 [pool-2-thread-3] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:54.762 [pool-2-thread-3] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:54.762 [pool-2-thread-3] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:54.762 [pool-2-thread-3] INFO  Server - in send response 
+2024-05-27 02:49:54.763 [pool-2-thread-3] INFO  Server - oos flushed
+2024-05-27 02:49:54.763 [pool-2-thread-3] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:54.763 [pool-2-thread-3] INFO  Server - in sending response while loop
+2024-05-27 02:49:54.764 [pool-2-thread-3] INFO  Server - Response sent to /127.0.0.1:65376
+2024-05-27 02:49:54.764 [pool-2-thread-3] INFO  Server - before read request in processing client block
+2024-05-27 02:49:54.764 [pool-2-thread-4] INFO  Server - in reading method
+2024-05-27 02:49:55.466 [pool-2-thread-2] INFO  Server - returning ois.readObject
+2024-05-27 02:49:55.467 [pool-2-thread-1] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:55.467 [pool-2-thread-1] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:55.467 [pool-2-thread-1] INFO  Server - in processRequest method
+2024-05-27 02:49:55.467 [pool-2-thread-1] INFO  Server - processing request started
+2024-05-27 02:49:55.468 [pool-2-thread-1] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:55.468 [pool-2-thread-1] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:55.468 [pool-2-thread-1] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:55.468 [pool-2-thread-1] INFO  Server - in send response 
+2024-05-27 02:49:55.468 [pool-2-thread-1] INFO  Server - oos flushed
+2024-05-27 02:49:55.469 [pool-2-thread-1] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:55.469 [pool-2-thread-1] INFO  Server - in sending response while loop
+2024-05-27 02:49:55.469 [pool-2-thread-1] INFO  Server - Response sent to /127.0.0.1:65369
+2024-05-27 02:49:55.469 [pool-2-thread-1] INFO  Server - before read request in processing client block
+2024-05-27 02:49:55.470 [pool-2-thread-2] INFO  Server - in reading method
+2024-05-27 02:49:56.130 [pool-2-thread-4] INFO  Server - returning ois.readObject
+2024-05-27 02:49:56.131 [pool-2-thread-3] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:56.132 [pool-2-thread-3] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:56.132 [pool-2-thread-3] INFO  Server - in processRequest method
+2024-05-27 02:49:56.132 [pool-2-thread-3] INFO  Server - processing request started
+2024-05-27 02:49:56.132 [pool-2-thread-3] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:56.132 [pool-2-thread-3] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:56.133 [pool-2-thread-3] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:56.133 [pool-2-thread-3] INFO  Server - in send response 
+2024-05-27 02:49:56.133 [pool-2-thread-3] INFO  Server - oos flushed
+2024-05-27 02:49:56.133 [pool-2-thread-3] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:56.134 [pool-2-thread-3] INFO  Server - in sending response while loop
+2024-05-27 02:49:56.134 [pool-2-thread-3] INFO  Server - Response sent to /127.0.0.1:65376
+2024-05-27 02:49:56.134 [pool-2-thread-3] INFO  Server - before read request in processing client block
+2024-05-27 02:49:56.134 [pool-2-thread-4] INFO  Server - in reading method
+2024-05-27 02:49:56.689 [pool-2-thread-2] INFO  Server - returning ois.readObject
+2024-05-27 02:49:56.689 [pool-2-thread-1] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:56.690 [pool-2-thread-1] INFO  Server - before processing request in processing client block
+2024-05-27 02:49:56.690 [pool-2-thread-1] INFO  Server - in processRequest method
+2024-05-27 02:49:56.690 [pool-2-thread-1] INFO  Server - processing request started
+2024-05-27 02:49:56.691 [pool-2-thread-1] INFO  Server - before requestHandler.processRequest
+2024-05-27 02:49:56.691 [pool-2-thread-1] INFO  Server - after requestHandler processRequest
+2024-05-27 02:49:56.691 [pool-2-thread-1] INFO  Server - after processing request in processing client block
+2024-05-27 02:49:56.691 [pool-2-thread-1] INFO  Server - in send response 
+2024-05-27 02:49:56.692 [pool-2-thread-1] INFO  Server - oos flushed
+2024-05-27 02:49:56.692 [pool-2-thread-1] INFO  Server - before writing to clientSocket sizeBuffer
+2024-05-27 02:49:56.692 [pool-2-thread-1] INFO  Server - in sending response while loop
+2024-05-27 02:49:56.693 [pool-2-thread-1] INFO  Server - Response sent to /127.0.0.1:65369
+2024-05-27 02:49:56.693 [pool-2-thread-1] INFO  Server - before read request in processing client block
+2024-05-27 02:49:56.693 [pool-2-thread-2] INFO  Server - in reading method
+2024-05-27 02:49:58.286 [pool-2-thread-4] ERROR Server - IO exception from client while reading request /127.0.0.1, info: Connection reset
+2024-05-27 02:49:58.287 [pool-2-thread-3] INFO  Server - after reading request in processing client block
+2024-05-27 02:49:58.287 [pool-2-thread-3] INFO  Server - null request -> breaking processing client
+2024-05-27 02:50:00.782 [pool-2-thread-2] ERROR Server - IO exception from client while reading request /127.0.0.1, info: Connection reset
+2024-05-27 02:50:00.782 [pool-2-thread-1] INFO  Server - after reading request in processing client block
+2024-05-27 02:50:00.783 [pool-2-thread-1] INFO  Server - null request -> breaking processing client
+2024-05-27 02:50:26.136 [Thread-0] INFO  Server - INPUT: exit
