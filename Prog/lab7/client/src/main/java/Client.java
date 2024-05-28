@@ -63,9 +63,9 @@ public class Client {
                     switch (clientInput[0]){
                         case "exit": 
                             exitCase(clientSocket);
-                        case "save":
-                            saveCase();
-                            break;
+                        // case "save":
+                        //     saveCase();
+                        //     break;
                         case "add":
                             addCase(clientInput);
                             break;
@@ -86,7 +86,7 @@ public class Client {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
             System.out.println("Connection is lost.");
         } catch (NullPointerException e){
             e.printStackTrace();
@@ -118,11 +118,11 @@ public class Client {
         while (dataBuffer.hasRemaining()) {
             clientSocket.write(dataBuffer);  // Отправляем сами данные
         }
-        System.out.println("send request ended.");
+        // System.out.println("send request ended.");
     }
     
     private CommandResult readResponse() {
-        System.out.println("in readresponse");
+        // System.out.println("in readresponse");
         try  {
             InputStream inputStream = Channels.newInputStream(clientSocket);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -153,7 +153,7 @@ public class Client {
             ByteArrayInputStream bais = new ByteArrayInputStream(objToSerialize);
     
             try (ObjectInputStream ois = new ObjectInputStream(bais)) {
-                System.out.println("before ois.readobject return in reading responce block");
+                // System.out.println("before ois.readobject return in reading responce block");
                 return (CommandResult) ois.readObject();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -180,11 +180,19 @@ public class Client {
 
         System.out.println("Hello, please provide your credentials");
         System.out.println("Enter login");
-        String username = scanner.nextLine();
+        String username = null;
+        while( username == null){
+            String nextline = scanner.nextLine();  
+            username =  nextline == "" ? null : nextline;
+        }
         System.out.println("Enter password");
         Console console = System.console();
-        char[] symbols = console.readPassword();        
-        String password = new String(symbols);
+        String password = null;
+        while (password == null){
+            char[] line = console.readPassword();
+            String nString = new String(line);
+            password = nString.length() == 0 ? null : nString;
+        }
 
         String[] authReqInfo = ("AuthenticateRequest" + " " +  username + " " + password).split(" ");
         user = new User(username, password);
@@ -201,6 +209,7 @@ public class Client {
                 }
             }
             else{
+                System.out.println("Ok, bye!");
                 closeSocket();
                 System.exit(0);
             }
@@ -211,11 +220,20 @@ public class Client {
     
     private void register() throws NotYetConnectedException, IOException, ClassNotFoundException, InterruptedException {
         System.out.println("Enter login");
-        String username = scanner.nextLine();
+        String username = null;
+        while( username == null){
+            String nextline = scanner.nextLine();  
+            username =  nextline == "" ? null : nextline;
+        }
         System.out.println("Enter password");
         Console console = System.console();
-        char[] symbols = console.readPassword();        
-        String password = new String(symbols);
+        String password = null;
+        while (password == null){
+            char[] line = console.readPassword();
+            String nString = new String(line);
+            password = nString.length() == 0 ? null : nString;
+        }
+
         user = new User(username, password);
         String[] RegistrationReqInfo = ("RegistrateRequest" + " " +  username + " " + password).split(" ");
         Request request = new Request(RegistrationReqInfo, null, user);
@@ -261,15 +279,15 @@ public class Client {
                         CommandResult response = null;
                         switch (command) {
                         case "add":
-                            MusicBand nonUserBand = musicBandRequester.requestNonUserBand(br);
+                            MusicBand nonUserBand = musicBandRequester.requestNonUserBand(br, this.user);
                             Request req = new Request(commandAndArgs, nonUserBand, user);
                             send(req);
                             response = readResponse();
                             System.out.println(response);
                             break;
-                        case "save":
-                            saveCase();
-                            break;
+                        // case "save":
+                        //     saveCase();
+                        //     break;
                         case "exit":
                             exitCase(clientSocket);
                             break;
@@ -304,12 +322,11 @@ public class Client {
     }
 
     private void addCase(String[] clientInput) throws IOException, ClassNotFoundException, NotYetConnectedException, InterruptedException{
-        MusicBand mb = musicBandRequester.requestUserBand();
+        MusicBand mb = musicBandRequester.requestUserBand(this.user);
         Request addRequest = new Request(clientInput, mb, user);
         send(addRequest);
         CommandResult response = readResponse();
         System.out.println(response);
-
     }
 
     private void exitCase(SocketChannel clientSocket) throws IOException{
@@ -320,38 +337,20 @@ public class Client {
         System.exit(0);
     } 
 
-    private void saveCase(){
-        System.out.println();
-        System.out.println("--------------------------");    
-        System.out.println("This command is not possible on client");
-    }
+    // private void saveCase(){
+    //     System.out.println();
+    //     System.out.println("--------------------------");    
+    //     System.out.println("This command is not possible on client");
+    // }
     private void updateCase(String[] clientInput) throws IOException, ClassNotFoundException, NotYetConnectedException, InterruptedException{
-        Request updateRequest = new Request(clientInput, null, user);
-        send(updateRequest);
-        System.out.println("Validating...");
-        buffer = ByteBuffer.allocate(BUFFERSIZE);
-        clientSocket.read(buffer);
-        buffer.flip();
-        byte[] dataBytes = new byte[buffer.remaining()];
-        buffer.get(dataBytes);
-        
-        ByteArrayInputStream bis = new ByteArrayInputStream(dataBytes);
-        ObjectInputStream ois = new ObjectInputStream(bis);
-        CommandResult  response = (CommandResult) ois.readObject();
-        bis.close();
-        ois.close();
-        System.out.println(response);      
-
-        if(!response.isSuccess()){
+        MusicBand musicBandForUpdate = musicBandRequester.requestUserBand(user);
+        if (clientInput[1] == null){
+            System.out.println("There has to be an id (type: Long) provided");
             return;
         }
-        long id = Long.valueOf(clientInput[1]);                            
-        MusicBand newBand = musicBandRequester.requestUserBand();
-        newBand.setId(id);
-        String[] arrayForRequest = "add".split(" ");
-        Request addRequest2 = new Request(arrayForRequest, newBand, user);
-        send(addRequest2);
-        CommandResult newresponse = readResponse();
-        System.out.println(newresponse);
+        musicBandForUpdate.setId(Long.parseLong(clientInput[1]));
+        send(new Request(clientInput, musicBandForUpdate, user));
+        CommandResult response = readResponse();
+        System.out.println(response);
     }
 }

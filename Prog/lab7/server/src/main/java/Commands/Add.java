@@ -5,7 +5,13 @@
 package Commands;
 
 
+import Collection.CollectionObject.MusicBand;
 import Communication.CommandResult;
+import Communication.Request;
+import DBRelated.JdbcProvider;
+import Exceptions.CommandException;
+import Managers.CollectionManager;
+import Managers.IdManager;
 
 /**
  * The `Add` class extends `Command` and implements a method to add a
@@ -17,35 +23,26 @@ public class Add extends Command {
     public Add(String name, String descr) {
         super(name, descr);
     }
-
+    CommandResult commandResult;
     /**
      * This function checks the number of arguments, requests a MusicBand object,
      * and adds it to a
      * collection based on user input.
      */
-    @Override
-    public CommandResult execute(String[] args) {
-        // if (args.length != 0)
-        //     throw new CommandException("There has to be no arguments");
-        // CollectionManager manager = CollectionManager.getInstance();
-        // MusicBandRequester musicBandRequester = new MusicBandRequester();
-        // //InputHandler inputHandler = new InputHandler();
-        // if (musicBandRequester.hashCode() == 1) { // мне просто надо было чтобы в add не выдавало ошибок, потому что add выполняется на клиенте.
-        //     manager.addElementToCollection(musicBandRequester.requestUserBand());
-        //     System.out.println("--------------------------");
-        //     System.out.println("MusicBand has been added to the collection.");
-        // } else {
-        //     MusicBand musicBand = musicBandRequester.requestNonUserBand();
-        //     if (musicBand != null) {
-        //         manager.addElementToCollection(musicBand);
-        //         System.out.println("--------------------------");
-        //         System.out.println("MusicBand has been added to the collection.");
-        //     } else {
-        //         System.out.println("--------------------------");
-        //         System.out.println("MusicBand hasn't been added to the collection.");
-        //     }
-        // }
-        return null;
 
+    @Override
+    public CommandResult execute(Request request){
+        if (request.getMusicBand() == null){
+        }
+        MusicBand mb = request.getMusicBand();
+        if (JdbcProvider.addMusicBand(mb).isSuccess()){
+            CollectionManager collectionManager = CollectionManager.getInstance();
+            IdManager idManager = IdManager.getInstance();
+            long id = idManager.genereateId();
+            mb.setId(id);
+            collectionManager.addElementToCollection(mb);
+            return new CommandResult(true, null, name);
+        }
+        throw new CommandException("problem appeared during executing add command");
     }
 }

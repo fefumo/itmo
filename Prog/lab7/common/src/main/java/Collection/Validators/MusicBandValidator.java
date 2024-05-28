@@ -6,7 +6,14 @@ import Collection.CollectionObject.MusicBand;
  * The Music band validator.
  */
 public class MusicBandValidator implements Validator<MusicBand> {
-
+    private static MusicBandValidator musicBandValidator;
+    
+    public static MusicBandValidator getInstance(){
+        if (musicBandValidator == null){
+        musicBandValidator = new MusicBandValidator();
+        }
+        return musicBandValidator;
+    }
     /**
      * Validate boolean.
      *

@@ -1,12 +1,13 @@
 package Commands;
 
 import Communication.CommandResult;
+import Communication.Request;
 
 /**
  * The abstract class Command defines properties and methods for a command
  * object in Java.
  */
-public abstract class Command implements CommandInterface {
+public abstract class Command {
     String name;
     String descr;
     Object argument;
@@ -16,18 +17,15 @@ public abstract class Command implements CommandInterface {
         this.descr = descr;
     }
 
-    @Override
     public String getDescr() {
         return descr;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
-    public abstract CommandResult execute(String[] args);
+    public abstract CommandResult execute(Request request);
 
     public Object getArgument() {
         return argument;

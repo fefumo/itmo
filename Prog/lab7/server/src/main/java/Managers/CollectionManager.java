@@ -2,7 +2,6 @@ package Managers;
 
 import java.time.LocalDateTime;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 
 import Collection.CollectionObject.MusicBand;
@@ -84,7 +83,7 @@ public class CollectionManager {
      *         `MusicBand` with the
      *         specified `id` is found, the method returns `null`.
      */
-    public MusicBand getBandById(long id) {
+    public synchronized MusicBand getBandById(long id) {
         for (MusicBand band : this.getCollection()) {
             if (band.getId() == id) {
                 return band;
@@ -109,14 +108,14 @@ public class CollectionManager {
      *              represents a
      *              `MusicBand` object that you want to add to a collection.
      */
-    public void addElementToCollection(MusicBand value) {
+    public synchronized void addElementToCollection(MusicBand value) {
         if (musicBandsQueue == null) {
             PriorityQueue<MusicBand> musicBands = new PriorityQueue<>();
             musicBands.add(value);
             this.setCollection(musicBands);
         } else {
             musicBandsQueue.add(value);
-        }
+        }                
     }
 
     /**
@@ -136,7 +135,7 @@ public class CollectionManager {
      *         `musicBandsQueue`, it throws a
      *         `NoSuchElementException`.
      */
-    public MusicBand getCollectionById(long id) throws NoSuchElementException {
+    public synchronized MusicBand getCollectionById(long id) {
         MusicBand mb = null;
         Iterator<MusicBand> iter = musicBandsQueue.iterator();
         while (iter.hasNext()) {
@@ -146,9 +145,7 @@ public class CollectionManager {
                 break;
             }
         }
-        if (mb == null) {
-            throw new NoSuchElementException("There is no such element. Try again");
-        }
         return mb;
     }
+
 }

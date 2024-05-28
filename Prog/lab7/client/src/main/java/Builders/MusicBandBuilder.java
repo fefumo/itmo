@@ -27,7 +27,7 @@ public class MusicBandBuilder implements Builder<MusicBand> {
     public MusicBand build() {
         final Date creationDate = new Date();
         Coordinates coordinates = null;
-        MusicBand new_Band = new MusicBand(-1, null, coordinates, creationDate, 0, null, null, null, null);
+        MusicBand new_Band = new MusicBand(-1, null, coordinates, creationDate, 0, null, null, null, null, null);
         return new_Band;
     }
 

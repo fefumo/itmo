@@ -3,71 +3,72 @@ import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import Collection.CollectionObject.MusicBand;
 import Communication.CommandResult;
 import Communication.Request;
-import Managers.CollectionManager;
+import DBRelated.JdbcProvider;
 import Managers.CommandManager;
-import Managers.IdManager;
 
 public class RequestHandler {
-    CommandManager commandManager;
+    JdbcProvider jdbcProvider = new JdbcProvider();
     CommandResult commandResult;
-    private boolean flagForUpdateCommand = false; //indicates whether to delete prev MB when we are adding a new one
     private static Logger logger = LogManager.getLogger(Server.class);
 
-    public RequestHandler(CommandManager commandManager){
-        this.commandManager = commandManager;
-    }
 
     public CommandResult processRequest(Request request) throws IOException{
         String commandFromRequest = request.getCommandAndArgs()[0];
-        CollectionManager collectionManager = CollectionManager.getInstance();
-        IdManager idManager = IdManager.getInstance();
-        MusicBand mb = request.getMusicBand();
-        MusicBand musicBandForUpdateCommand = null;
-        switch (commandFromRequest) {
-            case "add":
-                if ( flagForUpdateCommand == true){
-                    collectionManager.getCollection().remove(musicBandForUpdateCommand);
-                    flagForUpdateCommand = false;
-                }
-                if (mb == null){
-                    commandResult = new CommandResult(false, "MusicBand is null", commandFromRequest);
-                    break;
-                }
-                collectionManager.addElementToCollection(mb);
-                mb.setId(idManager.genereateId());
-                logger.info("New element has been added"); // в logger
-                commandResult = new CommandResult(true, null, commandFromRequest, "--------------------------\nNew element has been added\n");
-                break;
-            case "update_id":
-                try {
-                    Long id;
-                    String idString = request.getCommandAndArgs()[1];
-                    id = Long.parseLong(idString);
-                    musicBandForUpdateCommand = collectionManager.getBandById(id);
-                    if (musicBandForUpdateCommand == null){
-                        commandResult = new CommandResult(false, "There is no such element", commandFromRequest);
-                        break;
-                    }
-                    else{
-                        commandResult = new CommandResult(true, null, commandFromRequest, "--------------------------\nThere is such element. You can start updating it's values\n");
-                        flagForUpdateCommand = true;
-                        break;
-                    }
-                } catch (NumberFormatException e) {
-                    commandResult = new CommandResult(false, "Argument has to be of type long", commandFromRequest);
-                    break;
-                } catch (ArrayIndexOutOfBoundsException e){
-                    commandResult = new CommandResult(false, "No argument of type long provided", commandFromRequest);
-                    break;
-                }
-            default:
-                commandResult = commandManager.executeCommand(request.getCommandAndArgs());
-                break;
-        }
-
+        // String[] commandAndArgs = request.getCommandAndArgs();
+        logger.info("command from request: " + commandFromRequest);
+        // CollectionManager collectionManager = CollectionManager.getInstance();
+        CommandManager commandManager = new CommandManager();
+        // IdManager idManager = IdManager.getInstance();
+        // MusicBand mb = request.getMusicBand();
+        commandResult = commandManager.executeCommand(request);
+        
+        // switch (commandFromRequest) {
+        //     case "add":
+        //         if (mb == null){
+        //             commandResult = new CommandResult(false, "MusicBand is null", commandFromRequest);
+        //             break;
+        //         }
+        //         mb.setId(idManager.genereateId());
+        //         // System.out.println("before calling jdbc");
+        //         collectionManager.addElementToCollection(mb);
+        //         logger.info("Add command ended");
+        //         break;
+        //     case "":
+        //     case "groupCountingById":
+        //         return commandManager.executeCommand(commandAndArgs);
+        //     case "clear":
+        //         JdbcProvider.clearMusicBand(request.getUser()); // отправить в executeCommand
+        //         return commandManager.executeCommand(commandAndArgs);
+        //     case "update_id":
+        //         return new CommandResult(false, "cant be rn", commandFromRequest);
+        //         // try {
+        //         //     Long id;
+        //         //     String idString = request.getCommandAndArgs()[1];
+        //         //     id = Long.parseLong(idString);
+        //         //     musicBandForUpdateCommand = collectionManager.getBandById(id);
+        //         //     if (musicBandForUpdateCommand == null){
+        //         //         commandResult = new CommandResult(false, "There is no such element", commandFromRequest);
+        //         //         break;
+        //         //     }
+        //         //     else{
+        //         //         commandResult = new CommandResult(true, null, commandFromRequest, "--------------------------\nThere is such element. You can start updating it's values\n");
+        //         //         flagForUpdateCommand = true;
+        //         //         break;
+        //         //     }
+        //         // } catch (NumberFormatException e) {
+        //         //     commandResult = new CommandResult(false, "Argument has to be of type long", commandFromRequest);
+        //         //     break;
+        //         // } catch (ArrayIndexOutOfBoundsException e){
+        //         //     commandResult = new CommandResult(false, "No argument of type long provided", commandFromRequest);
+        //         //     break;
+        //         // }
+        //     default:
+        //         commandResult = commandManager.executeCommand(commandAndArgs);
+        //         break;
+        // }
+        
         return commandResult;
     }
 

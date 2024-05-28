@@ -1,6 +1,7 @@
 package Commands;
 
 import Communication.CommandResult;
+import Communication.Request;
 import Exceptions.CommandException;
 
 /**
@@ -21,8 +22,8 @@ public class Exit extends Command {
      * exiting the program if there is exactly one argument passed to it.
      */
     @Override
-    public CommandResult execute(String[] args) {
-        if (args.length != 0)
+    public CommandResult execute(Request request) {
+        if (request.getCommandAndArgs().length != 1)
             throw new CommandException("There has to be no arguments");
         System.out.println("Goodbye, have a nice day!");
         System.out.println(

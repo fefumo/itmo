@@ -12,27 +12,27 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
-import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import CLI.InputHandler;
+import Commands.Exit;
 import Communication.CommandResult;
 import Communication.Request;
 import DBRelated.JdbcProvider;
+import Managers.CollectionManager;
 import Managers.CommandManager;
+import Managers.IdManager;
 
 public class Server {
 
     public Server(String host, int port, JdbcProvider jdbcProvider){
         this.host = host;
         this.port = port;
-        this.jdbcProvider = jdbcProvider;
     };
     private String host;
     private int port;
-    private  JdbcProvider jdbcProvider;
     // private static final int BUFFERSIZE = 2048;
     private ServerSocketChannel server;
     private CommandManager commandManager;
@@ -40,15 +40,14 @@ public class Server {
     private final ExecutorService readPool = Executors.newCachedThreadPool();
     private final ForkJoinPool processingPool = new ForkJoinPool();
     private final ExecutorService writePool = Executors.newFixedThreadPool(10);
+    RequestHandler requestHandler = new RequestHandler();
+    
     // private final ReentrantLock lock = new ReentrantLock();
 
     public void run(){
-        commandManager = new CommandManager();
-        commandManager.buildCommands();
-        //initializeCollection();
-        jdbcProvider.establishConnection(); 
-        jdbcProvider.initializeDatabase();     
+
         try {
+            prepare();
             server = ServerSocketChannel.open();
             server.configureBlocking(false);
             server.bind(new InetSocketAddress(host, port));
@@ -66,11 +65,7 @@ public class Server {
                 if (client != null){
                     client.configureBlocking(false);
                     logger.info("Accepted connection from " + client.getRemoteAddress());
-                    // Thread thread  = new Thread(() -> processClient(client));
-                    // thread.start();
-                    // processClient(client);
                     readPool.submit(() -> processClient(client));
-                    //logger.info("Processing client " + client.getRemoteAddress() + " ended");
                 }
             }            
         } catch (IOException e) {
@@ -78,9 +73,23 @@ public class Server {
         }        
     }
     
+    private void prepare() {
+        logger.info("Preparation has started");
+        commandManager = new CommandManager();
+        commandManager.buildCommands();
+        logger.info("Iniitialised commandManager");
+        JdbcProvider.establishConnection(); 
+        logger.info("Connection to database is establised");
+        JdbcProvider.initializeDatabase();
+        JdbcProvider.loadCollectionToMemory();
+        logger.info("Database is initalised and loaded to memory");
+        IdManager.getInstance().reloadIds(CollectionManager.getInstance().getCollection());
+        logger.info("Session is initialised");
+    }
+
     private void processClient(SocketChannel client) {
             while (client.isOpen()) {
-                logger.info("before read request in processing client block");
+                // logger.info("before read request in processing client block");
                 Request request = null;
                 Future<Request> futureRequest = readPool.submit(() -> readRequest(client));
 
@@ -90,17 +99,21 @@ public class Server {
                 } catch (InterruptedException | ExecutionException e) {
                     e.printStackTrace();
                 }
-                logger.info("after reading request in processing client block");
+                // logger.info("after reading request in processing client block");
                 if (request == null) {
-                    logger.info("null request -> breaking processing client");
+                    try {
+						logger.warn("client" + client.getRemoteAddress() + "has disconnected");
+					} catch (IOException e) {
+						System.out.println("BRUUUUUH");
+					}
                     break;
                 }
                 final Request finalRequest = request;
                 processingPool.submit(() -> {
                     //try {
-                        logger.info("before processing request in processing client block");
+                        // logger.info("before processing request in processing client block");
                         CommandResult response = processRequest(finalRequest);
-                        logger.info("after processing request in processing client block");
+                        // logger.info("after processing request in processing client block");
                         writePool.submit(() -> {
                             try {
                                 sendResponse(client, response);
@@ -119,16 +132,17 @@ public class Server {
 
     private Request readRequest(SocketChannel clientSocket) throws InterruptedException, ExecutionException {
         // return writePool.submit(() -> {
-            logger.info("in reading method");
+            // logger.info("in reading method");
             ByteBuffer sizeBuffer = ByteBuffer.allocate(Integer.BYTES);
             try {
                 // Чтение размера данных
                 while (sizeBuffer.hasRemaining()) {
                     int bytesRead = clientSocket.read(sizeBuffer);
                     if (bytesRead == -1) {
-                        logger.error("Connection closed prematurely");
-                        closeSocket(clientSocket);
-                        return null;
+                        throw new IOException("Client disconnected");
+                        // logger.error("Connection closed prematurely");
+                        // closeSocket(clientSocket);
+                        // return null;
                     }
                 }
                 sizeBuffer.flip();
@@ -139,9 +153,10 @@ public class Server {
                 while (dataBuffer.hasRemaining()) {
                     int bytesRead = clientSocket.read(dataBuffer);
                     if (bytesRead == -1) {
-                        logger.error("Connection closed prematurely");
-                        closeSocket(clientSocket);
-                        return null;
+                        throw new IOException("Client disconnected");
+                        // logger.error("Connection closed prematurely");
+                        // closeSocket(clientSocket);
+                        // return null;
                     }
                 }
                 dataBuffer.flip();
@@ -151,7 +166,8 @@ public class Server {
         
                 try (ByteArrayInputStream bais = new ByteArrayInputStream(objToSerialize);
                      ObjectInputStream ois = new ObjectInputStream(bais)) {
-                        logger.info("returning ois.readObject");
+                        // logger.info("returning ois.readObject");
+                        logger.info("read request from " + clientSocket.socket().getInetAddress());
                     return (Request) ois.readObject();
                 } catch (ClassNotFoundException e) {
                     logger.error("Class not found exception from client while reading request " +
@@ -160,7 +176,7 @@ public class Server {
                 }
         
             } catch (IOException e) {
-                logger.error("IO exception from client while reading request " +
+                logger.error("IO exception from client while reading request from" +
                 clientSocket.socket().getInetAddress() + ", info: " + e.getMessage());
                 closeSocket(clientSocket);
                 return null;
@@ -177,95 +193,89 @@ public class Server {
     }
     
     
-    private CommandResult processRequest(Request requestData) {
-        // ForkJoinTask<CommandResult> task = processingPool.submit(() -> processRequestLogic(requestData));
-        // try {
-        //     System.out.println("Waiting for task to complete");
-        //     CommandResult result = task.get();
-        //     System.out.println("got the result and returning it");
-        //     return result;
-        // } catch (InterruptedException | ExecutionException e) {
-        //     logger.error("Exception during processing request: " + e.getMessage());
-        //     return new CommandResult(false, "Internal server error", "Processing");
-        // }
-        logger.info("in processRequest method");
-        return processRequestLogic(requestData);
+    private CommandResult processRequest(Request request) {
+        // logger.info("in processRequest method");
+        return processRequestLogic(request);
     }
 
-    private CommandResult processRequestLogic(Request requestData) {
+    private CommandResult processRequestLogic(Request request) {
         CommandResult response;
-        logger.info("processing request started");
-        //System.out.println("req data 0 element " + requestData.getCommandAndArgs()[0]);
+        // logger.info("processing request started");
+        //System.out.println("req data 0 element " + request.getCommandAndArgs()[0]);
 
-        if (requestData.getCommandAndArgs()[0].equals("AuthenticateRequest")) {
-            System.out.println("auth if");
-            if (jdbcProvider.userIsRegistered(requestData.getUser().getUsername())) {
-                System.out.println("login if");
-                if (jdbcProvider.checkUserPassword(requestData.getUser())) {
-                    System.out.println("pswd if");
+        if (request.getCommandAndArgs()[0].equals("AuthenticateRequest")) {
+            // System.out.println("auth if");
+            if (JdbcProvider.userIsRegistered(request.getUser().getUsername())) {
+                // System.out.println("login if");
+                if (JdbcProvider.checkUserPassword(request.getUser())) {
+                    // System.out.println("pswd if");
                     response = new CommandResult(true, null, "Authentication");
                     return response;
                 } else {
-                    System.out.println("else pswd");
+                    // System.out.println("else pswd");
                     response = new CommandResult(false, "Incorrect password", "Authentication");
                     return response;
                 }
             } else {
-                System.out.println("else login");
+                // System.out.println("else login");
                 response = new CommandResult(false, "No user found with such name", "Authentication");
                 return response;
             }
         }
 
-        if (requestData.getCommandAndArgs()[0].equals("RegistrateRequest")) {
-            System.out.println("reg if");
-            if (!jdbcProvider.userIsRegistered(requestData.getUser().getUsername())) {
-                System.out.println("not registrated if");
+        else if (request.getCommandAndArgs()[0].equals("RegistrateRequest")) {
+            // System.out.println("reg if");
+            if (!JdbcProvider.userIsRegistered(request.getUser().getUsername())) {
+                // System.out.println("not registrated if");
                 response = new CommandResult(true, null, "Registration");
 
-                jdbcProvider.registerUser(requestData.getUser());
-                logger.info("user " + requestData.getUser().getUsername() + " registered");
+                JdbcProvider.registerUser(request.getUser());
+                // logger.info("user " + request.getUser().getUsername() + " registered");
                 return response;
             } else {
-                System.out.println("else registrated");
+                // System.out.println("else registrated");
                 response = new CommandResult(false, "This username is not available", "Registration");
                 return response;
             }
         }
+        else{
+            // try {
+                // logger.info("before requestHandler.processRequest");
+                // response = requestHandler.processRequest(request);
+                // logger.info("after requestHandler processRequest");
+                // return response;
 
-        System.out.println("not any of ifs");
-        RequestHandler requestHandler = new RequestHandler(commandManager);
-        try {
-            logger.info("before requestHandler.processRequest");
-            response = requestHandler.processRequest(requestData);
-            logger.info("after requestHandler processRequest");
-            return response;
-        } catch (IOException e) {
-            logger.error("IO exception during processing request: " + e.getMessage());
-            return new CommandResult(false, "Internal server error", "Processing");
+                // String commandFromRequest = request.getCommandAndArgs()[0];
+                // logger.info("command from request: " + commandFromRequest);
+                return commandManager.executeCommand(request);
+            // }
+            // catch (IOException e) {
+                // logger.error("IO exception during processing request: " + e.getMessage());
+                // return new CommandResult(false, "Internal server error", "Processing");
+            // }
         }
     }
 
 
-    public synchronized void sendResponse(SocketChannel clientSocket, CommandResult response) throws IOException {
-        logger.info("in send response ");
+    public void sendResponse(SocketChannel clientSocket, CommandResult response) throws IOException {
+        // logger.info("in send response ");
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream)) {
             objectOutputStream.writeObject(response);
             objectOutputStream.flush();
         }
-        logger.info("oos flushed");
+        // logger.info("oos flushed");
         byte[] data = byteArrayOutputStream.toByteArray();
         ByteBuffer sizeBuffer = ByteBuffer.allocate(Integer.BYTES);
         sizeBuffer.putInt(data.length);
         sizeBuffer.flip();
-        logger.info("before writing to clientSocket sizeBuffer");
+        // logger.info("before writing to clientSocket sizeBuffer");
         clientSocket.write(sizeBuffer);
         // logger.info("after writing to clientSocket sizeBuffer");
         // Отправляем размер данных
         ByteBuffer dataBuffer = ByteBuffer.wrap(data);
         while (dataBuffer.hasRemaining()) {
-            logger.info("in sending response while loop");
+            // logger.info("in sending response while loop");
                 clientSocket.write(dataBuffer);
             }  // Отправляем сами данные
             logger.info("Response sent to " + clientSocket.getRemoteAddress());
@@ -295,21 +305,18 @@ public class Server {
             InputHandler inputHandler = new InputHandler();
             String[] serverInputArray = inputHandler.readByBytes();
             String serverInput = serverInputArray == null ? null : serverInputArray[0];
+            Request serverRequest = new Request(serverInputArray, null, null);
             if (serverInput == null){
                 return;
             }
             switch (serverInput) {
                 case "exit":
                     logger.info("INPUT: exit");
-                    CommandResult exitResult = commandManager.executeCommand(serverInputArray);
-                    logger.info("Saving before exiting...");
-                    logger.info(exitResult);
-                    commandManager.executeCommand(serverInputArray);
-                    return;
-                case "save":
-                    logger.info("INPUT: save");
-                    CommandResult result = commandManager.executeCommand(serverInputArray);
-                    logger.info(result);
+                    // CommandResult exitResult = commandManager.executeCommand(serverInputArray);
+                    // logger.info(exitResult);
+                    // commandManager.executeCommand(serverInputArray);
+                    Exit exit = new Exit(null, null);
+                    exit.execute(serverRequest);
                     return;
                 default:
                     logger.info("INPUT: " + serverInput);

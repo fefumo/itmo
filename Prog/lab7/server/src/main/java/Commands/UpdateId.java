@@ -4,7 +4,12 @@
 
 package Commands;
 
+import Collection.CollectionObject.MusicBand;
 import Communication.CommandResult;
+import Communication.Request;
+import DBRelated.JdbcProvider;
+import Exceptions.CommandException;
+import Managers.CollectionManager;
 
 /**
  * This Java class defines a command to update the ID of a music band in a
@@ -23,45 +28,21 @@ public class UpdateId extends Command {
      * check client for further info
      */
     @Override
-    public CommandResult execute(String[] args) {
-        // if (args.length != 1)
-        //     throw new CommandException("There has to be 1 argument (type: long)");
-        // CollectionManager manager = CollectionManager.getInstance();
-        // InputHandler inputHandler = new InputHandler();
-        // MusicBandBuilder musicBandBuilder = MusicBandBuilder.getInstance();
-        // String out = "";
-
-        // if (manager.getCollection().isEmpty()) {
-        //     throw new EmptyCollectionException(
-        //             "Fail: Collection is empty - cannot do anything to it \nReturning to starting screen...");
-        // } else {
-        //     try {
-        //         long userInput = Long.parseLong(args[0]);
-        //         if (manager.getBandById(userInput) != null){
-        //             MusicBand band = manager.getBandById(userInput);
-        //             while (true) {       
-        //                 System.out.println("type id you want to change to");
-        //                 Long finalId = inputHandler.getLongInput();
-        //                 if (manager.getBandById(finalId) == null) {
-        //                     band.setId(finalId);
-        //                     musicBandBuilder.getPreviousIds().remove(userInput);
-        //                     out = out.concat("\n--------------------------\n");
-        //                     out = out.concat(band.getName() + "'s id has been chaged\n");
-        //                     break;
-        //                 } else {
-        //                     throw new RuntimeException("This id already exists. Try another.");
-        //                 }
-        //             }
-        //         }
-        //         else{
-        //             throw new NoSuchElementException("There is no such musicBand");
-        //         }
-        //     } catch (NumberFormatException e) {
-        //         throw new CommandException("There has to be 1 argument (int) provided");
-        //     } catch (NoSuchElementException e) {
-        //         throw new CommandException(e.getMessage());
-        //     }
-        // }
-        return null;
+    public CommandResult execute(Request request) {
+        if (request.getCommandAndArgs().length != 2)
+            throw new CommandException("There has to be 1 argument (type: long)");
+        MusicBand musicBandFromRequest = request.getMusicBand();
+        Long idFromRequest = Long.parseLong(request.getCommandAndArgs()[1]);
+        CollectionManager collectionManager = CollectionManager.getInstance();
+        if (JdbcProvider.updateId(request.getUser(), idFromRequest, musicBandFromRequest).isSuccess()){
+            for (MusicBand mb : collectionManager.getCollection()){
+                if(mb.getId() == idFromRequest && mb.getCreator() == musicBandFromRequest.getCreator()){
+                    collectionManager.getCollection().remove(mb);
+                    collectionManager.addElementToCollection(musicBandFromRequest);
+                    return new CommandResult(true, null, "Element has been updated");
+                }
+            }
+        }
+        return new CommandResult(false, "Check your argument and access rights of band you want to change", name);
     }
 }

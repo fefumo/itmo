@@ -14,7 +14,7 @@ import Collection.CollectionObject.MusicBand;
 import Communication.CommandResult;
 
 public class IdManager {
-    private Set<Long> idSet = new HashSet<>();
+    private static Set<Long> idSet = new HashSet<>();
     private static IdManager singleton;
     private static long currentId = 0;
 
@@ -29,15 +29,15 @@ public class IdManager {
      * idSet это множество, где хранятся доступные id, которые попадают туда при удалении объекта из коллекции.
      */
     public long genereateId(){
-            long newId;
-            if (!idSet.isEmpty()) {
-                newId = idSet.iterator().next();
-                idSet.remove(newId);
-            } else {
-                currentId++;
-                newId = currentId;
-            }
-            return newId;
+            // long newId;
+            // if (!idSet.isEmpty()) {
+            //     newId = idSet.iterator().next();
+            //     idSet.remove(newId);
+            // } else {
+            //     currentId++;
+            //     newId = currentId;
+            // }
+            return ++currentId;
     } 
 
     public void deleteId(long id){

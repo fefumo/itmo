@@ -1,9 +1,24 @@
 package Managers;
 
 import java.util.HashMap;
-import java.util.Arrays;
-import Commands.*;
+import java.util.concurrent.locks.ReentrantLock;
+
+import Commands.Add;
+import Commands.Clear;
+import Commands.Command;
+import Commands.ExecuteScript;
+import Commands.Exit;
+import Commands.GroupCountingById;
+import Commands.Help;
+import Commands.History;
+import Commands.Info;
+import Commands.MinByNumberOfParticipants;
+import Commands.RemoveById;
+import Commands.RemoveLower;
+import Commands.Show;
+import Commands.UpdateId;
 import Communication.CommandResult;
+import Communication.Request;
 import Exceptions.CommandException;
 import Exceptions.InvalidCommandException;
 
@@ -15,8 +30,8 @@ import Exceptions.InvalidCommandException;
 public class CommandManager {
 
     private static HashMap<String, Command> commands = new HashMap<>();
-    String errString;
-    CommandResult result;
+    ReentrantLock locker = new ReentrantLock();
+
     /**
      * The `buildCommands` function initializes and adds various command objects to
      * a map for a
@@ -34,7 +49,7 @@ public class CommandManager {
         RemoveById removeById = new RemoveById("remove_by_id",
                 "remove_by_id {id} remove an element from a collection by its id");
         Clear clear = new Clear("clear", "clear collection");
-        Save save = new Save("save", "save the collection to a file");
+        // Save save = new Save("save", "save the collection to a file");
         ExecuteScript executeScript = new ExecuteScript("execute_script","execute_script {file_name} read and execute a script from the specified file. The script contains commands in the same form in which the user enters them interactively.");
         Exit exit = new Exit("exit", "end the program (without saving to a file)");
         RemoveLower removeLower = new RemoveLower("remove_lower",
@@ -53,7 +68,7 @@ public class CommandManager {
         commands.put(updateId.getName(), updateId);
         commands.put(removeById.getName(), removeById);
         commands.put(clear.getName(), clear);
-        commands.put(save.getName(), save);
+        // commands.put(save.getName(), save);
         commands.put(executeScript.getName(), executeScript);
         commands.put(exit.getName(), exit);
         commands.put(removeLower.getName(), removeLower);
@@ -77,20 +92,30 @@ public class CommandManager {
      *                command is null and prints a
      *                message if it is. It then splits the command
      */
-    public CommandResult executeCommand(String[] commandAndArgs) {
-            String command = commandAndArgs[0];
-            String[] args = Arrays.copyOfRange(commandAndArgs, 1, commandAndArgs.length);
-            History.addCommandToHistory(command);
-            try {
-                if (!(commands.containsKey(command))) {
-                    throw new InvalidCommandException("No such command. Try again");
-                }
-                result = commands.get(command).execute(args);
-            }catch (CommandException e){
-                result = new CommandResult(false, e.getMessage(), command);
-            }catch (NullPointerException e){
-                result = new CommandResult(false, "Null passed", command);
+    public CommandResult executeCommand(Request request) {
+        CommandResult result;
+        String[] commandAndArgs = request.getCommandAndArgs();
+        String command = commandAndArgs[0];
+        // String[] args = Arrays.copyOfRange(commandAndArgs, 1, commandAndArgs.length);
+        History.addCommandToHistory(command);
+        try {
+            if (!(commands.containsKey(command))) {
+                throw new InvalidCommandException("No such command. Try again");
             }
+            if (command.equals("add")|| command.equals("remove_by_id") || command.equals("remove_lower") || command.equals("clear") || command.equals("update_id")){
+                locker.lock();
+                result = commands.get(command).execute(request);
+                locker.unlock();
+            }
+            else{
+              result = commands.get(command).execute(request);  
+            }
+            
+        }catch (CommandException e){
+            result = new CommandResult(false, e.getMessage(), command);
+        }catch (NullPointerException e){
+            result = new CommandResult(false, "Null passed", command, e.getMessage());
+        }
         return result;
     }
 

@@ -38,6 +38,8 @@ public class MusicBand implements Comparable<MusicBand>, Serializable {
     private MusicGenre genre; // The field cannot be null
     @XmlElement(required = true)
     private Label label; // The field can be null (actually, it cannot, because of the Bands field)
+    private String creator;
+    
     /**
      * Instantiates a new Music band.
      *
@@ -53,7 +55,7 @@ public class MusicBand implements Comparable<MusicBand>, Serializable {
      */
     public MusicBand(long id, String name, Coordinates coordinates, java.util.Date creationDate,
             int numberOfParticipants, Long albumsCount,
-            ZonedDateTime establishmenDate, MusicGenre genre, Label label) {
+            ZonedDateTime establishmenDate, MusicGenre genre, Label label, String creator) {
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
@@ -63,6 +65,7 @@ public class MusicBand implements Comparable<MusicBand>, Serializable {
         this.establishmentDate = establishmenDate;
         this.genre = genre;
         this.label = label;
+        this.creator = creator;
     }
 
     /**
@@ -98,7 +101,7 @@ public class MusicBand implements Comparable<MusicBand>, Serializable {
         return "MusicBand's id: " + id + ", name: " + name + ", coordinates: " + coordinates
                 + ", created: " + creationDate + ", number_of_participants: " + numberOfParticipants
                 + ", albums_count: " + albumsCount + ", established: " + establishmentDate
-                + ", genre: " + genre + ", label: " + label.getName() + " with " + label.getBands() + " bands";
+                + ", genre: " + genre + ", label: " + label.getName() + " with " + label.getBands() + " bands. Creator:" + creator;
 
     }
 
@@ -262,6 +265,14 @@ public class MusicBand implements Comparable<MusicBand>, Serializable {
      */
     public void setCreationDate(java.util.Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 
 }

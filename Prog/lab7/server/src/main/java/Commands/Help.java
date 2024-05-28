@@ -3,6 +3,7 @@ package Commands;
 import java.util.stream.Collectors;
 
 import Communication.CommandResult;
+import Communication.Request;
 import Exceptions.CommandException;
 import Managers.CommandManager;
 
@@ -23,14 +24,11 @@ public class Help extends Command {
      * available commands with their descriptions.
      */
     @Override
-    public CommandResult execute(String[] args) {
+    public CommandResult execute(Request request) {
         String out = "";
-        if (args.length != 0)
+        if (request.getCommandAndArgs().length != 1)
             throw new CommandException("There has to be no arguments");
         out = out.concat("\nhere is the list of available commands: \n");
-        // for (String key : CommandManager.getCommandsHashMap().keySet()) {
-        //     out = out.concat("    -" + key + ": " + CommandManager.getCommandsHashMap().get(key).getDescr() + "\n");
-        // }
         out = CommandManager.getCommandsHashMap().keySet().stream()
             .map(key -> "  -" + key + ": " + CommandManager.getCommandsHashMap().get(key).getDescr())
             .collect(Collectors.joining("\n"));

@@ -5,6 +5,7 @@
 package Commands;
 
 import Communication.CommandResult;
+import Communication.Request;
 
 /**
  * The `ExecuteScript` class in Java executes a script file while checking for
@@ -23,7 +24,7 @@ public class ExecuteScript extends Command {
      * handling exceptions related to file access and recursion detection.
      */
     @Override
-    public CommandResult execute(String[] args) {
+    public CommandResult execute(Request request) {
         // if (args.length != 1)
         //     throw new ArrayIndexOutOfBoundsException("There has to be 1 argument - path to file ");
         // InputHandler inputHandler = new InputHandler();

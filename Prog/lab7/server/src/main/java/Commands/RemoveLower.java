@@ -1,12 +1,14 @@
 package Commands;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import Collection.CollectionObject.MusicBand;
 import Communication.CommandResult;
+import Communication.Request;
+import Communication.User;
+import DBRelated.JdbcProvider;
 import Exceptions.CommandException;
 import Exceptions.EmptyCollectionException;
 import Managers.CollectionManager;
@@ -31,70 +33,42 @@ public class RemoveLower extends Command {
      * @return 
      */
     @Override
-    public CommandResult execute(String[] args) {
+    public CommandResult execute(Request request) {
         CollectionManager manager = CollectionManager.getInstance();
-        MusicBand musicBand;
-        // boolean flag = true;
-        CommandResult commandResult = new CommandResult(false, null, null);
+        CommandResult commandResult = new CommandResult(false, "command did not execute", "check access rights of bands you are trying to delete");
         IdManager idManager = IdManager.getInstance();
-        //List<Long> list = new ArrayList<>();
 
-        if (args.length != 1)
+        if (request.getCommandAndArgs().length != 2)
             throw new CommandException("There has to be 1 argument (type: long)");
         if (manager.getCollection() == null)
             throw new EmptyCollectionException("There has to be a collection with elements. Try \"add\" command");
         
         try {
-            long id = Long.parseLong(args[0]);
-            musicBand = manager.getCollectionById(id);
-        
-            List<Long> idList = manager.getCollection().stream()
-                    .filter(musicBandToDelete -> musicBandToDelete.compareTo(musicBand) < 0)
-                    .map(MusicBand::getId)
-                    .collect(Collectors.toList());
-        
-            boolean flag = idList.isEmpty();
-        
-            idList.forEach(idManager::deleteId);
-            idList.forEach(id2 -> manager.getCollection().remove(manager.getBandById(id2)));
-
-            if (flag) {
-                commandResult = new CommandResult(true, null, this.name, "There is no band which id is less than the provided one.");
-            } else {
-                commandResult = new CommandResult(true, null, this.name, "Band(s) with id(s) " + Arrays.toString(idList.toArray()) + " has(have) been removed");
+            long id = Long.parseLong(request.getCommandAndArgs()[1]);
+            if (JdbcProvider.removeLower(request.getUser(), id).isSuccess()){
+                User requestUser = request.getUser();
+                List<Long> idList = manager.getCollection().stream()
+                        .filter(mb -> mb.getId() < id && mb.getCreator().equals(requestUser.getUsername()))
+                        .map(MusicBand::getId)
+                        .collect(Collectors.toList());
+                        
+                boolean flag = idList.isEmpty();
+                        
+                idList.forEach(idManager::deleteId);
+                idList.forEach(idToDelete -> manager.getCollection().remove(manager.getBandById(idToDelete)));
+                        
+                if (flag) {
+                    commandResult = new CommandResult(true, null, this.name, "There is no band which id is less than the provided one and created by the user.");
+                } else {
+                    commandResult = new CommandResult(true, null, this.name, "Band(s) with id(s) " + idList + " has(have) been removed");
+                }
             }
         } catch (NumberFormatException e) {
             throw new CommandException("There has to be an argument (int) provided");
         } catch (NoSuchElementException e) {
             throw new CommandException(e.getMessage());
         }
-        // try {
-        //     long id = Long.parseLong(args[0]);
-        //     musicBand = manager.getCollectionById(id);
-        //     Iterator<MusicBand> iter = manager.getCollection().iterator();
-        //     while (iter.hasNext()) {
-        //         MusicBand musicBandToDelete = iter.next();
-        //         if (musicBandToDelete.compareTo(musicBand) < 0) {
-        //             idManager.deleteId(musicBandToDelete.getId());
-        //             /*
-        //             THIS IS SO IMPORTANT NOT TO GET ConcurrentModificationException here!!!!!!!!!
-        //             manager.getCollection().remove(musicBandToDelete.getId()) WILL RESOLVE IN AN
-        //             EXCEPTION!
-        //             */
-        //             iter.remove();
-        //             flag = false;
-        //             list.add(musicBandToDelete.getId());
-        //         }
-        //     }
-        //     if (flag == true){
-        //         commandResult = new CommandResult(true, null, this.name, "There is no band which id is less than the provided one.");
-        //     }
-        //     commandResult = new CommandResult(true, null, this.name, "Band(s) with id(s) " + Arrays.toString(list.toArray()) + " has(have) been removed");
-        // } catch (NumberFormatException e) {
-        //     throw new CommandException("There has to be an argument (int) provided");
-        // } catch (NoSuchElementException e) {
-        //     throw new CommandException(e.getMessage());
-        // }
+        
         return commandResult;
     }
 }

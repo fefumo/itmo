@@ -4,6 +4,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import Communication.CommandResult;
+import Communication.Request;
 import Exceptions.CommandException;
 
 /**
@@ -33,7 +34,7 @@ public class History extends Command {
      *           buffer that stores a history of commands with a fixed size defined
      *           by `HISTORY_SIZE`.
      */
-    public static void addCommandToHistory(String st) {
+    public static synchronized void addCommandToHistory(String st) {
         if (headIndex == -1) {
             headIndex = 0;
             tailIndex = 0;
@@ -53,9 +54,9 @@ public class History extends Command {
      * there are no commands in history.
      */
     @Override
-    public CommandResult execute(String[] args) {
+    public CommandResult execute(Request request) {
         String out = "";
-        if (args.length != 0)
+        if (request.getCommandAndArgs().length != 1)
             throw new CommandException("There has to be no arguments");
 
         out = out.concat("\nHere is your history command list: \n----------------------------------\n");

@@ -1,6 +1,12 @@
 package Commands;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import Collection.CollectionObject.MusicBand;
 import Communication.CommandResult;
+import Communication.Request;
 import Exceptions.CommandException;
 import Exceptions.EmptyCollectionException;
 import Managers.CollectionManager;
@@ -21,22 +27,21 @@ public class Info extends Command {
      * and then prints information about the collection.
      */
     @Override
-    public CommandResult execute(String[] args) {
+    public CommandResult execute(Request request) {
         CollectionManager manager = CollectionManager.getInstance();
         String out = "";        
-        if (args.length != 0)
+        if (request.getCommandAndArgs().length != 1)
             throw new CommandException("There has to be no arguments");
         if (manager.getCollection() == null || manager.getCollection().isEmpty())
             throw new EmptyCollectionException("There has to be a collection with elements. Try \"add\" command");
 
-        // out = out.concat("   -Collection of type: " + manager.getCollection().getClass().toString()
-        //         + "\n   -Number of elements: " + manager.getCollection().size()
-        //         + "\n   -Created at: " + manager.getCollectionInitilizationDate());
-        out = manager.getCollection().stream()
-                                .collect(StringBuilder::new,
-                                        (sb, mb) -> sb.append("   -").append(mb).append("n"),
+        List<MusicBand> sortedList = new ArrayList<>(manager.getCollection());
+        Collections.sort(sortedList);
+        out = sortedList.stream()
+                            .collect(StringBuilder::new,
+                                        (sb, mb) -> sb.append("   -").append(mb).append("\n"),
                                         StringBuilder::append)
-                                .toString();
+                            .toString();                            
         
         return new CommandResult(true, null, this.name, out);
     }

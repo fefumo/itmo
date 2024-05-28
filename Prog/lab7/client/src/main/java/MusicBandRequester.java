@@ -17,6 +17,7 @@ import Collection.CollectionObject.MusicBand;
 import Collection.CollectionObject.MusicGenre;
 import Collection.Validators.AlbumsValidator;
 import Collection.Validators.NameValidator;
+import Communication.User;
 
 /**
  * The Music band requester class is used to perform operations with requesting Music Bands from user and non-user requesters.
@@ -42,9 +43,10 @@ public class MusicBandRequester {
      *
      * @return the music band
      */
-    public MusicBand requestUserBand() {
+    public MusicBand requestUserBand(User user) {
         InputHandler inputHandler = new InputHandler();
         MusicBand newBand = musicBandBuilder.build();
+        newBand.setCreator(user.getUsername());
 
         // name
         while (true) {
@@ -76,7 +78,7 @@ public class MusicBandRequester {
                 if (intUserInput == null) {
                     System.out.println("Number can't be null.");
                 } else {
-                    if (intUserInput < 0) {
+                    if (intUserInput <= 0) {
                         System.out.println("Number has to be more than 0.");
                     } else {
                         newBand.setNumberOfParticipants(intUserInput);
@@ -143,16 +145,14 @@ public class MusicBandRequester {
      * @return the music band
      * @throws IOException 
      */
-    public MusicBand requestNonUserBand(BufferedReader br) throws IOException {
+    public MusicBand requestNonUserBand(BufferedReader br, User user) throws IOException {
         bufferedReader = br;
-
         System.out.println();
         System.out.println("--------------------------");
         System.out.println("Add command for nonUserBand has started...");
         boolean validArguments = true;
         MusicBand nonUserBand = musicBandBuilder.build();
-        // InputHandler inputHandler = ih;
-        // inputHandler.setInputFromFile(file);
+        nonUserBand.setCreator(user.getUsername());
 
         // name
         String[] name = getInput();
@@ -192,7 +192,7 @@ public class MusicBandRequester {
                 validArguments = false;
                 throw new NumberFormatException();
             }
-            else if (number < 0){ //это просто отвратительно что я не мог поставить в первый if просто == null || < 0 из-за NullPointerException... 
+            else if (number < 0){ //это просто отвратительно что я не мог поставить в первый if просто "== null || < 0" из-за NullPointerException... 
                 validArguments = false;
                 throw new NullPointerException();
             }
