@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.sql.Types;
-import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -129,10 +128,10 @@ public class JdbcProvider {
                          ")";
 			    stmt.execute(usersQuery);
 
-                String musicBandsQuery = "CREATE TABLE IF NOT EXISTS music_bands ( id SERIAL PRIMARY KEY NOT NULL," +
+                String musicBandsQuery = "CREATE TABLE IF NOT EXISTS music_bands ( id BIGSERIAL PRIMARY KEY NOT NULL," +
                             "name VARCHAR(255) NOT NULL," +
                             "x INT NOT NULL , y INT NOT NULL," +
-                            "creationDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP," +
+                            "creationDate DATE NOT NULL DEFAULT CURRENT_DATE," +
                             "numberOfParticipants INT CHECK (numberOfParticipants > 0)," +
                             "albumsCount BIGINT CHECK (albumsCount > 0)," +
                             "establishmentDate TIMESTAMP WITH TIME ZONE," + 
@@ -168,9 +167,9 @@ public class JdbcProvider {
             p.setFloat(2, musicBand.getCoordinates().getX());
             // logger.info("3");
             p.setDouble(3, musicBand.getCoordinates().getY());
-            Timestamp creationDate = Timestamp.from(Instant.now());
+            java.sql.Date creationDate = new java.sql.Date(musicBand.getCreationDate().getTime());
             // logger.info("4");
-            p.setTimestamp(4, creationDate);
+            p.setDate(4, creationDate);
             // logger.info("5");
             p.setInt(5, musicBand.getNumberOfParticipants());
             
@@ -349,7 +348,7 @@ public class JdbcProvider {
     }
 
     public synchronized static CommandResult updateId(User user, long id, MusicBand musicBand){
-        String query = "UPDATE music_bands SET name = ?, x = ?, y = ?, creationDate = ?, numberOfParticipants = ?, albumsCount = ?, establishmentDate = ?, genre = ?, label_name = ?, label_number_of_bands = ?, creator_name = ?, "+
+        String query = "UPDATE music_bands SET name = ?, x = ?, y = ?, creationDate = ?, numberOfParticipants = ?, albumsCount = ?, establishmentDate = ?, genre = ?, label_name = ?, label_number_of_bands = ?, creator_name = ? "+
         "WHERE (id = ? AND creator_name = ?)";
         try {
 			PreparedStatement p = connection.prepareStatement(query);
@@ -382,21 +381,37 @@ public class JdbcProvider {
             p.setLong(10, musicBand.getLabel().getBands());
             p.setString(11, musicBand.getCreator());
 
-            p.setString(12, user.getUsername());
-            p.setLong(13, id);
+            p.setLong(12, id);
+            p.setString(13, user.getUsername());
+
+            //logger.debug("Executing query: " + query + "\n");
+            // logger.debug("Parameters: name=" + musicBand.getName() + "\n" +
+                // ", x=" + musicBand.getCoordinates().getX() + "\n" +
+                // ", y=" + musicBand.getCoordinates().getY() + "\n" +
+                // ", creationDate=" + new java.sql.Date(musicBand.getCreationDate().getTime()) + "\n" +
+                // ", numberOfParticipants=" + musicBand.getNumberOfParticipants() + "\n" +
+                // ", albumsCount=" + musicBand.getAlbumsCount() + "\n" +
+                // ", establishmentDate=" + establishmentDate + "\n" +
+                // ", genre=" + musicBand.getGenre().name() + "\n" +
+                // ", labelName=" + labelName + "\n" +
+                // ", labelBands=" + musicBand.getLabel().getBands() + "\n" +
+                // ", creatorName=" + musicBand.getCreator() + "\n" +
+                // ", id=" + id + "\n" +
+                // ", user=" + user.getUsername());
 
             int result = p.executeUpdate();
-            if (result == 1){
-                return new CommandResult(true, null, "updateId");
-            }
-            else if (result == 0){
+            if (result == 0){
+                logger.info("update_id command did not change anything");
                 return new CommandResult(false, "Command did not change anything", "updateId");
+            }
+            else{
+                logger.info("update_id command executed properly");
+                return new CommandResult(true, null, "updateId");
             }
 		} catch (SQLException e) {
 			e.printStackTrace();
             logger.error("Query execution failed during updateID " + e.getMessage());
             return new CommandResult(false, e.getMessage(), "updateId");
 		}
-        return new CommandResult(false, null, "updateId");
     }
 }

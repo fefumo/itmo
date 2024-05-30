@@ -53,12 +53,6 @@ public class Server {
             server.bind(new InetSocketAddress(host, port));
             logger.info("Server started running");
             
-            Thread inputThread = new Thread(() -> {
-                    while (true) {
-                        processInput();
-                    }
-            });
-            inputThread.start();
 
             while (true) {
                 SocketChannel client = server.accept();
@@ -84,6 +78,13 @@ public class Server {
         JdbcProvider.loadCollectionToMemory();
         logger.info("Database is initalised and loaded to memory");
         IdManager.getInstance().reloadIds(CollectionManager.getInstance().getCollection());
+        Thread inputThread = new Thread(() -> {
+            while (true) {
+                processInput();
+            }
+            });
+        inputThread.start();
+        logger.info("Started processing input");
         logger.info("Session is initialised");
     }
 
@@ -91,7 +92,7 @@ public class Server {
             while (client.isOpen()) {
                 // logger.info("before read request in processing client block");
                 Request request = null;
-                Future<Request> futureRequest = readPool.submit(() -> readRequest(client));
+            Future<Request> futureRequest = readPool.submit(() -> readRequest(client));
 
                 try {
                     // request = readRequest(client);
@@ -104,7 +105,7 @@ public class Server {
                     try {
 						logger.warn("client" + client.getRemoteAddress() + "has disconnected");
 					} catch (IOException e) {
-						System.out.println("BRUUUUUH");
+						// logger.info("IOException during client disconnecting: " + e.getMessage());
 					}
                     break;
                 }

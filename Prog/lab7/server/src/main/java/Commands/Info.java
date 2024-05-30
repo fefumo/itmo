@@ -1,10 +1,5 @@
 package Commands;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import Collection.CollectionObject.MusicBand;
 import Communication.CommandResult;
 import Communication.Request;
 import Exceptions.CommandException;
@@ -35,15 +30,10 @@ public class Info extends Command {
         if (manager.getCollection() == null || manager.getCollection().isEmpty())
             throw new EmptyCollectionException("There has to be a collection with elements. Try \"add\" command");
 
-        List<MusicBand> sortedList = new ArrayList<>(manager.getCollection());
-        Collections.sort(sortedList);
-        out = sortedList.stream()
-                            .collect(StringBuilder::new,
-                                        (sb, mb) -> sb.append("   -").append(mb).append("\n"),
-                                        StringBuilder::append)
-                            .toString();                            
+        out += ("\nnumber of bands: " + CollectionManager.getInstance().getCollection().size()
+        + "\nType: " + CollectionManager.getInstance().getCollection().getClass()
+        + "\nCreationDate: " + CollectionManager.getInstance().getCollectionInitilizationDate());                    
         
         return new CommandResult(true, null, this.name, out);
     }
-
 }

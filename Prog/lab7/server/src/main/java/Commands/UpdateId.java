@@ -34,9 +34,11 @@ public class UpdateId extends Command {
         MusicBand musicBandFromRequest = request.getMusicBand();
         Long idFromRequest = Long.parseLong(request.getCommandAndArgs()[1]);
         CollectionManager collectionManager = CollectionManager.getInstance();
+        System.out.println("is true or not wtf maaaan: "+ JdbcProvider.updateId(request.getUser(), idFromRequest, musicBandFromRequest).isSuccess());
         if (JdbcProvider.updateId(request.getUser(), idFromRequest, musicBandFromRequest).isSuccess()){
             for (MusicBand mb : collectionManager.getCollection()){
-                if(mb.getId() == idFromRequest && mb.getCreator() == musicBandFromRequest.getCreator()){
+                if(mb.getId() == idFromRequest && mb.getCreator().equals(musicBandFromRequest.getCreator())){
+                    System.out.println("IN IF UPDATEID SDKJGADKJGASDKGASSADKJFANFKJSADF;KAJF;ASKJFAS;KDFJAS;FJASFASDFASDFASD");
                     collectionManager.getCollection().remove(mb);
                     collectionManager.addElementToCollection(musicBandFromRequest);
                     return new CommandResult(true, null, "Element has been updated");

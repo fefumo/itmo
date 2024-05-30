@@ -27,7 +27,6 @@ public class Client {
     private final String host = "127.0.0.1";
     private final int port = 2804;
     private SocketChannel clientSocket;
-    private ByteBuffer buffer;
     private InputHandler clientInputHandler = new InputHandler();
     private MusicBandRequester musicBandRequester = new MusicBandRequester();
     private Stack<String> processedFiles = new Stack<>(); 
@@ -36,24 +35,26 @@ public class Client {
     Scanner scanner = new Scanner(System.in);
 
     public void run() {
-
+        System.out.println("Initializing connection, please wait");
         try {
-            // SocketChannel clientSocket;
             clientSocket = SocketChannel.open();
-            //clientSocket.configureBlocking(false);
-            System.out.println("Initializing connection, please wait");
             clientSocket.connect(new InetSocketAddress(host, port));
+            clientSocket.finishConnect();
+        } catch (IOException e) {
+            System.out.println("Server is not running or the parameters are wrong. Check server status, provided arguments and try again.");
+            System.exit(1);
+        }
+        
+        //authentication
+        try {
+			startAuthentication();
+		} catch (IOException e) {
+			System.out.println("Exception during authentication: " + e.getMessage());
+		}
+        
+        while (true) {
             try {
-                clientSocket.finishConnect();
-            } catch (IOException e) {
-                System.out.println("Server is not running or the parameters are wrong. Try again.");
-                System.exit(1);
-            }
-            
-            //authentication
-            startAuthentication();
-            while (true) {
-                System.out.println("in main while true");
+                // System.out.println("in main while true");
                 String[] clientInput = clientInputHandler.getInput();
                 if (clientInput == null){
                     System.out.println("Null sent. Nothing will be executed.");
@@ -84,25 +85,34 @@ public class Client {
                             break;
                     }
                 }
+            } catch (IOException e) {
+                System.out.println("Connection is lost. Waiting for server...");
+                while (true) {
+                    try {
+                        clientSocket = SocketChannel.open();
+                        System.out.println("Reconnecting...");
+                        clientSocket.connect(new InetSocketAddress(host, port));
+                        clientSocket.finishConnect();
+                        System.out.println("Reconnected to the server.");
+                        startAuthentication();
+                        break;
+                    } catch (IOException re) {
+                        System.out.println("Failed to reconnect. Retrying in 5 seconds...");
+                        try {
+                            Thread.sleep(5000);
+                        } catch (InterruptedException ie) {
+                            Thread.currentThread().interrupt();
+                            System.out.println("Thread was interrupted, failed to complete operation");
+                            return;
+                        }
+                    }
+                }
+                // run();
             }
-        } catch (IOException e) {
-            // e.printStackTrace();
-            System.out.println("Connection is lost.");
-        } catch (NullPointerException e){
-            e.printStackTrace();
-        } catch (ArrayIndexOutOfBoundsException e){
-            System.out.println("Not enough or too much arguments provided");
-        } catch (NotYetConnectedException e){
-            e.printStackTrace();
-        } 
-        catch (ClassNotFoundException e) {
-            System.out.println("ClassNotFoundException, info: " + e.getMessage());
-		} catch (InterruptedException e) {
-            System.out.println("InterruptedException, info: " + e.getMessage());
         }
     }
 
-    private void send (Request request) throws IOException, NotYetConnectedException{
+    private void send (Request request) throws IOException{
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
         objectOutputStream.writeObject(request);
@@ -121,49 +131,41 @@ public class Client {
         // System.out.println("send request ended.");
     }
     
-    private CommandResult readResponse() {
+    private CommandResult readResponse() throws IOException {
         // System.out.println("in readresponse");
-        try  {
-            InputStream inputStream = Channels.newInputStream(clientSocket);
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            // Чтение размера данных
-            ByteBuffer sizeBuffer = ByteBuffer.allocate(Integer.BYTES);
-            while (sizeBuffer.hasRemaining()) {
-                int bytesRead = clientSocket.read(sizeBuffer);
-                if (bytesRead == -1) {
-                    throw new IOException("Connection closed prematurely");
-                }
+        InputStream inputStream = Channels.newInputStream(clientSocket);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        // Чтение размера данных
+        ByteBuffer sizeBuffer = ByteBuffer.allocate(Integer.BYTES);
+        while (sizeBuffer.hasRemaining()) {
+            int bytesRead = clientSocket.read(sizeBuffer);
+            if (bytesRead == -1) {
+                throw new IOException("Connection closed prematurely");
             }
-            sizeBuffer.flip();
-            int dataSize = sizeBuffer.getInt();
-    
-            // Чтение данных заданного размера
-            byte[] buffer = new byte[BUFFERSIZE];
-            int totalBytesRead = 0;
-            while (totalBytesRead < dataSize) {
-                int bytesRead = inputStream.read(buffer, 0, Math.min(buffer.length, dataSize - totalBytesRead));
-                if (bytesRead == -1) {
-                    throw new IOException("Connection closed prematurely");
-                }
-                byteArrayOutputStream.write(buffer, 0, bytesRead);
-                totalBytesRead += bytesRead;
+        }
+        sizeBuffer.flip();
+        int dataSize = sizeBuffer.getInt();
+
+        // Чтение данных заданного размера
+        byte[] buffer = new byte[BUFFERSIZE];
+        int totalBytesRead = 0;
+        while (totalBytesRead < dataSize) {
+            int bytesRead = inputStream.read(buffer, 0, Math.min(buffer.length, dataSize - totalBytesRead));
+            if (bytesRead == -1) {
+                throw new IOException("Connection closed prematurely");
             }
-    
-            byte[] objToSerialize = byteArrayOutputStream.toByteArray();
-            ByteArrayInputStream bais = new ByteArrayInputStream(objToSerialize);
-    
-            try (ObjectInputStream ois = new ObjectInputStream(bais)) {
-                // System.out.println("before ois.readobject return in reading responce block");
-                return (CommandResult) ois.readObject();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-                return null;
-            }
-    
-        } catch (IOException e) {
-            System.out.println("closing socket");
-            closeSocket();
-            System.exit(0);
+            byteArrayOutputStream.write(buffer, 0, bytesRead);
+            totalBytesRead += bytesRead;
+        }
+
+        byte[] objToSerialize = byteArrayOutputStream.toByteArray();
+        ByteArrayInputStream bais = new ByteArrayInputStream(objToSerialize);
+
+        try (ObjectInputStream ois = new ObjectInputStream(bais)) {
+            // System.out.println("before ois.readobject return in reading responce block");
+            return (CommandResult) ois.readObject();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -176,7 +178,7 @@ public class Client {
         }
     }
 
-    private void startAuthentication() throws IOException, ClassNotFoundException, NotYetConnectedException, InterruptedException{
+    private void startAuthentication() throws IOException{
 
         System.out.println("Hello, please provide your credentials");
         System.out.println("Enter login");
@@ -214,11 +216,10 @@ public class Client {
                 System.exit(0);
             }
         }
-        //sc.close();
         System.out.println("\nCongrats, you are now connected and authenticated. \nType \"help\" for more info.");
     }
     
-    private void register() throws NotYetConnectedException, IOException, ClassNotFoundException, InterruptedException {
+    private void register() throws IOException {
         System.out.println("Enter login");
         String username = null;
         while( username == null){
@@ -250,7 +251,7 @@ public class Client {
         }
     }
 
-    private void executeSctipt(String path) throws ClassNotFoundException{
+    private void executeSctipt(String path) {
             try {
                 BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
                 InputHandler ih = new InputHandler();    
@@ -316,12 +317,10 @@ public class Client {
                 //System.out.println(e.getMessage());
             } catch (NotYetConnectedException e){
                 System.out.println("No connection or connection is lost. Try again.");
-            } catch (InterruptedException e) {
-                System.out.println("THREAD IS INTERRUPTED!!!!!!");
-			}
+            }
     }
 
-    private void addCase(String[] clientInput) throws IOException, ClassNotFoundException, NotYetConnectedException, InterruptedException{
+    private void addCase(String[] clientInput) throws IOException{
         MusicBand mb = musicBandRequester.requestUserBand(this.user);
         Request addRequest = new Request(clientInput, mb, user);
         send(addRequest);
@@ -342,13 +341,20 @@ public class Client {
     //     System.out.println("--------------------------");    
     //     System.out.println("This command is not possible on client");
     // }
-    private void updateCase(String[] clientInput) throws IOException, ClassNotFoundException, NotYetConnectedException, InterruptedException{
+    private void updateCase(String[] clientInput) throws IOException{
         MusicBand musicBandForUpdate = musicBandRequester.requestUserBand(user);
+        long id;
+        try {
+            id = Long.parseLong(clientInput[1]);            
+        } catch (Exception e) {
+            System.out.println("There has to be an id (type: Long) provided, info: " + e.getMessage());
+            return;
+        }
         if (clientInput[1] == null){
             System.out.println("There has to be an id (type: Long) provided");
             return;
         }
-        musicBandForUpdate.setId(Long.parseLong(clientInput[1]));
+        musicBandForUpdate.setId(id);
         send(new Request(clientInput, musicBandForUpdate, user));
         CommandResult response = readResponse();
         System.out.println(response);
