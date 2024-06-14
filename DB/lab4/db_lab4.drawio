@@ -1,0 +1,270 @@
+<mxfile host="app.diagrams.net" modified="2024-06-05T12:24:55.551Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0" etag="kFpkKcytJxMIr2g_zXZd" version="24.4.9" type="device">
+  <diagram name="Page-1" id="cY3PVSHQkvxPXBEjbLgC">
+    <mxGraphModel dx="2304" dy="683" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-120" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" target="KoGDCauCFxVt7_qu_iSd-112" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="490" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-109" value="&lt;span class=&quot;box&quot;&gt;σ &lt;/span&gt;Н_ВЕОДМОСТИ_ЧЛВК.ИД &amp;gt; 105590" style="text;html=1;verticalAlign=middle;align=center;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="280" y="490" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;verticalAlign=middle;" parent="1" source="KoGDCauCFxVt7_qu_iSd-24" target="KoGDCauCFxVt7_qu_iSd-27" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-24" value="Н_ОЦЕНКИ" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-675" y="475" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;verticalAlign=middle;" parent="1" source="KoGDCauCFxVt7_qu_iSd-27" target="KoGDCauCFxVt7_qu_iSd-29" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-27" value="⋈ Н_ВЕДОМОСТИ.ОЦЕНКА = Н.ОЦЕНКИ.КОД" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-907.5" y="405" width="275" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;verticalAlign=middle;" parent="1" source="KoGDCauCFxVt7_qu_iSd-28" target="KoGDCauCFxVt7_qu_iSd-27" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-28" value="Н_ВЕДОМОСТИ" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-910" y="475" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;verticalAlign=middle;" parent="1" source="KoGDCauCFxVt7_qu_iSd-29" target="KoGDCauCFxVt7_qu_iSd-30" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-29" value="&lt;span class=&quot;box&quot;&gt;σ &lt;/span&gt;Н_ОЦЕНКИ.КОД &amp;lt; &#39;2&#39;" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-850" y="355" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;verticalAlign=middle;" parent="1" source="KoGDCauCFxVt7_qu_iSd-30" target="KoGDCauCFxVt7_qu_iSd-31" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-30" value="&lt;span class=&quot;box&quot;&gt;σ &lt;/span&gt;Н_ВЕДОМОСТИ_ИД &amp;gt; 1250981" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-875" y="295" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;verticalAlign=middle;" parent="1" source="KoGDCauCFxVt7_qu_iSd-31" target="KoGDCauCFxVt7_qu_iSd-41" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-31" value="&lt;span class=&quot;box&quot;&gt;σ &lt;/span&gt;Н_ВЕОДМОСТИ_ИД &amp;lt; 1457443" style="text;html=1;verticalAlign=middle;align=center;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="-875" y="235" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-37" value="REUSLT" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-805" y="85" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-41" value="&lt;span class=&quot;box&quot;&gt;π&lt;/span&gt; Н_ВЕДОМОСТИ.ИД, Н_ОЦЕНКИ.КОД" style="text;whiteSpace=wrap;html=1;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="-890" y="155" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.487;entryY=1.123;entryDx=0;entryDy=0;entryPerimeter=0;verticalAlign=middle;" parent="1" source="KoGDCauCFxVt7_qu_iSd-41" target="KoGDCauCFxVt7_qu_iSd-37" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;verticalAlign=middle;" parent="1" target="KoGDCauCFxVt7_qu_iSd-50" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-259.9999999999998" y="415" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;verticalAlign=middle;" parent="1" target="KoGDCauCFxVt7_qu_iSd-48" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-484.9999999999998" y="475" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;verticalAlign=middle;" parent="1" source="KoGDCauCFxVt7_qu_iSd-48" target="KoGDCauCFxVt7_qu_iSd-49" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-48" value="&lt;span class=&quot;box&quot;&gt;σ &lt;/span&gt;Н_ВЕДОМОСТИ_ИД &amp;gt; 1250981" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-590" y="415" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;verticalAlign=middle;" parent="1" source="KoGDCauCFxVt7_qu_iSd-49" target="KoGDCauCFxVt7_qu_iSd-53" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-49" value="&lt;span class=&quot;box&quot;&gt;σ &lt;/span&gt;Н_ВЕОДМОСТИ_ИД &amp;lt; 1457443" style="text;html=1;verticalAlign=middle;align=center;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="-590" y="355" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;verticalAlign=middle;" parent="1" source="KoGDCauCFxVt7_qu_iSd-50" target="KoGDCauCFxVt7_qu_iSd-54" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-50" value="&lt;span class=&quot;box&quot;&gt;σ &lt;/span&gt;Н_ОЦЕНКИ.КОД &amp;lt; &#39;2&#39;" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-340" y="355" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;verticalAlign=middle;" parent="1" source="KoGDCauCFxVt7_qu_iSd-53" target="KoGDCauCFxVt7_qu_iSd-55" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-53" value="&lt;span class=&quot;box&quot;&gt;π&lt;/span&gt; Н_ВЕДОМОСТИ.ИД" style="text;whiteSpace=wrap;html=1;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="-550" y="290" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-63" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;verticalAlign=middle;" parent="1" source="KoGDCauCFxVt7_qu_iSd-54" target="KoGDCauCFxVt7_qu_iSd-55" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-54" value="&lt;span class=&quot;box&quot;&gt;π&lt;/span&gt; Н_ОЦЕНКИ.КОД" style="text;whiteSpace=wrap;html=1;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="-315" y="290" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;verticalAlign=middle;" parent="1" source="KoGDCauCFxVt7_qu_iSd-55" target="KoGDCauCFxVt7_qu_iSd-64" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-55" value="⋈ Н_ВЕДОМОСТИ.ОЦЕНКА = Н.ОЦЕНКИ.КОД" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-505" y="205" width="275" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-56" value="Н_ОЦЕНКИ" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-295" y="415" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-57" value="Н_ВЕДОМОСТИ" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-515" y="475" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-64" value="&lt;span class=&quot;box&quot;&gt;π&lt;/span&gt; Н_ВЕДОМОСТИ.ИД, Н_ОЦЕНКИ.КОД" style="text;whiteSpace=wrap;html=1;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="-487.5" y="145" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-66" value="REUSLT" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-402.5" y="85" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.495;entryY=1.033;entryDx=0;entryDy=0;entryPerimeter=0;verticalAlign=middle;" parent="1" source="KoGDCauCFxVt7_qu_iSd-64" target="KoGDCauCFxVt7_qu_iSd-66" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-68" value="1 план" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=30;fontStyle=6" parent="1" vertex="1">
+          <mxGeometry x="-830" y="45" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-69" value="2 план" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=30;fontStyle=6" parent="1" vertex="1">
+          <mxGeometry x="-427.5" y="45" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-134" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-71" target="KoGDCauCFxVt7_qu_iSd-133" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-71" value="Н_СЕССИЯ" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="572.5" y="420" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-82" value="REUSLT" style="text;html=1;verticalAlign=middle;align=center;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="290" y="75" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-102" value="REUSLT" style="text;html=1;verticalAlign=middle;align=center;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="905" y="75" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-104" value="1 план" style="text;html=1;verticalAlign=middle;align=center;whiteSpace=wrap;fontSize=30;fontStyle=6" parent="1" vertex="1">
+          <mxGeometry x="265" y="35" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-119" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-107" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-107" value="Н_ВЕДОМОСТИ" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="340" y="565" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-118" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-108" target="KoGDCauCFxVt7_qu_iSd-113" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-108" value="&lt;span class=&quot;box&quot;&gt;σ&lt;/span&gt; Н_ЛЮДИ.ФАМИЛИЯ &amp;lt; &#39;Афанасьев&#39;" style="text;html=1;verticalAlign=middle;align=center;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="-40" y="485" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-116" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-110" target="KoGDCauCFxVt7_qu_iSd-108" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-110" value="Н_ЛЮДИ" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="35" y="565" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-122" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-112" target="KoGDCauCFxVt7_qu_iSd-115" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-112" value="&lt;span class=&quot;box&quot;&gt;π&lt;/span&gt; Н_ВЕДОМОСТИ.ЧЛВК_ИД" style="text;whiteSpace=wrap;html=1;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="312.5" y="410" width="175" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-121" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-113" target="KoGDCauCFxVt7_qu_iSd-115" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-113" value="&lt;span class=&quot;box&quot;&gt;π&lt;/span&gt; Н_ЛЮДИ.ФАМИЛИЯ" style="text;whiteSpace=wrap;html=1;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="2.5" y="410" width="135" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-125" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-115" target="KoGDCauCFxVt7_qu_iSd-123" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-115" value="⋈ Н_ВЕДОМОСТИ.ЧЛВК_ИД = Н_ЛЮДИ.ИД" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="60" y="335" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-127" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-123" target="KoGDCauCFxVt7_qu_iSd-126" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-123" value="⋈ Н_ВЕДОМОСТИ.СЭС_ИД = Н_СЕССИЯ.ИД" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="187.5" y="235" width="275" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-152" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-126" target="KoGDCauCFxVt7_qu_iSd-82" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-126" value="&lt;span class=&quot;box&quot;&gt;π&lt;/span&gt; Н_ЛЮДИ.ИМЯ, Н_ВЕДОМОСТИ.ИД. Н_СЕССИЯ.ИД" style="text;whiteSpace=wrap;html=1;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="163.75" y="155" width="322.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-142" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-128" target="KoGDCauCFxVt7_qu_iSd-139" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-128" value="Н_ВЕДОМОСТИ" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="842.5" y="670" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-140" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-129" target="KoGDCauCFxVt7_qu_iSd-138" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-129" value="Н_ЛЮДИ" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="692.5" y="670" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-141" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-131" target="KoGDCauCFxVt7_qu_iSd-137" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-131" value="Н_СЕССИЯ" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1052.5" y="610" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-135" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-133" target="KoGDCauCFxVt7_qu_iSd-123" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-133" value="&lt;span class=&quot;box&quot;&gt;π&lt;/span&gt; Н_СЕССИЯ.ИД" style="text;whiteSpace=wrap;html=1;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="462.5" y="335" width="135" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="OYXklTBoOVYnBkDztAdi-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="KoGDCauCFxVt7_qu_iSd-137" target="KoGDCauCFxVt7_qu_iSd-146">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-137" value="&lt;span class=&quot;box&quot;&gt;π&lt;/span&gt; Н_СЕССИЯ.ИД" style="text;whiteSpace=wrap;html=1;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="1020" y="525" width="135" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-157" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-138" target="KoGDCauCFxVt7_qu_iSd-145" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-138" value="&lt;span class=&quot;box&quot;&gt;π&lt;/span&gt; Н_ЛЮДИ.ФАМИЛИЯ" style="text;whiteSpace=wrap;html=1;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="660" y="605" width="135" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-158" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-139" target="KoGDCauCFxVt7_qu_iSd-145" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-139" value="&lt;span class=&quot;box&quot;&gt;π&lt;/span&gt; Н_ВЕДОМОСТИ.ЧЛВК_ИД" style="text;whiteSpace=wrap;html=1;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="815" y="605" width="175" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-159" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-145" target="KoGDCauCFxVt7_qu_iSd-146" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-145" value="⋈ Н_ВЕДОМОСТИ.ЧЛВК_ИД = Н_ЛЮДИ.ИД" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="660" y="525" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-160" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-146" target="KoGDCauCFxVt7_qu_iSd-148" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-146" value="⋈ Н_ВЕДОМОСТИ.СЭС_ИД = Н_СЕССИЯ.ИД" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="802.5" y="420" width="275" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-161" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-148" target="KoGDCauCFxVt7_qu_iSd-149" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-148" value="&lt;span class=&quot;box&quot;&gt;σ&lt;/span&gt; Н_ЛЮДИ.ФАМИЛИЯ &amp;lt; &#39;Афанасьев&#39;" style="text;html=1;verticalAlign=middle;align=center;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="830" y="325" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-162" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-149" target="KoGDCauCFxVt7_qu_iSd-150" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-149" value="&lt;span class=&quot;box&quot;&gt;σ &lt;/span&gt;Н_ВЕОДМОСТИ_ЧЛВК.ИД &amp;gt; 105590" style="text;html=1;verticalAlign=middle;align=center;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="820" y="250" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-151" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="KoGDCauCFxVt7_qu_iSd-150" target="KoGDCauCFxVt7_qu_iSd-102" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-150" value="&lt;span class=&quot;box&quot;&gt;π&lt;/span&gt; Н_ЛЮДИ.ИМЯ, Н_ВЕДОМОСТИ.ИД., Н_СЕССИЯ.ИД" style="text;whiteSpace=wrap;html=1;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="778.75" y="155" width="322.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="KoGDCauCFxVt7_qu_iSd-153" value="2 план" style="text;html=1;verticalAlign=middle;align=center;whiteSpace=wrap;fontSize=30;fontStyle=6" parent="1" vertex="1">
+          <mxGeometry x="880" y="35" width="120" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
