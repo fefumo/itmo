@@ -19,7 +19,7 @@ document.getElementById("check-btn").addEventListener("click", function(event) {
     const data = { x: x, y: y, r: r };
 
     // Send POST request to the server
-    fetch("/validate-point", {
+    fetch("http://localhost:8080/fcgi-bin/app.jar", {
         method: "POST",
         headers: {
             'Accept': 'application/json',

@@ -79,6 +79,7 @@ button.selected {
   width: 100%;
   border-collapse: collapse;
   text-align: center;
+  overflow-y: auto;
 }
 
 
