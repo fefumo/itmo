@@ -26,6 +26,11 @@ dependencies {
     implementation files('../libs/fastcgi-lib.jar')
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
 application {
     // Define the main class for the application.
     mainClass = 'lab1.App'
