@@ -34,6 +34,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+  padding-bottom: 50px;
 }
 
 .table-container {
@@ -137,18 +138,18 @@ a:link {
 
 a:visited {
   color: #e289ff;
-  background-color: transparent;
-  text-decoration: none;
+  background-color: inherit;
+  text-decoration: inherit;
 }
 
 a:hover {
   color: #ff8484;
-  background-color: transparent;
-  text-decoration: underline;
+  background-color: inherit;
+  text-decoration: inherit;
 }
 
 a:active {
   color: #ffff78;
-  background-color: transparent;
-  text-decoration: underline;
+  background-color: inherit;
+  text-decoration: inherit;
 }

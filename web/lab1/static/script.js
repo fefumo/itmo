@@ -1,11 +1,11 @@
 document.getElementById("check-btn").addEventListener("click", function(event) {
     event.preventDefault(); // Prevent form submission or page reload
 
-    const xInput = document.getElementById("x-input").value.trim();
+    const xInput = document.getElementById("x-input").value.trim().replace(',','.');
     const ySelect = document.getElementById("y-select").value;
     const rSelect = document.getElementById("r-select").value;
 
-    // Validate X on the client side (should be between -5 and 3)
+    // Validate X on the client side
     if (!isValidX(xInput)) {
         alert("Invalid X value. It should be a number between -5 and 3.");
         return;
@@ -23,33 +23,37 @@ document.getElementById("check-btn").addEventListener("click", function(event) {
         method: "POST",
         headers: {
             'Accept': 'application/json',
-            "Content-Type": "application/json"
-        },
+            'Content-Type': 'application/json'
+          },        
         body: JSON.stringify(data)
     })
     .then(resp => { 
-        if(!resp.ok) { //check if any error occured
-          return resp.text().then(text => { throw new Error(text) }) //for readability
+        if(!resp.ok) { // Check if any error occurred
+            console.log('something is wrong with the response...');
+            return resp.text().then(text => { throw new Error(text) });
          }
         else {
             console.log('success');
-            return resp.json(); //convert to json 
+            return resp.json(); // Convert to JSON 
         }    
     })
-    .then(result => { // and now we can ctually use the data from the response
-        addResultToTable(x, y, r, result.hit);
+    .then(result => { // Handle the data from the response
+        console.log('result is: ' + JSON.stringify(result, null, 2)); // Pretty-print the JSON result
+        addResultToTable(x, y, r, result.response.hit, result.currentTime, result.elapsedTime);
     })
     .catch(error => {
-        console.error("Error:", error);
+        console.error("catch error:", error);
     });
 });
 
 function isValidX(value) {
-    const x = parseFloat(value);
-    return !isNaN(x) && x >= -5 && x <= 3;
+    const regex = /^-?\d+(\.\d+)?$/;
+
+    return regex.test(value) && Number(value) >= -5 && Number(value) <= 3;
 }
 
-function addResultToTable(x, y, r, result) {
+
+function addResultToTable(x, y, r, hit, currentTime, elapsedTime) {
     const resultBody = document.getElementById("result-body");
     const newRow = document.createElement("tr");
 
@@ -63,12 +67,20 @@ function addResultToTable(x, y, r, result) {
     rCell.textContent = r;
 
     const resultCell = document.createElement("td");
-    resultCell.textContent = result ? "Hit" : "Miss";
+    resultCell.textContent = hit ? "Hit" : "Miss";
+
+    const currentTimeCell = document.createElement("td");
+    currentTimeCell.textContent = currentTime;
+
+    const elapsedTimeCell = document.createElement("td");
+    elapsedTimeCell.textContent = elapsedTime + " ms";
 
     newRow.appendChild(xCell);
     newRow.appendChild(yCell);
     newRow.appendChild(rCell);
     newRow.appendChild(resultCell);
+    newRow.appendChild(currentTimeCell);
+    newRow.appendChild(elapsedTimeCell);
 
     resultBody.appendChild(newRow);
 }
