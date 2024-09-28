@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <title>web1</title>
+  </head>
+
+
+  <body>
+
+    <header class="header blurred_round_container">
+      <h1>Molchanov Fyodor Denisovich</h1>
+      <h1>group: P3213</h1>
+      <h1>variant №413018</h1>
+    </header>
+
+    <div class="svg_and_coords">
+
+      <div class="graph">
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="300px" height="300px" id="graph">
+          <line x1="0" y1="150" x2="300" y2="150" stroke="#000720"></line>
+          <line x1="150" y1="0" x2="150" y2="300" stroke="#000720"></line>
+          <line x1="270" y1="148" x2="270" y2="152" stroke="#000720"></line>
+          <text x="265" y="140">R</text>
+          <line x1="210" y1="148" x2="210" y2="152" stroke="#000720"></line>
+          <text x="200" y="140">R/2</text>
+          <line x1="90" y1="148" x2="90" y2="152" stroke="#000720"></line>
+          <text x="75" y="140">-R/2</text>
+          <line x1="30" y1="148" x2="30" y2="152" stroke="#000720"></line>
+          <text x="20" y="140">-R</text>
+          <line x1="148" y1="30" x2="152" y2="30" stroke="#000720"></line>
+          <text x="156" y="35">R</text>
+          <line x1="148" y1="90" x2="152" y2="90" stroke="#000720"></line>
+          <text x="156" y="95">R/2</text>
+          <line x1="148" y1="210" x2="152" y2="210" stroke="#000720"></line>
+          <text x="156" y="215">-R/2</text>
+          <line x1="148" y1="270" x2="152" y2="270" stroke="#000720"></line>
+          <text x="156" y="275">-R</text>
+
+
+          <polygon points="150,150 270,150 150,30" fill-opacity="0.4" stroke="navy" fill="blue"></polygon>
+          <rect x="30" y="30" width="120" height="120" fill-opacity="0.4" stroke="navy" fill="blue"></rect>
+          <path d="M 150 150 L 150 270 C 150 270 30 270 30 150 Z" fill-opacity="0.4" stroke="navy" fill="blue"></path>
+          <circle id="pointer" cx="150" cy="150"></circle>
+        </svg>
+
+      </div>
+
+      <div id="coordinates" class="blurred_round_container">
+        <p>Enter params:</p>
+
+        <div id="x-container" >
+          <label for="x-input">Input X:</label>
+          <input type="text" name="x-input" id="x-input" class="valid" placeholder="Should be between -5 and 3" required="" size="26" maxlength="10"> <!--required and size useless ig -->
+        </div>
+
+        <div id="y-container">
+          <label for="y-select">Select Y:</label>
+          <select id="y-select" name="y-select">
+            <option value="-5">-5</option>
+            <option value="-4">-4</option>
+            <option value="-3">-3</option>
+            <option value="-2">-2</option>
+            <option value="-1">-1</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+
+        <div id="r-container">
+          <label for="r-select">Select R:</label>
+          <select id="r-select" name="r-select">
+            <option value="1">1</option>
+            <option value="1.5">1.5</option>
+            <option value="2">2</option>
+            <option value="2.5">2.5</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+
+        <button id="check-btn">Check</button>
+
+      </div>
+
+    </div>
+
+    <div class="table-container blurred_round_container">
+      <table id="result-table">
+        <thead>
+          <tr>
+            <th>X</th>
+            <th>Y</th>
+            <th>R</th>
+            <th>Result</th>
+            <th>Current time</th>
+            <th>Elapsed time</th>
+          </tr>
+        </thead>
+        <tbody id="result-body">
+        </tbody>
+      </table>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+
+
+  <footer class="footer blurred_round_container">
+    <p>Copyright © Fefumo, 2024. Licensed under <a href="LICENSE">NoOnePaidMeForIt</a>. Plagiarism is <b>absolutely fine</b>.</p>
+  </footer>
+
+</html>
