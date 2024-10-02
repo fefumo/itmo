@@ -1,0 +1,153 @@
+* {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+
+header {
+  & h1{
+    /*background-image: linear-gradient(to left, #553c9a, #b393d3);*/
+    color: #cbade8;
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-align: right;
+
+  }
+  padding: 5px;
+  font-family: sans-serif; /* explicit font specification for the task */
+  font-size: 11px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+body {
+  scroll-behavior: auto;
+  overflow: auto;
+  font-family: sans-serif;
+  font-size: 15px;
+
+  background-image: url('kanagawa.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  padding-bottom: 50px;
+}
+
+.table-container {
+  overflow-y: auto;  /* Enable vertical scrolling if content overflows */
+}
+
+p {
+  margin: 0.5px;
+}
+
+table {
+  border: solid 2px black;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: solid 1px black;
+  padding: 5px;
+
+}
+
+input {
+  border-radius: 4px;
+  border: solid 1px black;
+}
+
+select {
+  padding: 2px;
+  border-radius: 4px;
+  border: solid 1px black;
+}
+
+button.selected {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#result-table {
+  & th{
+    font-weight: bold;
+  }
+  padding: 2px;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  overflow-y: auto;
+}
+
+
+#coordinates {
+  padding: 5px;
+  margin: 10px;
+  height: 250px;
+  width: 400px;
+  text-align: center;
+}
+
+.graph {
+  position: relative;
+  background-color: whitesmoke; 
+}
+
+.svg_and_coords {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+footer {
+
+  text-align: center;
+  overflow: auto;
+  width: 100%;
+  position: fixed; /* Fixes the footer at the bottom */
+  bottom: 0; /* Sticks the footer to the bottom */
+  padding: 5px;
+
+  height: fit-content; /* also auto-size for footer */
+  background-color: rgba(255, 235, 205, 0.2);
+
+  margin-top: 10px;
+}
+
+.blurred_round_container {
+  border: solid 2px black;
+  border-radius: 4px;
+  color: #F0EEEB;
+  background-color: rgba(77, 77, 77, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+a:link {
+  color: #00ffe9;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #e289ff;
+  background-color: inherit;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #ff8484;
+  background-color: inherit;
+  text-decoration: inherit;
+}
+
+a:active {
+  color: #ffff78;
+  background-color: inherit;
+  text-decoration: inherit;
+}
