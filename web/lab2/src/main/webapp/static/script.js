@@ -29,13 +29,13 @@ mainForm.addEventListener("click", function(event) {
 });
 
 
-function send(data){
+function send(reqData){
     fetch("controller", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: new URLSearchParams(data)
+        body: new URLSearchParams(reqData)
     })
         .then(resp => {
             if (!resp.ok) {
@@ -58,11 +58,12 @@ function send(data){
 
             // Extract result and other fields
             const result = data.result; // The nested result object
-            const currentTime = data.currentTime;
-            const elapsedTime = data.elapsedTime;
 
             // Pass the values to the function
             addResultToTable(result.x, result.y, result.r, result.isHit, result.currentTime, result.elapsedTime);
+            
+            const svgCoords = graphToSvgCoordinates(parseFloat(result.x), parseFloat(result.y), parseFloat(result.r));
+            drawDot(svgCoords.x, svgCoords.y, result.isHit);
         })
         .catch(error => {
             console.log("caught error during processing results")
@@ -72,7 +73,6 @@ function send(data){
 
 const svg = document.getElementById('graph');
 
-// Event listener for click on the SVG
 svg.addEventListener('click', function(event) {
     // Get the bounding box of the SVG
     const rect = svg.getBoundingClientRect();
@@ -81,18 +81,11 @@ svg.addEventListener('click', function(event) {
     const svgX = event.clientX - rect.left; // Click position in SVG width
     const svgY = event.clientY - rect.top;  // Click position in SVG height
 
-    // SVG dimensions
-    const svgWidth = svg.clientWidth;
-    const svgHeight = svg.clientHeight;
-
-    // Transform SVG coordinates to graph coordinates
-    const x = -1 + (svgX / svgWidth) * 2; // Map to [-1, 1]
-    const y = 1 - (svgY / svgHeight) * 2; // Map to [-1, 1] and invert Y-axis
-
-    const rInput = document.getElementById("r-input").value.trim().replace(',','.');
+    // Get the value of R
+    const rInput = document.getElementById("r-input").value.trim().replace(',', '.');
     const r = parseFloat(rInput);
 
-    if (!rInput){
+    if (!rInput) {
         alert("Please enter r value");
         return;
     }
@@ -101,7 +94,10 @@ svg.addEventListener('click', function(event) {
         return;
     }
 
-    // Create the JSON object with the coordinates
+    // Map SVG coordinates to graph coordinates [-R, R]
+    const x = ((svgX - 200) / 170) * r; // Transform SVG X to graph X
+    const y = ((200 - svgY) / 170) * r; // Transform SVG Y to graph Y and invert Y-axis
+
     const clickData = {
         'x': x,
         'y': y,
@@ -115,45 +111,34 @@ svg.addEventListener('click', function(event) {
     send(clickData);
 });
 
-/*
-document.querySelectorAll('input[type="radio"][name="x"]').forEach(radio => {
-    radio.addEventListener('click', function() {
-        if (this.checked) {
-            // Store the current radio's state
-            this.wasChecked = !this.wasChecked;
-        }
-
-        // If it was already checked, uncheck it
-        if (this.wasChecked) {
-            this.checked = false;
-        }
-
-        // Reset all other radios' wasChecked property
-        document.querySelectorAll('input[type="radio"][name="x"]').forEach(otherRadio => {
-            if (otherRadio !== this) {
-                otherRadio.wasChecked = false;
-            }
-        });
-    });
-});
-*/
-/*
-function setCanvasDPI() {
-    let dpi = window.devicePixelRatio;
-    let canvasElement = document.getElementById('graphCanvas');
-    let style = {
-        height() {
-            return +getComputedStyle(canvasElement).getPropertyValue('height').slice(0, -2);
-        },
-        width() {
-            return +getComputedStyle(canvasElement).getPropertyValue('width').slice(0, -2);
-        }
-    };
-
-    canvasElement.setAttribute('width', style.width() * dpi);
-    canvasElement.setAttribute('height', style.height() * dpi);
+function graphToSvgCoordinates(x, y, r) {
+    // Graph coordinates range from [-r, r] for both x and y, while SVG coordinates range from [0, 400]
+    const svgWidth = svg.clientWidth;
+    const svgHeight = svg.clientHeight;
+    
+    // Transform graph x to SVG x
+    const svgX = 200 + (x / r) * 170; // Based on your graph setup, 170px corresponds to R
+    
+    // Transform graph y to SVG y (and invert y-axis)
+    const svgY = 200 - (y / r) * 170;
+    
+    return { x: svgX, y: svgY };
 }
-*/
+
+function drawDot(svgX, svgY, isHit) {
+    // Create a new circle element in the SVG
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    
+    // Set the transformed SVG coordinates
+    circle.setAttribute("cx", svgX); // SVG X coordinate
+    circle.setAttribute("cy", svgY); // SVG Y coordinate
+    circle.setAttribute("r", 3); // Circle radius
+    circle.setAttribute("fill", isHit ? "green" : "red"); // Green if hit, red if miss
+
+    // Append the circle to the SVG
+    svg.appendChild(circle);
+}
+
 
 function isValidY(value) {
     const regex = /^-?\d+(\.\d+)?$/;

@@ -7,22 +7,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.time.format.DateTimeFormatter;
 
 @WebServlet("/check")
 public class AreaCheckServlet extends HttpServlet {
     public static final int SC_UNPROCESSABLE_ENTITY = 422;
     public static final int SC_INTERNAL_SERVER_ERROR = 500;
-    Instant startTime = Instant.now(); // Use Instant for accurate time measurement
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Instant startTime = Instant.now();
+        long startTime = System.currentTimeMillis(); // Track start time
         float x, y, r;
 
         try {
@@ -46,27 +42,17 @@ public class AreaCheckServlet extends HttpServlet {
                 request.getSession().setAttribute("results", bean);
             }
 
-            long elapsedTime = Duration.between(startTime, Instant.now()).toMillis();
-
-            Instant now = Instant.now();
-            LocalDateTime currentTime = LocalDateTime.ofInstant(now, ZoneId.systemDefault());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy:MM:dd:HH:mm:ss");
-            String curTime = currentTime.format(formatter);
+            long currentTime = System.currentTimeMillis();
+            long elapsedTime = currentTime - startTime;
+            String currentTimeStr = new SimpleDateFormat("HH:mm:ss.SSS").format(new Date(currentTime));
 
             ResultBean.Result result = new ResultBean.Result(String.valueOf(x),
-                    String.valueOf(y), String.valueOf(r), CoordinatesValidator.isInArea(x, y, r), curTime, String.valueOf(elapsedTime));
+                    String.valueOf(y), String.valueOf(r), CoordinatesValidator.isInArea(x, y, r), currentTimeStr, String.valueOf(elapsedTime));
             bean.addResult(result);
 
-
-            //System.out.println("the result is: " + result + ", elapsedTime: " + elapsedTime +"ms , currentTime: " + curTime);
-
             System.out.println("the result is: " + result);
-
             Map<String, Object> responseMap = new HashMap<>();
             responseMap.put("result", result);
-            //responseMap.put("currentTime", curTime);
-            //responseMap.put("elapsedTime", elapsedTime);
-
             String jsonResponse = new Gson().toJson(responseMap);
 
             // Respond with JSON

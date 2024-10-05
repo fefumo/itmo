@@ -1,7 +1,5 @@
 package ifmo.se;
 
-import java.util.Arrays;
-import java.util.List;
 
 public class CoordinatesValidator {
     private final double y, r;
@@ -49,8 +47,8 @@ public class CoordinatesValidator {
 
         // Top-right corner with rectangle
         if (x >= 0 && y >= 0) {
-            // Rectangle dimensions: width = R/2, height = R
-            return (x <= r / 2 && y <= r);
+            // Rectangle dimensions: width = R, height = R/2
+            return (x <= r && y <= r / 2);
         }
 
         // If none of the conditions match, the point is outside the area
