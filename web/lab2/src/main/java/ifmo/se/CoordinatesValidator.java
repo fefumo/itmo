@@ -23,8 +23,7 @@ public class CoordinatesValidator {
         return validX() && validY() && validR();
     }
     private boolean validX(){
-        List<Float> validXValues = Arrays.asList(-2f, -1.5f, -1f, -0.5f, 0f, 0.5f, 1f, 1.5f, 2f);
-        return validXValues.contains(x);
+        return x >= -2 && x <= 2;
     }
 
     private boolean validY(){

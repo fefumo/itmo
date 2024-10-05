@@ -19,50 +19,100 @@ mainForm.addEventListener("click", function(event) {
     const x = parseFloat(xInput);
     const y = parseFloat(yInput);
     const r = parseFloat(rInput);
-
+    const data = {
+        "x": x,
+        "y": y,
+        "r": r
+    }
     // Send POST request to the server
+    send(data);
+});
+
+
+function send(data){
     fetch("controller", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"
-          },
-        body: new URLSearchParams({
-                                  "x": x,
-                                  "y": y,
-                                  "r": r
-                              })
+        },
+        body: new URLSearchParams(data)
     })
-    .then(resp => {
-        if (!resp.ok) {
-            console.log('something is wrong with the response...');
-            return resp.text().then(text => {
-                console.error('Response text:', text); // Log the response text
-                throw new Error(text);
-            });
-        } else {
-            console.log('success');
-            console.log("Received response:", resp);
-            return resp.text().then(text => {
-                console.log('Raw response:', text); // Log raw response before parsing
-                return JSON.parse(text); // Manually parse JSON
-            });
-        }
-    })
-    .then(data => { // Handle the data from the response
-        console.log('Received response data: ', JSON.stringify(data, null, 2));
+        .then(resp => {
+            if (!resp.ok) {
+                console.log('something is wrong with the response...');
+                return resp.text().then(text => {
+                    console.error('Response text:', text); // Log the response text
+                    throw new Error(text);
+                });
+            } else {
+                console.log('success');
+                console.log("Received response:", resp);
+                return resp.text().then(text => {
+                    console.log('Raw response:', text); // Log raw response before parsing
+                    return JSON.parse(text); // Manually parse JSON
+                });
+            }
+        })
+        .then(data => { // Handle the data from the response
+            console.log('Received response data: ', JSON.stringify(data, null, 2));
 
-        // Extract result and other fields
-        const result = data.result; // The nested result object
-        const currentTime = data.currentTime;
-        const elapsedTime = data.elapsedTime;
+            // Extract result and other fields
+            const result = data.result; // The nested result object
+            const currentTime = data.currentTime;
+            const elapsedTime = data.elapsedTime;
 
-        // Pass the values to the function
-        addResultToTable(result.x, result.y, result.r, result.isHit, result.currentTime, result.elapsedTime);
-})
-    .catch(error => {
-        console.log("caught error during processing results")
-        console.error("catch error:", error);
-    });
+            // Pass the values to the function
+            addResultToTable(result.x, result.y, result.r, result.isHit, result.currentTime, result.elapsedTime);
+        })
+        .catch(error => {
+            console.log("caught error during processing results")
+            console.error("catch error:", error);
+        });
+}
+
+const svg = document.getElementById('graph');
+
+// Event listener for click on the SVG
+svg.addEventListener('click', function(event) {
+    // Get the bounding box of the SVG
+    const rect = svg.getBoundingClientRect();
+
+    // Get click coordinates relative to the SVG
+    const svgX = event.clientX - rect.left; // Click position in SVG width
+    const svgY = event.clientY - rect.top;  // Click position in SVG height
+
+    // SVG dimensions
+    const svgWidth = svg.clientWidth;
+    const svgHeight = svg.clientHeight;
+
+    // Transform SVG coordinates to graph coordinates
+    const x = -1 + (svgX / svgWidth) * 2; // Map to [-1, 1]
+    const y = 1 - (svgY / svgHeight) * 2; // Map to [-1, 1] and invert Y-axis
+
+    const rInput = document.getElementById("r-input").value.trim().replace(',','.');
+    const r = parseFloat(rInput);
+
+    if (!rInput){
+        alert("Please enter r value");
+        return;
+    }
+    if (!isValidR(rInput)) {
+        alert("Invalid R value. It should be a number between 1 and 4.");
+        return;
+    }
+
+    // Create the JSON object with the coordinates
+    const clickData = {
+        'x': x,
+        'y': y,
+        'r': r
+    };
+
+    // Log the coordinates to the console
+    console.log('Click coordinates:', clickData);
+
+    // Send the data to the server
+    send(clickData);
 });
 
 /*

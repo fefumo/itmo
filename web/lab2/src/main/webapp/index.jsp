@@ -53,7 +53,7 @@
 
                             <polygon points="200,200 30,200 200,30" fill-opacity="0.4" stroke="navy" fill="blue"></polygon>
                             <rect x="200" y="115" width="170" height="85" fill-opacity="0.4" stroke="navy" fill="blue"></rect>
-                            <path d="M 200 200 L 200 285 C 200 285 105 300 115 200 Z" fill-opacity="0.4" stroke="navy" fill="blue"></path>
+                            <path d="M 200 200 L 200 285 C 200 285 115 290 115 200 Z" fill-opacity="0.4" stroke="navy" fill="blue"></path>
                         </svg>
             </div>
 
