@@ -1,4 +1,5 @@
 const mainForm = document.getElementById("check-btn");
+/*
 mainForm.addEventListener("click", function(event) {
     event.preventDefault(); // Prevent form submission or page reload
 
@@ -27,7 +28,7 @@ mainForm.addEventListener("click", function(event) {
     // Send POST request to the server
     send(data);
 });
-
+*/
 
 function send(reqData){
     fetch("controller", {
@@ -49,19 +50,19 @@ function send(reqData){
                 console.log("Received response:", resp);
                 return resp.text().then(text => {
                     console.log('Raw response:', text); // Log raw response before parsing
-                    return JSON.parse(text); // Manually parse JSON
+                return JSON.parse(text); // Manually parse JSON
                 });
             }
         })
+        
         .then(data => { // Handle the data from the response
             console.log('Received response data: ', JSON.stringify(data, null, 2));
 
             // Extract result and other fields
             const result = data.result; // The nested result object
-
-            // Pass the values to the function
-            addResultToTable(result.x, result.y, result.r, result.isHit, result.currentTime, result.elapsedTime);
             
+            addResultToTable(result.x, result.y, result.r, result.isHit, result.currentTime, result.elapsedTime);
+
             const svgCoords = graphToSvgCoordinates(parseFloat(result.x), parseFloat(result.y), parseFloat(result.r));
             drawDot(svgCoords.x, svgCoords.y, result.isHit);
         })
@@ -70,6 +71,7 @@ function send(reqData){
             console.error("catch error:", error);
         });
 }
+
 
 const svg = document.getElementById('graph');
 
@@ -101,13 +103,12 @@ svg.addEventListener('click', function(event) {
     const clickData = {
         'x': x,
         'y': y,
-        'r': r
+        'r': r,
+        'clicked' : true
     };
 
     // Log the coordinates to the console
     console.log('Click coordinates:', clickData);
-
-    // Send the data to the server
     send(clickData);
 });
 

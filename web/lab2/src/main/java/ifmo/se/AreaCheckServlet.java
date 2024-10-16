@@ -22,9 +22,11 @@ public class AreaCheckServlet extends HttpServlet {
         float x, y, r;
 
         try {
-            x = ControllerServlet.getFloat(request, "x");
-            y = ControllerServlet.getFloat(request, "y");
-            r = ControllerServlet.getFloat(request, "r");
+            x = getFloat(request, "x");
+            y = getFloat(request, "y");
+            r = getFloat(request, "r");
+            String clickedParam = request.getParameter("clicked");
+            boolean clicked = clickedParam != null && clickedParam.equals("true");
 
             CoordinatesValidator validator = new CoordinatesValidator(x, y, r);
 
@@ -51,14 +53,20 @@ public class AreaCheckServlet extends HttpServlet {
             bean.addResult(result);
 
             System.out.println("the result is: " + result);
-            Map<String, Object> responseMap = new HashMap<>();
-            responseMap.put("result", result);
-            String jsonResponse = new Gson().toJson(responseMap);
 
-            // Respond with JSON
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(jsonResponse);// Write the response to the output
+            if (clicked){
+                Map<String, Object> responseMap = new HashMap<>();
+                responseMap.put("result", result);
+                String jsonResponse = new Gson().toJson(responseMap);
+
+                // Respond with JSON
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(jsonResponse);// Write the response to the output
+            }
+            else{
+                request.getRequestDispatcher("results.jsp").forward(request, response);
+            }
 
         } catch (NumberFormatException e) {
             sendError(response, SC_UNPROCESSABLE_ENTITY, "Invalid number format");
@@ -78,5 +86,10 @@ public class AreaCheckServlet extends HttpServlet {
         response.setContentType("application/json");
         response.getWriter().write(json.toJson(jsonResponse));
         response.setStatus(statusCode);
+    }
+
+    private static float getFloat(HttpServletRequest request, String parameter){
+        String param = request.getParameter(parameter);
+        return Float.parseFloat(param.replace(",", "."));
     }
 }

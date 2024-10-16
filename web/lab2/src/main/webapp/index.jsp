@@ -8,7 +8,7 @@
         <title>web2</title>
     </head>
 
-
+    <form action="${pageContext.request.contextPath}/controller" method="post" id="form">
     <body>
 
         <header class="header blurred_round_container">
@@ -84,15 +84,15 @@
 
                 <div id="y-container">
                     <label for="y-input">Select Y:</label>
-                    <input type="text" id="y-input" name="y-input" maxlength="10" />
+                    <input type="text" id="y-input" name="y" maxlength="10" />
                 </div>
 
                 <div id="r-container">
                     <label for="r-input">Select R:</label>
-                    <input type="text" id="r-input" name="y-input" maxlength="10" />
+                    <input type="text" id="r-input" name="r" maxlength="10" />
                 </div>
 
-                <button id="check-btn">Check</button>
+                <button type="submit" id="check-btn">Check</button>
 
             </div>
 
@@ -118,6 +118,7 @@
 
         <script src="static/script.js"></script>
     </body>
+    </form>
 
 
     <footer class="footer blurred_round_container">

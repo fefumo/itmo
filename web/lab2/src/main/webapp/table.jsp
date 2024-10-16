@@ -7,7 +7,7 @@
     <td>${result.y}</td>
     <td>${result.r}</td>
     <td>${result.isHit ? "Hit" : "Miss"}</td>
-    <!--<td>${result.currentTime}</td>
-    <td>${result.elapsedTime}</td>-->
+    <td>${result.currentTime}</td>
+    <td>${result.elapsedTime}</td>
   </tr>
 </core:forEach>
