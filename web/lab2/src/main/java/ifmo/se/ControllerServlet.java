@@ -28,13 +28,4 @@ public class ControllerServlet extends HttpServlet {
         }
 
     }
-
-    public static double getDouble(HttpServletRequest request, String parameter) {
-        String param = request.getParameter(parameter);
-        return Double.parseDouble(param.replace(",", "."));
-    }
-    public static float getFloat(HttpServletRequest request, String parameter){
-        String param = request.getParameter(parameter);
-        return Float.parseFloat(param.replace(",", "."));
-    }
 }
