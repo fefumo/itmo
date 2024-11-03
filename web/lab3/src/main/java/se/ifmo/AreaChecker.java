@@ -15,7 +15,7 @@ public class AreaChecker {
 
             inTriangle = (x <= 0 && x >= -r) && (y <= 0 && y >= -r) && (y >= -x - r);
 
-            inCircle = (x <= 0 && y >= 0) && (x * x + y * y <= (r / 2) * (r / 2));
+            inCircle = (x >= 0 && y<= 0) && (x * x + y * y <= (r / 2) * (r / 2));
 
             return inRectangle || inTriangle || inCircle;
         }
@@ -33,6 +33,6 @@ public class AreaChecker {
     }
 
     private static boolean isRInArea(double r){
-        return r >=1 && r <= 3;
+        return r >=1 && r <= 4;
     }
 }

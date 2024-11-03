@@ -23,8 +23,6 @@ public class PointBean implements Serializable {
     private double y;
     private double r;
     private boolean result;
-    private String hiddenX;
-    private String hiddenY;
     private List<Point> points = new ArrayList<>(); // List to hold session points
 
     @PersistenceContext
@@ -35,6 +33,7 @@ public class PointBean implements Serializable {
     // Method to validate, persist, and add point to session list
     @Transactional
     public void checkAndAddPoint() {
+        System.out.println("in checnAndAddPoint()\n");
 
         result = AreaChecker.isInArea(x, y, r); // Perform validation
 
@@ -58,71 +57,9 @@ public class PointBean implements Serializable {
                 transaction.rollback();
             }
         }
-    }
-
-    //--------------------------------------------------------------
-    @Transactional
-    public void addPointFromGraph() {
-        double pointX = Double.parseDouble(hiddenX);
-        double pointY = Double.parseDouble(hiddenY);
-        double radius = this.r;
-
-        boolean result = AreaChecker.isInArea(pointX, pointY, radius);
-        Point point = new Point(pointX, pointY, radius, result);
-
-        points.add(point);
-
-        EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
-            em.persist(point);
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-        }
-    }
-    @Transactional
-    public void addPointFromInput() {
-        double pointX = this.x;
-        double pointY = this.y;
-        double radius = this.r;
-
-        boolean result = AreaChecker.isInArea(pointX, pointY, radius);
-        Point point = new Point(pointX, pointY, radius, result);
-
-        points.add(point);
-
-        EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
-            em.persist(point);
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-        }
-    }
-//-----------------------------------------------------------------------------------
-
-    public String getPointsAsSvg() {
-        StringBuilder svgPoints = new StringBuilder();
-        double scaleFactor = 85 / r; // вычисляем масштаб на основе текущего R
-
-        for (Point point : points) {
-            double svgX = 200 + point.getX() * scaleFactor;
-            double svgY = 200 - point.getY() * scaleFactor;
-            String color = point.getResult() ? "green" : "red";
-            svgPoints.append("<circle cx='").append(svgX)
-                     .append("' cy='").append(svgY)
-                     .append("' r='5' fill='").append(color)
-                     .append("' />");
-        }
-        return svgPoints.toString();
+        System.out.println("after adding data to database\n");
+        //PrimeFaces.current().executeScript("updateGraph();"); // не работает:)):):): КАК И ВЕСЬ JSF Я НЕНАВИЖУ ЭТУ ЛАБУ
+        //System.out.println("after calling updateGraph()\n");
     }
 
     // Method to get points for display in the table
@@ -163,16 +100,4 @@ public class PointBean implements Serializable {
         this.result = result;
     }
 
-    public void setHiddenX(String hiddenX) {
-        this.hiddenX = hiddenX;
-    }
-    public void setHiddenY(String hiddenY) {
-        this.hiddenY = hiddenY;
-    }
-    public String getHiddenX() {
-        return hiddenX;
-    }
-    public String getHiddenY() {
-        return hiddenY;
-    }
 }

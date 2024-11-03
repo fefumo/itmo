@@ -3,12 +3,12 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-    <title>Geometry Check</title>    
+    <title>Geometry Check</title>
+    <h:outputScript name="js/main.js" />
 </h:head>
 <h:body>
+
     <h:form id="pointForm">
-        <h:inputHidden id="hiddenX" value="#{pointBean.hiddenX}" />
-        <h:inputHidden id="hiddenY" value="#{pointBean.hiddenY}" />        
 
         <h:outputLabel for="x" value="Select X:"/>
         <h:selectOneMenu id="x" value="#{pointBean.x}">
@@ -54,16 +54,17 @@
         </h:dataTable>
 
 
-        <h:commandButton id="checkButton" value="Check" action="#{pointBean.addPointFromInput}">
-            <f:ajax execute="@form" render="resultsTable graphSvg"/>
+        <h:commandButton id="checkButton" value="Check">
+            <f:ajax execute="@form"
+                listener="#{pointBean.checkAndAddPoint}"
+                render="pointForm:resultsTable"
+                onevent="updateGraph"/>
         </h:commandButton>
-
 
     </h:form>
 
-    <h:form id="tableForm">
         <div class="graph" id="graph">
-            <svg id="graphSvg" xmlns="http://www.w3.org/2000/svg" width="400px" height="400px">
+            <svg id="graphSvg" xmlns="http://www.w3.org/2000/svg" width="400px" height="400px" viewBox="0 0 400 400">
                 <!-- Оси -->
                 <line x1="0" y1="200" x2="400" y2="200" stroke="#000720"></line>
                 <line x1="200" y1="0" x2="200" y2="400" stroke="#000720"></line>
@@ -103,63 +104,24 @@
                 <!-- Четверть круга (четвертая четверть) -->
                 <path id="circleQuarter" d="M 200 200 L 285 200 A 85 85 0 0 1 200 285 Z" fill-opacity="0.4" stroke="navy" fill="blue"></path>
 
-                <h:outputText escape="false" value="#{pointBean.pointsAsSvg}" />
             </svg>
         </div>
-    </h:form>
 
     <h:form id="svg-form">
         <h:inputHidden id="xValue" value="#{pointBean.x}"/>
         <h:inputHidden id="yValue" value="#{pointBean.y}"/>
         <h:inputHidden id="rValue" value="#{pointBean.r}"/>
         
-        <!-- Передаем полный clientId формы в JavaScript переменную -->
         <h:outputText id="hiddenClientId" value="#{component.clientId}" style="display:none" />
-        <script type="text/javascript">
-            // Получаем полный clientId формы
-            const svgFormId = "#{component.clientId}";
-        </script>
     
-        <h:commandButton id="svgClickButton" styleClass="hidden">
+        <h:commandButton id="svgClickButton" style="display: none">
             <f:ajax execute="@form"
-                    listener="#{pointBean.checkAndAddPoint}"
-                    render="pointForm:resultsTable graphSvg"/>
+                listener="#{pointBean.checkAndAddPoint}"
+                render="pointForm:resultsTable"
+                onevent="updateGraph"/>
         </h:commandButton>
     </h:form>
-    
-    
 
-    <script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function () {
-            const svgElement = document.getElementById("graphSvg"); // ID вашего SVG элемента
-
-            svgElement.addEventListener("click", function (event) {
-                const rect = svgElement.getBoundingClientRect();
-                const x = event.clientX - rect.left;
-                const y = event.clientY - rect.top;
-
-                // Используем точное значение name для получения выбранного R
-                const selectedRInput = document.querySelector("input[name='pointForm:r']:checked");
-                const selectedR = selectedRInput ? selectedRInput.value : null;
-
-                // Проверяем, выбрано ли значение R
-                if (selectedR === null) {
-                    alert("Please select a value for R before clicking on the SVG.");
-                    return;
-                }
-
-                // Устанавливаем значения скрытых полей
-                document.getElementById(svgFormId + ":xValue").value = x;
-                document.getElementById(svgFormId + ":yValue").value = y;
-                document.getElementById(svgFormId + ":rValue").value = selectedR;
-
-                // Программно кликаем на скрытую кнопку
-                document.getElementById(svgFormId + ":svgClickButton").click();
-            });
-        });
-    </script>
-    
-    
-    
+    <h:inputHidden id="pointsData" value="#{pointBean.pointsJson}" />
 </h:body>
 </html>
