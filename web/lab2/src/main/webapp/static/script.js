@@ -1,34 +1,4 @@
 const mainForm = document.getElementById("check-btn");
-/*
-mainForm.addEventListener("click", function(event) {
-    event.preventDefault(); // Prevent form submission or page reload
-
-    const xInput = document.querySelector('input[name="x"]:checked').value.trim().replace(',', '.');
-    const yInput = document.getElementById("y-input").value.trim().replace(',','.');
-    const rInput = document.getElementById("r-input").value.trim().replace(',','.');
-
-    if (!isValidY(yInput)) {
-        alert("Invalid Y value. It should be a number between -3 and 5.");
-        return;
-    }
-
-    if (!isValidR(rInput)) {
-        alert("Invalid R value. It should be a number between 1 and 4.");
-        return;
-    }
-
-    const x = parseFloat(xInput);
-    const y = parseFloat(yInput);
-    const r = parseFloat(rInput);
-    const data = {
-        "x": x,
-        "y": y,
-        "r": r
-    }
-    // Send POST request to the server
-    send(data);
-});
-*/
 
 function send(reqData){
     fetch("controller", {
