@@ -49,6 +49,11 @@
             <artifactId>logback-classic</artifactId>
             <version>1.2.9</version>
         </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>5.5.0</version>
+        </dependency>
     </dependencies>
 
     <build>

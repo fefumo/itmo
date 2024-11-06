@@ -1,51 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<div class="graph" id="graph">
-    <svg xmlns="http://www.w3.org/2000/svg" width="400px" height="400px">
-        <!-- Оси -->
-        <line x1="0" y1="200" x2="400" y2="200" stroke="#000720"></line>
-        <line x1="200" y1="0" x2="200" y2="400" stroke="#000720"></line>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <h:outputStylesheet library="css" name="styles.css" />
+</h:head>
 
-        <!-- Метки по оси Y -->
-        <line x1="195" y1="30" x2="205" y2="30" stroke="black" stroke-width="2"></line>
-        <text x="210" y="35" font-size="12" fill="black" id="labelR">R</text>
+<h:body>
+    <div class="container">
+        <!-- Форма ввода -->
+        <div class="form-block rounded">
+            <h3>Input Form</h3>
 
-        <line x1="195" y1="115" x2="205" y2="115" stroke="black" stroke-width="2"></line>
-        <text x="210" y="120" font-size="12" fill="black" id="labelR2">R/2</text>
+            <div class="form-group">
+                <label for="x">X</label>
+                <select id="x">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <!-- Добавьте нужные опции -->
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="y">Y</label>
+                <input type="text" id="y">
+            </div>
 
-        <line x1="195" y1="285" x2="205" y2="285" stroke="black" stroke-width="2"></line>
-        <text x="210" y="290" font-size="12" fill="black" id="labelNegR2">-R/2</text>
+            <div class="radio-group">
+                <label>R</label>
+                <label><input type="radio" name="r" value="1"> 1</label>
+                <label><input type="radio" name="r" value="2"> 2</label>
+                <label><input type="radio" name="r" value="3"> 3</label>
+                <label><input type="radio" name="r" value="4"> 4</label>
+            </div>
+        </div>
 
-        <line x1="195" y1="370" x2="205" y2="370" stroke="black" stroke-width="2"></line>
-        <text x="210" y="375" font-size="12" fill="black" id="labelNegR">-R</text>
+        <!-- SVG график -->
+        <div class="graph-block rounded">
+            <svg id="graphSvg" xmlns="http://www.w3.org/2000/svg" width="400px" height="400px" viewBox="0 0 400 400">
+                <!-- Оси -->
+                <line x1="0" y1="200" x2="400" y2="200" stroke="#000720"></line>
+                <line x1="200" y1="0" x2="200" y2="400" stroke="#000720"></line>
 
-        <!-- Метки по оси X -->
-        <line x1="30" y1="195" x2="30" y2="205" stroke="black" stroke-width="2"></line>
-        <text x="20" y="190" font-size="12" fill="black">-R</text>
+                <!-- Метки по оси Y -->
+                <line x1="195" y1="30" x2="205" y2="30" stroke="black" stroke-width="2"></line>
+                <text x="210" y="35" font-size="12" fill="black" id="labelR">R</text>
 
-        <line x1="115" y1="195" x2="115" y2="205" stroke="black" stroke-width="2"></line>
-        <text x="105" y="190" font-size="12" fill="black">-R/2</text>
+                <line x1="195" y1="115" x2="205" y2="115" stroke="black" stroke-width="2"></line>
+                <text x="210" y="120" font-size="12" fill="black" id="labelR2">R/2</text>
 
-        <line x1="285" y1="195" x2="285" y2="205" stroke="black" stroke-width="2"></line>
-        <text x="275" y="190" font-size="12" fill="black">R/2</text>
+                <line x1="195" y1="285" x2="205" y2="285" stroke="black" stroke-width="2"></line>
+                <text x="210" y="290" font-size="12" fill="black" id="labelNegR2">-R/2</text>
 
-        <line x1="370" y1="195" x2="370" y2="205" stroke="black" stroke-width="2"></line>
-        <text x="360" y="190" font-size="12" fill="black">R</text>
+                <line x1="195" y1="370" x2="205" y2="370" stroke="black" stroke-width="2"></line>
+                <text x="210" y="375" font-size="12" fill="black" id="labelNegR">-R</text>
 
-        <!-- Прямоугольник (вторая четверть) -->
-        <rect id="rectangle" x="200" y="115" width="170" height="85" fill-opacity="0.4" stroke="navy" fill="blue"></rect>
+                <!-- Метки по оси X -->
+                <line x1="30" y1="195" x2="30" y2="205" stroke="black" stroke-width="2"></line>
+                <text x="20" y="190" font-size="12" fill="black">-R</text>
 
-        <!-- Треугольник (третья четверть) -->
-        <polygon id="triangle" points="200,200 200,370 30,200" fill-opacity="0.4" stroke="navy" fill="blue"></polygon>
+                <line x1="115" y1="195" x2="115" y2="205" stroke="black" stroke-width="2"></line>
+                <text x="105" y="190" font-size="12" fill="black">-R/2</text>
 
-        <!-- Четверть круга (четвертая четверть) -->
-        <path id="circleQuarter" d="M 200 200 L 285 200 A 85 85 0 0 1 200 285 Z" fill-opacity="0.4" stroke="navy" fill="blue"></path>
-    </svg>
-</div>
-</body>
+                <line x1="285" y1="195" x2="285" y2="205" stroke="black" stroke-width="2"></line>
+                <text x="275" y="190" font-size="12" fill="black">R/2</text>
+
+                <line x1="370" y1="195" x2="370" y2="205" stroke="black" stroke-width="2"></line>
+                <text x="360" y="190" font-size="12" fill="black">R</text>
+
+                <!-- Прямоугольник (вторая четверть) -->
+                <rect id="rectangle" x="200" y="115" width="170" height="85" fill-opacity="0.4" stroke="navy"
+                    fill="blue">
+                </rect>
+
+                <!-- Треугольник (третья четверть) -->
+                <polygon id="triangle" points="200,200 200,370 30,200" fill-opacity="0.4" stroke="navy" fill="blue">
+                </polygon>
+
+                <!-- Четверть круга (четвертая четверть) -->
+                <path id="circleQuarter" d="M 200 200 L 285 200 A 85 85 0 0 1 200 285 Z" fill-opacity="0.4"
+                    stroke="navy" fill="blue"></path>
+            </svg>
+        </div>
+
+        <!-- Таблица результатов -->
+        <div class="table-block rounded">
+            <h3>Results</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>X</th>
+                        <th>Y</th>
+                        <th>R</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Данные будут добавлены динамически -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</h:body>
+
 </html>

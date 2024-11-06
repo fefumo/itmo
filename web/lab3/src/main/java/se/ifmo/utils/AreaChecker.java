@@ -1,4 +1,4 @@
-package se.ifmo;
+package se.ifmo.utils;
 
 /**
  * Utility class to check if a point lies within a defined area.

@@ -1,5 +1,6 @@
 package se.ifmo.mbeans;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
@@ -8,8 +9,8 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import jakarta.transaction.UserTransaction;
-import se.ifmo.AreaChecker;
 import se.ifmo.db.Point;
+import se.ifmo.utils.AreaChecker;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,18 +31,32 @@ public class PointBean implements Serializable {
 
     @Resource
     private UserTransaction userTransaction;
+
+    @PostConstruct
+    public void init() {
+        loadPointsFromDatabase();
+    }
+
+    @Transactional
+    public void loadPointsFromDatabase() {
+        points = em.createQuery("SELECT p FROM Point p", Point.class).getResultList();
+    }
     // Method to validate, persist, and add point to session list
     @Transactional
     public void checkAndAddPoint() {
         System.out.println("in checnAndAddPoint()\n");
-
+        
+        if (r == 0){
+            System.out.println(" r is null(0), returning");
+            return;
+        }
         result = AreaChecker.isInArea(x, y, r); // Perform validation
 
         // Create a new Point object with validated data
         Point point = new Point(x, y, r, result);
 
         // Persist the Point in the database
-        //em.persist(point);
+        //em.persist(point); не работает:):)):):):):):)
 
         // Add the Point to the session list
         points.add(point);
@@ -57,9 +72,26 @@ public class PointBean implements Serializable {
                 transaction.rollback();
             }
         }
-        System.out.println("after adding data to database\n");
+
+        //System.out.println("after adding data to database\n");
         //PrimeFaces.current().executeScript("updateGraph();"); // не работает:)):):): КАК И ВЕСЬ JSF Я НЕНАВИЖУ ЭТУ ЛАБУ
         //System.out.println("after calling updateGraph()\n");
+    }
+
+    @Transactional
+    public void clearPoints() {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            em.createQuery("DELETE FROM Point").executeUpdate(); 
+            points.clear(); 
+            transaction.commit();
+        }catch (Exception e) {
+            e.printStackTrace();
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+        }
     }
 
     // Method to get points for display in the table

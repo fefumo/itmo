@@ -1,75 +1,99 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
     <title>Geometry Check</title>
     <h:outputScript name="js/main.js" />
+    <h:outputStylesheet library="css" name="styles.css" />
+    <h:outputScript library="webjars" name="font-awesome/5.5.0/js/all.js" />
 </h:head>
-<h:body>
+<h:body style="background: url('#{request.contextPath}/resources/cafe.gif') fixed; background-size: cover;">
+    <div class="page-container">
+        <h:form id="pointForm">
 
-    <h:form id="pointForm">
+            <div class="form-block rounded">
+                <h3>Meow</h3>
 
-        <h:outputLabel for="x" value="Select X:"/>
-        <h:selectOneMenu id="x" value="#{pointBean.x}">
-            <f:selectItem itemValue="-3" itemLabel="-3"/>
-            <f:selectItem itemValue="-2" itemLabel="-2"/>
-            <f:selectItem itemValue="-1" itemLabel="-1"/>
-            <f:selectItem itemValue="0" itemLabel="0"/>
-            <f:selectItem itemValue="1" itemLabel="1"/>
-            <f:selectItem itemValue="2" itemLabel="2"/>
-            <f:selectItem itemValue="3" itemLabel="3"/>
-            <f:selectItem itemValue="4" itemLabel="4"/>
-        </h:selectOneMenu>
+                <div class="form-group">
+                    <h:outputLabel for="x" value="X" />
+                    <h:selectOneMenu id="x" value="#{pointBean.x}">
+                        <f:selectItem itemValue="-3" itemLabel="-3" />
+                        <f:selectItem itemValue="-2" itemLabel="-2" />
+                        <f:selectItem itemValue="-1" itemLabel="-1" />
+                        <f:selectItem itemValue="0" itemLabel="0" />
+                        <f:selectItem itemValue="1" itemLabel="1" />
+                        <f:selectItem itemValue="2" itemLabel="2" />
+                        <f:selectItem itemValue="3" itemLabel="3" />
+                        <f:selectItem itemValue="4" itemLabel="4" />
+                    </h:selectOneMenu>
+                </div>
 
-        <h:outputLabel for="y" value="Enter Y:"/>
-        <h:inputText id="y" value="#{pointBean.y}" required="true"/>
+                <div class="form-group">
+                    <h:outputLabel for="y" value="Y" />
+                    <h:inputText id="y" value="#{pointBean.y}" required="true"
+                        maxlength="7" title="Input a number with(out) floating point."/>
+                </div>
 
-        <h:outputLabel for="r" value="Select R:"/>
-        <h:selectOneRadio id="r" value="#{pointBean.r}"> 
-            <f:selectItem itemValue="1" itemLabel="1"/>
-            <f:selectItem itemValue="2" itemLabel="2"/>
-            <f:selectItem itemValue="3" itemLabel="3"/>
-            <f:selectItem itemValue="4" itemLabel="4"/>
-        </h:selectOneRadio>
+                <div class="form-group">
+                    <h:outputLabel for="r" value="R" />
+                    <h:selectOneRadio id="r" value="#{pointBean.r}">
+                        <f:selectItem itemValue="1" itemLabel="1" />
+                        <f:selectItem itemValue="2" itemLabel="2" />
+                        <f:selectItem itemValue="3" itemLabel="3" />
+                        <f:selectItem itemValue="4" itemLabel="4" />
+                    </h:selectOneRadio>
+                </div>
 
-        <h:outputText value="Results:"/>
-        <h:dataTable id="resultsTable" value="#{pointBean.points}" var="point">
-            <h:column>
-                <f:facet name="header">X</f:facet>
-                #{point.x}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Y</f:facet>
-                #{point.y}
-            </h:column>
-            <h:column>
-                <f:facet name="header">R</f:facet>
-                #{point.r}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Result</f:facet>
-                #{point.result ? 'Hit' : 'Miss'}
-            </h:column>
-        </h:dataTable>
+                <div class="buttons">
+                    <!-- Check -->
+                    <h:commandButton id="checkButton" title="Check" styleClass="icon-button" value="&#xf00c;">
+                        <f:ajax execute="@form" listener="#{pointBean.checkAndAddPoint}" render="resultsTable"
+                            onevent="updateGraph" />
+                    </h:commandButton>
+
+                    <!-- Clear Table -->
+                    <h:commandButton title="Clear Table" styleClass="icon-button" value="&#xf1f8;">
+                        <f:ajax execute="@form" listener="#{pointBean.clearPoints}" render="resultsTable"
+                            onevent="removePoints" />
+                    </h:commandButton>
+                    
+                    <!-- link -->
+                    <h:link title="Return" styleClass="icon-button" value="&#xf0a8;" outcome="goToIndex"></h:link>
+                </div>
 
 
-        <h:commandButton id="checkButton" value="Check">
-            <f:ajax execute="@form"
-                listener="#{pointBean.checkAndAddPoint}"
-                render="pointForm:resultsTable"
-                onevent="updateGraph"/>
-        </h:commandButton>
+            </div>
+        </h:form>
 
-    </h:form>
+        <div class="table-block rounded">
+            <h3>Results</h3>
+            <h:dataTable id="resultsTable" value="#{pointBean.points}" var="point">
+                <h:column>
+                    <f:facet name="header">X</f:facet>
+                    #{point.x}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Y</f:facet>
+                    #{point.y}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">R</f:facet>
+                    #{point.r}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Result</f:facet>
+                    #{point.result ? 'Hit' : 'Miss'}
+                </h:column>
+            </h:dataTable>
+        </div>
 
-        <div class="graph" id="graph">
+        <div class="graph-block rounded" id="graph">
             <svg id="graphSvg" xmlns="http://www.w3.org/2000/svg" width="400px" height="400px" viewBox="0 0 400 400">
-                <!-- Оси -->
+                <!-- Axis -->
                 <line x1="0" y1="200" x2="400" y2="200" stroke="#000720"></line>
                 <line x1="200" y1="0" x2="200" y2="400" stroke="#000720"></line>
 
-                <!-- Метки по оси Y -->
+                <!-- Y marks -->
                 <line x1="195" y1="30" x2="205" y2="30" stroke="black" stroke-width="2"></line>
                 <text x="210" y="35" font-size="12" fill="black" id="labelR">R</text>
 
@@ -82,7 +106,7 @@
                 <line x1="195" y1="370" x2="205" y2="370" stroke="black" stroke-width="2"></line>
                 <text x="210" y="375" font-size="12" fill="black" id="labelNegR">-R</text>
 
-                <!-- Метки по оси X -->
+                <!-- X marks -->
                 <line x1="30" y1="195" x2="30" y2="205" stroke="black" stroke-width="2"></line>
                 <text x="20" y="190" font-size="12" fill="black">-R</text>
 
@@ -95,32 +119,37 @@
                 <line x1="370" y1="195" x2="370" y2="205" stroke="black" stroke-width="2"></line>
                 <text x="360" y="190" font-size="12" fill="black">R</text>
 
-                <!-- Прямоугольник (вторая четверть) -->
-                <rect id="rectangle" x="200" y="115" width="170" height="85" fill-opacity="0.4" stroke="navy" fill="blue"></rect>
+                <!-- Rectagle -->
+                <rect id="rectangle" x="200" y="115" width="170" height="85" fill-opacity="0.4" stroke="navy"
+                    fill="blue">
+                </rect>
 
-                <!-- Треугольник (третья четверть) -->
-                <polygon id="triangle" points="200,200 200,370 30,200" fill-opacity="0.4" stroke="navy" fill="blue"></polygon>
+                <!-- Triangle -->
+                <polygon id="triangle" points="200,200 200,370 30,200" fill-opacity="0.4" stroke="navy" fill="blue">
+                </polygon>
 
-                <!-- Четверть круга (четвертая четверть) -->
-                <path id="circleQuarter" d="M 200 200 L 285 200 A 85 85 0 0 1 200 285 Z" fill-opacity="0.4" stroke="navy" fill="blue"></path>
-
+                <!-- Semicircle -->
+                <path id="circleQuarter" d="M 200 200 L 285 200 A 85 85 0 0 1 200 285 Z" fill-opacity="0.4"
+                    stroke="navy" fill="blue"></path>
             </svg>
         </div>
 
-    <h:form id="svg-form">
-        <h:inputHidden id="xValue" value="#{pointBean.x}"/>
-        <h:inputHidden id="yValue" value="#{pointBean.y}"/>
-        <h:inputHidden id="rValue" value="#{pointBean.r}"/>
-        
-        <h:outputText id="hiddenClientId" value="#{component.clientId}" style="display:none" />
-    
-        <h:commandButton id="svgClickButton" style="display: none">
-            <f:ajax execute="@form"
-                listener="#{pointBean.checkAndAddPoint}"
-                render="pointForm:resultsTable"
-                onevent="updateGraph"/>
-        </h:commandButton>
-    </h:form>
 
+        <!-- Click form -->
+        <h:form id="svg-form">
+            <h:inputHidden id="xValue" value="#{pointBean.x}" />
+            <h:inputHidden id="yValue" value="#{pointBean.y}" />
+            <h:inputHidden id="rValue" value="#{pointBean.r}" />
+
+            <h:outputText id="hiddenClientId" value="#{component.clientId}" style="display:none" />
+
+            <h:commandButton id="svgClickButton" style="display: none">
+                <f:ajax execute="@form" listener="#{pointBean.checkAndAddPoint}" render="resultsTable"
+                    onevent="updateGraph" />
+            </h:commandButton>
+        </h:form>
+
+    </div>
 </h:body>
+
 </html>

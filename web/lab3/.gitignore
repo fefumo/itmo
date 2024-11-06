@@ -36,6 +36,3 @@ build/
 
 ### Mac OS ###
 .DS_Store
-
-### personal info ###
-persistence.xml

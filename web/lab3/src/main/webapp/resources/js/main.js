@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const selectedRInput = document.querySelector('input[name="pointForm:r"]:checked');
         console.log('selected radio: ', selectedRInput);
         const r = selectedRInput ? selectedRInput.value : null;
-        const svgFormId = 'svg-form'
 
         if (r === null) {
             alert("Please select a value for R before clicking on the SVG.");
@@ -22,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const x = ((svgX - 200) / 170) * r; // Transform SVG X to graph X
         const y = ((200 - svgY) / 170) * r; // Transform SVG Y to graph Y and invert Y-axis
 
+        const svgFormId = 'svg-form'
         document.getElementById(svgFormId + ":xValue").value = x.toFixed(3);
         document.getElementById(svgFormId + ":yValue").value = y.toFixed(3);
         document.getElementById(svgFormId + ":rValue").value = r;
@@ -32,19 +32,18 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+
 function updateGraph() {
-    
-    console.log('in updateGraph');
-    const table = document.getElementById("pointForm:resultsTable");
-    
-    // Удаляем старые элементы из SVG
-    const svg = document.getElementById('graphSvg');
-    const oldPoints = svg.querySelectorAll('.graph-point');
-    console.log(oldPoints);
-    if (oldPoints.length > 0) {
-        oldPoints.forEach(point => point.remove());
-    }
+    console.log('updating graph...');
+    const table = document.getElementById("resultsTable");
+
+    removePoints();
+
     const selectedRInput = document.querySelector('input[name="pointForm:r"]:checked');
+    if (!selectedRInput){
+        alert('R is not selected');
+        return;
+    }
     console.log('selected radio: ', selectedRInput);
     const r = selectedRInput ? selectedRInput.value : null;
 
@@ -59,6 +58,16 @@ function updateGraph() {
         drawPoint(coordinates.x, coordinates.y, result ? 'green' : 'red');
     }
     
+}
+
+function removePoints(){
+    console.log('removing points');    
+    const svg = document.getElementById('graphSvg');
+    const oldPoints = svg.querySelectorAll('.graph-point');
+    console.log(oldPoints);
+    if (oldPoints.length > 0) {
+        oldPoints.forEach(point => point.remove());
+    }
 }
 
 
@@ -79,7 +88,6 @@ function drawPoint(x, y, color) {
 }
 
 function graphToSvgCoordinates(x, y, r) {
-    
     // Transform graph x to SVG x
     const svgX = 200 + (x / r) * 170; // Based on graph setup, 170px corresponds to R
     
@@ -88,19 +96,6 @@ function graphToSvgCoordinates(x, y, r) {
     
     return {x: svgX, y: svgY};
 }
-
-//it doesnt work. thanks to JSF :) i HATE THIS SDJFHSDAJFHDSA
-function getCurrentRValue() {
-    const selectedR = document.querySelector('input[name="pointForm:r"]:checked');
-    if (selectedR) {
-        return parseFloat(selectedR.value);
-    } else {
-        console.warn("No R value selected");
-        return null;
-    }
-}
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
     const pointForm = document.getElementById('pointForm');
@@ -115,3 +110,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+function validateInput(input) {
+
+    let value = input.value;
+    let regex = /^[0-9]{1,6}(\.[0-9]{0,1})?$/;
+
+    if (!regex.test(value)) {
+        warn('Invalid input! Come on dude!')
+    } else {
+        input.setCustomValidity(""); 
+    }
+}

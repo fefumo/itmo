@@ -5,11 +5,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:head>
-    <title>Стартовая страница</title>
+    <title>Welcome page</title>
 </h:head>
 
 <h:body>
-    <h:form>
         <!-- Шапка с данными студента -->
         <h:panelGrid columns="1" style="text-align:center; margin-bottom:20px;">
             <h:outputText value="Molchanov Fyodor Denisovich" />
@@ -17,6 +16,7 @@
             <h:outputText value="Variant 9993" />
         </h:panelGrid>
         
+    <h:form>
         <h:link value="Click here to go to main page!" outcome="goToMain"></h:link>
     </h:form>
 
