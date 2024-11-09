@@ -1,24 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:head>
     <title>Welcome page</title>
+    <h:outputStylesheet library="css" name="header.css" />
+    <h:outputStylesheet library="css" name="index.css" />
+    <h:outputScript name="js/index.js" />
 </h:head>
 
 <h:body>
-        <!-- Шапка с данными студента -->
-        <h:panelGrid columns="1" style="text-align:center; margin-bottom:20px;">
-            <h:outputText value="Molchanov Fyodor Denisovich" />
-            <h:outputText value="Group P3212" />
-            <h:outputText value="Variant 9993" />
-        </h:panelGrid>
-        
-    <h:form>
-        <h:link value="Click here to go to main page!" outcome="goToMain"></h:link>
-    </h:form>
+    <header class="product-header">
+        <div class="header-content">
+            <h1>Flexible geo-validator</h1>
+        </div>
+    </header>
+
+    <div class="main-content">
+
+        <div class="credentials">
+            <p>Molchanov Fyodor Denisovich</p>
+            <p>Group P3212</p>
+            <p>Variant 9993</p>
+        </div>
+
+        <h:form>
+            <h:link value="Click here to go to main page!" outcome="goToMain"></h:link>
+        </h:form>
+
+        <div id="clock-container" class="clock-container">
+            <!-- Время будет обновляться здесь -->
+            <span id="current-time"></span>
+        </div>
+
+    </div>
 
 </h:body>
+
 </html>

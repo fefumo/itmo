@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core">
+
 <h:head>
     <title>Geometry Check</title>
     <h:outputScript name="js/main.js" />
     <h:outputStylesheet library="css" name="styles.css" />
     <h:outputScript library="webjars" name="font-awesome/5.5.0/js/all.js" />
 </h:head>
+
 <h:body style="background: url('#{request.contextPath}/resources/cafe.gif') fixed; background-size: cover;">
     <div class="page-container">
         <h:form id="pointForm">
@@ -30,8 +32,8 @@
 
                 <div class="form-group">
                     <h:outputLabel for="y" value="Y" />
-                    <h:inputText id="y" value="#{pointBean.y}" required="true"
-                        maxlength="7" title="Input a number with(out) floating point."/>
+                    <h:inputText id="y" value="#{pointBean.y}" required="true" maxlength="7"
+                        title="Input a number with(out) floating point." />
                 </div>
 
                 <div class="form-group">
@@ -56,7 +58,7 @@
                         <f:ajax execute="@form" listener="#{pointBean.clearPoints}" render="resultsTable"
                             onevent="removePoints" />
                     </h:commandButton>
-                    
+
                     <!-- link -->
                     <h:link title="Return" styleClass="icon-button" value="&#xf0a8;" outcome="goToIndex"></h:link>
                 </div>

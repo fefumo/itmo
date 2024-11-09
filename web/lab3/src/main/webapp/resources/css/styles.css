@@ -39,7 +39,6 @@ body {
   text-align: center;
 }
 
-/* Обертка для полей формы, выравнивание по центру */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -68,7 +67,7 @@ body {
   padding: 8px;
   border: 1px solid #000000;
   border-radius: 5px;
-  box-sizing: border-box; /* Обеспечивает одинаковую ширину */
+  box-sizing: border-box; 
 }
 
 .form-block .radio-group {
@@ -118,9 +117,6 @@ table {
   border-bottom: 1px solid #c98989;
 }
 
-
-
-/* Стиль для прозрачности и закругления */
 .rounded {
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.8);
