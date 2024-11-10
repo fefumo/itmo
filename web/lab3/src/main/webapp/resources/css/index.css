@@ -2,25 +2,9 @@ body {
     font-family: Arial;
     margin: 0;
     padding: 0;
-    /* background-image: url('your-background-image.jpg'); */
     background-size: cover;
     background-position: center;
 }
-
-.product-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: sticky;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 0 0 25px 25px;
-    padding: 30px 20px;
-    box-shadow: 8px 20px 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    text-align: center;
-    height:80px; 
-}
-
 
 .main-content {
     font-size: 30px;
@@ -30,15 +14,9 @@ body {
     flex-direction:column;
     padding: 20px;
     border-radius: 25px; 
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.7);
     box-shadow: 10px 10px 10px 6px  rgba(0, 0, 0, 0.3); 
     margin: 20px;
-}
-
-.header-content h1 {
-    font-size: 3rem;
-    color: #333;
-    margin: 0;
 }
 
 .credentials {

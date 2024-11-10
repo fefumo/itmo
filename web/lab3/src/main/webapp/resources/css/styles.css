@@ -1,25 +1,16 @@
 body {
+  font-family: Arial;
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  background-position: center;
+  }
+
+.page-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #f0f0f0;
-}
-
-.icon-button {
-  font-family: "Font Awesome 5 Free"; /* Убедитесь, что используете правильное имя шрифта */
-  font-weight: 900; /* Указываем вес для Solid версии иконки */
-  font-size: 24px; /* Подходящий размер */
-  background: none; /* Убираем фон */
-  border: none; /* Убираем рамку */
-  padding: 0; /* Убираем отступы */
-  cursor: pointer; /* Курсор для кнопки */
-  color: #333; /* Цвет иконки */
-}
-
-
-.page-container {
   display: flex;
   gap: 20px;
   width: 100%;
@@ -114,11 +105,11 @@ table {
 .table-block td {
   padding: 10px;
   text-align: center;
-  border-bottom: 1px solid #c98989;
+  border-bottom: 1px solid #64179f;
 }
 
 .rounded {
-  border-radius: 10px;
+  border-radius: 30px;
   background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }

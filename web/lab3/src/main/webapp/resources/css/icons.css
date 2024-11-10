@@ -1,0 +1,12 @@
+.icon-button {
+    font-family: "Font Awesome 5 Free"; /* Убедитесь, что используете правильное имя шрифта */
+    font-weight: 900; /* Указываем вес для Solid версии иконки */
+    font-size: 24px; /* Подходящий размер */
+    background: none; /* Убираем фон */
+    border: none; /* Убираем рамку */
+    padding: 0; /* Убираем отступы */
+    cursor: pointer; /* Курсор для кнопки */
+    color: #333; /* Цвет иконки */
+    text-decoration: none; /* Убирает подчеркивание */
+    display: inline-block;  /* Делает элемент интерактивным */
+  }

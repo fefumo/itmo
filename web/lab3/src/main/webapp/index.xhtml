@@ -5,14 +5,16 @@
 <h:head>
     <title>Welcome page</title>
     <h:outputStylesheet library="css" name="header.css" />
+    <h:outputStylesheet library="css" name="icons.css" />
     <h:outputStylesheet library="css" name="index.css" />
     <h:outputScript name="js/index.js" />
+    <h:outputScript library="webjars" name="font-awesome/5.5.0/js/all.js" />
 </h:head>
 
-<h:body>
+<h:body style="background: url('#{request.contextPath}/resources/girl-with-cat.gif') fixed; background-size: cover;">
     <header class="product-header">
         <div class="header-content">
-            <h1>Flexible geo-validator</h1>
+            <h1>Geo-validator</h1>
         </div>
     </header>
 
@@ -25,7 +27,7 @@
         </div>
 
         <h:form>
-            <h:link value="Click here to go to main page!" outcome="goToMain"></h:link>
+            <h:link title="Go to content!" styleClass="icon-button" value ="Go to content &#xf0a9;" outcome="goToMain"></h:link>
         </h:form>
 
         <div id="clock-container" class="clock-container">
