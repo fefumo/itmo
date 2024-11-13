@@ -1,14 +1,16 @@
+const svgElement = document.getElementById("graphSvg"); 
 
 document.addEventListener("DOMContentLoaded", function () {
-    const svgElement = document.getElementById("graphSvg"); 
     svgElement.addEventListener("click", function (event) {
         console.log('graph clicked')
+
         const selectedRInput = document.querySelector('input[name="pointForm:r"]:checked');
         console.log('selected radio: ', selectedRInput);
+        
         const r = selectedRInput ? selectedRInput.value : null;
 
         if (r === null) {
-            alert("Please select a value for R before clicking on the SVG.");
+            alert("Please select a value for R before clicking on the graph.");
             return;
         }
 
@@ -37,13 +39,15 @@ function updateGraph() {
     console.log('updating graph...');
     const table = document.getElementById("resultsTable");
 
-    removePoints();
-
     const selectedRInput = document.querySelector('input[name="pointForm:r"]:checked');
-    if (!selectedRInput){
-        alert('R is not selected');
+    if (selectedRInput === null){
+        alert('Please select a value for R before clicking on the graph.');
         return;
     }
+    
+    removePoints();
+
+
     console.log('selected radio: ', selectedRInput);
     const r = selectedRInput ? selectedRInput.value : null;
 
@@ -76,7 +80,6 @@ function drawPoint(x, y, color) {
         console.log('Invalid data in drawPoint:', x, y);
         return;
     }
-    const svgElement = document.getElementById("graphSvg"); 
     console.log('in drawPoint: ', x,y,color);
     const point = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     point.setAttribute("cx", x);
