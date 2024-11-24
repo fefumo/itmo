@@ -101,6 +101,15 @@
     "stdbool.h": "c",
     "stdlib.h": "c",
     "l_list.h": "c",
-    "string.h": "c"
-  }
+    "string.h": "c",
+    "future": "c",
+    "initial.h": "c",
+    "optional": "c",
+    "system_error": "c",
+    "functional": "c",
+    "utility": "c",
+    "compare": "c",
+    "cstdint": "c"
+  },
+  "C_Cpp.errorSquiggles": "enabled"
 }
