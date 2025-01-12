@@ -4,6 +4,3 @@
 [submodule "web/lab4/frontend"]
 	path = web/lab4/frontend
 	url = https://github.com/fefumo/PrecisionArc-frontend
-[submodule "low-level/assignment-1-io-library"]
-	path = low-level/assignment-1-io-library
-	url = https://gitlab.se.ifmo.ru/fefumo/assignment-1-io-library.git
