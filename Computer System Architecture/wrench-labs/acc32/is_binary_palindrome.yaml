@@ -1,0 +1,20 @@
+name: palindrome
+limit: 1000
+memory_size: 0x2000
+# {memory:291:292}
+input_streams:
+  0x80: [2147483649]
+  0x84: []
+reports:
+  - name: Step-by-step
+    slice: all
+    view: |
+      {pc}:	{instruction}	{pc:label} {Acc:hex}  
+  - name: Result
+    slice: last
+    view: |
+      numio[0x80]: {io:0x80:dec}
+      numio[0x84]: {io:0x84:dec}
+    assert: |
+      numio[0x80]: [] >>> []
+      numio[0x84]: [] >>> [1]
