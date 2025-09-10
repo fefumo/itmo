@@ -1,0 +1,3 @@
+/home/Theodor/my-coding/algos/build/CMakeFiles/myprogram.dir
+/home/Theodor/my-coding/algos/build/CMakeFiles/edit_cache.dir
+/home/Theodor/my-coding/algos/build/CMakeFiles/rebuild_cache.dir

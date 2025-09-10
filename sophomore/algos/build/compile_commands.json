@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/Theodor/my-coding/algos/build",
+  "command": "/usr/bin/clang++ -g -std=gnu++17 -o CMakeFiles/myprogram.dir/main.cpp.o -c /home/Theodor/my-coding/algos/main.cpp",
+  "file": "/home/Theodor/my-coding/algos/main.cpp",
+  "output": "CMakeFiles/myprogram.dir/main.cpp.o"
+}
+]
