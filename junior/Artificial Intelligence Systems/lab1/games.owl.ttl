@@ -1,0 +1,97 @@
+@prefix : <http://example.org/games#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/games> a owl:Ontology ;
+  rdfs:label "Games Ontology (from Prolog facts) — FIXED"@en ;
+  rdfs:comment "Fixes property hierarchy recursion; places owl:propertyChainAxiom on the properties directly."@en .
+
+############ Classes ############
+
+:Game a owl:Class .
+:Studio a owl:Class .
+:Genre a owl:Class .
+:Mechanic a owl:Class .
+:IndieStudio a owl:Class ; rdfs:subClassOf :Studio .
+
+############ Object properties ############
+
+:hasGenre a owl:ObjectProperty ; rdfs:domain :Game ; rdfs:range :Genre .
+:hasMechanic a owl:ObjectProperty ; rdfs:domain :Game ; rdfs:range :Mechanic .
+:developedBy a owl:ObjectProperty ; rdfs:domain :Game ; rdfs:range :Studio .
+
+# Derived properties without self-subProperty cycles; chains asserted directly.
+:specializesInGenre a owl:ObjectProperty ;
+  rdfs:domain :Studio ; rdfs:range :Genre ;
+  owl:propertyChainAxiom ( [ owl:inverseOf :developedBy ] :hasGenre ) .
+
+:specializesInMechanic a owl:ObjectProperty ;
+  rdfs:domain :Studio ; rdfs:range :Mechanic ;
+  owl:propertyChainAxiom ( [ owl:inverseOf :developedBy ] :hasMechanic ) .
+
+############ Individuals (Genres) ############
+:rpg a :Genre .
+:moba a :Genre .
+:soulslike a :Genre .
+:shooter a :Genre .
+:platformer a :Genre .
+:puzzle a :Genre .
+:simulation a :Genre .
+:survival a :Genre .
+:adventure a :Genre .
+:roguelike a :Genre .
+:mmorpg a :Genre .
+:action a :Genre .
+
+############ Individuals (Mechanics) ############
+:crafting a :Mechanic .
+:stealth a :Mechanic .
+:coop a :Mechanic .
+:pvp a :Mechanic .
+:loot a :Mechanic .
+:building a :Mechanic .
+:farming a :Mechanic .
+:permadeath a :Mechanic .
+
+############ Individuals (Studios) ############
+:cdpr a :Studio .
+:valve a :Studio .
+:team_cherry a :Studio, :IndieStudio .
+:fromsoftware a :Studio .
+:epic_games a :Studio .
+:riot_games a :Studio .
+:pubg_studios a :Studio .
+:mojang_studios a :Studio, :IndieStudio .
+:blizzard_entertainment a :Studio .
+:dennaton_games a :Studio, :IndieStudio .
+:coffee_stain a :Studio, :IndieStudio .
+:wube_software a :Studio, :IndieStudio .
+:wube a :Studio, :IndieStudio ; owl:sameAs :wube_software .
+:supergiant a :Studio .
+:zaum a :Studio, :IndieStudio .
+:ludeon_studios a :Studio, :IndieStudio .
+
+############ Individuals (Games) + assertions ############
+:disco_elysium a :Game ; :developedBy :zaum ; :hasGenre :rpg .
+:rimworld a :Game ; :developedBy :ludeon_studios ; :hasGenre :simulation ; :hasMechanic :farming, :crafting, :building .
+:witcher3 a :Game ; :developedBy :cdpr ; :hasGenre :rpg, :action .
+:cyberpunk2077 a :Game ; :developedBy :cdpr ; :hasGenre :rpg, :action .
+:portal2 a :Game ; :developedBy :valve ; :hasGenre :puzzle ; :hasMechanic :coop .
+:dota2 a :Game ; :developedBy :valve ; :hasGenre :moba ; :hasMechanic :farming, :pvp .
+:cs2 a :Game ; :developedBy :valve ; :hasGenre :shooter ; :hasMechanic :pvp .
+:silksong a :Game ; :developedBy :team_cherry ; :hasGenre :platformer .
+:hollow_knight a :Game ; :developedBy :team_cherry ; :hasGenre :platformer .
+:elden_ring a :Game ; :developedBy :fromsoftware ; :hasGenre :rpg, :action .
+:dark_souls3 a :Game ; :developedBy :fromsoftware ; :hasGenre :rpg, :action, :soulslike .
+:fortnite a :Game ; :developedBy :epic_games ; :hasGenre :shooter ; :hasMechanic :pvp, :building .
+:league_of_legends a :Game ; :developedBy :riot_games ; :hasGenre :moba ; :hasMechanic :pvp, :farming .
+:pubg a :Game ; :developedBy :pubg_studios ; :hasGenre :shooter ; :hasMechanic :pvp, :loot .
+:minecraft a :Game ; :developedBy :mojang_studios ; :hasGenre :survival, :adventure ; :hasMechanic :crafting, :building, :farming, :loot, :pvp .
+:overwatch a :Game ; :developedBy :blizzard_entertainment ; :hasGenre :shooter ; :hasMechanic :pvp .
+:wow a :Game ; :developedBy :blizzard_entertainment ; :hasGenre :mmorpg .
+:hotline_miami a :Game ; :developedBy :dennaton_games ; :hasGenre :action, :shooter .
+:satisfactory a :Game ; :developedBy :coffee_stain ; :hasGenre :simulation ; :hasMechanic :crafting, :building .
+:factorio a :Game ; :developedBy :wube_software ; :hasGenre :simulation ; :hasMechanic :crafting, :building .
+:hades a :Game ; :developedBy :supergiant ; :hasGenre :roguelike ; :hasMechanic :loot, :permadeath .
