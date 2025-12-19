@@ -15,11 +15,7 @@ def show_target_correlations(
     top_k: int = 5,
     print_top: int = 10,
 ) -> None:
-    """
-    Рисует:
-      1) bar-график |corr| всех признаков с таргетом
-      2) scatter-графики для top_k признаков (по |corr|) с линейной аппроксимацией
-    """
+
 
     df = X.copy()
     df["_TARGET_"] = y
@@ -142,7 +138,7 @@ def main():
     show_target_correlations(X, y)
 
     # --- Extra models ---
-    # 1) Small model with 2-3 features
+    # 1) Small model with 3 features
     small_feats = ["Hours Studied", "Previous Scores", "Sleep Hours"]
     X_small = X[small_feats].copy()
 
