@@ -1,0 +1,20 @@
+Illuminance computation summary
+Datetime: 2025-11-08T10:56:47.329169
+
+Params: H=1000.0 mm, W=1000.0 mm, Hres=400, Wres=400
+Light source: (xL, yL, zL)=(200.0, -150.0, 600.0) mm, I0=250.0 W/sr
+Circle: center=(0.0, 0.0) mm, R=300.0 mm
+
+Stats within circle (W/m^2):
+  min=2.052322e+02
+  max=6.944393e+02
+  mean=4.465204e+02
+
+Five points (W/m^2):
+  center_circle: 5.041840e+02
+  right_intersection: 5.842022e+02
+  left_intersection: 2.249684e+02
+  top_intersection: 2.479296e+02
+  bottom_intersection: 5.041840e+02
+
+Emax over full image (for normalization): 6.944393e+02 W/m^2
