@@ -28,30 +28,36 @@ std::vector<Token> Lexer::tokenize() {
       advance();
       continue;
     }
+
     std::size_t startPos = pos_;
     int startLine = line_;
     int startCol = col_;
 
-    // Identifier
+    // Identifier / Keyword
     if (isIdentStart(c)) {
       advance();
-      while (!isAtEnd() && isIdentCont((unsigned char)peek())) {
+      while (!isAtEnd() && isIdentCont((unsigned char)peek()))
         advance();
-      }
+
       Token t;
-      t.kind = TokenKind::Identifier;
       t.lexeme = src_.substr(startPos, pos_ - startPos);
       t.line = startLine;
       t.col = startCol;
+      t.kind = (t.lexeme == "var" || t.lexeme == "while" || t.lexeme == "if" ||
+                t.lexeme == "else" || t.lexeme == "print")
+                   ? TokenKind::Keyword
+                   : TokenKind::Identifier;
+
       out.push_back(std::move(t));
       continue;
     }
 
-    if (std::isdigit(c)) {
-
-      while (!isAtEnd() && std::isdigit((unsigned char)peek())) {
+    // Number
+    if (std::isdigit((unsigned char)c)) {
+      advance();
+      while (!isAtEnd() && std::isdigit((unsigned char)peek()))
         advance();
-      }
+
       Token t;
       t.kind = TokenKind::Number;
       t.lexeme = src_.substr(startPos, pos_ - startPos);
@@ -61,11 +67,20 @@ std::vector<Token> Lexer::tokenize() {
       continue;
     }
 
-    // Symbol (fallback for now)
-    char ch = advance();
+    // Symbol (single- or double-char)
+    char a = advance();
+    std::string s{a};
+    if (!isAtEnd()) {
+      char b = peek();
+      if ((a == '=' && b == '=') || (a == '!' && b == '=') ||
+          (a == '<' && b == '=') || (a == '>' && b == '=')) {
+        s.push_back(advance());
+      }
+    }
+
     Token t;
     t.kind = TokenKind::Symbol;
-    t.lexeme = std::string{ch};
+    t.lexeme = std::move(s);
     t.line = startLine;
     t.col = startCol;
     out.push_back(std::move(t));

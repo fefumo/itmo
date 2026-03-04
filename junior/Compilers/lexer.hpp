@@ -1,3 +1,5 @@
+#pragma once
+
 #include <cctype>
 #include <string>
 #include <vector>
@@ -10,8 +12,22 @@ static inline bool isIdentStart(char c) {
 static inline bool isIdentCont(char c) {
   return std::isalnum(c) || c == '_'; // alphanumeric
 }
+enum class TokenKind { Identifier, Number, Keyword, Symbol, End };
+static const char *kindName(TokenKind k) {
+  switch (k) {
+    case TokenKind::Symbol:
+      return "Symbol";
+    case TokenKind::End:
+      return "End";
+    case TokenKind::Identifier:
+      return "Identifier";
+    case TokenKind::Number:
+      return "Number";
+    default:
+      return "Other";
+  }
+}
 
-enum class TokenKind { Identifier, Number, Symbol, End };
 
 struct Token {
   TokenKind kind;
