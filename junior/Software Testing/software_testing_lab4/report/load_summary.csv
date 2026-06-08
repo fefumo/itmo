@@ -1,0 +1,4 @@
+config,requests,errors,error_pct,avg_ms,p90_ms,p95_ms,max_ms,throughput_rps,duration_sec,satisfies_avg_860ms,satisfies_p95_860ms
+1,543,26,4.79,2329.99,3902.4,5612.7,10014.0,3.034,179.0,False,False
+2,667,0,0.0,1310.03,1670.6,1888.0,3788.0,3.714,179.6,False,False
+3,706,0,0.0,785.81,1039.5,1203.5,2826.0,3.926,179.8,True,False
