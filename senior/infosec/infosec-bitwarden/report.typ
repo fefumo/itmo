@@ -11,7 +11,8 @@
     body
   }
 }
-#set text(size: 10pt)
+
+#set text(size: 10pt, lang: "ru")
 #set par(justify: true, leading: 0.7em)
 
 #let terminal(body) = block(
@@ -24,8 +25,6 @@
 )[#body]
 #show raw.where(block: true): set text(size: 8pt)
 
-// Универсальный шаблон для скриншота.
-// Меняйте только path, title и caption.
 #let screenshot(path, title, caption) = block(
   width: 100%,
   breakable: false,
@@ -35,7 +34,7 @@
   // Заголовок входит в ту же фигуру, что и уменьшенное изображение.
   #figure(
     block(width: 100%, breakable: false)[
-      #align(left, text(weight: "bold", title))
+      #align(center, text(weight: "bold", title))
       #v(0.2cm)
       #align(center, image(path, width: 75%))
     ],
