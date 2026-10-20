@@ -1,0 +1,42 @@
+Device: cpu; parameters: 89379; train: 1531; val: 328
+Epoch 01 | train loss 0.8216 acc 0.6486 | val loss 0.8121 acc 0.6433 | 28.3s
+Epoch 02 | train loss 0.3439 acc 0.8785 | val loss 0.3291 acc 0.9024 | 24.3s
+Epoch 03 | train loss 0.1747 acc 0.9491 | val loss 0.1444 acc 0.9756 | 24.6s
+Epoch 04 | train loss 0.1008 acc 0.9700 | val loss 0.0875 acc 0.9817 | 23.8s
+Epoch 05 | train loss 0.0818 acc 0.9765 | val loss 0.0700 acc 0.9817 | 30.0s
+Epoch 06 | train loss 0.1002 acc 0.9693 | val loss 0.0859 acc 0.9817 | 29.2s
+Epoch 07 | train loss 0.0734 acc 0.9745 | val loss 0.0537 acc 0.9787 | 32.6s
+Epoch 08 | train loss 0.0549 acc 0.9869 | val loss 0.0502 acc 0.9878 | 24.5s
+Epoch 09 | train loss 0.0491 acc 0.9850 | val loss 0.0501 acc 0.9878 | 24.3s
+Epoch 10 | train loss 0.0617 acc 0.9771 | val loss 0.0343 acc 0.9878 | 22.7s
+Epoch 11 | train loss 0.0393 acc 0.9882 | val loss 0.0448 acc 0.9909 | 27.8s
+Epoch 12 | train loss 0.0348 acc 0.9902 | val loss 0.0358 acc 0.9909 | 27.2s
+Epoch 13 | train loss 0.0786 acc 0.9791 | val loss 0.0591 acc 0.9817 | 24.5s
+Epoch 14 | train loss 0.0415 acc 0.9863 | val loss 0.0356 acc 0.9909 | 29.4s
+Epoch 15 | train loss 0.0292 acc 0.9928 | val loss 0.0344 acc 0.9939 | 25.0s
+Epoch 16 | train loss 0.0292 acc 0.9895 | val loss 0.0293 acc 0.9939 | 29.5s
+Epoch 17 | train loss 0.0321 acc 0.9895 | val loss 0.0177 acc 0.9970 | 23.6s
+Epoch 18 | train loss 0.0271 acc 0.9902 | val loss 0.0206 acc 0.9939 | 24.8s
+Epoch 19 | train loss 0.0222 acc 0.9941 | val loss 0.0301 acc 0.9909 | 28.3s
+Epoch 20 | train loss 0.0277 acc 0.9915 | val loss 0.0333 acc 0.9939 | 25.9s
+Epoch 21 | train loss 0.0315 acc 0.9882 | val loss 0.0173 acc 0.9970 | 24.8s
+Epoch 22 | train loss 0.0441 acc 0.9843 | val loss 0.0271 acc 0.9909 | 27.3s
+Epoch 23 | train loss 0.0190 acc 0.9954 | val loss 0.0213 acc 0.9939 | 24.6s
+Epoch 24 | train loss 0.0185 acc 0.9954 | val loss 0.0237 acc 0.9909 | 30.8s
+Epoch 25 | train loss 0.0223 acc 0.9928 | val loss 0.0098 acc 0.9939 | 25.4s
+{
+  "best_epoch": 25,
+  "epochs_run": 25,
+  "train": {
+    "loss": 0.022337831836011308,
+    "accuracy": 0.992815153494448,
+    "macro_f1": 0.9928008344263183
+  },
+  "val": {
+    "loss": 0.00975416779657258,
+    "accuracy": 0.9939024390243902,
+    "macro_f1": 0.9939054934045751
+  },
+  "training_seconds": 674.9767743749999,
+  "peak_rss_mib": 603.546875
+}

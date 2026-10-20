@@ -1,0 +1,37 @@
+{
+  "seed": 42,
+  "proportions": [
+    0.7,
+    0.15,
+    0.15
+  ],
+  "classes": [
+    "paper",
+    "rock",
+    "scissors"
+  ],
+  "counts": {
+    "paper": {
+      "train": 498,
+      "val": 107,
+      "test": 107
+    },
+    "rock": {
+      "train": 508,
+      "val": 109,
+      "test": 109
+    },
+    "scissors": {
+      "train": 525,
+      "val": 112,
+      "test": 113
+    }
+  },
+  "unique_images": 2188,
+  "exact_duplicates_removed": [],
+  "totals": {
+    "train": 1531,
+    "val": 328,
+    "test": 329
+  }
+}

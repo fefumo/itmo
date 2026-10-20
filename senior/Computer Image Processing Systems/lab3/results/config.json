@@ -1,0 +1,17 @@
+{
+  "data": "data/raw",
+  "manifest": "data/split.csv",
+  "out": "results",
+  "epochs": 25,
+  "batch_size": 32,
+  "threads": 4,
+  "patience": 6,
+  "lr": 0.001,
+  "seed": 42,
+  "device": "cpu",
+  "python": "3.12.14",
+  "torch": "2.14.1+cpu",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "parameters": 89379,
+  "manifest_sha256": "f6bd961aea443321aea1c7d0c91a4cd4f7166eafaf7c9dad3f94cf5d992aecd4"
+}
