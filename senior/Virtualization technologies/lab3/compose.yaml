@@ -1,0 +1,56 @@
+name: lab3-cloud
+services:
+  db:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:?}
+      MARIADB_DATABASE: nextcloud
+      MARIADB_USER: nextcloud
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:?}
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  app:
+    image: nextcloud:33-fpm
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      MYSQL_HOST: db
+      MYSQL_DATABASE: nextcloud
+      MYSQL_USER: nextcloud
+      MYSQL_PASSWORD: ${MARIADB_PASSWORD:?}
+      NEXTCLOUD_ADMIN_USER: ${NEXTCLOUD_ADMIN_USER:?}
+      NEXTCLOUD_ADMIN_PASSWORD: ${NEXTCLOUD_ADMIN_PASSWORD:?}
+      NEXTCLOUD_TRUSTED_DOMAINS: localhost 127.0.0.1
+      OVERWRITECLIURL: http://localhost:2022
+    volumes:
+      - nextcloud_data:/var/www/html
+  web:
+    build: ./compose
+    image: fefumo/lab3-nextcloud-nginx:1.1
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "127.0.0.1:2022:80"
+    volumes:
+      - nextcloud_data:/var/www/html:ro
+  portainer:
+    image: portainer/portainer-ce:lts
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+volumes:
+  db_data:
+  nextcloud_data:
+  portainer_data:
